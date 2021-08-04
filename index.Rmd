@@ -14,5 +14,24 @@ description: "This is a Course Notebook for Advanced Measurement Theory (ERMA 83
 
 
 
-Welcome to Advanced Measurement Theory!
+Welcome!
+This is a notebook for ERMA 8350 Advanced Measurement Theory.
+The class will be using the textbook *Modern Psychometrics with R* [@mair2018modern], which will be the primary source for the course. 
+I will use this notebook to make available additional information to help you learn the material. 
+It may include some examples from the textbook, with some elaborations, additional readings, and some more details about implementing the methods in R. 
+These web-based notes will make it easy for you to use code, by allowing you to copy and paste code found within.
+Some of you will have experience with R and others not.
+So I will try to also point you to additional resources that may be helpful. 
+For example, in this preface I will provide links to resources to help you setup R and RStudio.
+RStudio is a platform to make using R more productive.
+I will use it extensively in this course.
+
+## Software {-}  
+
+[Vlab](https://nv.instructuremedia.com/fetch/QkFoYkIxc0hhUVNIRGFrSE1Hd3JCeWhUREdFPS0tZjk4ODFlYWEyZWFiNWQwYWYyZDk0YTZjMjljZTJlMjBkNmIwMzE5Yw.mp4)
+
+
+[Installing R and RStudio](https://auburn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=5dacd1fe-b888-407b-a89f-ac150135ace8)
+
+[Organizing projects](https://auburn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=aed0e2a9-004f-453f-80c7-abbe010a063b)
 
