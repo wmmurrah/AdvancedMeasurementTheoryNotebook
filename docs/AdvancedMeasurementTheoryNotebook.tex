@@ -1,0 +1,352 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Advanced Measurement Theory Course Notebook},
+  pdfauthor={William M. Murrah},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{Advanced Measurement Theory Course Notebook}
+\author{William M. Murrah}
+\date{2021-08-04}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{introduction-to-the-course}{%
+\chapter*{Introduction to the Course}\label{introduction-to-the-course}}
+\addcontentsline{toc}{chapter}{Introduction to the Course}
+
+Welcome to Advanced Measurement Theory!
+
+\hypertarget{CCT}{%
+\chapter{Classic Test Theory}\label{CCT}}
+
+In the notes for this chapter, I demonstrate aspects of classical test theory, reliability and generalizability theory using data from a study exploring the motivation of R package authors \citep{mair2015motivation}.
+This tutorial is based on Chapter 1 of \citet{mair2018modern}, which can be consulted for a more indepth exposition of the underlying theory.
+Here I focus on demonstrating some of those concepts in R, as well as describing how to get certain results in R.
+
+First, I load the packages used in this tutorial:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Packages used:}
+\FunctionTok{library}\NormalTok{(psych)}
+\FunctionTok{library}\NormalTok{(MPsychoR)}
+\end{Highlighting}
+\end{Shaded}
+
+Next, I load the full data set from the \texttt{MPsychoR} package \citep{Mair2020mpsychor}, then as in the chapter, I subset the data to only include hybrid motivation items, followed by removing rows with missing values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(}\StringTok{"Rmotivation"}\NormalTok{)}
+
+\CommentTok{\# Create data frame with only Hybrid Motivation items.}
+\NormalTok{HybMot }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(Rmotivation, }
+                        \AttributeTok{select =} \FunctionTok{grep}\NormalTok{(}\StringTok{"hyb"}\NormalTok{, }\FunctionTok{names}\NormalTok{(Rmotivation)))}
+\CommentTok{\# Remove rows  with any missing data.}
+\NormalTok{HybMot }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(HybMot)}
+\end{Highlighting}
+\end{Shaded}
+
+This leads to a data set with 777 authors and 19 items.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# How many authors(rows) and items(columns)?}
+\FunctionTok{dim}\NormalTok{(HybMot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 777  19
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Note they are all dichotomous items.}
+\FunctionTok{head}\NormalTok{(HybMot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  hyb1 hyb2 hyb3 hyb4 hyb5 hyb6 hyb7 hyb8 hyb9 hyb10 hyb11
+1    1    0    1    0    1    1    0    0    0     1     1
+3    0    0    1    0    1    0    0    0    0     1     0
+4    1    1    1    1    1    0    1    0    0     1     0
+5    1    0    0    1    1    0    0    0    0     1     1
+8    1    1    1    1    1    1    1    1    1     1     0
+9    1    0    0    1    1    0    0    0    0     1     0
+  hyb12 hyb13 hyb14 hyb15 hyb16 hyb17 hyb18 hyb19
+1     1     1     0     1     1     1     1     1
+3     1     1     0     1     0     0     1     0
+4     1     1     0     0     1     1     1     1
+5     1     1     0     1     0     1     1     1
+8     1     1     1     1     1     1     1     1
+9     0     1     0     0     1     1     1     1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vcmat }\OtherTok{\textless{}{-}} \FunctionTok{cov}\NormalTok{(HybMot)}
+
+\FunctionTok{scroll\_box}\NormalTok{(}\FunctionTok{kable}\NormalTok{(vcmat, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\AttributeTok{width =} \StringTok{"100\%"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}{l|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r}
+\hline
+  & hyb1 & hyb2 & hyb3 & hyb4 & hyb5 & hyb6 & hyb7 & hyb8 & hyb9 & hyb10 & hyb11 & hyb12 & hyb13 & hyb14 & hyb15 & hyb16 & hyb17 & hyb18 & hyb19\\
+\hline
+hyb1 & 0.18 & 0.06 & 0.04 & 0.03 & 0.03 & 0.05 & 0.01 & 0.05 & 0.04 & 0.04 & 0.03 & 0.03 & 0.03 & 0.03 & 0.04 & 0.05 & 0.04 & 0.03 & 0.06\\
+\hline
+hyb2 & 0.06 & 0.25 & 0.06 & 0.05 & 0.03 & 0.05 & -0.01 & 0.04 & 0.05 & 0.02 & 0.04 & 0.04 & 0.03 & 0.03 & 0.03 & 0.03 & 0.01 & 0.00 & 0.03\\
+\hline
+hyb3 & 0.04 & 0.06 & 0.23 & 0.13 & 0.03 & 0.05 & 0.00 & 0.03 & 0.05 & 0.04 & 0.05 & 0.06 & 0.02 & 0.02 & 0.06 & 0.02 & 0.03 & 0.02 & 0.04\\
+\hline
+hyb4 & 0.03 & 0.05 & 0.13 & 0.21 & 0.03 & 0.04 & 0.01 & 0.03 & 0.04 & 0.03 & 0.05 & 0.05 & 0.02 & 0.02 & 0.04 & 0.02 & 0.03 & 0.02 & 0.04\\
+\hline
+hyb5 & 0.03 & 0.03 & 0.03 & 0.03 & 0.11 & 0.02 & 0.00 & 0.01 & 0.01 & 0.03 & 0.03 & 0.03 & 0.03 & 0.02 & 0.04 & 0.02 & 0.02 & 0.01 & 0.03\\
+\hline
+hyb6 & 0.05 & 0.05 & 0.05 & 0.04 & 0.02 & 0.24 & 0.01 & 0.11 & 0.15 & 0.05 & 0.06 & 0.06 & 0.02 & 0.07 & 0.06 & 0.05 & 0.05 & 0.02 & 0.07\\
+\hline
+hyb7 & 0.01 & -0.01 & 0.00 & 0.01 & 0.00 & 0.01 & 0.22 & 0.04 & 0.01 & 0.03 & 0.00 & 0.02 & 0.00 & 0.00 & 0.01 & 0.02 & 0.02 & 0.01 & 0.02\\
+\hline
+hyb8 & 0.05 & 0.04 & 0.03 & 0.03 & 0.01 & 0.11 & 0.04 & 0.25 & 0.10 & 0.06 & 0.05 & 0.06 & 0.02 & 0.04 & 0.06 & 0.05 & 0.05 & 0.03 & 0.06\\
+\hline
+hyb9 & 0.04 & 0.05 & 0.05 & 0.04 & 0.01 & 0.15 & 0.01 & 0.10 & 0.20 & 0.04 & 0.04 & 0.05 & 0.01 & 0.05 & 0.04 & 0.04 & 0.03 & 0.01 & 0.05\\
+\hline
+hyb10 & 0.04 & 0.02 & 0.04 & 0.03 & 0.03 & 0.05 & 0.03 & 0.06 & 0.04 & 0.15 & 0.03 & 0.06 & 0.03 & 0.02 & 0.04 & 0.04 & 0.04 & 0.03 & 0.05\\
+\hline
+hyb11 & 0.03 & 0.04 & 0.05 & 0.05 & 0.03 & 0.06 & 0.00 & 0.05 & 0.04 & 0.03 & 0.23 & 0.10 & 0.03 & 0.04 & 0.10 & 0.03 & 0.03 & 0.01 & 0.02\\
+\hline
+hyb12 & 0.03 & 0.04 & 0.06 & 0.05 & 0.03 & 0.06 & 0.02 & 0.06 & 0.05 & 0.06 & 0.10 & 0.23 & 0.04 & 0.03 & 0.11 & 0.04 & 0.03 & 0.02 & 0.04\\
+\hline
+hyb13 & 0.03 & 0.03 & 0.02 & 0.02 & 0.03 & 0.02 & 0.00 & 0.02 & 0.01 & 0.03 & 0.03 & 0.04 & 0.10 & 0.01 & 0.03 & 0.03 & 0.02 & 0.01 & 0.02\\
+\hline
+hyb14 & 0.03 & 0.03 & 0.02 & 0.02 & 0.02 & 0.07 & 0.00 & 0.04 & 0.05 & 0.02 & 0.04 & 0.03 & 0.01 & 0.20 & 0.03 & 0.04 & 0.03 & 0.01 & 0.04\\
+\hline
+hyb15 & 0.04 & 0.03 & 0.06 & 0.04 & 0.04 & 0.06 & 0.01 & 0.06 & 0.04 & 0.04 & 0.10 & 0.11 & 0.03 & 0.03 & 0.23 & 0.03 & 0.03 & 0.02 & 0.04\\
+\hline
+hyb16 & 0.05 & 0.03 & 0.02 & 0.02 & 0.02 & 0.05 & 0.02 & 0.05 & 0.04 & 0.04 & 0.03 & 0.04 & 0.03 & 0.04 & 0.03 & 0.17 & 0.06 & 0.05 & 0.07\\
+\hline
+hyb17 & 0.04 & 0.01 & 0.03 & 0.03 & 0.02 & 0.05 & 0.02 & 0.05 & 0.03 & 0.04 & 0.03 & 0.03 & 0.02 & 0.03 & 0.03 & 0.06 & 0.14 & 0.04 & 0.07\\
+\hline
+hyb18 & 0.03 & 0.00 & 0.02 & 0.02 & 0.01 & 0.02 & 0.01 & 0.03 & 0.01 & 0.03 & 0.01 & 0.02 & 0.01 & 0.01 & 0.02 & 0.05 & 0.04 & 0.08 & 0.05\\
+\hline
+hyb19 & 0.06 & 0.03 & 0.04 & 0.04 & 0.03 & 0.07 & 0.02 & 0.06 & 0.05 & 0.05 & 0.02 & 0.04 & 0.02 & 0.04 & 0.04 & 0.07 & 0.07 & 0.05 & 0.21\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k }\OtherTok{\textless{}{-}} \FunctionTok{ncol}\NormalTok{(HybMot)}
+\NormalTok{sigma2\_Xi }\OtherTok{\textless{}{-}} \FunctionTok{tr}\NormalTok{(vcmat) }\CommentTok{\# trace of matrix or sum(diag(vmat))}
+\NormalTok{sigma2\_X }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(vcmat)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{classical-true-score-model}{%
+\section{Classical True Score Model}\label{classical-true-score-model}}
+
+The true score model is:
+\[
+X = T + E
+\]
+where \(X\) is the \textbf{observed score}, \(T\) is the \textbf{true score}, which is unknown, and \(E\) is the \textbf{error}
+
+\hypertarget{reliability}{%
+\section{Reliability}\label{reliability}}
+
+\[
+\text{reliability} = \frac{\sigma^2_T}{\sigma^2_X} = \frac{\sigma^2_T}{\sigma^2_T + \sigma^2_E} = \rho^2_{XT}
+\]
+
+\hypertarget{cronbachs-alpha}{%
+\subsection{\texorpdfstring{Cronbach's \(\alpha\)}{Cronbach's \textbackslash alpha}}\label{cronbachs-alpha}}
+
+\hypertarget{other-reliability-coefficients}{%
+\subsection{Other Reliability Coefficients}\label{other-reliability-coefficients}}
+
+\hypertarget{generalizability-theory}{%
+\section{Generalizability Theory}\label{generalizability-theory}}
+
+\hypertarget{reliability-and-generalizability}{%
+\subsection{Reliability and Generalizability}\label{reliability-and-generalizability}}
+
+\hypertarget{multiple-sources-of-error}{%
+\subsection{Multiple Sources of Error}\label{multiple-sources-of-error}}
+
+\hypertarget{factor-analysis}{%
+\chapter{Factor Analysis}\label{factor-analysis}}
+
+\hypertarget{path-analysis-and-structural-equation-modeling}{%
+\chapter{Path Analysis and Structural Equation Modeling}\label{path-analysis-and-structural-equation-modeling}}
+
+We describe our methods in this chapter.
+
+\hypertarget{item-response-theory}{%
+\chapter{Item Response Theory}\label{item-response-theory}}
+
+Some \emph{significant} applications are demonstrated in this chapter.
+
+\hypertarget{example-one}{%
+\section{Example one}\label{example-one}}
+
+\hypertarget{example-two}{%
+\section{Example two}\label{example-two}}
+
+\hypertarget{principal-components-analysis}{%
+\chapter{Principal Components Analysis}\label{principal-components-analysis}}
+
+We have finished a nice book.
+
+\hypertarget{correspondence-analysis}{%
+\chapter{Correspondence Analysis}\label{correspondence-analysis}}
+
+\hypertarget{gifi-methods}{%
+\chapter{Gifi Methods}\label{gifi-methods}}
+
+\hypertarget{multidimensional-scaling}{%
+\chapter{Multidimensional Scaling}\label{multidimensional-scaling}}
+
+\hypertarget{graphing-multidimensional-data}{%
+\chapter{Graphing Multidimensional Data}\label{graphing-multidimensional-data}}
+
+\hypertarget{networks}{%
+\chapter{Networks}\label{networks}}
+
+\hypertarget{modeling-trajectories-and-time-series}{%
+\chapter{Modeling Trajectories and Time Series}\label{modeling-trajectories-and-time-series}}
+
+  \bibliography{book.bib}
+
+\end{document}
