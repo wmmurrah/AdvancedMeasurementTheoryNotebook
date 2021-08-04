@@ -1,0 +1,18 @@
+--- 
+title: "Advanced Measurement Theory Course Notebook"
+author: "William M. Murrah"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: book.bib
+biblio-style: apalike
+link-citations: yes
+description: "This is a Course Notebook for Advanced Measurement Theory (ERMA 8350)"
+---
+
+# Introduction to the Course {-}
+
+
+
+Welcome to Advanced Measurement Theory!
+

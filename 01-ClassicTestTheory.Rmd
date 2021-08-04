@@ -1,0 +1,99 @@
+# Classic Test Theory {#CCT}
+
+```{r, include=FALSE}
+options(width = 60)
+local({
+  hook_output <- knitr::knit_hooks$get('output')
+  knitr::knit_hooks$set(output = function(x, options) {
+    if (!is.null(options$max.height)) options$attr.output <- c(
+      options$attr.output,
+      sprintf('style="max-height: %s;"', options$max.height)
+    )
+    hook_output(x, options)
+  })
+})
+
+```
+
+```{r setup, include=FALSE}
+library(knitr)
+library(kableExtra)
+opts_chunk$set(echo = TRUE, comment = NULL)
+library(psych)
+library(MPsychoR)
+```
+
+
+In the notes for this chapter, I demonstrate aspects of classical test theory, reliability and generalizability theory using data from a study exploring the motivation of R package authors [@mair2015motivation]. 
+This tutorial is based on Chapter 1 of @mair2018modern, which can be consulted for a more indepth exposition of the underlying theory.
+Here I focus on demonstrating some of those concepts in R, as well as describing how to get certain results in R.
+
+First, I load the packages used in this tutorial:
+
+```{r}
+# Packages used:
+library(psych)
+library(MPsychoR)
+```
+
+
+Next, I load the full data set from the `MPsychoR` package [@Mair2020mpsychor], then as in the chapter, I subset the data to only include hybrid motivation items, followed by removing rows with missing values.
+
+```{r, echo=TRUE}
+data("Rmotivation")
+
+# Create data frame with only Hybrid Motivation items.
+HybMot <- subset(Rmotivation, 
+                        select = grep("hyb", names(Rmotivation)))
+# Remove rows  with any missing data.
+HybMot <- na.omit(HybMot)
+
+```
+
+This leads to a data set with 777 authors and 19 items.
+
+```{r}
+# How many authors(rows) and items(columns)?
+dim(HybMot)
+# Note they are all dichotomous items.
+head(HybMot)
+```
+
+
+```{r}
+vcmat <- cov(HybMot)
+
+scroll_box(kable(vcmat, digits = 2), width = "100%")
+
+```
+
+
+```{r}
+k <- ncol(HybMot)
+sigma2_Xi <- tr(vcmat) # trace of matrix or sum(diag(vmat))
+sigma2_X <- sum(vcmat)
+```
+
+## Classical True Score Model
+
+The true score model is:
+$$
+X = T + E
+$$
+where $X$ is the **observed score**, $T$ is the **true score**, which is unknown, and $E$ is the **error**
+
+## Reliability
+
+$$
+\text{reliability} = \frac{\sigma^2_T}{\sigma^2_X} = \frac{\sigma^2_T}{\sigma^2_T + \sigma^2_E} = \rho^2_{XT}
+$$
+
+### Cronbach's $\alpha$
+
+### Other Reliability Coefficients
+
+## Generalizability Theory
+
+### Reliability and Generalizability
+
+### Multiple Sources of Error
