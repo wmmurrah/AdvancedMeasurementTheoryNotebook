@@ -1,20 +1,5 @@
 # Classic Test Theory {#CCT}
 
-```{r, include=FALSE}
-options(width = 60)
-local({
-  hook_output <- knitr::knit_hooks$get('output')
-  knitr::knit_hooks$set(output = function(x, options) {
-    if (!is.null(options$max.height)) options$attr.output <- c(
-      options$attr.output,
-      sprintf('style="max-height: %s;"', options$max.height)
-    )
-    hook_output(x, options)
-  })
-})
-
-```
-
 ```{r setup, include=FALSE}
 library(knitr)
 library(kableExtra)
@@ -23,6 +8,27 @@ library(psych)
 library(MPsychoR)
 ```
 
+## Classical True Score Model
+
+The true score model is:
+$$
+X = T + E
+$$
+where $X$ is the **observed score**, $T$ is the **true score**, which is unknown, and $E$ is the **error**
+
+```{r}
+
+
+```
+
+
+## Reliability
+
+$$
+\text{reliability} = \frac{\sigma^2_T}{\sigma^2_X} = \frac{\sigma^2_T}{\sigma^2_T + \sigma^2_E} = \rho^2_{XT}
+$$
+
+### Cronbach's $\alpha$
 
 In the notes for this chapter, I demonstrate aspects of classical test theory, reliability and generalizability theory using data from a study exploring the motivation of R package authors [@mair2015motivation]. 
 This tutorial is based on Chapter 1 of @mair2018modern, which can be consulted for a more indepth exposition of the underlying theory.
@@ -61,10 +67,9 @@ head(HybMot)
 
 
 ```{r}
+# Variance/Covariance Matrix
 vcmat <- cov(HybMot)
-
 scroll_box(kable(vcmat, digits = 2), width = "100%")
-
 ```
 
 
@@ -73,23 +78,6 @@ k <- ncol(HybMot)
 sigma2_Xi <- tr(vcmat) # trace of matrix or sum(diag(vmat))
 sigma2_X <- sum(vcmat)
 ```
-
-## Classical True Score Model
-
-The true score model is:
-$$
-X = T + E
-$$
-where $X$ is the **observed score**, $T$ is the **true score**, which is unknown, and $E$ is the **error**
-
-## Reliability
-
-$$
-\text{reliability} = \frac{\sigma^2_T}{\sigma^2_X} = \frac{\sigma^2_T}{\sigma^2_T + \sigma^2_E} = \rho^2_{XT}
-$$
-
-### Cronbach's $\alpha$
-
 ### Other Reliability Coefficients
 
 ## Generalizability Theory

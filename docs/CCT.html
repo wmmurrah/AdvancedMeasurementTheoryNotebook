@@ -158,10 +158,15 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Advanced Measurement Theory</a></li>
+<li><a href="./">Advanced Measurement Theory Notebook</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to the Course</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction to the Course</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#software"><i class="fa fa-check"></i>Software</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources-for-learning-r"><i class="fa fa-check"></i>Resources for Learning R</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#r-packages"><i class="fa fa-check"></i>R Packages</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="CCT.html"><a href="CCT.html"><i class="fa fa-check"></i><b>1</b> Classic Test Theory</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="CCT.html"><a href="CCT.html#classical-true-score-model"><i class="fa fa-check"></i><b>1.1</b> Classical True Score Model</a></li>
@@ -213,6 +218,21 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="CCT" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Classic Test Theory</h1>
+<div id="classical-true-score-model" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Classical True Score Model</h2>
+<p>The true score model is:
+<span class="math display">\[
+X = T + E
+\]</span>
+where <span class="math inline">\(X\)</span> is the <strong>observed score</strong>, <span class="math inline">\(T\)</span> is the <strong>true score</strong>, which is unknown, and <span class="math inline">\(E\)</span> is the <strong>error</strong></p>
+</div>
+<div id="reliability" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Reliability</h2>
+<p><span class="math display">\[
+\text{reliability} = \frac{\sigma^2_T}{\sigma^2_X} = \frac{\sigma^2_T}{\sigma^2_T + \sigma^2_E} = \rho^2_{XT}
+\]</span></p>
+<div id="cronbachs-alpha" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Cronbach’s <span class="math inline">\(\alpha\)</span></h3>
 <p>In the notes for this chapter, I demonstrate aspects of classical test theory, reliability and generalizability theory using data from a study exploring the motivation of R package authors <span class="citation">(<a href="#ref-mair2015motivation" role="doc-biblioref">Mair et al. 2015</a>)</span>.
 This tutorial is based on Chapter 1 of <span class="citation"><a href="#ref-mair2018modern" role="doc-biblioref">Mair</a> (<a href="#ref-mair2018modern" role="doc-biblioref">2018</a>)</span>, which can be consulted for a more indepth exposition of the underlying theory.
 Here I focus on demonstrating some of those concepts in R, as well as describing how to get certain results in R.</p>
@@ -234,22 +254,22 @@ Here I focus on demonstrating some of those concepts in R, as well as describing
 <pre><code>[1] 777  19</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="CCT.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note they are all dichotomous items.</span></span>
 <span id="cb5-2"><a href="CCT.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(HybMot)</span></code></pre></div>
-<pre><code>  hyb1 hyb2 hyb3 hyb4 hyb5 hyb6 hyb7 hyb8 hyb9 hyb10 hyb11
-1    1    0    1    0    1    1    0    0    0     1     1
-3    0    0    1    0    1    0    0    0    0     1     0
-4    1    1    1    1    1    0    1    0    0     1     0
-5    1    0    0    1    1    0    0    0    0     1     1
-8    1    1    1    1    1    1    1    1    1     1     0
-9    1    0    0    1    1    0    0    0    0     1     0
-  hyb12 hyb13 hyb14 hyb15 hyb16 hyb17 hyb18 hyb19
-1     1     1     0     1     1     1     1     1
-3     1     1     0     1     0     0     1     0
-4     1     1     0     0     1     1     1     1
-5     1     1     0     1     0     1     1     1
-8     1     1     1     1     1     1     1     1
-9     0     1     0     0     1     1     1     1</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="CCT.html#cb7-1" aria-hidden="true" tabindex="-1"></a>vcmat <span class="ot">&lt;-</span> <span class="fu">cov</span>(HybMot)</span>
-<span id="cb7-2"><a href="CCT.html#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<pre><code>  hyb1 hyb2 hyb3 hyb4 hyb5 hyb6 hyb7 hyb8 hyb9 hyb10 hyb11 hyb12 hyb13 hyb14
+1    1    0    1    0    1    1    0    0    0     1     1     1     1     0
+3    0    0    1    0    1    0    0    0    0     1     0     1     1     0
+4    1    1    1    1    1    0    1    0    0     1     0     1     1     0
+5    1    0    0    1    1    0    0    0    0     1     1     1     1     0
+8    1    1    1    1    1    1    1    1    1     1     0     1     1     1
+9    1    0    0    1    1    0    0    0    0     1     0     0     1     0
+  hyb15 hyb16 hyb17 hyb18 hyb19
+1     1     1     1     1     1
+3     1     0     0     1     0
+4     0     1     1     1     1
+5     1     0     1     1     1
+8     1     1     1     1     1
+9     0     1     1     1     1</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="CCT.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance/Covariance Matrix</span></span>
+<span id="cb7-2"><a href="CCT.html#cb7-2" aria-hidden="true" tabindex="-1"></a>vcmat <span class="ot">&lt;-</span> <span class="fu">cov</span>(HybMot)</span>
 <span id="cb7-3"><a href="CCT.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scroll_box</span>(<span class="fu">kable</span>(vcmat, <span class="at">digits =</span> <span class="dv">2</span>), <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table>
@@ -1501,21 +1521,6 @@ hyb19
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="CCT.html#cb8-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">ncol</span>(HybMot)</span>
 <span id="cb8-2"><a href="CCT.html#cb8-2" aria-hidden="true" tabindex="-1"></a>sigma2_Xi <span class="ot">&lt;-</span> <span class="fu">tr</span>(vcmat) <span class="co"># trace of matrix or sum(diag(vmat))</span></span>
 <span id="cb8-3"><a href="CCT.html#cb8-3" aria-hidden="true" tabindex="-1"></a>sigma2_X <span class="ot">&lt;-</span> <span class="fu">sum</span>(vcmat)</span></code></pre></div>
-<div id="classical-true-score-model" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Classical True Score Model</h2>
-<p>The true score model is:
-<span class="math display">\[
-X = T + E
-\]</span>
-where <span class="math inline">\(X\)</span> is the <strong>observed score</strong>, <span class="math inline">\(T\)</span> is the <strong>true score</strong>, which is unknown, and <span class="math inline">\(E\)</span> is the <strong>error</strong></p>
-</div>
-<div id="reliability" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Reliability</h2>
-<p><span class="math display">\[
-\text{reliability} = \frac{\sigma^2_T}{\sigma^2_X} = \frac{\sigma^2_T}{\sigma^2_T + \sigma^2_E} = \rho^2_{XT}
-\]</span></p>
-<div id="cronbachs-alpha" class="section level3" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> Cronbach’s <span class="math inline">\(\alpha\)</span></h3>
 </div>
 <div id="other-reliability-coefficients" class="section level3" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Other Reliability Coefficients</h3>

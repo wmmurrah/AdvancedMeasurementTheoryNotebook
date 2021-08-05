@@ -144,10 +144,83 @@
 \chapter*{Introduction to the Course}\label{introduction-to-the-course}}
 \addcontentsline{toc}{chapter}{Introduction to the Course}
 
-Welcome to Advanced Measurement Theory!
+Welcome!
+This is a notebook for ERMA 8350 Advanced Measurement Theory.
+The class will be using the textbook \emph{Modern Psychometrics with R} \citep{mair2018modern}, which will be the primary source for the course.
+I will use this notebook to make available additional information to help you learn the material.
+It may include some examples from the textbook, with some elaborations, additional readings, and some more details about implementing the methods in R.
+These web-based notes will make it easy for you to use code, by allowing you to copy and paste code found within.
+Some of you will have experience with R and others not.
+So I will try to also point you to additional resources that may be helpful.
+For example, in this preface I will provide links to resources to help you setup R and RStudio.
+RStudio is a platform to make using R more productive.
+I will use it extensively in this course.
+
+\hypertarget{software}{%
+\section*{Software}\label{software}}
+\addcontentsline{toc}{section}{Software}
+
+There are at least two way you can access the software needed for this course.
+You can use the virtual labs on campus.
+I know at least the education virtual labls have R and RStudio installed.
+IF you go this route you can watch the following video.
+Note you will need Duo setup for this to work.
+
+\href{https://nv.instructuremedia.com/fetch/QkFoYkIxc0hhUVNIRGFrSE1Hd3JCeWhUREdFPS0tZjk4ODFlYWEyZWFiNWQwYWYyZDk0YTZjMjljZTJlMjBkNmIwMzE5Yw.mp4}{Using Vlab to acces R/RStudio}
+
+A better option if you have a laptop, you can install both programs on your computer.
+They are both absolutely free and available on all major operating systems, so you will not have to worry about transferring information across computers, limited connection speeds, or other hassles inherent with the Vlab route.
+
+The following links take you to videos instructing you how to install them.
+
+\href{https://auburn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=5dacd1fe-b888-407b-a89f-ac150135ace8}{Installing R and RStudio}
+
+\href{https://auburn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=aed0e2a9-004f-453f-80c7-abbe010a063b}{Organizing Projects in RStudio}
+
+\hypertarget{resources-for-learning-r}{%
+\section*{Resources for Learning R}\label{resources-for-learning-r}}
+\addcontentsline{toc}{section}{Resources for Learning R}
+
+While such experience is certainly helpful, I do not assume you have prior knowledge of using R.
+I will demonstrate the use of R and provide (particularly in this notebook) the R code needed to use the methods we will learn.
+However, even if you have prior experience with R, you should plan to spend time learning to program in R.
+Some people find this intimidating initially, but most of you will grow to find R programming rewarding, and even fun by the end of the course.
+But, there will be frustration for sure.
+
+Here are some good places to start learning R:
+
+\href{https://cran.r-project.org/}{CRAN}
+
+\hypertarget{r-packages}{%
+\section*{R Packages}\label{r-packages}}
+\addcontentsline{toc}{section}{R Packages}
+
+R is, among other paradigms, a functional programming language, which means is heavily utilizes functions.
+R's functions are stored in packages.
+While base R has a long list of very useful functions, to fully realize the power of R you will have to use additional packages.
+So, learning how to \textbf{install} packages (downloading from the web to your computer) and \textbf{loading} packages (making the package's functions accessible to your current R session) are important skills to master.
 
 \hypertarget{CCT}{%
 \chapter{Classic Test Theory}\label{CCT}}
+
+\hypertarget{classical-true-score-model}{%
+\section{Classical True Score Model}\label{classical-true-score-model}}
+
+The true score model is:
+\[
+X = T + E
+\]
+where \(X\) is the \textbf{observed score}, \(T\) is the \textbf{true score}, which is unknown, and \(E\) is the \textbf{error}
+
+\hypertarget{reliability}{%
+\section{Reliability}\label{reliability}}
+
+\[
+\text{reliability} = \frac{\sigma^2_T}{\sigma^2_X} = \frac{\sigma^2_T}{\sigma^2_T + \sigma^2_E} = \rho^2_{XT}
+\]
+
+\hypertarget{cronbachs-alpha}{%
+\subsection{\texorpdfstring{Cronbach's \(\alpha\)}{Cronbach's \textbackslash alpha}}\label{cronbachs-alpha}}
 
 In the notes for this chapter, I demonstrate aspects of classical test theory, reliability and generalizability theory using data from a study exploring the motivation of R package authors \citep{mair2015motivation}.
 This tutorial is based on Chapter 1 of \citet{mair2018modern}, which can be consulted for a more indepth exposition of the underlying theory.
@@ -198,26 +271,26 @@ This leads to a data set with 777 authors and 19 items.
 \end{Shaded}
 
 \begin{verbatim}
-  hyb1 hyb2 hyb3 hyb4 hyb5 hyb6 hyb7 hyb8 hyb9 hyb10 hyb11
-1    1    0    1    0    1    1    0    0    0     1     1
-3    0    0    1    0    1    0    0    0    0     1     0
-4    1    1    1    1    1    0    1    0    0     1     0
-5    1    0    0    1    1    0    0    0    0     1     1
-8    1    1    1    1    1    1    1    1    1     1     0
-9    1    0    0    1    1    0    0    0    0     1     0
-  hyb12 hyb13 hyb14 hyb15 hyb16 hyb17 hyb18 hyb19
-1     1     1     0     1     1     1     1     1
-3     1     1     0     1     0     0     1     0
-4     1     1     0     0     1     1     1     1
-5     1     1     0     1     0     1     1     1
-8     1     1     1     1     1     1     1     1
-9     0     1     0     0     1     1     1     1
+  hyb1 hyb2 hyb3 hyb4 hyb5 hyb6 hyb7 hyb8 hyb9 hyb10 hyb11 hyb12 hyb13 hyb14
+1    1    0    1    0    1    1    0    0    0     1     1     1     1     0
+3    0    0    1    0    1    0    0    0    0     1     0     1     1     0
+4    1    1    1    1    1    0    1    0    0     1     0     1     1     0
+5    1    0    0    1    1    0    0    0    0     1     1     1     1     0
+8    1    1    1    1    1    1    1    1    1     1     0     1     1     1
+9    1    0    0    1    1    0    0    0    0     1     0     0     1     0
+  hyb15 hyb16 hyb17 hyb18 hyb19
+1     1     1     1     1     1
+3     1     0     0     1     0
+4     0     1     1     1     1
+5     1     0     1     1     1
+8     1     1     1     1     1
+9     0     1     1     1     1
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# Variance/Covariance Matrix}
 \NormalTok{vcmat }\OtherTok{\textless{}{-}} \FunctionTok{cov}\NormalTok{(HybMot)}
-
 \FunctionTok{scroll\_box}\NormalTok{(}\FunctionTok{kable}\NormalTok{(vcmat, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{), }\AttributeTok{width =} \StringTok{"100\%"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -273,25 +346,6 @@ hyb19 & 0.06 & 0.03 & 0.04 & 0.04 & 0.03 & 0.07 & 0.02 & 0.06 & 0.05 & 0.05 & 0.
 \NormalTok{sigma2\_X }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(vcmat)}
 \end{Highlighting}
 \end{Shaded}
-
-\hypertarget{classical-true-score-model}{%
-\section{Classical True Score Model}\label{classical-true-score-model}}
-
-The true score model is:
-\[
-X = T + E
-\]
-where \(X\) is the \textbf{observed score}, \(T\) is the \textbf{true score}, which is unknown, and \(E\) is the \textbf{error}
-
-\hypertarget{reliability}{%
-\section{Reliability}\label{reliability}}
-
-\[
-\text{reliability} = \frac{\sigma^2_T}{\sigma^2_X} = \frac{\sigma^2_T}{\sigma^2_T + \sigma^2_E} = \rho^2_{XT}
-\]
-
-\hypertarget{cronbachs-alpha}{%
-\subsection{\texorpdfstring{Cronbach's \(\alpha\)}{Cronbach's \textbackslash alpha}}\label{cronbachs-alpha}}
 
 \hypertarget{other-reliability-coefficients}{%
 \subsection{Other Reliability Coefficients}\label{other-reliability-coefficients}}

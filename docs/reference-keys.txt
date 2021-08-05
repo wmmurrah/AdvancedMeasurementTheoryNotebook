@@ -18,5 +18,3 @@ multidimensional-scaling
 graphing-multidimensional-data
 networks
 modeling-trajectories-and-time-series
-using-vlab
-software
