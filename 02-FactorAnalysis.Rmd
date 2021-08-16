@@ -1,3 +1,334 @@
 # Factor Analysis
 
+  
+```{r, include=FALSE, warning=FALSE, message=FALSE}
+# Some customization.  You can alter or delete as desired (if you know what you are doing).
+
+# knitr settings to control how R chunks work.
+library(knitr)
+# opts_knit$set(root.dir = "../../")
+opts_chunk$set(
+  echo = FALSE,
+  tidy=FALSE,     # display code as typed
+  size="small",    # slightly smaller font for code
+  comment = NULL,
+  warning = FALSE,
+  message = FALSE
+)
+
+library(mosaic)
+library(pander)
+suppressPackageStartupMessages(library(tidyverse))
+library(texreg)
+library(car)
+library(lavaan)
+library(semPlot)
+library(psych)
+library(tables)
+library(lavaan)
+options(ztable.type = "latex")
+options(xtable.comment = FALSE)
+# Set ggplot default font size
+theme_update(text = element_text(size = 18))
+# This changes the default colors in lattice plots.
+trellis.par.set(theme=theme.mosaic())  
+tsize = 30
+panderOptions("missing", "")
+```
+
+
+## Think about these situations
+
+What do you do when you have a large number of variables you are considering as predictors of a dependent variable?
+
+\pause
+
+* Often, subsets of these variables are measuring the same, or very similar things.
+* We might like to reduce the variables to a smaller number of predictors.
+
+\pause
+
+What if you are developing a measurement scale and have a large number of items you think measure the same construct
+
+\pause
+
+* You might want to see how strongly the items are related to the construct.
+
+## Solutions
+
+1. Principal Components Analysis
+    
+    * transforming the original variables into a new set of linear combinations (pricipal components).
+    
+2. Factor Analysis
+
+    * setting up a mathematical model to estimate the number or factors
+
+
+
+## Principal Components Analysis
+
+* Concerned with explaining variance-covariance structure of a set of variables.
+*  PCA attempts to explain as much of the total variance among the observed variables as possible with a smaller number of components.
+* Because the variables are standardized prior to analysis, the total amount of variance available is the number of variables.
+* The goal is **data reduction** for subsequent analysis.
+* Variables *cause* components.
+* Components are not representative of any underlying theory.
+  
+## Factor Analysis
+
+* The goal is understanding underlying constructs.
+* Uses a modified correlation matrix (reduced matrix)
+* factors *cause* the variables.
+* Factors represent theoretical constructs.
+* Focuses on the common variance of the variables, and purges the unique variance.
+  
+
+## Components
+
+The principal components partition the total variance (the sum of the variances of the original variables) by finding the linear combination of the variables that account for the maximum amount of variance:
+
+$$
+PC1 = a_{11}x_1 + a_{12}x_2 ... a_{1p}x_p, 
+$$
+This is repeated as many time as there are variables.
+
+## PC Extraction
+
+draw pretty pictures on the board
+
+## Eigenvalues
+
+Eigenvalues represent the variance in the variables explained by the success components.
+
+## Determining the Number of Factors
+
+1. Kaiser criterion: Retain only factors with eigenvalues > 1. (generally accurate)
+2. Scree plot: plot eigenvalues and drop factors after leveling off. 
+3. Parallel analysis: compare observed eigenvalues to parallel set of data from randomly generated data. Retain factors in original if eigenvalue is greater than random eigenvalue.
+4. Factor meaningfulness is also very important to consider.
+
+## Example data
+
+```{r}
+lower <- "
+1.00
+0.70 1.00
+0.65 0.66 1.00
+0.62 0.63 0.60 1.00
+"
+cormat <- getCov(lower, names = c("d1", "d2", "d3", "d4"))
+
+cormat
+
+```
+
+## Kaiser
+
+Retain factors with eigenvalues greater than 1
+```{r}
+eigen(cormat)$values
+```
+
+## Scree Plot
+
+```{r}
+scree(cormat, factors = FALSE)
+```
+
+
+## Horn's Parallel Analysis
+
+```{r}
+fa.parallel(cormat, fa = "pc")
+```
+
+
+## Another example
+
+```{r}
+fa.parallel(Harman74.cor$cov, fa = "pc")
+```
+
+## Rotation
+
+* Principal components are derived to maximize the variance accounted for (data reduction).
+* Rotation is done to make the factors more interpretable (i.e. meaningful).
+* Two major classes of rotation:
+    - Orthogonal - new factors are still uncorrelated, as were the initial factors.
+    - Oblique - new factors are allowed to be correlated.
+    
+Essentially reallocates the loadings. The first factor may not be the one accounting for the most variance.    
+    
+## Orthogonal Rotation
+
+1. **Quartimax** - idea is to clean up the *variables*. Rotation done so each variable loads mainly on one factor. Problematic if there is a general factor on which most or all variables load on (think IQ).
+
+2. **Varimax** - to clean up *factors*. So each factor has  high correlation with a smaller number of variables, low correlation with the other variables. Generally makes interpretation easier.
+
+## Oblique Rotation
+
+* Often correlated factors are more reasonable. 
+* Therefore, oblique rotation is often preferred.
+* But interpretation is more complicated.
+
+## Factor Matrices
+
+1. Factor pattern matrix: 
+    - includes *pattern coefficients* analogous to standardized partial regression coefficients. 
+    - Indicated the unique importance of a factor to a variable, holding other factors constant.
+    
+2. Factor structure matrix: 
+    - includes *structure coefficients* which are simple correlations of the variables with the factors.
+    
+## Which matrix should we interpret?
+
+* When orthogonal rotation is used interpret *structural coefficients* (but they are the same as pattern coefficients).
+
+* When oblique rotation is used pattern coefficients are preferred because they account for the correlation between the factors and they are parameters of the correlated factor model (which we will discuss next class).
+
+## Which variables should be used to interpret each factor?
+
+* The idea is to use only those variables that have a strong association with the factor.
+* Typical thresholds are |.30| or |.40|. 
+* Content knowledge is critical.
+
+## Examples
+
+Let's look at some examples
+
+
+  
+```{r, include=FALSE, warning=FALSE, message=FALSE}
+# Some customization.  You can alter or delete as desired (if you know what you are doing).
+
+# knitr settings to control how R chunks work.
+library(knitr)
+# opts_knit$set(root.dir = "../../")
+opts_chunk$set(
+  echo = FALSE,
+  tidy=FALSE,     # display code as typed
+  size="small",    # slightly smaller font for code
+  comment = NULL,
+  warning = FALSE,
+  message = FALSE
+)
+
+library(mosaic)
+library(pander)
+suppressPackageStartupMessages(library(tidyverse))
+library(texreg)
+library(car)
+library(lavaan)
+library(semPlot)
+library(psych)
+library(tables)
+library(lavaan)
+library(Hmisc)
+options(ztable.type = "latex")
+options(xtable.comment = FALSE)
+# Set ggplot default font size
+theme_update(text = element_text(size = 18))
+# This changes the default colors in lattice plots.
+trellis.par.set(theme=theme.mosaic())  
+tsize = 30
+#panderOptions("missing", "")
+```
+
+
+## Steps in Factor Analysis
+
+1. Choose extraction method 
+    - So far we've focused on PCA
+2. Determine the number of components/factors
+    - Kaiser method: eigenvalues > 1
+    - Scree plot: All components before leveling off
+    - Horn's parallel analysis: components/factors greater than simulated values from random numbers
+3. Rotate Factors  
+    - Orthogonal
+    - Oblique
+    
+4. Interpret Components/Factors    
+    
+## Tom Swift's Eletric Factor Analysis Factory
+
+"Little Jiffy" method of factor analysis
+
+1. Extraction method : PCA
+2. Number of factors: eigenvalues > 1
+3. Rotation: orthogonal(varimax)
+4. Interpretation
+
+## Metal Boxes
+
+```{r, eval=FALSE}
+tab <- data.frame(
+  Dimension  = c("Thickness", "Width", "Length", "Volume", "Density", "Weight",
+                 "Surface area", "Cross-section", "Edge length", 
+                 "Diagonal length", "Cost/lb"),
+  Derivation = c("x", "y", "z", "xyz", "d", "xyzd", "2(xy + xz + yz)",
+                 "yz", "4(x + y + z)", "(x^2)")
+tab
+
+
+ 
+```
+
+\begin{table}[]
+\begin{tabular}{lllll}
+ Dimension &  Derivation  &  \\
+ \hline \\
+ Thickness &  $x$  \\
+ Width & $y$ \\
+ Length & $z$ \\
+ Volume & $xyz$ \\
+ Density & $d$ \\
+ Weight & $xyzd$ \\
+ Total surface area & $2(xy + xz +_ yz)$ \\
+ Cross-sectional area & $yz$ \\
+ Total edge length & $4(x +  y + z)$ \\
+ Internal diagonal length & $(x^2 + y^2 + z^2)^2$ \\
+ Cost per pound & $c$
+\end{tabular}
+\end{table}
+
+
+## Correlations
+
+\tiny
+```{r}
+# load("data/Rdata/swift.Rdata")
+load("data/swift.Rdata")
+cor <- swift %>%
+  cor() %>% 
+  round(2)
+cor[upper.tri(cor, diag = TRUE)] <- ""
+diag(cor) <- "1.00"
+    
+cor <- as.data.frame(cor)
+kable(cor[ ,1:10], format = 'latex', caption = "Correlations between dimensions")
+```
+
+## Eigenvalues > 1
+
+```{r}
+scree(cor(swift), factors = FALSE)
+```
+
+## Orthogonal Rotation
+
+\footnotesize
+```{r}
+jiffy <- pca(cor(swift), nfactors = 3)
+print(jiffy$loadings, cut = .00)
+```
+
+## Orthogonal Rotation with Loadings > .70
+
+\footnotesize
+```{r}
+jiffy <- pca(cor(swift), nfactors = 3)
+print(jiffy$loadings, cut = .70)
+```
+
 
