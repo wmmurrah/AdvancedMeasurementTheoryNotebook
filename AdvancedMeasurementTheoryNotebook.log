@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.4.7)  17 AUG 2021 15:08
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.4.7)  17 AUG 2021 16:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -922,49 +922,49 @@ df Graphic file (type pdf)
 <use AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-11-1.pd
 f>
 [10]
-Overfull \hbox (54.0pt too wide) in paragraph at lines 465--465
+Overfull \hbox (54.0pt too wide) in paragraph at lines 473--473
 []  \TU/lmtt/m/n/10 hyb1 hyb2 hyb3 hyb4 hyb5 hyb6 hyb7 hyb8 hyb9 hyb10 hyb11 hy
 b12 hyb13 hyb14[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 465--465
+Overfull \hbox (54.0pt too wide) in paragraph at lines 473--473
 []\TU/lmtt/m/n/10 1    1    0    1    0    1    1    0    0    0     1     1   
   1     1     0[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 465--465
+Overfull \hbox (54.0pt too wide) in paragraph at lines 473--473
 []\TU/lmtt/m/n/10 3    0    0    1    0    1    0    0    0    0     1     0   
   1     1     0[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 465--465
+Overfull \hbox (54.0pt too wide) in paragraph at lines 473--473
 []\TU/lmtt/m/n/10 4    1    1    1    1    1    0    1    0    0     1     0   
   1     1     0[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 465--465
+Overfull \hbox (54.0pt too wide) in paragraph at lines 473--473
 []\TU/lmtt/m/n/10 5    1    0    0    1    1    0    0    0    0     1     1   
   1     1     0[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 465--465
+Overfull \hbox (54.0pt too wide) in paragraph at lines 473--473
 []\TU/lmtt/m/n/10 8    1    1    1    1    1    1    1    1    1     1     0   
   1     1     1[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 465--465
+Overfull \hbox (54.0pt too wide) in paragraph at lines 473--473
 []\TU/lmtt/m/n/10 9    1    0    0    1    1    0    0    0    0     1     0   
   0     1     0[] 
  []
 
 
-Overfull \hbox (379.99979pt too wide) in paragraph at lines 475--518
+Overfull \hbox (379.99979pt too wide) in paragraph at lines 483--526
 [][] 
  []
 
@@ -972,54 +972,54 @@ Overfull \hbox (379.99979pt too wide) in paragraph at lines 475--518
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [11]
-Overfull \vbox (1.48575pt too high) detected at line 554
+Overfull \vbox (1.48575pt too high) detected at line 562
  []
 
 [12]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 616--616
+Overfull \hbox (17.25pt too wide) in paragraph at lines 624--624
 []                         \TU/lmtt/m/n/10 type  ICC   F df1   df2        p low
 er bound[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 616--616
+Overfull \hbox (17.25pt too wide) in paragraph at lines 624--624
 []\TU/lmtt/m/n/10 Single_raters_absolute   ICC1 0.15 4.4 776 13986 7.2e-279    
     0.14[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 616--616
+Overfull \hbox (17.25pt too wide) in paragraph at lines 624--624
 []\TU/lmtt/m/n/10 Single_random_raters     ICC2 0.16 5.5 776 13968  0.0e+00    
     0.14[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 616--616
+Overfull \hbox (17.25pt too wide) in paragraph at lines 624--624
 []\TU/lmtt/m/n/10 Single_fixed_raters      ICC3 0.19 5.5 776 13968  0.0e+00    
     0.18[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 616--616
+Overfull \hbox (17.25pt too wide) in paragraph at lines 624--624
 []\TU/lmtt/m/n/10 Average_raters_absolute ICC1k 0.77 4.4 776 13986 7.2e-279    
     0.75[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 616--616
+Overfull \hbox (17.25pt too wide) in paragraph at lines 624--624
 []\TU/lmtt/m/n/10 Average_random_raters   ICC2k 0.78 5.5 776 13968  0.0e+00    
     0.75[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 616--616
+Overfull \hbox (17.25pt too wide) in paragraph at lines 624--624
 []\TU/lmtt/m/n/10 Average_fixed_raters    ICC3k 0.82 5.5 776 13968  0.0e+00    
     0.80[] 
  []
 
 [13] [14] [15]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 834.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 842.
 [16] [17] [18
 
 ]
@@ -1037,7 +1037,7 @@ f>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [21]
-Overfull \hbox (148.5pt too wide) in paragraph at lines 1011--1011
+Overfull \hbox (148.5pt too wide) in paragraph at lines 1019--1019
 []\TU/lmtt/m/n/10 Parallel analysis suggests that the number of factors =  NA  
 and the number of components =  1[] 
  []
@@ -1047,7 +1047,7 @@ df Graphic file (type pdf)
 <use AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-31-1.pd
 f>
 
-Overfull \hbox (148.5pt too wide) in paragraph at lines 1020--1020
+Overfull \hbox (148.5pt too wide) in paragraph at lines 1028--1028
 []\TU/lmtt/m/n/10 Parallel analysis suggests that the number of factors =  NA  
 and the number of components =  2[] 
  []
@@ -1055,10 +1055,10 @@ and the number of components =  2[]
 [22] [23] [24]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 1184.
+               Default added (so using `tbp') on input line 1192.
 
 
-Overfull \hbox (114.40994pt too wide) in paragraph at lines 1210--1237
+Overfull \hbox (114.40994pt too wide) in paragraph at lines 1218--1245
  [][] 
  []
 
@@ -1114,18 +1114,18 @@ Chapter 11.
 (./AdvancedMeasurementTheoryNotebook.bbl [45] [46
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1337.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1345.
 [47]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1337.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1345.
 (./AdvancedMeasurementTheoryNotebook.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1337.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1337.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1345.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1345.
  ) 
 Here is how much of TeX's memory you used:
- 20527 strings out of 479418
- 360268 string characters out of 5884586
- 830621 words of memory out of 5000000
- 37685 multiletter control sequences out of 15000+600000
+ 20529 strings out of 479418
+ 360298 string characters out of 5884586
+ 830675 words of memory out of 5000000
+ 37687 multiletter control sequences out of 15000+600000
  538959 words of font info for 86 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,10n,118p,832b,469s stack positions out of 5000i,500n,10000p,200000b,80000s

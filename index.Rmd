@@ -67,4 +67,9 @@ While base R has a long list of very useful functions, to fully realize the powe
 So, learning how to **install** packages (downloading from the web to your computer) and **loading** packages (making the package's functions accessible to your current R session) are important skills to master.
 
 
+## How To Use These Notes {-}
+
+Before going further, it may be helpful to watch the following video about how to use the code in this notebook with Rstudio:
+
+[How to Use RStudio with this Notebook](https://auburn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=13acb849-902a-45c7-bc4e-ad870153fcae)
 
