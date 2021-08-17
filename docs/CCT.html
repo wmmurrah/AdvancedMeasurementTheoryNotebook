@@ -181,6 +181,10 @@ div.csl-indent {
 <li class="chapter" data-level="1.3.2" data-path="CCT.html"><a href="CCT.html#multiple-sources-of-error"><i class="fa fa-check"></i><b>1.3.2</b> Multiple Sources of Error</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="CCT.html"><a href="CCT.html#additional-readings"><i class="fa fa-check"></i><b>1.4</b> Additional Readings</a></li>
+<li class="chapter" data-level="1.5" data-path="CCT.html"><a href="CCT.html#r-scripts"><i class="fa fa-check"></i><b>1.5</b> R Scripts</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="CCT.html"><a href="CCT.html#simulating-ctt-data"><i class="fa fa-check"></i><b>1.5.1</b> Simulating CTT data</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="factor-analysis.html"><a href="factor-analysis.html"><i class="fa fa-check"></i><b>2</b> Factor Analysis</a>
 <ul>
@@ -255,7 +259,7 @@ div.csl-indent {
 X = T + E
 \]</span>
 where <span class="math inline">\(X\)</span> is the <strong>observed score</strong>, <span class="math inline">\(T\)</span> is the <strong>true score</strong>, which is unknown, and <span class="math inline">\(E\)</span> is the <strong>error</strong></p>
-<p>To demonstrate this let’s assume we have the following data,</p>
+<p>To demonstrate this let’s assume we have the following data (R script is at end of this chapter),</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="CCT.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;code/simulate_CTTdata.R&quot;</span>)</span>
 <span id="cb1-2"><a href="CCT.html#cb1-2" aria-hidden="true" tabindex="-1"></a>CTTdata</span></code></pre></div>
 <pre><code>   id time x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 Tau
@@ -1783,7 +1787,45 @@ attr(,&quot;class&quot;)
 <h2><span class="header-section-number">1.4</span> Additional Readings</h2>
 <p>For more information of G theory, see <span class="citation"><a href="#ref-raykov2011introduction" role="doc-biblioref">Raykov and Marcoulides</a> (<a href="#ref-raykov2011introduction" role="doc-biblioref">2011</a>)</span>.
 For an example using the R package <code>lavaan</code> with G theory, see <span class="citation"><a href="#ref-Jorgensen2021Howestimateabsolute" role="doc-biblioref">Jorgensen</a> (<a href="#ref-Jorgensen2021Howestimateabsolute" role="doc-biblioref">2021</a>)</span>.</p>
+</div>
+<div id="r-scripts" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> R Scripts</h2>
+<div id="simulating-ctt-data" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Simulating CTT data</h3>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="CCT.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">#************************************************************************</span></span>
+<span id="cb62-2"><a href="CCT.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Title: simulate_CTTdata</span></span>
+<span id="cb62-3"><a href="CCT.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: William Murrah</span></span>
+<span id="cb62-4"><a href="CCT.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Description: Simulate data to demonstrate CTT and reliability</span></span>
+<span id="cb62-5"><a href="CCT.html#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: Monday, 09 August 2021</span></span>
+<span id="cb62-6"><a href="CCT.html#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="co"># R version: R version 4.1.0 (2021-05-18)</span></span>
+<span id="cb62-7"><a href="CCT.html#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Project(working) directory: /Users/wmm0017/Projects/Courses/AdvancedMeasurementTheoryNotebook</span></span>
+<span id="cb62-8"><a href="CCT.html#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="co">#************************************************************************</span></span>
+<span id="cb62-9"><a href="CCT.html#cb62-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-10"><a href="CCT.html#cb62-10" aria-hidden="true" tabindex="-1"></a>simx <span class="ot">&lt;-</span> <span class="cf">function</span>(truescore, <span class="at">sigmax =</span> <span class="dv">1</span>) {</span>
+<span id="cb62-11"><a href="CCT.html#cb62-11" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">18</span>, truescore, sigmax)</span>
+<span id="cb62-12"><a href="CCT.html#cb62-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">round</span>(x))</span>
+<span id="cb62-13"><a href="CCT.html#cb62-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb62-14"><a href="CCT.html#cb62-14" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb62-15"><a href="CCT.html#cb62-15" aria-hidden="true" tabindex="-1"></a>Tau <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>),<span class="dv">2</span>)</span>
+<span id="cb62-16"><a href="CCT.html#cb62-16" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20210805</span>)</span>
+<span id="cb62-17"><a href="CCT.html#cb62-17" aria-hidden="true" tabindex="-1"></a>CTTdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb62-18"><a href="CCT.html#cb62-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> id,</span>
+<span id="cb62-19"><a href="CCT.html#cb62-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">6</span>),</span>
+<span id="cb62-20"><a href="CCT.html#cb62-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb62-21"><a href="CCT.html#cb62-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb62-22"><a href="CCT.html#cb62-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">x3 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb62-23"><a href="CCT.html#cb62-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">x4 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb62-24"><a href="CCT.html#cb62-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">x5 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb62-25"><a href="CCT.html#cb62-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">x6 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb62-26"><a href="CCT.html#cb62-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">x7 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb62-27"><a href="CCT.html#cb62-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">x8 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb62-28"><a href="CCT.html#cb62-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">x9 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb62-29"><a href="CCT.html#cb62-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">x10 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb62-30"><a href="CCT.html#cb62-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tau =</span> Tau</span>
+<span id="cb62-31"><a href="CCT.html#cb62-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb62-32"><a href="CCT.html#cb62-32" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(id, Tau, simx)</span></code></pre></div>
 
+</div>
 </div>
 </div>
 <h3>References</h3>

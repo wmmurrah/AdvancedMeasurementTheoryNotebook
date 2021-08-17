@@ -7,6 +7,8 @@ generalizability-theory
 reliability-and-generalizability
 multiple-sources-of-error
 additional-readings
+r-scripts
+simulating-ctt-data
 factor-analysis
 think-about-these-situations
 solutions

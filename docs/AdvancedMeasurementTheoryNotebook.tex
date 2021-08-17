@@ -212,7 +212,7 @@ X = T + E
 \]
 where \(X\) is the \textbf{observed score}, \(T\) is the \textbf{true score}, which is unknown, and \(E\) is the \textbf{error}
 
-To demonstrate this let's assume we have the following data,
+To demonstrate this let's assume we have the following data (R script is at end of this chapter),
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -814,6 +814,49 @@ attr(,"class")
 For more information of G theory, see \citet{raykov2011introduction}.
 For an example using the R package \texttt{lavaan} with G theory, see \citet{Jorgensen2021Howestimateabsolute}.
 
+\hypertarget{r-scripts}{%
+\section{R Scripts}\label{r-scripts}}
+
+\hypertarget{simulating-ctt-data}{%
+\subsection{Simulating CTT data}\label{simulating-ctt-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#************************************************************************}
+\CommentTok{\# Title: simulate\_CTTdata}
+\CommentTok{\# Author: William Murrah}
+\CommentTok{\# Description: Simulate data to demonstrate CTT and reliability}
+\CommentTok{\# Created: Monday, 09 August 2021}
+\CommentTok{\# R version: R version 4.1.0 (2021{-}05{-}18)}
+\CommentTok{\# Project(working) directory: /Users/wmm0017/Projects/Courses/AdvancedMeasurementTheoryNotebook}
+\CommentTok{\#************************************************************************}
+
+\NormalTok{simx }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(truescore, }\AttributeTok{sigmax =} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{  x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{18}\NormalTok{, truescore, sigmax)}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{round}\NormalTok{(x))}
+\NormalTok{\}}
+\NormalTok{id }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{, }\AttributeTok{each =} \DecValTok{3}\NormalTok{)}
+\NormalTok{Tau }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{4}\SpecialCharTok{:}\DecValTok{6}\NormalTok{, }\AttributeTok{each =} \DecValTok{3}\NormalTok{),}\DecValTok{2}\NormalTok{)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{20210805}\NormalTok{)}
+\NormalTok{CTTdata }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{id =}\NormalTok{ id,}
+  \AttributeTok{time =} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{),}
+  \AttributeTok{x1 =} \FunctionTok{simx}\NormalTok{(Tau),}
+  \AttributeTok{x2 =} \FunctionTok{simx}\NormalTok{(Tau),}
+  \AttributeTok{x3 =} \FunctionTok{simx}\NormalTok{(Tau),}
+  \AttributeTok{x4 =} \FunctionTok{simx}\NormalTok{(Tau),}
+  \AttributeTok{x5 =} \FunctionTok{simx}\NormalTok{(Tau),}
+  \AttributeTok{x6 =} \FunctionTok{simx}\NormalTok{(Tau),}
+  \AttributeTok{x7 =} \FunctionTok{simx}\NormalTok{(Tau),}
+  \AttributeTok{x8 =} \FunctionTok{simx}\NormalTok{(Tau),}
+  \AttributeTok{x9 =} \FunctionTok{simx}\NormalTok{(Tau),}
+  \AttributeTok{x10 =} \FunctionTok{simx}\NormalTok{(Tau),}
+  \AttributeTok{Tau =}\NormalTok{ Tau}
+\NormalTok{)}
+\FunctionTok{rm}\NormalTok{(id, Tau, simx)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{factor-analysis}{%
 \chapter{Factor Analysis}\label{factor-analysis}}
 
@@ -956,12 +999,12 @@ Retain factors with eigenvalues greater than 1
 \hypertarget{scree-plot}{%
 \section{Scree Plot}\label{scree-plot}}
 
-\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-28-1.pdf}
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-29-1.pdf}
 
 \hypertarget{horns-parallel-analysis}{%
 \section{Horn's Parallel Analysis}\label{horns-parallel-analysis}}
 
-\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-29-1.pdf}
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-30-1.pdf}
 
 \begin{verbatim}
 Parallel analysis suggests that the number of factors =  NA  and the number of components =  1 
@@ -970,7 +1013,7 @@ Parallel analysis suggests that the number of factors =  NA  and the number of c
 \hypertarget{another-example}{%
 \section{Another example}\label{another-example}}
 
-\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-30-1.pdf}
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-31-1.pdf}
 
 \begin{verbatim}
 Parallel analysis suggests that the number of factors =  NA  and the number of components =  2 
@@ -1162,7 +1205,7 @@ Let's look at some examples
 \tiny
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-33}Correlations between dimensions}
+\caption{\label{tab:unnamed-chunk-34}Correlations between dimensions}
 \centering
 \begin{tabular}[t]{l|l|l|l|l|l|l|l|l|l|l}
 \hline
@@ -1196,7 +1239,7 @@ cost & -0.02 & 0.03 & -0.02 & -0.11 & 0.62 & 0.24 & -0.07 & -0.03 & -0.04 & -0.1
 \hypertarget{eigenvalues-1}{%
 \section{Eigenvalues \textgreater{} 1}\label{eigenvalues-1}}
 
-\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-34-1.pdf}
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-35-1.pdf}
 
 \hypertarget{orthogonal-rotation-1}{%
 \section{Orthogonal Rotation}\label{orthogonal-rotation-1}}
