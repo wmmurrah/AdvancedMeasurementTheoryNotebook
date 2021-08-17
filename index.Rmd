@@ -58,7 +58,6 @@ Here are some good places to start learning R:
 
 [CRAN](https://cran.r-project.org/)
 
-s
 
 ## R Packages {-}
 

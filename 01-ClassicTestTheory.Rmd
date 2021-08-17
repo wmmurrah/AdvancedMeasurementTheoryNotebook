@@ -157,8 +157,6 @@ https://seananderson.ca/2013/10/19/reshape/
 
 Basically, we need to transform the data so that instead of each item being in a separate column are reshaped so there is one column with the cell values, and one column that identifies which item the score is from.
 
-
-
 ```{r}
 library("reshape2")
 # Add person variable
@@ -189,12 +187,8 @@ print(alpha, digits = 2)
 ICC(HybMot)
 ```
 
-### Multiple Sources of Error
 
 ```{r}
-
-
-
 icchyb <- ICC(HybMot)
 sqrt((0.85-0.15)/19)
 sqrt((31.88-0.15)/777)
@@ -207,6 +201,19 @@ gfit <- gstudy(data = Hyblong, formula = value ~ (1|person) + (1|item))
 dfit <- dstudy(gfit, colname.objects = "person", colname.scores = "value", 
                data = Hyblong)
 round(dfit$generalizability, 3)
+```
+
+### Multiple Sources of Error
+
+Generalizability theory acknowledges that multiple sources of error can impact scores simultaneously, and allow for estimating the effects of each [@raykov2011introduction].
+These various sources of error, or facets (e.g., items, raters, measurement occasions).
+All measurements of behavior are conceptualized as being sampled from a *universe* of admissible observations [@raykov2011introduction].
+If the observed score is expected to vary across a facet (e.g. vary across occasions, or vary depending on the items included, or the rater scoring), then that facet is a defining characteristic of the universe.
+The idea of reliability is replace with the idea of generalizability, which ,instead of asking how accurately observed scores can reflect the true score (CTT), generalizability theory asks how accurately observed scores allow us to generalize about behavior of an individual in a particular universe.
+
+Below is the code from the @mair2018modern text.
+```{r}
+library(gtheory)
 
 data("Lakes")
 phydat <- subset(Lakes, subtest == "physical")
@@ -217,10 +224,15 @@ formula <- score ~ (1|personID) + (1|raterID) + (1|item) +
   (1|personID:raterID) + (1|personID:item) + (1|raterID:item)
 gfit <- gstudy(formula = formula, data = phydat)
 gfit
+```
 
+```{r}
 dfit <- dstudy(gfit, colname.objects = "personID", colname.scores = "score", 
                data = phydat)
 dfit$components
+```
+
+```{r}
 dfit$var.error.abs
 dfit$sem.abs
 dfit$var.error.rel
@@ -228,3 +240,8 @@ dfit$sem.rel
 dfit$dependability
 dfit$generalizability
 ```
+
+## Additional Readings
+
+For more information of G theory, see @raykov2011introduction. 
+For an example using the R package `lavaan` with G theory, see @Jorgensen2021Howestimateabsolute.

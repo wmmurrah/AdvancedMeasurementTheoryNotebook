@@ -41,16 +41,11 @@ panderOptions("missing", "")
 
 What do you do when you have a large number of variables you are considering as predictors of a dependent variable?
 
-\pause
-
 * Often, subsets of these variables are measuring the same, or very similar things.
 * We might like to reduce the variables to a smaller number of predictors.
 
-\pause
-
 What if you are developing a measurement scale and have a large number of items you think measure the same construct
 
-\pause
 
 * You might want to see how strongly the items are related to the construct.
 

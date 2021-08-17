@@ -131,7 +131,7 @@
 
 \title{Advanced Measurement Theory Course Notebook}
 \author{William M. Murrah}
-\date{2021-08-08}
+\date{2021-08-17}
 
 \begin{document}
 \maketitle
@@ -191,8 +191,6 @@ Here are some good places to start learning R:
 
 \href{https://cran.r-project.org/}{CRAN}
 
-s
-
 \hypertarget{r-packages}{%
 \section*{R Packages}\label{r-packages}}
 \addcontentsline{toc}{section}{R Packages}
@@ -214,6 +212,127 @@ X = T + E
 \]
 where \(X\) is the \textbf{observed score}, \(T\) is the \textbf{true score}, which is unknown, and \(E\) is the \textbf{error}
 
+To demonstrate this let's assume we have the following data,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{source}\NormalTok{(}\StringTok{"code/simulate\_CTTdata.R"}\NormalTok{)}
+\NormalTok{CTTdata}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   id time x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 Tau
+1   1    1  3  6  5  3  5  5  4  5  3   3   4
+2   1    2  6  3  5  3  4  2  4  4  3   5   4
+3   1    3  4  4  2  4  4  3  5  3  4   5   4
+4   2    1  3  6  8  6  5  4  5  5  5   5   5
+5   2    2  6  4  6  6  4  6  6  5  4   4   5
+6   2    3  4  6  6  5  5  5  1  3  6   4   5
+7   3    1  6  5  6  6  6  6  9  6  6   5   6
+8   3    2  6  6  6  7  5  6  6  6  6   7   6
+9   3    3  6  5  8  6  6  6  7  7  5   7   6
+10  4    1  4  3  5  4  2  3  3  5  5   2   4
+11  4    2  4  5  5  4  5  5  3  5  3   4   4
+12  4    3  2  4  4  4  6  4  3  4  5   4   4
+13  5    1  5  6  5  4  5  5  5  6  5   6   5
+14  5    2  6  6  4  6  4  5  4  5  5   5   5
+15  5    3  6  4  5  4  5  5  4  4  5   5   5
+16  6    1  6  6  7  8  6  6  7  6  6   4   6
+17  6    2  4  5  7  5  5  7  4  5  6   7   6
+18  6    3  5  6  6  6  4  5  4  5  7   6   6
+\end{verbatim}
+
+where \texttt{id} is a variable indicating individual test-takers, \texttt{time} indicated which of 3 times each individual was assessed, \texttt{x1} - \texttt{x10} are the scores on 10 items that comprise the test, and \texttt{Tau} is the true value of the individuals ability.
+I use \texttt{Tau} here instead of \texttt{T}, because \texttt{T} is a protected symbol in R which is short-hand for \texttt{TRUE}.
+Note that we would not know \texttt{Tau} in most situations, but because this is simulated data we will pretend we do.
+
+We can create a composite score for the ten items for each individual on each occasion by averaging columns 3 through 12.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CTTdata}\SpecialCharTok{$}\NormalTok{X }\OtherTok{\textless{}{-}} \FunctionTok{rowMeans}\NormalTok{(CTTdata[ ,}\DecValTok{3}\SpecialCharTok{:}\DecValTok{12}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+And we can also create \texttt{E}, the error with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CTTdata}\SpecialCharTok{$}\NormalTok{E }\OtherTok{\textless{}{-}}\NormalTok{ CTTdata}\SpecialCharTok{$}\NormalTok{X }\SpecialCharTok{{-}}\NormalTok{ CTTdata}\SpecialCharTok{$}\NormalTok{Tau}
+\end{Highlighting}
+\end{Shaded}
+
+Again, in practice we would not be able to directly compute \texttt{E} because we would not know \texttt{Tau}, but we will use it to build an understanding of what error is.
+
+Now we have:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CTTdata}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   id time x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 Tau   X    E
+1   1    1  3  6  5  3  5  5  4  5  3   3   4 4.2  0.2
+2   1    2  6  3  5  3  4  2  4  4  3   5   4 3.9 -0.1
+3   1    3  4  4  2  4  4  3  5  3  4   5   4 3.8 -0.2
+4   2    1  3  6  8  6  5  4  5  5  5   5   5 5.2  0.2
+5   2    2  6  4  6  6  4  6  6  5  4   4   5 5.1  0.1
+6   2    3  4  6  6  5  5  5  1  3  6   4   5 4.5 -0.5
+7   3    1  6  5  6  6  6  6  9  6  6   5   6 6.1  0.1
+8   3    2  6  6  6  7  5  6  6  6  6   7   6 6.1  0.1
+9   3    3  6  5  8  6  6  6  7  7  5   7   6 6.3  0.3
+10  4    1  4  3  5  4  2  3  3  5  5   2   4 3.6 -0.4
+11  4    2  4  5  5  4  5  5  3  5  3   4   4 4.3  0.3
+12  4    3  2  4  4  4  6  4  3  4  5   4   4 4.0  0.0
+13  5    1  5  6  5  4  5  5  5  6  5   6   5 5.2  0.2
+14  5    2  6  6  4  6  4  5  4  5  5   5   5 5.0  0.0
+15  5    3  6  4  5  4  5  5  4  4  5   5   5 4.7 -0.3
+16  6    1  6  6  7  8  6  6  7  6  6   4   6 6.2  0.2
+17  6    2  4  5  7  5  5  7  4  5  6   7   6 5.5 -0.5
+18  6    3  5  6  6  6  4  5  4  5  7   6   6 5.4 -0.6
+\end{verbatim}
+
+Look over the last three columns and make sure you understand their relation.
+For example, in the first row, note that \texttt{X} is .2 points above \texttt{Tau}, which is exactly the value of \texttt{E} we computed (\(X_1 - T_1 = E_1 = 4.2 - 4 = .2\)).
+The 1 subscript in the previous expression indicated row 1 (i.e.~i = 1).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CTTdata}\SpecialCharTok{$}\NormalTok{X\_t }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{ave}\NormalTok{(CTTdata}\SpecialCharTok{$}\NormalTok{X, CTTdata}\SpecialCharTok{$}\NormalTok{id, }\AttributeTok{FUN =}\NormalTok{ mean),}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CTTdata}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   id time x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 Tau   X    E X_t
+1   1    1  3  6  5  3  5  5  4  5  3   3   4 4.2  0.2 4.0
+2   1    2  6  3  5  3  4  2  4  4  3   5   4 3.9 -0.1 4.0
+3   1    3  4  4  2  4  4  3  5  3  4   5   4 3.8 -0.2 4.0
+4   2    1  3  6  8  6  5  4  5  5  5   5   5 5.2  0.2 4.9
+5   2    2  6  4  6  6  4  6  6  5  4   4   5 5.1  0.1 4.9
+6   2    3  4  6  6  5  5  5  1  3  6   4   5 4.5 -0.5 4.9
+7   3    1  6  5  6  6  6  6  9  6  6   5   6 6.1  0.1 6.2
+8   3    2  6  6  6  7  5  6  6  6  6   7   6 6.1  0.1 6.2
+9   3    3  6  5  8  6  6  6  7  7  5   7   6 6.3  0.3 6.2
+10  4    1  4  3  5  4  2  3  3  5  5   2   4 3.6 -0.4 4.0
+11  4    2  4  5  5  4  5  5  3  5  3   4   4 4.3  0.3 4.0
+12  4    3  2  4  4  4  6  4  3  4  5   4   4 4.0  0.0 4.0
+13  5    1  5  6  5  4  5  5  5  6  5   6   5 5.2  0.2 5.0
+14  5    2  6  6  4  6  4  5  4  5  5   5   5 5.0  0.0 5.0
+15  5    3  6  4  5  4  5  5  4  4  5   5   5 4.7 -0.3 5.0
+16  6    1  6  6  7  8  6  6  7  6  6   4   6 6.2  0.2 5.7
+17  6    2  4  5  7  5  5  7  4  5  6   7   6 5.5 -0.5 5.7
+18  6    3  5  6  6  6  4  5  4  5  7   6   6 5.4 -0.6 5.7
+\end{verbatim}
+
 \hypertarget{reliability}{%
 \section{Reliability}\label{reliability}}
 
@@ -221,11 +340,67 @@ where \(X\) is the \textbf{observed score}, \(T\) is the \textbf{true score}, wh
 \text{reliability} = \frac{\sigma^2_T}{\sigma^2_X} = \frac{\sigma^2_T}{\sigma^2_T + \sigma^2_E} = \rho^2_{XT}
 \]
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Tau }\OtherTok{\textless{}{-}}\NormalTok{ CTTdata}\SpecialCharTok{$}\NormalTok{Tau}
+\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{ CTTdata}\SpecialCharTok{$}\NormalTok{X}
+\NormalTok{E }\OtherTok{\textless{}{-}}\NormalTok{ CTTdata}\SpecialCharTok{$}\NormalTok{X }\SpecialCharTok{{-}}\NormalTok{ CTTdata}\SpecialCharTok{$}\NormalTok{Tau}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{var}\NormalTok{(Tau)}\SpecialCharTok{/}\FunctionTok{var}\NormalTok{(X)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.9170806
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{var}\NormalTok{(Tau)}\SpecialCharTok{/}\NormalTok{(}\FunctionTok{var}\NormalTok{(Tau) }\SpecialCharTok{+} \FunctionTok{var}\NormalTok{(E))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.8898776
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(Tau, X)}\SpecialCharTok{\^{}}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.886766
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =}\NormalTok{ CTTdata}\SpecialCharTok{$}\NormalTok{Tau, }\AttributeTok{y =}\NormalTok{ CTTdata}\SpecialCharTok{$}\NormalTok{id, }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{10}\NormalTok{),}
+     \AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{7}\NormalTok{))}
+\FunctionTok{points}\NormalTok{(}\AttributeTok{x =}\NormalTok{ CTTdata}\SpecialCharTok{$}\NormalTok{X, }\AttributeTok{y =} \FunctionTok{jitter}\NormalTok{(CTTdata}\SpecialCharTok{$}\NormalTok{id), }\AttributeTok{pch =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(}\AttributeTok{x =} \FunctionTok{ave}\NormalTok{(}\AttributeTok{x =}\NormalTok{ CTTdata}\SpecialCharTok{$}\NormalTok{X, }\FunctionTok{factor}\NormalTok{(CTTdata}\SpecialCharTok{$}\NormalTok{id), }\AttributeTok{FUN =}\NormalTok{ mean), }\AttributeTok{y =}\NormalTok{ CTTdata}\SpecialCharTok{$}\NormalTok{id, }
+       \AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{pch =} \DecValTok{18}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# points(x = CTTdata$X\_t, pch = 2, factor(CTTdata$id))}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{cronbachs-alpha}{%
 \subsection{\texorpdfstring{Cronbach's \(\alpha\)}{Cronbach's \textbackslash alpha}}\label{cronbachs-alpha}}
 
 In the notes for this chapter, I demonstrate aspects of classical test theory, reliability and generalizability theory using data from a study exploring the motivation of R package authors \citep{mair2015motivation}.
-This tutorial is based on Chapter 1 of \citet{mair2018modern}, which can be consulted for a more indepth exposition of the underlying theory.
+This tutorial is based on Chapter 1 of \citet{mair2018modern}, which can be consulted for a more in depth exposition of the underlying theory.
 Here I focus on demonstrating some of those concepts in R, as well as describing how to get certain results in R.
 
 First, I load the packages used in this tutorial:
@@ -355,14 +530,725 @@ hyb19 & 0.06 & 0.03 & 0.04 & 0.04 & 0.03 & 0.07 & 0.02 & 0.06 & 0.05 & 0.05 & 0.
 \hypertarget{generalizability-theory}{%
 \section{Generalizability Theory}\label{generalizability-theory}}
 
+Generalizability theory, or G-theory for short, is an extension of CTT, which decomposes the one error term in CTT into multiple sources of error called \emph{facets}.
+These could include sources such as items, raters, or measurement occasions.
+These were each given a subscript on page 2 of the text.
+
+Before looking at these different sources of error, let's calculate Cronbach's \(\alpha\) in a different way, that will allow this decomposition going forward.
+
+We will first need to reshape the data from wide to long format.
+A great tutorial on reshaping data with the \texttt{reshape2} package can be found here:
+
+\url{https://seananderson.ca/2013/10/19/reshape/}
+
+Basically, we need to transform the data so that instead of each item being in a separate column are reshaped so there is one column with the cell values, and one column that identifies which item the score is from.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"reshape2"}\NormalTok{)}
+\CommentTok{\# Add person variable}
+\NormalTok{Hyb1 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(HybMot, }\AttributeTok{person =} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(HybMot))}
+\NormalTok{Hyblong }\OtherTok{\textless{}{-}} \FunctionTok{melt}\NormalTok{(Hyb1, }\AttributeTok{id.vars =} \FunctionTok{c}\NormalTok{(}\StringTok{"person"}\NormalTok{), }\AttributeTok{variable.name =} \StringTok{"item"}\NormalTok{)}
+\NormalTok{Hyblong}\SpecialCharTok{$}\NormalTok{person }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(Hyblong}\SpecialCharTok{$}\NormalTok{person)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{reliability-and-generalizability}{%
 \subsection{Reliability and Generalizability}\label{reliability-and-generalizability}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{aov}\NormalTok{(value }\SpecialCharTok{\textasciitilde{}}\NormalTok{ person }\SpecialCharTok{+}\NormalTok{ item, }\AttributeTok{data =}\NormalTok{ Hyblong))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+               Df Sum Sq Mean Sq F value Pr(>F)    
+person        776  663.0    0.85   5.549 <2e-16 ***
+item           18  573.8   31.88 207.048 <2e-16 ***
+Residuals   13968 2150.5    0.15                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+From this output we can calculate Cronbach's \(\alpha\) with the following values:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MSp }\OtherTok{\textless{}{-}} \FloatTok{0.85}
+\NormalTok{MSe }\OtherTok{\textless{}{-}} \FloatTok{0.15}
+
+\NormalTok{alpha }\OtherTok{\textless{}{-}}\NormalTok{ (MSp }\SpecialCharTok{{-}}\NormalTok{ MSe)}\SpecialCharTok{/}\NormalTok{MSp}
+\FunctionTok{print}\NormalTok{(alpha, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.82
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ICC}\NormalTok{(HybMot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Call: ICC(x = HybMot)
+
+Intraclass correlation coefficients 
+                         type  ICC   F df1   df2        p lower bound
+Single_raters_absolute   ICC1 0.15 4.4 776 13986 7.2e-279        0.14
+Single_random_raters     ICC2 0.16 5.5 776 13968  0.0e+00        0.14
+Single_fixed_raters      ICC3 0.19 5.5 776 13968  0.0e+00        0.18
+Average_raters_absolute ICC1k 0.77 4.4 776 13986 7.2e-279        0.75
+Average_random_raters   ICC2k 0.78 5.5 776 13968  0.0e+00        0.75
+Average_fixed_raters    ICC3k 0.82 5.5 776 13968  0.0e+00        0.80
+                        upper bound
+Single_raters_absolute         0.17
+Single_random_raters           0.18
+Single_fixed_raters            0.21
+Average_raters_absolute        0.79
+Average_random_raters          0.81
+Average_fixed_raters           0.83
+
+ Number of subjects = 777     Number of Judges =  19
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{icchyb }\OtherTok{\textless{}{-}} \FunctionTok{ICC}\NormalTok{(HybMot)}
+\FunctionTok{sqrt}\NormalTok{((}\FloatTok{0.85{-}0.15}\NormalTok{)}\SpecialCharTok{/}\DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.191943
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{((}\FloatTok{31.88{-}0.15}\NormalTok{)}\SpecialCharTok{/}\DecValTok{777}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.2020806
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"lme4"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Loading required package: Matrix
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{VarCorr}\NormalTok{(}\FunctionTok{lmer}\NormalTok{(value }\SpecialCharTok{\textasciitilde{}}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{person) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{item), }\AttributeTok{data =}\NormalTok{ Hyblong))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Groups   Name        Std.Dev.
+ person   (Intercept) 0.19200 
+ item     (Intercept) 0.20206 
+ Residual             0.39238 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"gtheory"}\NormalTok{)}
+\NormalTok{gfit }\OtherTok{\textless{}{-}} \FunctionTok{gstudy}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Hyblong, }\AttributeTok{formula =}\NormalTok{ value }\SpecialCharTok{\textasciitilde{}}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{person) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{item))}
+\NormalTok{dfit }\OtherTok{\textless{}{-}} \FunctionTok{dstudy}\NormalTok{(gfit, }\AttributeTok{colname.objects =} \StringTok{"person"}\NormalTok{, }\AttributeTok{colname.scores =} \StringTok{"value"}\NormalTok{, }
+               \AttributeTok{data =}\NormalTok{ Hyblong)}
+\FunctionTok{round}\NormalTok{(dfit}\SpecialCharTok{$}\NormalTok{generalizability, }\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.82
+\end{verbatim}
 
 \hypertarget{multiple-sources-of-error}{%
 \subsection{Multiple Sources of Error}\label{multiple-sources-of-error}}
 
+Generalizability theory acknowledges that multiple sources of error can impact scores simultaneously, and allow for estimating the effects of each \citep{raykov2011introduction}.
+These various sources of error, or facets (e.g., items, raters, measurement occasions).
+All measurements of behavior are conceptualized as being sampled from a \emph{universe} of admissible observations \citep{raykov2011introduction}.
+If the observed score is expected to vary across a facet (e.g.~vary across occasions, or vary depending on the items included, or the rater scoring), then that facet is a defining characteristic of the universe.
+The idea of reliability is replace with the idea of generalizability, which ,instead of asking how accurately observed scores can reflect the true score (CTT), generalizability theory asks how accurately observed scores allow us to generalize about behavior of an individual in a particular universe.
+
+Below is the code from the \citet{mair2018modern} text.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(gtheory)}
+
+\FunctionTok{data}\NormalTok{(}\StringTok{"Lakes"}\NormalTok{)}
+\NormalTok{phydat }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(Lakes, subtest }\SpecialCharTok{==} \StringTok{"physical"}\NormalTok{)}
+\NormalTok{phydat}\SpecialCharTok{$}\NormalTok{item }\OtherTok{\textless{}{-}} \FunctionTok{droplevels}\NormalTok{(phydat}\SpecialCharTok{$}\NormalTok{item)}
+\FunctionTok{head}\NormalTok{(phydat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      personID raterID item score  subtest
+12611        1       7 phy1     5 physical
+12612        1       1 phy1     5 physical
+12613        1       3 phy1     5 physical
+12614        1       8 phy1     4 physical
+12615        1       5 phy1     6 physical
+12616        2       3 phy1     5 physical
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{formula }\OtherTok{\textless{}{-}}\NormalTok{ score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{personID) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{raterID) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{item) }\SpecialCharTok{+} 
+\NormalTok{  (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{personID}\SpecialCharTok{:}\NormalTok{raterID) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{personID}\SpecialCharTok{:}\NormalTok{item) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{raterID}\SpecialCharTok{:}\NormalTok{item)}
+\NormalTok{gfit }\OtherTok{\textless{}{-}} \FunctionTok{gstudy}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ formula, }\AttributeTok{data =}\NormalTok{ phydat)}
+\NormalTok{gfit}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+$components
+            source         var percent n
+1 personID:raterID 0.127298630    10.7 1
+2    personID:item 0.151229568    12.7 1
+3         personID 0.458766113    38.5 1
+4     raterID:item 0.008802081     0.7 1
+5          raterID 0.139048763    11.7 1
+6             item 0.033388424     2.8 1
+7         Residual 0.272703419    22.9 1
+
+attr(,"class")
+[1] "gstudy" "list"  
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfit }\OtherTok{\textless{}{-}} \FunctionTok{dstudy}\NormalTok{(gfit, }\AttributeTok{colname.objects =} \StringTok{"personID"}\NormalTok{, }\AttributeTok{colname.scores =} \StringTok{"score"}\NormalTok{, }
+               \AttributeTok{data =}\NormalTok{ phydat)}
+\NormalTok{dfit}\SpecialCharTok{$}\NormalTok{components}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+            source          var percent  n
+1 personID:raterID 0.0254597259     4.3  5
+2    personID:item 0.0504098560     8.5  3
+3         personID 0.4587661131    77.4  1
+4     raterID:item 0.0005868054     0.1 15
+5          raterID 0.0278097526     4.7  5
+6             item 0.0111294746     1.9  3
+7         Residual 0.0181802279     3.1 15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfit}\SpecialCharTok{$}\NormalTok{var.error.abs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.1335758
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfit}\SpecialCharTok{$}\NormalTok{sem.abs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.3654803
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfit}\SpecialCharTok{$}\NormalTok{var.error.rel}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.09404981
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfit}\SpecialCharTok{$}\NormalTok{sem.rel}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.3066754
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfit}\SpecialCharTok{$}\NormalTok{dependability}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.7744954
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfit}\SpecialCharTok{$}\NormalTok{generalizability}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.8298714
+\end{verbatim}
+
+\hypertarget{additional-readings}{%
+\section{Additional Readings}\label{additional-readings}}
+
+For more information of G theory, see \citet{raykov2011introduction}.
+For an example using the R package \texttt{lavaan} with G theory, see \citet{Jorgensen2021Howestimateabsolute}.
+
 \hypertarget{factor-analysis}{%
 \chapter{Factor Analysis}\label{factor-analysis}}
+
+\hypertarget{think-about-these-situations}{%
+\section{Think about these situations}\label{think-about-these-situations}}
+
+What do you do when you have a large number of variables you are considering as predictors of a dependent variable?
+
+\begin{itemize}
+\tightlist
+\item
+  Often, subsets of these variables are measuring the same, or very similar things.
+\item
+  We might like to reduce the variables to a smaller number of predictors.
+\end{itemize}
+
+What if you are developing a measurement scale and have a large number of items you think measure the same construct
+
+\begin{itemize}
+\tightlist
+\item
+  You might want to see how strongly the items are related to the construct.
+\end{itemize}
+
+\hypertarget{solutions}{%
+\section{Solutions}\label{solutions}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Principal Components Analysis
+
+  \begin{itemize}
+  \tightlist
+  \item
+    transforming the original variables into a new set of linear combinations (pricipal components).
+  \end{itemize}
+\item
+  Factor Analysis
+
+  \begin{itemize}
+  \tightlist
+  \item
+    setting up a mathematical model to estimate the number or factors
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{principal-components-analysis}{%
+\section{Principal Components Analysis}\label{principal-components-analysis}}
+
+\begin{itemize}
+\tightlist
+\item
+  Concerned with explaining variance-covariance structure of a set of variables.
+\item
+  PCA attempts to explain as much of the total variance among the observed variables as possible with a smaller number of components.
+\item
+  Because the variables are standardized prior to analysis, the total amount of variance available is the number of variables.
+\item
+  The goal is \textbf{data reduction} for subsequent analysis.
+\item
+  Variables \emph{cause} components.
+\item
+  Components are not representative of any underlying theory.
+\end{itemize}
+
+\hypertarget{factor-analysis-1}{%
+\section{Factor Analysis}\label{factor-analysis-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  The goal is understanding underlying constructs.
+\item
+  Uses a modified correlation matrix (reduced matrix)
+\item
+  factors \emph{cause} the variables.
+\item
+  Factors represent theoretical constructs.
+\item
+  Focuses on the common variance of the variables, and purges the unique variance.
+\end{itemize}
+
+\hypertarget{components}{%
+\section{Components}\label{components}}
+
+The principal components partition the total variance (the sum of the variances of the original variables) by finding the linear combination of the variables that account for the maximum amount of variance:
+
+\[
+PC1 = a_{11}x_1 + a_{12}x_2 ... a_{1p}x_p, 
+\]
+This is repeated as many time as there are variables.
+
+\hypertarget{pc-extraction}{%
+\section{PC Extraction}\label{pc-extraction}}
+
+draw pretty pictures on the board
+
+\hypertarget{eigenvalues}{%
+\section{Eigenvalues}\label{eigenvalues}}
+
+Eigenvalues represent the variance in the variables explained by the success components.
+
+\hypertarget{determining-the-number-of-factors}{%
+\section{Determining the Number of Factors}\label{determining-the-number-of-factors}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Kaiser criterion: Retain only factors with eigenvalues \textgreater{} 1. (generally accurate)
+\item
+  Scree plot: plot eigenvalues and drop factors after leveling off.
+\item
+  Parallel analysis: compare observed eigenvalues to parallel set of data from randomly generated data. Retain factors in original if eigenvalue is greater than random eigenvalue.
+\item
+  Factor meaningfulness is also very important to consider.
+\end{enumerate}
+
+\hypertarget{example-data}{%
+\section{Example data}\label{example-data}}
+
+\begin{verbatim}
+     d1   d2   d3   d4
+d1 1.00 0.70 0.65 0.62
+d2 0.70 1.00 0.66 0.63
+d3 0.65 0.66 1.00 0.60
+d4 0.62 0.63 0.60 1.00
+\end{verbatim}
+
+\hypertarget{kaiser}{%
+\section{Kaiser}\label{kaiser}}
+
+Retain factors with eigenvalues greater than 1
+
+\begin{verbatim}
+[1] 2.9311792 0.4103921 0.3592372 0.2991916
+\end{verbatim}
+
+\hypertarget{scree-plot}{%
+\section{Scree Plot}\label{scree-plot}}
+
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+\hypertarget{horns-parallel-analysis}{%
+\section{Horn's Parallel Analysis}\label{horns-parallel-analysis}}
+
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+\begin{verbatim}
+Parallel analysis suggests that the number of factors =  NA  and the number of components =  1 
+\end{verbatim}
+
+\hypertarget{another-example}{%
+\section{Another example}\label{another-example}}
+
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-30-1.pdf}
+
+\begin{verbatim}
+Parallel analysis suggests that the number of factors =  NA  and the number of components =  2 
+\end{verbatim}
+
+\hypertarget{rotation}{%
+\section{Rotation}\label{rotation}}
+
+\begin{itemize}
+\tightlist
+\item
+  Principal components are derived to maximize the variance accounted for (data reduction).
+\item
+  Rotation is done to make the factors more interpretable (i.e.~meaningful).
+\item
+  Two major classes of rotation:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Orthogonal - new factors are still uncorrelated, as were the initial factors.
+  \item
+    Oblique - new factors are allowed to be correlated.
+  \end{itemize}
+\end{itemize}
+
+Essentially reallocates the loadings. The first factor may not be the one accounting for the most variance.
+
+\hypertarget{orthogonal-rotation}{%
+\section{Orthogonal Rotation}\label{orthogonal-rotation}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Quartimax} - idea is to clean up the \emph{variables}. Rotation done so each variable loads mainly on one factor. Problematic if there is a general factor on which most or all variables load on (think IQ).
+\item
+  \textbf{Varimax} - to clean up \emph{factors}. So each factor has high correlation with a smaller number of variables, low correlation with the other variables. Generally makes interpretation easier.
+\end{enumerate}
+
+\hypertarget{oblique-rotation}{%
+\section{Oblique Rotation}\label{oblique-rotation}}
+
+\begin{itemize}
+\tightlist
+\item
+  Often correlated factors are more reasonable.
+\item
+  Therefore, oblique rotation is often preferred.
+\item
+  But interpretation is more complicated.
+\end{itemize}
+
+\hypertarget{factor-matrices}{%
+\section{Factor Matrices}\label{factor-matrices}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Factor pattern matrix:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    includes \emph{pattern coefficients} analogous to standardized partial regression coefficients.
+  \item
+    Indicated the unique importance of a factor to a variable, holding other factors constant.
+  \end{itemize}
+\item
+  Factor structure matrix:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    includes \emph{structure coefficients} which are simple correlations of the variables with the factors.
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{which-matrix-should-we-interpret}{%
+\section{Which matrix should we interpret?}\label{which-matrix-should-we-interpret}}
+
+\begin{itemize}
+\item
+  When orthogonal rotation is used interpret \emph{structural coefficients} (but they are the same as pattern coefficients).
+\item
+  When oblique rotation is used pattern coefficients are preferred because they account for the correlation between the factors and they are parameters of the correlated factor model (which we will discuss next class).
+\end{itemize}
+
+\hypertarget{which-variables-should-be-used-to-interpret-each-factor}{%
+\section{Which variables should be used to interpret each factor?}\label{which-variables-should-be-used-to-interpret-each-factor}}
+
+\begin{itemize}
+\tightlist
+\item
+  The idea is to use only those variables that have a strong association with the factor.
+\item
+  Typical thresholds are \textbar.30\textbar{} or \textbar.40\textbar.
+\item
+  Content knowledge is critical.
+\end{itemize}
+
+\hypertarget{examples}{%
+\section{Examples}\label{examples}}
+
+Let's look at some examples
+
+\hypertarget{steps-in-factor-analysis}{%
+\section{Steps in Factor Analysis}\label{steps-in-factor-analysis}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Choose extraction method
+
+  \begin{itemize}
+  \tightlist
+  \item
+    So far we've focused on PCA
+  \end{itemize}
+\item
+  Determine the number of components/factors
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Kaiser method: eigenvalues \textgreater{} 1
+  \item
+    Scree plot: All components before leveling off
+  \item
+    Horn's parallel analysis: components/factors greater than simulated values from random numbers
+  \end{itemize}
+\item
+  Rotate Factors
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Orthogonal
+  \item
+    Oblique
+  \end{itemize}
+\item
+  Interpret Components/Factors
+\end{enumerate}
+
+\hypertarget{tom-swifts-eletric-factor-analysis-factory}{%
+\section{Tom Swift's Eletric Factor Analysis Factory}\label{tom-swifts-eletric-factor-analysis-factory}}
+
+``Little Jiffy'' method of factor analysis
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Extraction method : PCA
+\item
+  Number of factors: eigenvalues \textgreater{} 1
+\item
+  Rotation: orthogonal(varimax)
+\item
+  Interpretation
+\end{enumerate}
+
+\hypertarget{metal-boxes}{%
+\section{Metal Boxes}\label{metal-boxes}}
+
+\begin{table}[]
+\begin{tabular}{lllll}
+ Dimension &  Derivation  &  \\
+ \hline \\
+ Thickness &  $x$  \\
+ Width & $y$ \\
+ Length & $z$ \\
+ Volume & $xyz$ \\
+ Density & $d$ \\
+ Weight & $xyzd$ \\
+ Total surface area & $2(xy + xz +_ yz)$ \\
+ Cross-sectional area & $yz$ \\
+ Total edge length & $4(x +  y + z)$ \\
+ Internal diagonal length & $(x^2 + y^2 + z^2)^2$ \\
+ Cost per pound & $c$
+\end{tabular}
+\end{table}
+
+\hypertarget{correlations}{%
+\section{Correlations}\label{correlations}}
+
+\tiny
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-33}Correlations between dimensions}
+\centering
+\begin{tabular}[t]{l|l|l|l|l|l|l|l|l|l|l}
+\hline
+  & thick & width & length & volume & density & weight & surface & crosssec & edge & diagonal\\
+\hline
+thick & 1.00 &  &  &  &  &  &  &  &  & \\
+\hline
+width & 0.49 & 1.00 &  &  &  &  &  &  &  & \\
+\hline
+length & 0.24 & 0.61 & 1.00 &  &  &  &  &  &  & \\
+\hline
+volume & 0.84 & 0.77 & 0.58 & 1.00 &  &  &  &  &  & \\
+\hline
+density & -0.13 & -0.15 & -0.02 & -0.22 & 1.00 &  &  &  &  & \\
+\hline
+weight & 0.59 & 0.55 & 0.45 & 0.65 & 0.44 & 1.00 &  &  &  & \\
+\hline
+surface & 0.74 & 0.87 & 0.72 & 0.97 & -0.2 & 0.65 & 1.00 &  &  & \\
+\hline
+crosssec & 0.46 & 0.92 & 0.83 & 0.81 & -0.15 & 0.56 & 0.92 & 1.00 &  & \\
+\hline
+edge & 0.61 & 0.88 & 0.84 & 0.87 & -0.15 & 0.61 & 0.97 & 0.96 & 1.00 & \\
+\hline
+diagonal & 0.51 & 0.78 & 0.86 & 0.85 & -0.18 & 0.57 & 0.91 & 0.93 & 0.92 & 1.00\\
+\hline
+cost & -0.02 & 0.03 & -0.02 & -0.11 & 0.62 & 0.24 & -0.07 & -0.03 & -0.04 & -0.12\\
+\hline
+\end{tabular}
+\end{table}
+
+\hypertarget{eigenvalues-1}{%
+\section{Eigenvalues \textgreater{} 1}\label{eigenvalues-1}}
+
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-34-1.pdf}
+
+\hypertarget{orthogonal-rotation-1}{%
+\section{Orthogonal Rotation}\label{orthogonal-rotation-1}}
+
+\footnotesize
+
+\begin{verbatim}
+Loadings:
+         RC1    RC3    RC2   
+thick     0.212  0.947 -0.053
+width     0.801  0.382 -0.011
+length    0.936 -0.006  0.054
+volume    0.634  0.744 -0.122
+density  -0.102 -0.060  0.930
+weight    0.440  0.610  0.509
+surface   0.792  0.600 -0.078
+crosssec  0.942  0.287 -0.031
+edge      0.892  0.422 -0.031
+diagonal  0.905  0.327 -0.088
+cost     -0.023 -0.012  0.841
+
+                 RC1   RC3   RC2
+SS loadings    5.298 2.699 1.868
+Proportion Var 0.482 0.245 0.170
+Cumulative Var 0.482 0.727 0.897
+\end{verbatim}
+
+\hypertarget{orthogonal-rotation-with-loadings-.70}{%
+\section{Orthogonal Rotation with Loadings \textgreater{} .70}\label{orthogonal-rotation-with-loadings-.70}}
+
+\footnotesize
+
+\begin{verbatim}
+Loadings:
+         RC1    RC3    RC2   
+thick            0.947       
+width     0.801              
+length    0.936              
+volume           0.744       
+density                 0.930
+weight                       
+surface   0.792              
+crosssec  0.942              
+edge      0.892              
+diagonal  0.905              
+cost                    0.841
+
+                 RC1   RC3   RC2
+SS loadings    5.298 2.699 1.868
+Proportion Var 0.482 0.245 0.170
+Cumulative Var 0.482 0.727 0.897
+\end{verbatim}
 
 \hypertarget{path-analysis-and-structural-equation-modeling}{%
 \chapter{Path Analysis and Structural Equation Modeling}\label{path-analysis-and-structural-equation-modeling}}
@@ -380,8 +1266,8 @@ Some \emph{significant} applications are demonstrated in this chapter.
 \hypertarget{example-two}{%
 \section{Example two}\label{example-two}}
 
-\hypertarget{principal-components-analysis}{%
-\chapter{Principal Components Analysis}\label{principal-components-analysis}}
+\hypertarget{principal-components-analysis-1}{%
+\chapter{Principal Components Analysis}\label{principal-components-analysis-1}}
 
 We have finished a nice book.
 
