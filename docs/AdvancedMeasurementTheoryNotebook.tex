@@ -131,7 +131,7 @@
 
 \title{Advanced Measurement Theory Course Notebook}
 \author{William M. Murrah}
-\date{2021-08-17}
+\date{2021-08-23}
 
 \begin{document}
 \maketitle
@@ -169,7 +169,7 @@ Note you will need Duo setup for this to work.
 \href{https://nv.instructuremedia.com/fetch/QkFoYkIxc0hhUVNIRGFrSE1Hd3JCeWhUREdFPS0tZjk4ODFlYWEyZWFiNWQwYWYyZDk0YTZjMjljZTJlMjBkNmIwMzE5Yw.mp4}{Using Vlab to acces R/RStudio}
 
 A better option if you have a laptop, you can install both programs on your computer.
-They are both absolutely free and available on all major operating systems, so you will not have to worry about transferring information across computers, limited connection speeds, or other hassles inherent with the Vlab route.
+They are both absolutely free and available on all major operating systems, so you will not have to worry about transferring information across computers, limited connection speeds, or other hassles inherent with the VLab route.
 
 The following links take you to videos instructing you how to install them.
 
@@ -868,6 +868,100 @@ For an example using the R package \texttt{lavaan} with G theory, see \citet{Jor
 \hypertarget{factor-analysis}{%
 \chapter{Factor Analysis}\label{factor-analysis}}
 
+\hypertarget{correlation-coefficient}{%
+\section{Correlation Coefficient}\label{correlation-coefficient}}
+
+\emph{Pearson product-moment correlation}:
+
+\[
+r_{xy} = \frac{\Sigma_{n=1}^n (x_k - \bar{x})(y_i - \bar{y})}{\sqrt{\Sigma_{n=1}^n(x_i - \bar{x})^2} \sqrt{\Sigma_{n=1}^n(y_i - \bar{y})^2}} = \frac{s_{xy}}{s_x s_y}.
+\]
+
+The eauation looks very daunting, until you see that it is just the covariance of \(x\) and \(y\) divided by the product of their standard deviations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"MPsychoR"}\NormalTok{)}
+\FunctionTok{data}\NormalTok{(}\StringTok{"YouthDep"}\NormalTok{)}
+\NormalTok{item1 }\OtherTok{\textless{}{-}}\NormalTok{ YouthDep[, }\DecValTok{1}\NormalTok{]}
+\FunctionTok{levels}\NormalTok{(item1) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"0"}\NormalTok{, }\StringTok{"1"}\NormalTok{, }\StringTok{"1"}\NormalTok{)}
+\NormalTok{item2 }\OtherTok{\textless{}{-}}\NormalTok{ YouthDep[, }\DecValTok{14}\NormalTok{]}
+\FunctionTok{levels}\NormalTok{(item2) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"0"}\NormalTok{, }\StringTok{"1"}\NormalTok{, }\StringTok{"1"}\NormalTok{)}
+\FunctionTok{table}\NormalTok{(item1, item2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     item2
+item1    0    1
+    0 1353  656
+    1  115  166
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-} correlation coefficients}
+\FunctionTok{library}\NormalTok{(}\StringTok{"psych"}\NormalTok{)}
+\NormalTok{tetcor }\OtherTok{\textless{}{-}} \FunctionTok{tetrachoric}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(item1, item2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tetcor}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Call: tetrachoric(x = cbind(item1, item2))
+tetrachoric correlation 
+      item1 item2
+item1 1.00       
+item2 0.35  1.00 
+
+ with tau of 
+item1 item2 
+ 1.16  0.36 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{item1 }\OtherTok{\textless{}{-}}\NormalTok{ YouthDep[, }\DecValTok{1}\NormalTok{]}
+\NormalTok{item2 }\OtherTok{\textless{}{-}}\NormalTok{ YouthDep[, }\DecValTok{14}\NormalTok{]}
+\NormalTok{polcor }\OtherTok{\textless{}{-}} \FunctionTok{polychoric}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(item1, item2))}
+\NormalTok{polcor}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Call: polychoric(x = cbind(item1, item2))
+Polychoric correlations 
+      item1 item2
+item1 1.00       
+item2 0.33  1.00 
+
+ with tau of 
+         1   2
+item1 1.16 2.3
+item2 0.36 1.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{draw.tetra}\NormalTok{(}\AttributeTok{r =}\NormalTok{ .}\DecValTok{35}\NormalTok{, }\AttributeTok{t1 =} \FloatTok{1.16}\NormalTok{, }\AttributeTok{t2 =}\NormalTok{ .}\DecValTok{36}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DepItems }\OtherTok{\textless{}{-}}\NormalTok{ YouthDep[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{26}\NormalTok{] }
+\NormalTok{Depnum }\OtherTok{\textless{}{-}} \FunctionTok{data.matrix}\NormalTok{(DepItems) }\SpecialCharTok{{-}} \DecValTok{1}  \DocumentationTok{\#\# convert to numeric   }
+\NormalTok{Rdep }\OtherTok{\textless{}{-}} \FunctionTok{polychoric}\NormalTok{(Depnum)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{think-about-these-situations}{%
 \section{Think about these situations}\label{think-about-these-situations}}
 
@@ -987,6 +1081,20 @@ Eigenvalues represent the variance in the variables explained by the success com
 \hypertarget{example-data}{%
 \section{Example data}\label{example-data}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lower }\OtherTok{\textless{}{-}} \StringTok{"}
+\StringTok{1.00}
+\StringTok{0.70 1.00}
+\StringTok{0.65 0.66 1.00}
+\StringTok{0.62 0.63 0.60 1.00}
+\StringTok{"}
+\NormalTok{cormat }\OtherTok{\textless{}{-}} \FunctionTok{getCov}\NormalTok{(lower, }\AttributeTok{names =} \FunctionTok{c}\NormalTok{(}\StringTok{"d1"}\NormalTok{, }\StringTok{"d2"}\NormalTok{, }\StringTok{"d3"}\NormalTok{, }\StringTok{"d4"}\NormalTok{))}
+
+\NormalTok{cormat}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
      d1   d2   d3   d4
 d1 1.00 0.70 0.65 0.62
@@ -1000,6 +1108,12 @@ d4 0.62 0.63 0.60 1.00
 
 Retain factors with eigenvalues greater than 1
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{eigen}\NormalTok{(cormat)}\SpecialCharTok{$}\NormalTok{values}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
 [1] 2.9311792 0.4103921 0.3592372 0.2991916
 \end{verbatim}
@@ -1007,12 +1121,24 @@ Retain factors with eigenvalues greater than 1
 \hypertarget{scree-plot}{%
 \section{Scree Plot}\label{scree-plot}}
 
-\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-29-1.pdf}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{scree}\NormalTok{(cormat, }\AttributeTok{factors =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-31-1.pdf}
 
 \hypertarget{horns-parallel-analysis}{%
 \section{Horn's Parallel Analysis}\label{horns-parallel-analysis}}
 
-\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-30-1.pdf}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fa.parallel}\NormalTok{(cormat, }\AttributeTok{fa =} \StringTok{"pc"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-32-1.pdf}
 
 \begin{verbatim}
 Parallel analysis suggests that the number of factors =  NA  and the number of components =  1 
@@ -1021,7 +1147,13 @@ Parallel analysis suggests that the number of factors =  NA  and the number of c
 \hypertarget{another-example}{%
 \section{Another example}\label{another-example}}
 
-\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-31-1.pdf}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fa.parallel}\NormalTok{(Harman74.cor}\SpecialCharTok{$}\NormalTok{cov, }\AttributeTok{fa =} \StringTok{"pc"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-33-1.pdf}
 
 \begin{verbatim}
 Parallel analysis suggests that the number of factors =  NA  and the number of components =  2 
@@ -1213,7 +1345,7 @@ Let's look at some examples
 \tiny
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-34}Correlations between dimensions}
+\caption{\label{tab:unnamed-chunk-36}Correlations between dimensions}
 \centering
 \begin{tabular}[t]{l|l|l|l|l|l|l|l|l|l|l}
 \hline
@@ -1247,7 +1379,7 @@ cost & -0.02 & 0.03 & -0.02 & -0.11 & 0.62 & 0.24 & -0.07 & -0.03 & -0.04 & -0.1
 \hypertarget{eigenvalues-1}{%
 \section{Eigenvalues \textgreater{} 1}\label{eigenvalues-1}}
 
-\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-35-1.pdf}
+\includegraphics{AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-37-1.pdf}
 
 \hypertarget{orthogonal-rotation-1}{%
 \section{Orthogonal Rotation}\label{orthogonal-rotation-1}}
@@ -1300,6 +1432,9 @@ SS loadings    5.298 2.699 1.868
 Proportion Var 0.482 0.245 0.170
 Cumulative Var 0.482 0.727 0.897
 \end{verbatim}
+
+\hypertarget{r-code-for-chapter-2}{%
+\section{R Code for Chapter 2}\label{r-code-for-chapter-2}}
 
 \hypertarget{path-analysis-and-structural-equation-modeling}{%
 \chapter{Path Analysis and Structural Equation Modeling}\label{path-analysis-and-structural-equation-modeling}}

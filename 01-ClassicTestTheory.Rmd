@@ -8,6 +8,15 @@ library(psych)
 library(MPsychoR)
 ```
 
+
+## Overview
+
+Three important concepts:
+
+1. We can build a model of instruments similar to the way we model conceptual relationships (measurement model vs. structural model).
+2. The concept of reliability
+3. Measurement models can account for different sources of error.
+
 ## Classical True Score Model
 
 The true score model is:
@@ -63,6 +72,9 @@ CTTdata
 $$
 \text{reliability} = \frac{\sigma^2_T}{\sigma^2_X} = \frac{\sigma^2_T}{\sigma^2_T + \sigma^2_E} = \rho^2_{XT}
 $$
+
+The reliability is the proportion of variance of $T$ in $X$, which is also the squared correlation between $X$ and $T$.
+
 ```{r}
 Tau <- CTTdata$Tau
 X <- CTTdata$X
@@ -141,6 +153,7 @@ sigma2_Xi <- tr(vcmat) # trace of matrix or sum(diag(vmat))
 sigma2_X <- sum(vcmat)
 ```
 ### Other Reliability Coefficients
+
 
 ## Generalizability Theory
 

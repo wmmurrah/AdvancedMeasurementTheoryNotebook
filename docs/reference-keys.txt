@@ -10,6 +10,7 @@ additional-readings
 r-scripts
 simulating-ctt-data
 factor-analysis
+correlation-coefficient
 think-about-these-situations
 solutions
 principal-components-analysis
@@ -37,6 +38,7 @@ correlations
 eigenvalues-1
 orthogonal-rotation-1
 orthogonal-rotation-with-loadings-.70
+r-code-for-chapter-2
 path-analysis-and-structural-equation-modeling
 item-response-theory
 example-one
@@ -48,3 +50,7 @@ multidimensional-scaling
 graphing-multidimensional-data
 networks
 modeling-trajectories-and-time-series
+tom-swifts-electric-factor-analysis-factory
+tab:unnamed-chunk-10
+tab:unnamed-chunk-12
+overview

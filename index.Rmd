@@ -37,7 +37,7 @@ Note you will need Duo setup for this to work.
 [Using Vlab to acces R/RStudio](https://nv.instructuremedia.com/fetch/QkFoYkIxc0hhUVNIRGFrSE1Hd3JCeWhUREdFPS0tZjk4ODFlYWEyZWFiNWQwYWYyZDk0YTZjMjljZTJlMjBkNmIwMzE5Yw.mp4)
 
 A better option if you have a laptop, you can install both programs on your computer. 
-They are both absolutely free and available on all major operating systems, so you will not have to worry about transferring information across computers, limited connection speeds, or other hassles inherent with the Vlab route.
+They are both absolutely free and available on all major operating systems, so you will not have to worry about transferring information across computers, limited connection speeds, or other hassles inherent with the VLab route.
 
 The following links take you to videos instructing you how to install them.
 

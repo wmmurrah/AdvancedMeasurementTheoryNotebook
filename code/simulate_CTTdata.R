@@ -30,3 +30,4 @@ CTTdata <- data.frame(
   Tau = Tau
 )
 rm(id, Tau, simx)
+write.csv(CTTdata, file = "data/CTTdata.csv", row.names = FALSE)
