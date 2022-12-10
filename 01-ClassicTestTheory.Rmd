@@ -264,14 +264,14 @@ For an example using the R package `lavaan` with G theory, see @Jorgensen2021How
 ### Simulating CTT data
 
 ```{r}
-#************************************************************************
+#------------------------------------------------------------------------
 # Title: simulate_CTTdata
 # Author: William Murrah
 # Description: Simulate data to demonstrate CTT and reliability
 # Created: Monday, 09 August 2021
 # R version: R version 4.1.0 (2021-05-18)
 # Project(working) directory: /Users/wmm0017/Projects/Courses/AdvancedMeasurementTheoryNotebook
-#************************************************************************
+#------------------------------------------------------------------------
 
 simx <- function(truescore, sigmax = 1) {
   x <- rnorm(18, truescore, sigmax)

@@ -1,4 +1,7 @@
+tab:unnamed-chunk-35
+tab:unnamed-chunk-37
 CCT
+overview
 classical-true-score-model
 reliability
 cronbachs-alpha
@@ -32,7 +35,7 @@ which-matrix-should-we-interpret
 which-variables-should-be-used-to-interpret-each-factor
 examples
 steps-in-factor-analysis
-tom-swifts-eletric-factor-analysis-factory
+tom-swifts-electric-factor-analysis-factory
 metal-boxes
 correlations
 eigenvalues-1
@@ -50,7 +53,3 @@ multidimensional-scaling
 graphing-multidimensional-data
 networks
 modeling-trajectories-and-time-series
-tom-swifts-electric-factor-analysis-factory
-tab:unnamed-chunk-10
-tab:unnamed-chunk-12
-overview
