@@ -1,0 +1,18 @@
+project:
+  type: book
+
+book:
+  title: "AdvancedMeasurementTheoryNotebook"
+  author: "William Murrah"
+  chapters:
+    - index.qmd
+    - intro_R_programming.qmd
+    - ctt.qmd
+    
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
