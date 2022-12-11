@@ -12,6 +12,7 @@ multiple-sources-of-error
 additional-readings
 r-scripts
 simulating-ctt-data
+generalizability-theory-1
 factor-analysis
 correlation-coefficient
 think-about-these-situations
@@ -42,7 +43,6 @@ eigenvalues-1
 orthogonal-rotation-1
 orthogonal-rotation-with-loadings-.70
 r-code-for-chapter-2
-path-analysis-and-structural-equation-modeling
 item-response-theory
 example-one
 example-two

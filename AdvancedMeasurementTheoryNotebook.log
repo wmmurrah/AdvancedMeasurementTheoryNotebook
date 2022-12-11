@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.20)  29 NOV 2022 10:58
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.20)  10 DEC 2022 17:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -916,7 +916,10 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 \tf@toc=\write4
 \openout4 = `AdvancedMeasurementTheoryNotebook.toc'.
 
-[4] [5
+[4]
+Underfull \vbox (badness 5260) has occurred while \output is active []
+
+[5
 
 ] [6]
 Chapter 1.
@@ -928,49 +931,49 @@ df Graphic file (type pdf)
 <use AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-11-1.pd
 f>
 [10]
-Overfull \hbox (54.0pt too wide) in paragraph at lines 491--491
+Overfull \hbox (54.0pt too wide) in paragraph at lines 487--487
 []  \TU/lmtt/m/n/10 hyb1 hyb2 hyb3 hyb4 hyb5 hyb6 hyb7 hyb8 hyb9 hyb10 hyb11 hy
 b12 hyb13 hyb14[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 491--491
+Overfull \hbox (54.0pt too wide) in paragraph at lines 487--487
 []\TU/lmtt/m/n/10 1    1    0    1    0    1    1    0    0    0     1     1   
   1     1     0[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 491--491
+Overfull \hbox (54.0pt too wide) in paragraph at lines 487--487
 []\TU/lmtt/m/n/10 3    0    0    1    0    1    0    0    0    0     1     0   
   1     1     0[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 491--491
+Overfull \hbox (54.0pt too wide) in paragraph at lines 487--487
 []\TU/lmtt/m/n/10 4    1    1    1    1    1    0    1    0    0     1     0   
   1     1     0[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 491--491
+Overfull \hbox (54.0pt too wide) in paragraph at lines 487--487
 []\TU/lmtt/m/n/10 5    1    0    0    1    1    0    0    0    0     1     1   
   1     1     0[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 491--491
+Overfull \hbox (54.0pt too wide) in paragraph at lines 487--487
 []\TU/lmtt/m/n/10 8    1    1    1    1    1    1    1    1    1     1     0   
   1     1     1[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 491--491
+Overfull \hbox (54.0pt too wide) in paragraph at lines 487--487
 []\TU/lmtt/m/n/10 9    1    0    0    1    1    0    0    0    0     1     0   
   0     1     0[] 
  []
 
 
-Overfull \hbox (379.99979pt too wide) in paragraph at lines 501--544
+Overfull \hbox (379.99979pt too wide) in paragraph at lines 497--540
 [][] 
  []
 
@@ -978,69 +981,73 @@ Overfull \hbox (379.99979pt too wide) in paragraph at lines 501--544
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [11]
-Overfull \vbox (1.48575pt too high) detected at line 580
+Overfull \vbox (1.48575pt too high) detected at line 576
  []
 
 [12]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 643--643
+Overfull \hbox (17.25pt too wide) in paragraph at lines 639--639
 []                         \TU/lmtt/m/n/10 type  ICC   F df1   df2        p low
 er bound[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 643--643
+Overfull \hbox (17.25pt too wide) in paragraph at lines 639--639
 []\TU/lmtt/m/n/10 Single_raters_absolute   ICC1 0.15 4.4 776 13986 7.2e-279    
     0.14[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 643--643
+Overfull \hbox (17.25pt too wide) in paragraph at lines 639--639
 []\TU/lmtt/m/n/10 Single_random_raters     ICC2 0.16 5.5 776 13968  0.0e+00    
     0.14[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 643--643
+Overfull \hbox (17.25pt too wide) in paragraph at lines 639--639
 []\TU/lmtt/m/n/10 Single_fixed_raters      ICC3 0.19 5.5 776 13968  0.0e+00    
     0.17[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 643--643
+Overfull \hbox (17.25pt too wide) in paragraph at lines 639--639
 []\TU/lmtt/m/n/10 Average_raters_absolute ICC1k 0.77 4.4 776 13986 7.2e-279    
     0.75[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 643--643
+Overfull \hbox (17.25pt too wide) in paragraph at lines 639--639
 []\TU/lmtt/m/n/10 Average_random_raters   ICC2k 0.78 5.5 776 13968  0.0e+00    
     0.75[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 643--643
+Overfull \hbox (17.25pt too wide) in paragraph at lines 639--639
 []\TU/lmtt/m/n/10 Average_fixed_raters    ICC3k 0.82 5.5 776 13968  0.0e+00    
     0.80[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 643--643
+Overfull \hbox (54.0pt too wide) in paragraph at lines 639--639
 []\TU/lmtt/m/n/10 See the help file for a discussion of the other 4 McGraw and 
 Wong estimates,[] 
  []
 
 [13] [14] [15]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 861.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 857.
 [16] [17] [18
 
 ]
 Chapter 2.
+[19] [20
+
+]
+Chapter 3.
 
 LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 922.
+(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 923.
 
-[19]
+[21]
 File: AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-28-1.p
 df Graphic file (type pdf)
 <use AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-28-1.pd
@@ -1048,13 +1055,13 @@ f>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[20]
+[22]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[21] [22]
+[23] [24]
 Underfull \vbox (badness 3601) has occurred while \output is active []
 
-[23]
+[25]
 File: AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-31-1.p
 df Graphic file (type pdf)
 <use AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-31-1.pd
@@ -1066,8 +1073,8 @@ f>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[24]
-Overfull \hbox (148.5pt too wide) in paragraph at lines 1164--1164
+[26]
+Overfull \hbox (148.5pt too wide) in paragraph at lines 1165--1165
 []\TU/lmtt/m/n/10 Parallel analysis suggests that the number of factors =  NA  
 and the number of components =  1[] 
  []
@@ -1077,18 +1084,18 @@ df Graphic file (type pdf)
 <use AdvancedMeasurementTheoryNotebook_files/figure-latex/unnamed-chunk-33-1.pd
 f>
 
-Overfull \hbox (148.5pt too wide) in paragraph at lines 1179--1179
+Overfull \hbox (148.5pt too wide) in paragraph at lines 1180--1180
 []\TU/lmtt/m/n/10 Parallel analysis suggests that the number of factors =  NA  
 and the number of components =  2[] 
  []
 
-[25] [26] [27]
+[27] [28] [29]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 1391.
+               Default added (so using `tbp') on input line 1392.
 
 
-Overfull \hbox (147.91994pt too wide) in paragraph at lines 1417--1444
+Overfull \hbox (147.91994pt too wide) in paragraph at lines 1418--1445
  [][] 
  []
 
@@ -1099,61 +1106,51 @@ f>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[28] [29] [30]
+[30] [31] [32]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1510.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1511.
 
 LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 1510.
+(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 1511.
 
-
-[31]
-Underfull \vbox (badness 10000) detected at line 1782
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1782
- []
-
-[32]
-Underfull \vbox (badness 10000) detected at line 1782
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1782
- []
 
 [33]
-Underfull \vbox (badness 10000) detected at line 1782
+Underfull \vbox (badness 10000) detected at line 1783
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1782
+Underfull \vbox (badness 10000) detected at line 1783
  []
 
 [34]
-Underfull \vbox (badness 10000) detected at line 1782
+Underfull \vbox (badness 10000) detected at line 1783
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1782
+Underfull \vbox (badness 10000) detected at line 1783
  []
 
-[35] [36]
-Chapter 3.
-[37
-
-]
-Overfull \hbox (24.85452pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 38 \TU/lmr/m/sl/10 CHAPTER 3.  PATH ANALYSIS AND STRUCTURAL EQUA
-TION MODELING
+[35]
+Underfull \vbox (badness 10000) detected at line 1783
  []
 
-[38
 
-]
+Underfull \vbox (badness 10000) detected at line 1783
+ []
+
+[36]
+Underfull \vbox (badness 10000) detected at line 1783
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1783
+ []
+
+[37] [38]
 Chapter 4.
-[39] [40
+[39
+
+] [40
 
 ]
 Chapter 5.
@@ -1185,10 +1182,10 @@ Chapter 11.
 
 ]) [55] (./AdvancedMeasurementTheoryNotebook.aux) ) 
 Here is how much of TeX's memory you used:
- 20897 strings out of 476156
- 385531 string characters out of 5809220
- 912626 words of memory out of 5000000
- 41313 multiletter control sequences out of 15000+600000
+ 20898 strings out of 476156
+ 385650 string characters out of 5809220
+ 912609 words of memory out of 5000000
+ 41314 multiletter control sequences out of 15000+600000
  475904 words of font info for 93 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,10n,121p,1030b,498s stack positions out of 10000i,1000n,20000p,200000b,200000s

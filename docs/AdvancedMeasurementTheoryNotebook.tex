@@ -131,7 +131,7 @@
 
 \title{Advanced Measurement Theory Course Notebook}
 \author{William M. Murrah}
-\date{2022-11-29}
+\date{2022-12-10}
 
 \begin{document}
 \maketitle
@@ -146,7 +146,7 @@
 
 Welcome!
 This is a notebook for ERMA 8350 Advanced Measurement Theory.
-The class will be using the textbook \emph{Modern Psychometrics with R} \citep{mair2018modern}, which will be the primary source for the course.
+The class will be using the textbook \emph{Handbook of Educational Measurement and Psychometrics Using R}, which will be the primary source for the course .
 I will use this notebook to make available additional information to help you learn the material.
 It may include some examples from the textbook, with some elaborations, additional readings, and some more details about implementing the methods in R.
 These web-based notes will make it easy for you to use code, by allowing you to copy and paste code found within.
@@ -154,11 +154,7 @@ Some of you will have experience with R and others not.
 So I will try to also point you to additional resources that may be helpful.
 For example, in this preface I will provide links to resources to help you setup R and RStudio.
 RStudio is a platform to make using R more productive.
-I will use it extensively in this course.
-
-\hypertarget{software}{%
-\section*{Software}\label{software}}
-\addcontentsline{toc}{section}{Software}
+I will use it extensively in this course \citep{Desjardins2018Handbookeducationalmeasurement}.
 
 There are at least two way you can access the software needed for this course.
 You can use the virtual labs on campus.
@@ -883,6 +879,11 @@ For an example using the R package \texttt{lavaan} with G theory, see \citet{Jor
 \FunctionTok{rm}\NormalTok{(id, Tau, simx)}
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{generalizability-theory-1}{%
+\chapter{Generalizability Theory}\label{generalizability-theory-1}}
+
+We describe our methods in this chapter.
 
 \hypertarget{factor-analysis}{%
 \chapter{Factor Analysis}\label{factor-analysis}}
@@ -1780,11 +1781,6 @@ Cumulative Var 0.482 0.727 0.897
 \FunctionTok{summary}\NormalTok{(fitBCFA)}
 \end{Highlighting}
 \end{Shaded}
-
-\hypertarget{path-analysis-and-structural-equation-modeling}{%
-\chapter{Path Analysis and Structural Equation Modeling}\label{path-analysis-and-structural-equation-modeling}}
-
-We describe our methods in this chapter.
 
 \hypertarget{item-response-theory}{%
 \chapter{Item Response Theory}\label{item-response-theory}}

@@ -1,3 +1,0 @@
-# Path Analysis and Structural Equation Modeling
-
-We describe our methods in this chapter.
