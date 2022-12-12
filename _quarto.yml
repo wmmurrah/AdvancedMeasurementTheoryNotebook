@@ -1,0 +1,19 @@
+project:
+  type: book
+
+book:
+  title: "Advanced Measurement Theory Notebook"
+  author: "William Murrah"
+  chapters:
+    - index.qmd
+    - intro_R_programming.qmd
+    - ctt.qmd
+    - generalizability.qmd
+    - factor_analysis.qmd
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt

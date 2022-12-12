@@ -1,0 +1,78 @@
+<<<<<<< HEAD:index.Rmd
+---
+title: "Advanced Measurement Theory Course Notebook"
+author: "William M. Murrah"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: book.bib
+biblio-style: apalike
+link-citations: yes
+description: "This is a Course Notebook for Advanced Measurement Theory (ERMA 8350)"
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# Introduction to the Course {.unnumbered}
+
+Welcome!
+This is a notebook for ERMA 8350 Advanced Measurement Theory.
+The class will be using the textbook *Handbook of Educational Measurement and Psychometrics Using R* [@Desjardins2018Handbookeducationalmeasurement], which will be the primary source for learning to use R for the methods covered in this course.
+=======
+# Introduction to the Course
+
+Welcome!
+This is a notebook for ERMA 8350 Advanced Measurement Theory.
+The class will be using the textbook *Handbook of Educational Measurement and Psychometrics Using R* [@desjardins2018handbook], which will be the primary source for learning to use R for the methods covered in this course.
+>>>>>>> Quartobook:index.qmd
+I will use this notebook to make available additional readings to help you learn the theory behind these methods and to provide published examples of their use.
+It may include some examples from the textbook, with some elaborations, additional readings, and some more details about implementing the methods in R.
+These web-based notes will make it easy for you to use code, by allowing you to copy and paste code found within.
+Some of you will have experience with R and others not.
+So I will try to also point you to additional resources that may be helpful.
+For example, in this preface I will provide links to resources to help you setup R and RStudio.
+RStudio is a platform to make using R more productive.
+I will use it extensively in this course.
+
+There are at least two way you can access the software needed for this course.
+You can use the virtual labs on campus.
+I know at least the education virtual labs have R and RStudio installed.
+IF you go this route you can watch the following video.
+Note you will need Duo setup for this to work.
+
+[Using Vlab to acces R/RStudio](https://nv.instructuremedia.com/fetch/QkFoYkIxc0hhUVNIRGFrSE1Hd3JCeWhUREdFPS0tZjk4ODFlYWEyZWFiNWQwYWYyZDk0YTZjMjljZTJlMjBkNmIwMzE5Yw.mp4)
+
+A better option if you have a laptop, you can install both programs on your computer.
+They are both absolutely free and available on all major operating systems, so you will not have to worry about transferring information across computers, limited connection speeds, or other hassles inherent with the VLab route.
+
+The following links take you to videos instructing you how to install them.
+
+[Installing R and RStudio](https://auburn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=5dacd1fe-b888-407b-a89f-ac150135ace8)
+
+[Organizing Projects in RStudio](https://auburn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=aed0e2a9-004f-453f-80c7-abbe010a063b)
+
+## Resources for Learning R {.unnumbered}
+
+While such experience is certainly helpful, I do not assume you have prior knowledge of using R.
+I will demonstrate the use of R and provide (particularly in this notebook) the R code needed to use the methods we will learn.
+However, even if you have prior experience with R, you should plan to spend time learning to program in R.
+Some people find this intimidating initially, but most of you will grow to find R programming rewarding, and even fun by the end of the course.
+But, there will be frustration for sure.
+
+Here are some good places to start learning R:
+
+[CRAN](https://cran.r-project.org/)
+
+## R Packages {.unnumbered}
+
+R is, among other paradigms, a functional programming language, which means is heavily utilizes functions.
+R's functions are stored in packages.
+While base R has a long list of very useful functions, to fully realize the power of R you will have to use additional packages.
+So, learning how to **install** packages (downloading from the web to your computer) and **loading** packages (making the package's functions accessible to your current R session) are important skills to master.
+
+## How To Use These Notes {.unnumbered}
+
+Before going further, it may be helpful to watch the following video about how to use the code in this notebook with Rstudio:
+
+[How to Use RStudio with this Notebook](https://auburn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=13acb849-902a-45c7-bc4e-ad870153fcae)
