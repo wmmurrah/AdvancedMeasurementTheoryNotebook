@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Advanced Measurement Theory Notebook - 5&nbsp; Factor Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./generalizability.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Factor Analysis</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Advanced Measurement Theory Notebook</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the Course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_R_programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R Programming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ctt.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classic Test Theory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./generalizability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Generalizability Theory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factor_analysis.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Factor Analysis</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#correlation-coefficient" id="toc-correlation-coefficient" class="nav-link active" data-scroll-target="#correlation-coefficient"><span class="toc-section-number">5.1</span>  Correlation Coefficient</a></li>
+  <li><a href="#think-about-these-situations" id="toc-think-about-these-situations" class="nav-link" data-scroll-target="#think-about-these-situations"><span class="toc-section-number">5.2</span>  Think about these situations</a></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="toc-section-number">5.3</span>  Solutions</a></li>
+  <li><a href="#principal-components-analysis" id="toc-principal-components-analysis" class="nav-link" data-scroll-target="#principal-components-analysis"><span class="toc-section-number">5.4</span>  Principal Components Analysis</a></li>
+  <li><a href="#factor-analysis" id="toc-factor-analysis" class="nav-link" data-scroll-target="#factor-analysis"><span class="toc-section-number">5.5</span>  Factor Analysis</a></li>
+  <li><a href="#components" id="toc-components" class="nav-link" data-scroll-target="#components"><span class="toc-section-number">5.6</span>  Components</a></li>
+  <li><a href="#pc-extraction" id="toc-pc-extraction" class="nav-link" data-scroll-target="#pc-extraction"><span class="toc-section-number">5.7</span>  PC Extraction</a></li>
+  <li><a href="#eigenvalues" id="toc-eigenvalues" class="nav-link" data-scroll-target="#eigenvalues"><span class="toc-section-number">5.8</span>  Eigenvalues</a></li>
+  <li><a href="#determining-the-number-of-factors" id="toc-determining-the-number-of-factors" class="nav-link" data-scroll-target="#determining-the-number-of-factors"><span class="toc-section-number">5.9</span>  Determining the Number of Factors</a></li>
+  <li><a href="#example-data" id="toc-example-data" class="nav-link" data-scroll-target="#example-data"><span class="toc-section-number">5.10</span>  Example data</a></li>
+  <li><a href="#kaiser" id="toc-kaiser" class="nav-link" data-scroll-target="#kaiser"><span class="toc-section-number">5.11</span>  Kaiser</a></li>
+  <li><a href="#scree-plot" id="toc-scree-plot" class="nav-link" data-scroll-target="#scree-plot"><span class="toc-section-number">5.12</span>  Scree Plot</a></li>
+  <li><a href="#horns-parallel-analysis" id="toc-horns-parallel-analysis" class="nav-link" data-scroll-target="#horns-parallel-analysis"><span class="toc-section-number">5.13</span>  Horn’s Parallel Analysis</a></li>
+  <li><a href="#another-example" id="toc-another-example" class="nav-link" data-scroll-target="#another-example"><span class="toc-section-number">5.14</span>  Another example</a></li>
+  <li><a href="#rotation" id="toc-rotation" class="nav-link" data-scroll-target="#rotation"><span class="toc-section-number">5.15</span>  Rotation</a></li>
+  <li><a href="#orthogonal-rotation" id="toc-orthogonal-rotation" class="nav-link" data-scroll-target="#orthogonal-rotation"><span class="toc-section-number">5.16</span>  Orthogonal Rotation</a></li>
+  <li><a href="#oblique-rotation" id="toc-oblique-rotation" class="nav-link" data-scroll-target="#oblique-rotation"><span class="toc-section-number">5.17</span>  Oblique Rotation</a></li>
+  <li><a href="#factor-matrices" id="toc-factor-matrices" class="nav-link" data-scroll-target="#factor-matrices"><span class="toc-section-number">5.18</span>  Factor Matrices</a></li>
+  <li><a href="#which-matrix-should-we-interpret" id="toc-which-matrix-should-we-interpret" class="nav-link" data-scroll-target="#which-matrix-should-we-interpret"><span class="toc-section-number">5.19</span>  Which matrix should we interpret?</a></li>
+  <li><a href="#which-variables-should-be-used-to-interpret-each-factor" id="toc-which-variables-should-be-used-to-interpret-each-factor" class="nav-link" data-scroll-target="#which-variables-should-be-used-to-interpret-each-factor"><span class="toc-section-number">5.20</span>  Which variables should be used to interpret each factor?</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="toc-section-number">5.21</span>  Examples</a></li>
+  <li><a href="#steps-in-factor-analysis" id="toc-steps-in-factor-analysis" class="nav-link" data-scroll-target="#steps-in-factor-analysis"><span class="toc-section-number">5.22</span>  Steps in Factor Analysis</a></li>
+  <li><a href="#tom-swifts-electric-factor-analysis-factory" id="toc-tom-swifts-electric-factor-analysis-factory" class="nav-link" data-scroll-target="#tom-swifts-electric-factor-analysis-factory"><span class="toc-section-number">5.23</span>  Tom Swift’s Electric Factor Analysis Factory</a></li>
+  <li><a href="#metal-boxes" id="toc-metal-boxes" class="nav-link" data-scroll-target="#metal-boxes"><span class="toc-section-number">5.24</span>  Metal Boxes</a></li>
+  <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations"><span class="toc-section-number">5.25</span>  Correlations</a></li>
+  <li><a href="#eigenvalues-1" id="toc-eigenvalues-1" class="nav-link" data-scroll-target="#eigenvalues-1"><span class="toc-section-number">5.26</span>  Eigenvalues &gt; 1</a></li>
+  <li><a href="#orthogonal-rotation-1" id="toc-orthogonal-rotation-1" class="nav-link" data-scroll-target="#orthogonal-rotation-1"><span class="toc-section-number">5.27</span>  Orthogonal Rotation</a></li>
+  <li><a href="#orthogonal-rotation-with-loadings-.70" id="toc-orthogonal-rotation-with-loadings-.70" class="nav-link" data-scroll-target="#orthogonal-rotation-with-loadings-.70"><span class="toc-section-number">5.28</span>  Orthogonal Rotation with Loadings &gt; .70</a></li>
+  <li><a href="#r-code-for-chapter-2" id="toc-r-code-for-chapter-2" class="nav-link" data-scroll-target="#r-code-for-chapter-2"><span class="toc-section-number">5.29</span>  R Code for Chapter 2</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Factor Analysis</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="correlation-coefficient" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="correlation-coefficient"><span class="header-section-number">5.1</span> Correlation Coefficient</h2>
+<p><em>Pearson product-moment correlation</em>:</p>
+<p><span class="math display">\[
+r_{xy} = \frac{\Sigma_{n=1}^n (x_k - \bar{x})(y_i - \bar{y})}{\sqrt{\Sigma_{n=1}^n(x_i - \bar{x})^2} \sqrt{\Sigma_{n=1}^n(y_i - \bar{y})^2}} = \frac{s_{xy}}{s_x s_y}.
+\]</span></p>
+<p>The equation looks very daunting, until you see that it is just the covariance of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> divided by the product of their standard deviations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MPsychoR"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"YouthDep"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>item1 <span class="ot">&lt;-</span> YouthDep[, <span class="dv">1</span>]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(item1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>, <span class="st">"1"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>item2 <span class="ot">&lt;-</span> YouthDep[, <span class="dv">14</span>]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(item2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>, <span class="st">"1"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(item1, item2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     item2
+item1    0    1
+    0 1353  656
+    1  115  166</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ------ correlation coefficients</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"psych"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>tetcor <span class="ot">&lt;-</span> <span class="fu">tetrachoric</span>(<span class="fu">cbind</span>(item1, item2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tetcor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: tetrachoric(x = cbind(item1, item2))
+tetrachoric correlation 
+      item1 item2
+item1 1.00       
+item2 0.35  1.00 
+
+ with tau of 
+item1 item2 
+ 1.16  0.36 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>item1 <span class="ot">&lt;-</span> YouthDep[, <span class="dv">1</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>item2 <span class="ot">&lt;-</span> YouthDep[, <span class="dv">14</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>polcor <span class="ot">&lt;-</span> <span class="fu">polychoric</span>(<span class="fu">cbind</span>(item1, item2))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>polcor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: polychoric(x = cbind(item1, item2))
+Polychoric correlations 
+      item1 item2
+item1 1.00       
+item2 0.33  1.00 
+
+ with tau of 
+         1   2
+item1 1.16 2.3
+item2 0.36 1.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw.tetra</span>(<span class="at">r =</span> .<span class="dv">35</span>, <span class="at">t1 =</span> <span class="fl">1.16</span>, <span class="at">t2 =</span> .<span class="dv">36</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="factor_analysis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>DepItems <span class="ot">&lt;-</span> YouthDep[,<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>] </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>Depnum <span class="ot">&lt;-</span> <span class="fu">data.matrix</span>(DepItems) <span class="sc">-</span> <span class="dv">1</span>  <span class="do">## convert to numeric   </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Rdep <span class="ot">&lt;-</span> <span class="fu">polychoric</span>(Depnum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="think-about-these-situations" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="think-about-these-situations"><span class="header-section-number">5.2</span> Think about these situations</h2>
+<p>What do you do when you have a large number of variables you are considering as predictors of a dependent variable?</p>
+<ul>
+<li>Often, subsets of these variables are measuring the same, or very similar things.</li>
+<li>We might like to reduce the variables to a smaller number of predictors.</li>
+</ul>
+<p>What if you are developing a measurement scale and have a large number of items you think measure the same construct</p>
+<ul>
+<li>You might want to see how strongly the items are related to the construct.</li>
+</ul>
+</section>
+<section id="solutions" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="solutions"><span class="header-section-number">5.3</span> Solutions</h2>
+<ol type="1">
+<li><p>Principal Components Analysis</p>
+<ul>
+<li>transforming the original variables into a new set of linear combinations (pricipal components).</li>
+</ul></li>
+<li><p>Factor Analysis</p>
+<ul>
+<li>setting up a mathematical model to estimate the number or factors</li>
+</ul></li>
+</ol>
+</section>
+<section id="principal-components-analysis" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="principal-components-analysis"><span class="header-section-number">5.4</span> Principal Components Analysis</h2>
+<ul>
+<li>Concerned with explaining variance-covariance structure of a set of variables.</li>
+<li>PCA attempts to explain as much of the total variance among the observed variables as possible with a smaller number of components.</li>
+<li>Because the variables are standardized prior to analysis, the total amount of variance available is the number of variables.</li>
+<li>The goal is <strong>data reduction</strong> for subsequent analysis.</li>
+<li>Variables <em>cause</em> components.</li>
+<li>Components are not representative of any underlying theory.</li>
+</ul>
+</section>
+<section id="factor-analysis" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="factor-analysis"><span class="header-section-number">5.5</span> Factor Analysis</h2>
+<ul>
+<li>The goal is understanding underlying constructs.</li>
+<li>Uses a modified correlation matrix (reduced matrix)</li>
+<li>factors <em>cause</em> the variables.</li>
+<li>Factors represent theoretical constructs.</li>
+<li>Focuses on the common variance of the variables, and purges the unique variance.</li>
+</ul>
+</section>
+<section id="components" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="components"><span class="header-section-number">5.6</span> Components</h2>
+<p>The principal components partition the total variance (the sum of the variances of the original variables) by finding the linear combination of the variables that account for the maximum amount of variance:</p>
+<p><span class="math display">\[
+PC1 = a_{11}x_1 + a_{12}x_2 ... a_{1p}x_p,
+\]</span> This is repeated as many time as there are variables.</p>
+</section>
+<section id="pc-extraction" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="pc-extraction"><span class="header-section-number">5.7</span> PC Extraction</h2>
+<p>draw pretty pictures on the board</p>
+</section>
+<section id="eigenvalues" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="eigenvalues"><span class="header-section-number">5.8</span> Eigenvalues</h2>
+<p>Eigenvalues represent the variance in the variables explained by the success components.</p>
+</section>
+<section id="determining-the-number-of-factors" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="determining-the-number-of-factors"><span class="header-section-number">5.9</span> Determining the Number of Factors</h2>
+<ol type="1">
+<li>Kaiser criterion: Retain only factors with eigenvalues &gt; 1. (generally accurate)</li>
+<li>Scree plot: plot eigenvalues and drop factors after leveling off.</li>
+<li>Parallel analysis: compare observed eigenvalues to parallel set of data from randomly generated data. Retain factors in original if eigenvalue is greater than random eigenvalue.</li>
+<li>Factor meaningfulness is also very important to consider.</li>
+</ol>
+</section>
+<section id="example-data" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="example-data"><span class="header-section-number">5.10</span> Example data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lower <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="st">1.00</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">0.70 1.00</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">0.65 0.66 1.00</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="st">0.62 0.63 0.60 1.00</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>cormat <span class="ot">&lt;-</span> <span class="fu">getCov</span>(lower, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"d1"</span>, <span class="st">"d2"</span>, <span class="st">"d3"</span>, <span class="st">"d4"</span>))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>cormat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     d1   d2   d3   d4
+d1 1.00 0.70 0.65 0.62
+d2 0.70 1.00 0.66 0.63
+d3 0.65 0.66 1.00 0.60
+d4 0.62 0.63 0.60 1.00</code></pre>
+</div>
+</div>
+</section>
+<section id="kaiser" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="kaiser"><span class="header-section-number">5.11</span> Kaiser</h2>
+<p>Retain factors with eigenvalues greater than 1</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eigen</span>(cormat)<span class="sc">$</span>values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.9311792 0.4103921 0.3592372 0.2991916</code></pre>
+</div>
+</div>
+</section>
+<section id="scree-plot" class="level2" data-number="5.12">
+<h2 data-number="5.12" class="anchored" data-anchor-id="scree-plot"><span class="header-section-number">5.12</span> Scree Plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scree</span>(cormat, <span class="at">factors =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="factor_analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="horns-parallel-analysis" class="level2" data-number="5.13">
+<h2 data-number="5.13" class="anchored" data-anchor-id="horns-parallel-analysis"><span class="header-section-number">5.13</span> Horn’s Parallel Analysis</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fa.parallel</span>(cormat, <span class="at">fa =</span> <span class="st">"pc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="factor_analysis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parallel analysis suggests that the number of factors =  NA  and the number of components =  1 </code></pre>
+</div>
+</div>
+</section>
+<section id="another-example" class="level2" data-number="5.14">
+<h2 data-number="5.14" class="anchored" data-anchor-id="another-example"><span class="header-section-number">5.14</span> Another example</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fa.parallel</span>(Harman74.cor<span class="sc">$</span>cov, <span class="at">fa =</span> <span class="st">"pc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="factor_analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parallel analysis suggests that the number of factors =  NA  and the number of components =  2 </code></pre>
+</div>
+</div>
+</section>
+<section id="rotation" class="level2" data-number="5.15">
+<h2 data-number="5.15" class="anchored" data-anchor-id="rotation"><span class="header-section-number">5.15</span> Rotation</h2>
+<ul>
+<li>Principal components are derived to maximize the variance accounted for (data reduction).</li>
+<li>Rotation is done to make the factors more interpretable (i.e.&nbsp;meaningful).</li>
+<li>Two major classes of rotation:
+<ul>
+<li>Orthogonal - new factors are still uncorrelated, as were the initial factors.</li>
+<li>Oblique - new factors are allowed to be correlated.</li>
+</ul></li>
+</ul>
+<p>Essentially reallocates the loadings. The first factor may not be the one accounting for the most variance.</p>
+</section>
+<section id="orthogonal-rotation" class="level2" data-number="5.16">
+<h2 data-number="5.16" class="anchored" data-anchor-id="orthogonal-rotation"><span class="header-section-number">5.16</span> Orthogonal Rotation</h2>
+<ol type="1">
+<li><p><strong>Quartimax</strong> - idea is to clean up the <em>variables</em>. Rotation done so each variable loads mainly on one factor. Problematic if there is a general factor on which most or all variables load on (think IQ).</p></li>
+<li><p><strong>Varimax</strong> - to clean up <em>factors</em>. So each factor has high correlation with a smaller number of variables, low correlation with the other variables. Generally makes interpretation easier.</p></li>
+</ol>
+</section>
+<section id="oblique-rotation" class="level2" data-number="5.17">
+<h2 data-number="5.17" class="anchored" data-anchor-id="oblique-rotation"><span class="header-section-number">5.17</span> Oblique Rotation</h2>
+<ul>
+<li>Often correlated factors are more reasonable.</li>
+<li>Therefore, oblique rotation is often preferred.</li>
+<li>But interpretation is more complicated.</li>
+</ul>
+</section>
+<section id="factor-matrices" class="level2" data-number="5.18">
+<h2 data-number="5.18" class="anchored" data-anchor-id="factor-matrices"><span class="header-section-number">5.18</span> Factor Matrices</h2>
+<ol type="1">
+<li>Factor pattern matrix:
+<ul>
+<li>includes <em>pattern coefficients</em> analogous to standardized partial regression coefficients.</li>
+<li>Indicated the unique importance of a factor to a variable, holding other factors constant.</li>
+</ul></li>
+<li>Factor structure matrix:
+<ul>
+<li>includes <em>structure coefficients</em> which are simple correlations of the variables with the factors.</li>
+</ul></li>
+</ol>
+</section>
+<section id="which-matrix-should-we-interpret" class="level2" data-number="5.19">
+<h2 data-number="5.19" class="anchored" data-anchor-id="which-matrix-should-we-interpret"><span class="header-section-number">5.19</span> Which matrix should we interpret?</h2>
+<ul>
+<li><p>When orthogonal rotation is used interpret <em>structural coefficients</em> (but they are the same as pattern coefficients).</p></li>
+<li><p>When oblique rotation is used pattern coefficients are preferred because they account for the correlation between the factors and they are parameters of the correlated factor model (which we will discuss next class).</p></li>
+</ul>
+</section>
+<section id="which-variables-should-be-used-to-interpret-each-factor" class="level2" data-number="5.20">
+<h2 data-number="5.20" class="anchored" data-anchor-id="which-variables-should-be-used-to-interpret-each-factor"><span class="header-section-number">5.20</span> Which variables should be used to interpret each factor?</h2>
+<ul>
+<li>The idea is to use only those variables that have a strong association with the factor.</li>
+<li>Typical thresholds are |.30| or |.40|.</li>
+<li>Content knowledge is critical.</li>
+</ul>
+</section>
+<section id="examples" class="level2" data-number="5.21">
+<h2 data-number="5.21" class="anchored" data-anchor-id="examples"><span class="header-section-number">5.21</span> Examples</h2>
+<p>Let’s look at some examples</p>
+</section>
+<section id="steps-in-factor-analysis" class="level2" data-number="5.22">
+<h2 data-number="5.22" class="anchored" data-anchor-id="steps-in-factor-analysis"><span class="header-section-number">5.22</span> Steps in Factor Analysis</h2>
+<ol type="1">
+<li>Choose extraction method
+<ul>
+<li>So far we’ve focused on PCA</li>
+</ul></li>
+<li>Determine the number of components/factors
+<ul>
+<li>Kaiser method: eigenvalues &gt; 1</li>
+<li>Scree plot: All components before leveling off</li>
+<li>Horn’s parallel analysis: components/factors greater than simulated values from random numbers</li>
+</ul></li>
+<li>Rotate Factors
+<ul>
+<li>Orthogonal</li>
+<li>Oblique</li>
+</ul></li>
+<li>Interpret Components/Factors</li>
+</ol>
+</section>
+<section id="tom-swifts-electric-factor-analysis-factory" class="level2" data-number="5.23">
+<h2 data-number="5.23" class="anchored" data-anchor-id="tom-swifts-electric-factor-analysis-factory"><span class="header-section-number">5.23</span> Tom Swift’s Electric Factor Analysis Factory</h2>
+<p>“Little Jiffy” method of factor analysis</p>
+<ol type="1">
+<li>Extraction method : PCA</li>
+<li>Number of factors: eigenvalues &gt; 1</li>
+<li>Rotation: orthogonal(varimax)</li>
+<li>Interpretation</li>
+</ol>
+</section>
+<section id="metal-boxes" class="level2" data-number="5.24">
+<h2 data-number="5.24" class="anchored" data-anchor-id="metal-boxes"><span class="header-section-number">5.24</span> Metal Boxes</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Functional Definitions of Tom Swift’s Original 11 Variables</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Dimension</th>
+<th style="text-align: left;">Derivation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Thickness</td>
+<td style="text-align: left;">x</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Width</td>
+<td style="text-align: left;">y</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Length</td>
+<td style="text-align: left;">z</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Volume</td>
+<td style="text-align: left;">xyz</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Density</td>
+<td style="text-align: left;">d</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Weight</td>
+<td style="text-align: left;">xyzd</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Surface area</td>
+<td style="text-align: left;">2(xy + xz + yz)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cross-section</td>
+<td style="text-align: left;">yz</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Edge length</td>
+<td style="text-align: left;">4(x + y + z)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Diagonal length</td>
+<td style="text-align: left;">(x^2)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cost/lb</td>
+<td style="text-align: left;">c</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   63 obs. of  11 variables:
+ $ thick   : num  1.362 2.385 3.101 0.934 0.845 ...
+ $ width   : num  1.71 2.83 4.32 3.2 3.84 ...
+ $ length  : num  2.93 5.01 5.99 4.15 4.09 ...
+ $ volume  : num  6.02 30.2 72.01 11.78 16.1 ...
+ $ density : int  10 7 16 22 11 16 11 21 6 13 ...
+ $ weight  : num  60 210 1152 264 176 ...
+ $ surface : num  22 62.1 108.2 38 48 ...
+ $ crosssec: num  5.87 15.06 23.53 12.02 16.13 ...
+ $ edge    : num  23.9 39.9 51.5 31.9 36.1 ...
+ $ diagonal: num  196 1444 3721 676 1089 ...
+ $ cost    : num  4.48 2.37 9.77 22.21 15.86 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="correlations" class="level2" data-number="5.25">
+<h2 data-number="5.25" class="anchored" data-anchor-id="correlations"><span class="header-section-number">5.25</span> Correlations</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Correlations between dimensions</caption>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 10%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">thick</th>
+<th style="text-align: right;">width</th>
+<th style="text-align: right;">length</th>
+<th style="text-align: right;">volume</th>
+<th style="text-align: right;">density</th>
+<th style="text-align: right;">weight</th>
+<th style="text-align: right;">surface</th>
+<th style="text-align: right;">crosssec</th>
+<th style="text-align: right;">edge</th>
+<th style="text-align: right;">diagonal</th>
+<th style="text-align: right;">cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">thick</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">0.84</td>
+<td style="text-align: right;">-0.13</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">0.74</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">0.51</td>
+<td style="text-align: right;">-0.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">width</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">0.77</td>
+<td style="text-align: right;">-0.15</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">0.87</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">0.88</td>
+<td style="text-align: right;">0.78</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">length</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.58</td>
+<td style="text-align: right;">-0.02</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">0.72</td>
+<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">0.84</td>
+<td style="text-align: right;">0.86</td>
+<td style="text-align: right;">-0.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">volume</td>
+<td style="text-align: right;">0.84</td>
+<td style="text-align: right;">0.77</td>
+<td style="text-align: right;">0.58</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">-0.22</td>
+<td style="text-align: right;">0.65</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">0.81</td>
+<td style="text-align: right;">0.87</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">-0.11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">density</td>
+<td style="text-align: right;">-0.13</td>
+<td style="text-align: right;">-0.15</td>
+<td style="text-align: right;">-0.02</td>
+<td style="text-align: right;">-0.22</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.44</td>
+<td style="text-align: right;">-0.20</td>
+<td style="text-align: right;">-0.15</td>
+<td style="text-align: right;">-0.15</td>
+<td style="text-align: right;">-0.18</td>
+<td style="text-align: right;">0.62</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">weight</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">0.65</td>
+<td style="text-align: right;">0.44</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.65</td>
+<td style="text-align: right;">0.56</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">0.24</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">surface</td>
+<td style="text-align: right;">0.74</td>
+<td style="text-align: right;">0.87</td>
+<td style="text-align: right;">0.72</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">-0.20</td>
+<td style="text-align: right;">0.65</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">0.91</td>
+<td style="text-align: right;">-0.07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">crosssec</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">0.81</td>
+<td style="text-align: right;">-0.15</td>
+<td style="text-align: right;">0.56</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">0.93</td>
+<td style="text-align: right;">-0.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">edge</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">0.88</td>
+<td style="text-align: right;">0.84</td>
+<td style="text-align: right;">0.87</td>
+<td style="text-align: right;">-0.15</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">-0.04</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">diagonal</td>
+<td style="text-align: right;">0.51</td>
+<td style="text-align: right;">0.78</td>
+<td style="text-align: right;">0.86</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">-0.18</td>
+<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">0.91</td>
+<td style="text-align: right;">0.93</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">-0.12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">cost</td>
+<td style="text-align: right;">-0.02</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">-0.02</td>
+<td style="text-align: right;">-0.11</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">-0.07</td>
+<td style="text-align: right;">-0.03</td>
+<td style="text-align: right;">-0.04</td>
+<td style="text-align: right;">-0.12</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="eigenvalues-1" class="level2" data-number="5.26">
+<h2 data-number="5.26" class="anchored" data-anchor-id="eigenvalues-1"><span class="header-section-number">5.26</span> Eigenvalues &gt; 1</h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="factor_analysis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="orthogonal-rotation-1" class="level2" data-number="5.27">
+<h2 data-number="5.27" class="anchored" data-anchor-id="orthogonal-rotation-1"><span class="header-section-number">5.27</span> Orthogonal Rotation</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Loadings:
+         RC1    RC3    RC2    RC5    RC4   
+thick            0.968                     
+width                          0.734       
+length    0.986                            
+volume           0.754                     
+density                 0.864              
+weight                                     
+surface   0.703                            
+crosssec  0.829                            
+edge      0.819                            
+diagonal  0.875                            
+cost                                  0.955
+
+                 RC1   RC3   RC2   RC5   RC4
+SS loadings    4.425 2.662 1.318 1.225 1.106
+Proportion Var 0.402 0.242 0.120 0.111 0.101
+Cumulative Var 0.402 0.644 0.764 0.876 0.976</code></pre>
+</div>
+</div>
+</section>
+<section id="orthogonal-rotation-with-loadings-.70" class="level2" data-number="5.28">
+<h2 data-number="5.28" class="anchored" data-anchor-id="orthogonal-rotation-with-loadings-.70"><span class="header-section-number">5.28</span> Orthogonal Rotation with Loadings &gt; .70</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Loadings:
+         RC1    RC3    RC2   
+thick            0.947       
+width     0.801              
+length    0.936              
+volume           0.744       
+density                 0.930
+weight                       
+surface   0.792              
+crosssec  0.942              
+edge      0.892              
+diagonal  0.905              
+cost                    0.841
+
+                 RC1   RC3   RC2
+SS loadings    5.298 2.699 1.868
+Proportion Var 0.482 0.245 0.170
+Cumulative Var 0.482 0.727 0.897</code></pre>
+</div>
+</div>
+</section>
+<section id="r-code-for-chapter-2" class="level2" data-number="5.29">
+<h2 data-number="5.29" class="anchored" data-anchor-id="r-code-for-chapter-2"><span class="header-section-number">5.29</span> R Code for Chapter 2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ----------------------- Chapter 2: Factor Analysis ------------------</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MPsychoR"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"YouthDep"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>item1 <span class="ot">&lt;-</span> YouthDep[, <span class="dv">1</span>]</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(item1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>, <span class="st">"1"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>item2 <span class="ot">&lt;-</span> YouthDep[, <span class="dv">14</span>]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(item2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>, <span class="st">"1"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(item1, item2)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ------ correlation coefficients</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"psych"</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>tetcor <span class="ot">&lt;-</span> <span class="fu">tetrachoric</span>(<span class="fu">cbind</span>(item1, item2))</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>tetcor</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>item1 <span class="ot">&lt;-</span> YouthDep[, <span class="dv">1</span>]</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>item2 <span class="ot">&lt;-</span> YouthDep[, <span class="dv">14</span>]</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>polcor <span class="ot">&lt;-</span> <span class="fu">polychoric</span>(<span class="fu">cbind</span>(item1, item2))</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>polcor</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>DepItems <span class="ot">&lt;-</span> YouthDep[,<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>] </span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>Depnum <span class="ot">&lt;-</span> <span class="fu">data.matrix</span>(DepItems) <span class="sc">-</span> <span class="dv">1</span>  <span class="do">## convert to numeric   </span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>Rdep <span class="ot">&lt;-</span> <span class="fu">polychoric</span>(Depnum)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Rmotivation"</span>)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>vind <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"ext|int"</span>, <span class="fu">colnames</span>(Rmotivation)) </span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>Rmotivation1 <span class="ot">&lt;-</span> Rmotivation[, vind]</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>Rmot1 <span class="ot">&lt;-</span> <span class="fu">tetrachoric</span>(Rmotivation1, <span class="at">smooth =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">round</span>(<span class="fu">eigen</span>(Rmot1<span class="sc">$</span>rho)<span class="sc">$</span>values, <span class="dv">3</span>))</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>Rmot <span class="ot">&lt;-</span> <span class="fu">tetrachoric</span>(Rmotivation1)</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">round</span>(<span class="fu">eigen</span>(Rmot<span class="sc">$</span>rho)<span class="sc">$</span>values, <span class="dv">3</span>))</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="do">## ----- exploratory factor analysis </span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>motFA <span class="ot">&lt;-</span> <span class="fu">fa</span>(Rmot<span class="sc">$</span>rho, <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">rotate =</span> <span class="st">"none"</span>, <span class="at">fm =</span> <span class="st">"ml"</span>)</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(motFA<span class="sc">$</span>loadings, <span class="at">cutoff =</span> <span class="fl">0.2</span>)</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(motFA<span class="sc">$</span>communality, <span class="dv">2</span>)</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>motFA2 <span class="ot">&lt;-</span> <span class="fu">fa</span>(Rmot<span class="sc">$</span>rho, <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">fm =</span> <span class="st">"ml"</span>)</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(motFA<span class="sc">$</span>loadings, <span class="at">asp =</span> <span class="dv">1</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.9</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.9</span>), <span class="at">type =</span> <span class="st">"n"</span>, <span class="at">xlab =</span> <span class="st">"Factor 1"</span>, <span class="at">ylab =</span> <span class="st">"Factor 2"</span>, <span class="at">main =</span> <span class="st">"Loadings Plot"</span>)</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(motFA<span class="sc">$</span>loadings, <span class="at">labels =</span> <span class="fu">rownames</span>(motFA<span class="sc">$</span>loadings), <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">col =</span> <span class="st">"gray"</span>)</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">v =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"lightgray"</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(motFA2<span class="sc">$</span>loadings, <span class="at">labels =</span> <span class="fu">rownames</span>(motFA2<span class="sc">$</span>loadings), <span class="at">col =</span> <span class="dv">1</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomleft"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"rotated"</span>, <span class="st">"unrotated"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"gray"</span>), <span class="at">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>Rmot2 <span class="ot">&lt;-</span> <span class="fu">tetrachoric</span>(Rmotivation[,<span class="dv">1</span><span class="sc">:</span><span class="dv">36</span>])</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>motFA3 <span class="ot">&lt;-</span> <span class="fu">fa</span>(Rmot2<span class="sc">$</span>rho, <span class="at">nfactors =</span> <span class="dv">3</span>, <span class="at">rotate =</span> <span class="st">"oblimin"</span>, <span class="at">fm =</span> <span class="st">"ml"</span>)</span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>motFA3<span class="sc">$</span>loadings</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(motFA3<span class="sc">$</span>Phi, <span class="dv">3</span>)</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>motFA2 <span class="ot">&lt;-</span> <span class="fu">fa</span>(Rmotivation1, <span class="at">nfactors =</span> <span class="dv">2</span>, <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="at">cor =</span> <span class="st">"tet"</span>, <span class="at">fm =</span> <span class="st">"ml"</span>, <span class="at">scores =</span> <span class="st">"regression"</span>,</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>             <span class="at">missing =</span> <span class="cn">TRUE</span>, <span class="at">impute =</span> <span class="st">"median"</span>)</span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(motFA2<span class="sc">$</span>scores)</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>Rdep <span class="ot">&lt;-</span> <span class="fu">polychoric</span>(Depnum)<span class="sc">$</span>rho</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>evals <span class="ot">&lt;-</span> <span class="fu">eigen</span>(Rdep)<span class="sc">$</span>values</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a><span class="fu">scree</span>(Rdep, <span class="at">factors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>(evals<span class="sc">/</span><span class="fu">sum</span>(evals)<span class="sc">*</span><span class="dv">100</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>resPA <span class="ot">&lt;-</span> <span class="fu">fa.parallel</span>(Depnum, <span class="at">fa =</span> <span class="st">"pc"</span>, <span class="at">cor =</span> <span class="st">"poly"</span>, <span class="at">fm =</span> <span class="st">"ml"</span>)  </span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a>resvss <span class="ot">&lt;-</span> <span class="fu">vss</span>(Rdep, <span class="at">fm =</span> <span class="st">"ml"</span>, <span class="at">n.obs =</span> <span class="fu">nrow</span>(Depnum), <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a>resvss</span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a>fadep <span class="ot">&lt;-</span> <span class="fu">fa</span>(Depnum, <span class="dv">1</span>, <span class="at">cor =</span> <span class="st">"poly"</span>, <span class="at">fm =</span> <span class="st">"ml"</span>)</span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fadep)</span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>resnf <span class="ot">&lt;-</span> <span class="fu">nfactors</span>(Depnum, <span class="at">n =</span> <span class="dv">8</span>, <span class="at">fm =</span> <span class="st">"ml"</span>, <span class="at">cor =</span> <span class="st">"poly"</span>)</span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>resnf</span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a><span class="do">## ----- Bayesian exploratory factor analysis</span></span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MPsychoR"</span>)</span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"corrplot"</span>)</span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"BayesFM"</span>)</span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Privacy"</span>)</span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a>Privstd <span class="ot">&lt;-</span> <span class="fu">scale</span>(Privacy)</span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(Privstd))</span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a>Nid <span class="ot">&lt;-</span> <span class="dv">2</span>              <span class="do">## minimum number of variables per factor</span></span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a>pmax <span class="ot">&lt;-</span> <span class="fu">trunc</span>(<span class="fu">ncol</span>(Privstd)<span class="sc">/</span>Nid)   <span class="do">## maximum number of factors</span></span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>pmax</span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a>Rsim <span class="ot">&lt;-</span> <span class="fu">simul.R.prior</span>(pmax, <span class="at">nu0 =</span> pmax <span class="sc">+</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>))</span>
+<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Rsim)</span>
+<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a>Ksim <span class="ot">&lt;-</span> <span class="fu">simul.nfac.prior</span>(<span class="at">nvar =</span> <span class="fu">ncol</span>(Privstd), <span class="at">Nid =</span> Nid, <span class="at">Kmax =</span> pmax, <span class="at">kappa =</span> <span class="fu">c</span>(.<span class="dv">1</span>, .<span class="dv">2</span>, .<span class="dv">5</span>, <span class="dv">1</span>))</span>
+<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Ksim)</span>
+<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">222</span>)</span>
+<span id="cb22-88"><a href="#cb22-88" aria-hidden="true" tabindex="-1"></a>fitbefa <span class="ot">&lt;-</span> <span class="fu">befa</span>(Privstd, <span class="at">Nid =</span> <span class="dv">2</span>, <span class="at">Kmax =</span> pmax, <span class="at">nu0 =</span> <span class="dv">10</span>, <span class="at">kappa =</span> <span class="fl">0.2</span>, <span class="at">kappa0 =</span> <span class="fl">0.1</span>, <span class="at">xi0 =</span> <span class="fl">0.1</span>,</span>
+<span id="cb22-89"><a href="#cb22-89" aria-hidden="true" tabindex="-1"></a>                <span class="at">burnin =</span> <span class="dv">5000</span>, <span class="at">iter =</span> <span class="dv">50000</span>)</span>
+<span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a>fitbefa <span class="ot">&lt;-</span> <span class="fu">post.column.switch</span>(fitbefa)   <span class="do">## column reordering</span></span>
+<span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a>fitbefa <span class="ot">&lt;-</span> <span class="fu">post.sign.switch</span>(fitbefa)     <span class="do">## sign switching</span></span>
+<span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a>sumbefa <span class="ot">&lt;-</span> <span class="fu">summary</span>(fitbefa)</span>
+<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a><span class="do">## ----- confirmatory factor analysis</span></span>
+<span id="cb22-95"><a href="#cb22-95" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MPsychoR"</span>)</span>
+<span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lavaan"</span>)</span>
+<span id="cb22-97"><a href="#cb22-97" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Rmotivation"</span>)</span>
+<span id="cb22-98"><a href="#cb22-98" aria-hidden="true" tabindex="-1"></a>vind <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"ext|int"</span>, <span class="fu">colnames</span>(Rmotivation)) <span class="do">## ext/int items</span></span>
+<span id="cb22-99"><a href="#cb22-99" aria-hidden="true" tabindex="-1"></a>Rmot <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(Rmotivation[, vind])</span>
+<span id="cb22-100"><a href="#cb22-100" aria-hidden="true" tabindex="-1"></a>mot_model <span class="ot">&lt;-</span> <span class="st">' </span></span>
+<span id="cb22-101"><a href="#cb22-101" aria-hidden="true" tabindex="-1"></a><span class="st">  extrinsic  =~ ext1 + ext2 + ext3 + ext4 + ext5 + ext6 + </span></span>
+<span id="cb22-102"><a href="#cb22-102" aria-hidden="true" tabindex="-1"></a><span class="st">                ext7 + ext8 + ext9 + ext10 + ext11 + ext12      </span></span>
+<span id="cb22-103"><a href="#cb22-103" aria-hidden="true" tabindex="-1"></a><span class="st">  intrinsic =~  int1 + int2 + int3 + int4 + int5'</span></span>
+<span id="cb22-104"><a href="#cb22-104" aria-hidden="true" tabindex="-1"></a>fitMot <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">cfa</span>(mot_model, <span class="at">data =</span> Rmot, <span class="at">ordered =</span> <span class="fu">names</span>(Rmot))</span>
+<span id="cb22-105"><a href="#cb22-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-106"><a href="#cb22-106" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"semPlot"</span>)</span>
+<span id="cb22-107"><a href="#cb22-107" aria-hidden="true" tabindex="-1"></a><span class="fu">semPaths</span>(fitMot, <span class="at">what =</span> <span class="st">"est"</span>, <span class="at">edge.label.cex =</span> <span class="fl">0.7</span>, <span class="at">edge.color =</span> <span class="dv">1</span>, <span class="at">esize =</span> <span class="dv">1</span>, <span class="at">sizeMan =</span> <span class="fl">4.5</span>, <span class="at">asize =</span> <span class="fl">2.5</span>,</span>
+<span id="cb22-108"><a href="#cb22-108" aria-hidden="true" tabindex="-1"></a>         <span class="at">intercepts =</span> <span class="cn">FALSE</span>, <span class="at">rotation =</span> <span class="dv">4</span>, <span class="at">thresholdColor =</span> <span class="st">"red"</span>, <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="fl">1.5</span>, <span class="dv">5</span>), <span class="at">fade =</span> <span class="cn">FALSE</span>, <span class="at">nCharNodes =</span> <span class="dv">4</span>)</span>
+<span id="cb22-109"><a href="#cb22-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-110"><a href="#cb22-110" aria-hidden="true" tabindex="-1"></a><span class="fu">inspect</span>(fitMot, <span class="at">what =</span> <span class="st">"est"</span>)<span class="sc">$</span>theta</span>
+<span id="cb22-111"><a href="#cb22-111" aria-hidden="true" tabindex="-1"></a><span class="fu">inspect</span>(fitMot, <span class="at">what =</span> <span class="st">"est"</span>)<span class="sc">$</span>lambda</span>
+<span id="cb22-112"><a href="#cb22-112" aria-hidden="true" tabindex="-1"></a><span class="fu">inspect</span>(fitMot, <span class="at">what =</span> <span class="st">"std"</span>)<span class="sc">$</span>lambda</span>
+<span id="cb22-113"><a href="#cb22-113" aria-hidden="true" tabindex="-1"></a><span class="fu">inspect</span>(fitMot, <span class="at">what =</span> <span class="st">"est"</span>)<span class="sc">$</span>psi</span>
+<span id="cb22-114"><a href="#cb22-114" aria-hidden="true" tabindex="-1"></a><span class="fu">inspect</span>(fitMot, <span class="at">what =</span> <span class="st">"std"</span>)<span class="sc">$</span>psi</span>
+<span id="cb22-115"><a href="#cb22-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-116"><a href="#cb22-116" aria-hidden="true" tabindex="-1"></a><span class="fu">parameterEstimates</span>(fitMot, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-117"><a href="#cb22-117" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitMot, <span class="at">standardized =</span> <span class="cn">TRUE</span>, <span class="at">fit.measures =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-118"><a href="#cb22-118" aria-hidden="true" tabindex="-1"></a><span class="fu">parameterEstimates</span>(fitMot)[<span class="dv">5</span>,]</span>
+<span id="cb22-119"><a href="#cb22-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-120"><a href="#cb22-120" aria-hidden="true" tabindex="-1"></a>mot_model2 <span class="ot">&lt;-</span> <span class="st">'</span></span>
+<span id="cb22-121"><a href="#cb22-121" aria-hidden="true" tabindex="-1"></a><span class="st">  extrinsic  =~ ext1 + ext2 + ext3 + ext4 + ext6 + ext7 + </span></span>
+<span id="cb22-122"><a href="#cb22-122" aria-hidden="true" tabindex="-1"></a><span class="st">                ext8 + ext9 + ext10 + ext11 + ext12</span></span>
+<span id="cb22-123"><a href="#cb22-123" aria-hidden="true" tabindex="-1"></a><span class="st">  intrinsic =~  int1 + int2 + int3 + int4 + int5'</span></span>
+<span id="cb22-124"><a href="#cb22-124" aria-hidden="true" tabindex="-1"></a>fitMot2 <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">cfa</span>(mot_model2, <span class="at">data =</span> Rmot, <span class="at">ordered =</span> <span class="fu">names</span>(Rmot)[<span class="sc">-</span><span class="dv">5</span>])</span>
+<span id="cb22-125"><a href="#cb22-125" aria-hidden="true" tabindex="-1"></a>vind <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">13</span><span class="sc">:</span><span class="dv">16</span>, <span class="dv">32</span><span class="sc">:</span><span class="dv">35</span>)</span>
+<span id="cb22-126"><a href="#cb22-126" aria-hidden="true" tabindex="-1"></a>Rmot2 <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(Rmotivation[, vind])</span>
+<span id="cb22-127"><a href="#cb22-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-128"><a href="#cb22-128" aria-hidden="true" tabindex="-1"></a>mot_model3 <span class="ot">&lt;-</span> <span class="st">'</span></span>
+<span id="cb22-129"><a href="#cb22-129" aria-hidden="true" tabindex="-1"></a><span class="st">  extrinsic  =~ ext1 + ext2 + ext3 + ext4 </span></span>
+<span id="cb22-130"><a href="#cb22-130" aria-hidden="true" tabindex="-1"></a><span class="st">  hybrid =~ hyb1 + hyb2 + hyb3 + hyb4              </span></span>
+<span id="cb22-131"><a href="#cb22-131" aria-hidden="true" tabindex="-1"></a><span class="st">  intrinsic =~  int1 + int2 + int3 + int4 </span></span>
+<span id="cb22-132"><a href="#cb22-132" aria-hidden="true" tabindex="-1"></a><span class="st">  motivation =~ extrinsic + hybrid + intrinsic'</span></span>
+<span id="cb22-133"><a href="#cb22-133" aria-hidden="true" tabindex="-1"></a>fitMot3 <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">cfa</span>(mot_model3, <span class="at">data =</span> Rmot2, <span class="at">ordered =</span> <span class="fu">names</span>(Rmot2))</span>
+<span id="cb22-134"><a href="#cb22-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-135"><a href="#cb22-135" aria-hidden="true" tabindex="-1"></a><span class="fu">semPaths</span>(fitMot3, <span class="at">what =</span> <span class="st">"std"</span>, <span class="at">edge.label.cex =</span> <span class="fl">0.7</span>, <span class="at">edge.color =</span> <span class="dv">1</span>, <span class="at">esize =</span> <span class="dv">1</span>, <span class="at">sizeMan =</span> <span class="dv">5</span>, <span class="at">asize =</span> <span class="fl">2.5</span>,</span>
+<span id="cb22-136"><a href="#cb22-136" aria-hidden="true" tabindex="-1"></a>         <span class="at">intercepts =</span> <span class="cn">FALSE</span>, <span class="at">rotation =</span> <span class="dv">4</span>, <span class="at">thresholdColor =</span> <span class="st">"red"</span>, <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="fl">1.5</span>, <span class="dv">5</span>), <span class="at">fade =</span> <span class="cn">FALSE</span>, <span class="at">nCharNodes =</span> <span class="dv">4</span>)</span>
+<span id="cb22-137"><a href="#cb22-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-138"><a href="#cb22-138" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitMot3, <span class="at">standardized =</span> <span class="cn">TRUE</span>, <span class="at">fit.measures =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-139"><a href="#cb22-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-140"><a href="#cb22-140" aria-hidden="true" tabindex="-1"></a>vind <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">13</span><span class="sc">:</span><span class="dv">16</span>, <span class="dv">32</span><span class="sc">:</span><span class="dv">35</span>, <span class="dv">39</span><span class="sc">:</span><span class="dv">41</span>)</span>
+<span id="cb22-141"><a href="#cb22-141" aria-hidden="true" tabindex="-1"></a>Rmot3 <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(Rmotivation[, vind])</span>
+<span id="cb22-142"><a href="#cb22-142" aria-hidden="true" tabindex="-1"></a>mot_model4 <span class="ot">&lt;-</span> <span class="st">'</span></span>
+<span id="cb22-143"><a href="#cb22-143" aria-hidden="true" tabindex="-1"></a><span class="st">  extrinsic  =~ ext1 + ext2 + ext3 + ext4 </span></span>
+<span id="cb22-144"><a href="#cb22-144" aria-hidden="true" tabindex="-1"></a><span class="st">  hybrid =~ hyb1 + hyb2 + hyb3 + hyb4              </span></span>
+<span id="cb22-145"><a href="#cb22-145" aria-hidden="true" tabindex="-1"></a><span class="st">  intrinsic =~  int1 + int2 + int3 + int4 </span></span>
+<span id="cb22-146"><a href="#cb22-146" aria-hidden="true" tabindex="-1"></a><span class="st">  motivation =~ extrinsic + hybrid + intrinsic</span></span>
+<span id="cb22-147"><a href="#cb22-147" aria-hidden="true" tabindex="-1"></a><span class="st">  motivation ~ npkgs + phd'</span></span>
+<span id="cb22-148"><a href="#cb22-148" aria-hidden="true" tabindex="-1"></a>fitMot4 <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">cfa</span>(mot_model4, <span class="at">data =</span> Rmot3, <span class="at">ordered =</span> <span class="fu">names</span>(Rmot3[<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>]))</span>
+<span id="cb22-149"><a href="#cb22-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-150"><a href="#cb22-150" aria-hidden="true" tabindex="-1"></a><span class="fu">semPaths</span>(fitMot4, <span class="at">what =</span> <span class="st">"std"</span>, <span class="at">edge.label.cex =</span> <span class="fl">0.7</span>, <span class="at">edge.color =</span> <span class="dv">1</span>, <span class="at">esize =</span> <span class="dv">1</span>, <span class="at">sizeMan =</span> <span class="dv">5</span>, <span class="at">asize =</span> <span class="fl">2.5</span>,</span>
+<span id="cb22-151"><a href="#cb22-151" aria-hidden="true" tabindex="-1"></a>         <span class="at">intercepts =</span> <span class="cn">FALSE</span>, <span class="at">rotation =</span> <span class="dv">4</span>, <span class="at">thresholdColor =</span> <span class="st">"red"</span>, <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="fl">1.5</span>, <span class="dv">5</span>), <span class="at">fade =</span> <span class="cn">FALSE</span>, <span class="at">nCharNodes =</span> <span class="dv">4</span>)</span>
+<span id="cb22-152"><a href="#cb22-152" aria-hidden="true" tabindex="-1"></a><span class="fu">parameterEstimates</span>(fitMot4)[<span class="dv">16</span><span class="sc">:</span><span class="dv">17</span>,]</span>
+<span id="cb22-153"><a href="#cb22-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-154"><a href="#cb22-154" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"semTools"</span>)</span>
+<span id="cb22-155"><a href="#cb22-155" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Bergh"</span>)</span>
+<span id="cb22-156"><a href="#cb22-156" aria-hidden="true" tabindex="-1"></a>GP_model <span class="ot">&lt;-</span> <span class="st">'GP =~ EP + HP + DP + SP'</span></span>
+<span id="cb22-157"><a href="#cb22-157" aria-hidden="true" tabindex="-1"></a>minvfit1 <span class="ot">&lt;-</span> <span class="fu">measEq.syntax</span>(GP_model, <span class="at">data =</span> Bergh, <span class="at">group =</span> <span class="st">"gender"</span>, <span class="at">return.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-158"><a href="#cb22-158" aria-hidden="true" tabindex="-1"></a>minvfit2 <span class="ot">&lt;-</span> <span class="fu">measEq.syntax</span>(GP_model, <span class="at">data =</span> Bergh, <span class="at">group =</span> <span class="st">"gender"</span>, </span>
+<span id="cb22-159"><a href="#cb22-159" aria-hidden="true" tabindex="-1"></a>                          <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"loadings"</span>), <span class="at">return.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-160"><a href="#cb22-160" aria-hidden="true" tabindex="-1"></a>minvfit3 <span class="ot">&lt;-</span> <span class="fu">measEq.syntax</span>(GP_model, <span class="at">data =</span> Bergh, <span class="at">group =</span> <span class="st">"gender"</span>, </span>
+<span id="cb22-161"><a href="#cb22-161" aria-hidden="true" tabindex="-1"></a>                          <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"loadings"</span>, <span class="st">"intercepts"</span>), <span class="at">return.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-162"><a href="#cb22-162" aria-hidden="true" tabindex="-1"></a>minvfit4 <span class="ot">&lt;-</span> <span class="fu">measEq.syntax</span>(GP_model, <span class="at">data =</span> Bergh, <span class="at">group =</span> <span class="st">"gender"</span>, </span>
+<span id="cb22-163"><a href="#cb22-163" aria-hidden="true" tabindex="-1"></a>                          <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"loadings"</span>, <span class="st">"intercepts"</span>, <span class="st">"means"</span>), <span class="at">return.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-164"><a href="#cb22-164" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(minvfit1, minvfit2, minvfit3, minvfit4)</span>
+<span id="cb22-165"><a href="#cb22-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a>GP_model <span class="ot">&lt;-</span> <span class="st">'GP =~ c(v1,v1)*EP + c(v2,v2)*HP + c(v3,v3)*DP + SP'</span></span>
+<span id="cb22-167"><a href="#cb22-167" aria-hidden="true" tabindex="-1"></a>fitBase <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">cfa</span>(GP_model, <span class="at">data =</span> Bergh, <span class="at">group =</span> <span class="st">"gender"</span>, <span class="at">estimator =</span> <span class="st">"MLR"</span>)</span>
+<span id="cb22-168"><a href="#cb22-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-169"><a href="#cb22-169" aria-hidden="true" tabindex="-1"></a>GP_model <span class="ot">&lt;-</span> <span class="st">'GP =~ EP + HP + DP + SP'</span></span>
+<span id="cb22-170"><a href="#cb22-170" aria-hidden="true" tabindex="-1"></a>fitBase <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">cfa</span>(GP_model, <span class="at">data =</span> Bergh, <span class="at">group =</span> <span class="st">"gender"</span>, <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"loadings"</span>),</span>
+<span id="cb22-171"><a href="#cb22-171" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">"GP=~ SP"</span>), <span class="at">estimator =</span> <span class="st">"MLR"</span>)</span>
+<span id="cb22-172"><a href="#cb22-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-173"><a href="#cb22-173" aria-hidden="true" tabindex="-1"></a>fitBase1 <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">cfa</span>(GP_model, <span class="at">data =</span> Bergh, <span class="at">group =</span> <span class="st">"gender"</span>, <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"loadings"</span>, <span class="st">"intercepts"</span>), </span>
+<span id="cb22-174"><a href="#cb22-174" aria-hidden="true" tabindex="-1"></a>                        <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">"GP=~SP"</span>, <span class="st">"DP~1"</span>, <span class="st">"HP~1"</span>, <span class="st">"SP~1"</span>), <span class="at">estimator =</span> <span class="st">"MLR"</span>)</span>
+<span id="cb22-175"><a href="#cb22-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-176"><a href="#cb22-176" aria-hidden="true" tabindex="-1"></a>GP_model2 <span class="ot">&lt;-</span> <span class="st">'GP =~ c(v1,v1)*EP + c(v2,v2)*HP + c(v3,v3)*DP + c(NA, 0)*SP'</span></span>
+<span id="cb22-177"><a href="#cb22-177" aria-hidden="true" tabindex="-1"></a>fitIO <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">cfa</span>(GP_model2, <span class="at">data =</span> Bergh, <span class="at">group =</span> <span class="st">"gender"</span>, <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"intercepts"</span>), </span>
+<span id="cb22-178"><a href="#cb22-178" aria-hidden="true" tabindex="-1"></a>                     <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">"DP~1"</span>, <span class="st">"HP~1"</span>, <span class="st">"SP~1"</span>), <span class="at">estimator =</span> <span class="st">"MLR"</span>)</span>
+<span id="cb22-179"><a href="#cb22-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-180"><a href="#cb22-180" aria-hidden="true" tabindex="-1"></a>fitMarg <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">cfa</span>(GP_model, <span class="at">data =</span> Bergh, <span class="at">group =</span> <span class="st">"gender"</span>, <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">"loadings"</span>, <span class="st">"intercepts"</span>),</span>
+<span id="cb22-181"><a href="#cb22-181" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">"DP~1"</span>, <span class="st">"HP~1"</span>, <span class="st">"SP~1"</span>), <span class="at">estimator =</span> <span class="st">"MLR"</span>)</span>
+<span id="cb22-182"><a href="#cb22-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-183"><a href="#cb22-183" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fitMarg, fitBase1)</span>
+<span id="cb22-184"><a href="#cb22-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-185"><a href="#cb22-185" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MPsychoR"</span>)</span>
+<span id="cb22-186"><a href="#cb22-186" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lavaan"</span>)</span>
+<span id="cb22-187"><a href="#cb22-187" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"SDOwave"</span>)</span>
+<span id="cb22-188"><a href="#cb22-188" aria-hidden="true" tabindex="-1"></a>model_sdo1 <span class="ot">&lt;-</span> <span class="st">'</span></span>
+<span id="cb22-189"><a href="#cb22-189" aria-hidden="true" tabindex="-1"></a><span class="st">  SDO1996 =~ 1*I1.1996 + a2*I2.1996 + a3*I3.1996 + a4*I4.1996</span></span>
+<span id="cb22-190"><a href="#cb22-190" aria-hidden="true" tabindex="-1"></a><span class="st">  SDO1998 =~ 1*I1.1998 + a2*I2.1998 + a3*I3.1998 + a4*I4.1998</span></span>
+<span id="cb22-191"><a href="#cb22-191" aria-hidden="true" tabindex="-1"></a><span class="st">  SDO1996 ~~ SDO1998</span></span>
+<span id="cb22-192"><a href="#cb22-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-193"><a href="#cb22-193" aria-hidden="true" tabindex="-1"></a><span class="st">  ## intercepts</span></span>
+<span id="cb22-194"><a href="#cb22-194" aria-hidden="true" tabindex="-1"></a><span class="st">  I1.1996 ~ int1*1; I1.1998 ~ int1*1</span></span>
+<span id="cb22-195"><a href="#cb22-195" aria-hidden="true" tabindex="-1"></a><span class="st">  I2.1996 ~ int2*1; I2.1998 ~ int2*1 </span></span>
+<span id="cb22-196"><a href="#cb22-196" aria-hidden="true" tabindex="-1"></a><span class="st">  I3.1996 ~ int3*1; I3.1998 ~ int3*1</span></span>
+<span id="cb22-197"><a href="#cb22-197" aria-hidden="true" tabindex="-1"></a><span class="st">  I4.1996 ~ int4*1; I4.1998 ~ int4*1</span></span>
+<span id="cb22-198"><a href="#cb22-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-199"><a href="#cb22-199" aria-hidden="true" tabindex="-1"></a><span class="st">  ## residual covariances</span></span>
+<span id="cb22-200"><a href="#cb22-200" aria-hidden="true" tabindex="-1"></a><span class="st">  I1.1996 ~~ I1.1998</span></span>
+<span id="cb22-201"><a href="#cb22-201" aria-hidden="true" tabindex="-1"></a><span class="st">  I2.1996 ~~ I2.1998</span></span>
+<span id="cb22-202"><a href="#cb22-202" aria-hidden="true" tabindex="-1"></a><span class="st">  I3.1996 ~~ I3.1998</span></span>
+<span id="cb22-203"><a href="#cb22-203" aria-hidden="true" tabindex="-1"></a><span class="st">  I4.1996 ~~ I4.1998</span></span>
+<span id="cb22-204"><a href="#cb22-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-205"><a href="#cb22-205" aria-hidden="true" tabindex="-1"></a><span class="st">  ## latent means: 1996 as baseline</span></span>
+<span id="cb22-206"><a href="#cb22-206" aria-hidden="true" tabindex="-1"></a><span class="st">  SDO1996 ~ 0*1</span></span>
+<span id="cb22-207"><a href="#cb22-207" aria-hidden="true" tabindex="-1"></a><span class="st">  SDO1998 ~ 1'</span></span>
+<span id="cb22-208"><a href="#cb22-208" aria-hidden="true" tabindex="-1"></a>fitsdo1 <span class="ot">&lt;-</span> <span class="fu">cfa</span>(model_sdo1, <span class="at">data =</span> SDOwave, <span class="at">estimator =</span> <span class="st">"MLR"</span>)</span>
+<span id="cb22-209"><a href="#cb22-209" aria-hidden="true" tabindex="-1"></a><span class="fu">parameterEstimates</span>(fitsdo1)[<span class="dv">22</span><span class="sc">:</span><span class="dv">23</span>,]</span>
+<span id="cb22-210"><a href="#cb22-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-211"><a href="#cb22-211" aria-hidden="true" tabindex="-1"></a>model_sdo2 <span class="ot">&lt;-</span> <span class="st">'</span></span>
+<span id="cb22-212"><a href="#cb22-212" aria-hidden="true" tabindex="-1"></a><span class="st">  ## 1st CFA level, constant loadings across time</span></span>
+<span id="cb22-213"><a href="#cb22-213" aria-hidden="true" tabindex="-1"></a><span class="st">  SDOD1996 =~ 1*I1.1996 + d1*I2.1996</span></span>
+<span id="cb22-214"><a href="#cb22-214" aria-hidden="true" tabindex="-1"></a><span class="st">  SDOD1998 =~ 1*I1.1998 + d1*I2.1998</span></span>
+<span id="cb22-215"><a href="#cb22-215" aria-hidden="true" tabindex="-1"></a><span class="st">  SDOD1999 =~ 1*I1.1999 + d1*I2.1999 </span></span>
+<span id="cb22-216"><a href="#cb22-216" aria-hidden="true" tabindex="-1"></a><span class="st">  SDOE1996 =~ 1*I3.1996 + a1*I4.1996 </span></span>
+<span id="cb22-217"><a href="#cb22-217" aria-hidden="true" tabindex="-1"></a><span class="st">  SDOE1998 =~ 1*I3.1998 + a1*I4.1998</span></span>
+<span id="cb22-218"><a href="#cb22-218" aria-hidden="true" tabindex="-1"></a><span class="st">  SDOE1999 =~ 1*I3.1999 + a1*I4.1999</span></span>
+<span id="cb22-219"><a href="#cb22-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-220"><a href="#cb22-220" aria-hidden="true" tabindex="-1"></a><span class="st">  ## 2nd CFA level, constant loadings across time</span></span>
+<span id="cb22-221"><a href="#cb22-221" aria-hidden="true" tabindex="-1"></a><span class="st">  SDO1996 =~ 1*SDOD1996 + sd1*SDOE1996</span></span>
+<span id="cb22-222"><a href="#cb22-222" aria-hidden="true" tabindex="-1"></a><span class="st">  SDO1998 =~ 1*SDOD1998 + sd1*SDOE1998</span></span>
+<span id="cb22-223"><a href="#cb22-223" aria-hidden="true" tabindex="-1"></a><span class="st">  SDO1999 =~ 1*SDOD1999 + sd1*SDOE1999</span></span>
+<span id="cb22-224"><a href="#cb22-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-225"><a href="#cb22-225" aria-hidden="true" tabindex="-1"></a><span class="st">  ## Constant 1st level intercepts</span></span>
+<span id="cb22-226"><a href="#cb22-226" aria-hidden="true" tabindex="-1"></a><span class="st">  I1.1996 ~ iI1*1; I1.1998 ~ iI1*1; I1.1999 ~ iI1*1</span></span>
+<span id="cb22-227"><a href="#cb22-227" aria-hidden="true" tabindex="-1"></a><span class="st">  I2.1996 ~ iI2*1; I2.1998 ~ iI2*1; I2.1999 ~ iI2*1</span></span>
+<span id="cb22-228"><a href="#cb22-228" aria-hidden="true" tabindex="-1"></a><span class="st">  I3.1996 ~ iI3*1; I3.1998 ~ iI3*1; I3.1999 ~ iI3*1</span></span>
+<span id="cb22-229"><a href="#cb22-229" aria-hidden="true" tabindex="-1"></a><span class="st">  I4.1996 ~ iI4*1; I4.1998 ~ iI4*1; I4.1999 ~ iI4*1</span></span>
+<span id="cb22-230"><a href="#cb22-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-231"><a href="#cb22-231" aria-hidden="true" tabindex="-1"></a><span class="st">  ## residual covariances:</span></span>
+<span id="cb22-232"><a href="#cb22-232" aria-hidden="true" tabindex="-1"></a><span class="st">  I1.1999 ~~ I1.1998; I1.1996 ~~ I1.1998; I1.1999 ~~ I1.1996</span></span>
+<span id="cb22-233"><a href="#cb22-233" aria-hidden="true" tabindex="-1"></a><span class="st">  I2.1999 ~~ I2.1998; I2.1996 ~~ I2.1998; I2.1999 ~~ I2.1996</span></span>
+<span id="cb22-234"><a href="#cb22-234" aria-hidden="true" tabindex="-1"></a><span class="st">  I3.1999 ~~ I3.1998; I3.1996 ~~ I3.1998; I3.1999 ~~ I3.1996</span></span>
+<span id="cb22-235"><a href="#cb22-235" aria-hidden="true" tabindex="-1"></a><span class="st">  I4.1999 ~~ I4.1998; I4.1996 ~~ I4.1998; I4.1999 ~~ I4.1996</span></span>
+<span id="cb22-236"><a href="#cb22-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-237"><a href="#cb22-237" aria-hidden="true" tabindex="-1"></a><span class="st">  ## latent means</span></span>
+<span id="cb22-238"><a href="#cb22-238" aria-hidden="true" tabindex="-1"></a><span class="st">  SDO1996 ~ 0*1    ## 1996 baseline year</span></span>
+<span id="cb22-239"><a href="#cb22-239" aria-hidden="true" tabindex="-1"></a><span class="st">  SDO1998 ~ 1      ## 1998 vs. 1996</span></span>
+<span id="cb22-240"><a href="#cb22-240" aria-hidden="true" tabindex="-1"></a><span class="st">  SDO1999 ~ 1      ## 1999 vs. 1996</span></span>
+<span id="cb22-241"><a href="#cb22-241" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span>
+<span id="cb22-242"><a href="#cb22-242" aria-hidden="true" tabindex="-1"></a>fitsdo2 <span class="ot">&lt;-</span> <span class="fu">cfa</span>(model_sdo2, <span class="at">data =</span> SDOwave, <span class="at">estimator =</span> <span class="st">"MLR"</span>)</span>
+<span id="cb22-243"><a href="#cb22-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-244"><a href="#cb22-244" aria-hidden="true" tabindex="-1"></a><span class="fu">semPaths</span>(fitsdo2, <span class="at">what =</span> <span class="st">"est"</span>, <span class="at">edge.label.cex =</span> <span class="fl">0.7</span>, <span class="at">edge.color =</span> <span class="dv">1</span>, <span class="at">esize =</span> <span class="dv">1</span>, <span class="at">sizeMan =</span> <span class="dv">6</span>, <span class="at">asize =</span> <span class="fl">2.5</span>,</span>
+<span id="cb22-245"><a href="#cb22-245" aria-hidden="true" tabindex="-1"></a>         <span class="at">intercepts =</span> <span class="cn">FALSE</span>, <span class="at">rotation =</span> <span class="dv">4</span>, <span class="at">thresholdColor =</span> <span class="st">"red"</span>, <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="fl">1.5</span>, <span class="dv">5</span>), <span class="at">fade =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-246"><a href="#cb22-246" aria-hidden="true" tabindex="-1"></a><span class="fu">parameterEstimates</span>(fitsdo2)[<span class="dv">43</span><span class="sc">:</span><span class="dv">45</span>,]</span>
+<span id="cb22-247"><a href="#cb22-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-248"><a href="#cb22-248" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"FamilyIQ"</span>)</span>
+<span id="cb22-249"><a href="#cb22-249" aria-hidden="true" tabindex="-1"></a>modelIQ <span class="ot">&lt;-</span> <span class="st">'</span></span>
+<span id="cb22-250"><a href="#cb22-250" aria-hidden="true" tabindex="-1"></a><span class="st"> level: 1</span></span>
+<span id="cb22-251"><a href="#cb22-251" aria-hidden="true" tabindex="-1"></a><span class="st">  numeric =~ wordlist + cards + matrices</span></span>
+<span id="cb22-252"><a href="#cb22-252" aria-hidden="true" tabindex="-1"></a><span class="st">  perception =~ figures + animals + occupation</span></span>
+<span id="cb22-253"><a href="#cb22-253" aria-hidden="true" tabindex="-1"></a><span class="st"> level: 2</span></span>
+<span id="cb22-254"><a href="#cb22-254" aria-hidden="true" tabindex="-1"></a><span class="st">  general =~ wordlist + cards +  matrices + figures + animals +</span></span>
+<span id="cb22-255"><a href="#cb22-255" aria-hidden="true" tabindex="-1"></a><span class="st">             occupation'</span></span>
+<span id="cb22-256"><a href="#cb22-256" aria-hidden="true" tabindex="-1"></a>fitIQ <span class="ot">&lt;-</span> <span class="fu">cfa</span>(modelIQ, <span class="at">data =</span> FamilyIQ, <span class="at">cluster =</span> <span class="st">"family"</span>, <span class="at">std.lv =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-257"><a href="#cb22-257" aria-hidden="true" tabindex="-1"></a>fitIQ</span>
+<span id="cb22-258"><a href="#cb22-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-259"><a href="#cb22-259" aria-hidden="true" tabindex="-1"></a><span class="do">## ----- bayesian confirmatory factor analysis</span></span>
+<span id="cb22-260"><a href="#cb22-260" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"blavaan"</span>)</span>
+<span id="cb22-261"><a href="#cb22-261" aria-hidden="true" tabindex="-1"></a><span class="fu">dpriors</span>()[<span class="fu">c</span>(<span class="st">"lambda"</span>, <span class="st">"itheta"</span>, <span class="st">"ipsi"</span>)]</span>
+<span id="cb22-262"><a href="#cb22-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-263"><a href="#cb22-263" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MPsychoR"</span>)</span>
+<span id="cb22-264"><a href="#cb22-264" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Bergh"</span>)</span>
+<span id="cb22-265"><a href="#cb22-265" aria-hidden="true" tabindex="-1"></a>GP_model <span class="ot">&lt;-</span> <span class="st">'GP =~ EP + HP + DP + SP'</span></span>
+<span id="cb22-266"><a href="#cb22-266" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb22-267"><a href="#cb22-267" aria-hidden="true" tabindex="-1"></a>fitBCFA <span class="ot">&lt;-</span> <span class="fu">bcfa</span>(GP_model, <span class="at">data =</span> Bergh, <span class="at">burnin =</span> <span class="dv">2000</span>, <span class="at">sample =</span> <span class="dv">10000</span>, <span class="at">n.chains =</span> <span class="dv">2</span>)</span>
+<span id="cb22-268"><a href="#cb22-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-269"><a href="#cb22-269" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitBCFA, <span class="at">pars =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">plot.type =</span> <span class="st">"trace"</span>)</span>
+<span id="cb22-270"><a href="#cb22-270" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitBCFA, <span class="at">pars =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">plot.type =</span> <span class="st">"autocorr"</span>)</span>
+<span id="cb22-271"><a href="#cb22-271" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitBCFA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./generalizability.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Generalizability Theory</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
