@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>AdvancedMeasurementTheoryNotebook - 3&nbsp; Classic Test Theory</title>
+<title>AdvancedMeasurementTheoryNotebook - 2&nbsp; Classic Test Theory</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -112,6 +112,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./generalizability.html" rel="next">
 <link href="./intro_R_programming.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -155,7 +156,7 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classic Test Theory</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Classic Test Theory</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -180,17 +181,27 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the Course</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Introduction to the Course</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro_R_programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R Programming</span></a>
+  <a href="./intro_R_programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R Programming</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ctt.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classic Test Theory</span></a>
+  <a href="./ctt.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Classic Test Theory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./generalizability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Generalizability Theory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factor_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Factor Analysis</span></a>
   </div>
 </li>
     </ul>
@@ -202,22 +213,17 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">3.1</span>  Overview</a></li>
-  <li><a href="#classical-true-score-model" id="toc-classical-true-score-model" class="nav-link" data-scroll-target="#classical-true-score-model"><span class="toc-section-number">3.2</span>  Classical True Score Model</a></li>
-  <li><a href="#reliability" id="toc-reliability" class="nav-link" data-scroll-target="#reliability"><span class="toc-section-number">3.3</span>  Reliability</a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">2.1</span>  Overview</a></li>
+  <li><a href="#classical-true-score-model" id="toc-classical-true-score-model" class="nav-link" data-scroll-target="#classical-true-score-model"><span class="toc-section-number">2.2</span>  Classical True Score Model</a></li>
+  <li><a href="#reliability" id="toc-reliability" class="nav-link" data-scroll-target="#reliability"><span class="toc-section-number">2.3</span>  Reliability</a>
   <ul class="collapse">
-  <li><a href="#cronbachs-alpha" id="toc-cronbachs-alpha" class="nav-link" data-scroll-target="#cronbachs-alpha"><span class="toc-section-number">3.3.1</span>  Cronbach’s <span class="math inline">\(\alpha\)</span></a></li>
-  <li><a href="#other-reliability-coefficients" id="toc-other-reliability-coefficients" class="nav-link" data-scroll-target="#other-reliability-coefficients"><span class="toc-section-number">3.3.2</span>  Other Reliability Coefficients</a></li>
+  <li><a href="#cronbachs-alpha" id="toc-cronbachs-alpha" class="nav-link" data-scroll-target="#cronbachs-alpha"><span class="toc-section-number">2.3.1</span>  Cronbach’s <span class="math inline">\(\alpha\)</span></a></li>
+  <li><a href="#other-reliability-coefficients" id="toc-other-reliability-coefficients" class="nav-link" data-scroll-target="#other-reliability-coefficients"><span class="toc-section-number">2.3.2</span>  Other Reliability Coefficients</a></li>
   </ul></li>
-  <li><a href="#generalizability-theory" id="toc-generalizability-theory" class="nav-link" data-scroll-target="#generalizability-theory"><span class="toc-section-number">3.4</span>  Generalizability Theory</a>
+  <li><a href="#generalizability-theory" id="toc-generalizability-theory" class="nav-link" data-scroll-target="#generalizability-theory"><span class="toc-section-number">2.4</span>  Generalizability Theory</a></li>
+  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts"><span class="toc-section-number">2.5</span>  R Scripts</a>
   <ul class="collapse">
-  <li><a href="#reliability-and-generalizability" id="toc-reliability-and-generalizability" class="nav-link" data-scroll-target="#reliability-and-generalizability"><span class="toc-section-number">3.4.1</span>  Reliability and Generalizability</a></li>
-  <li><a href="#multiple-sources-of-error" id="toc-multiple-sources-of-error" class="nav-link" data-scroll-target="#multiple-sources-of-error"><span class="toc-section-number">3.4.2</span>  Multiple Sources of Error</a></li>
-  </ul></li>
-  <li><a href="#additional-readings" id="toc-additional-readings" class="nav-link" data-scroll-target="#additional-readings"><span class="toc-section-number">3.5</span>  Additional Readings</a></li>
-  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts"><span class="toc-section-number">3.6</span>  R Scripts</a>
-  <ul class="collapse">
-  <li><a href="#simulating-ctt-data" id="toc-simulating-ctt-data" class="nav-link" data-scroll-target="#simulating-ctt-data"><span class="toc-section-number">3.6.1</span>  Simulating CTT data</a></li>
+  <li><a href="#simulating-ctt-data" id="toc-simulating-ctt-data" class="nav-link" data-scroll-target="#simulating-ctt-data"><span class="toc-section-number">2.5.1</span>  Simulating CTT data</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -227,7 +233,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="CCT" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classic Test Theory</span></span></h1>
+<h1 class="title"><span id="CCT" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Classic Test Theory</span></span></h1>
 </div>
 
 
@@ -242,8 +248,8 @@ div.csl-indent {
 
 </header>
 
-<section id="overview" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">3.1</span> Overview</h2>
+<section id="overview" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">2.1</span> Overview</h2>
 <p>Three important concepts:</p>
 <ol type="1">
 <li>We can build a model of instruments similar to the way we model conceptual relationships (measurement model vs.&nbsp;structural model).</li>
@@ -251,8 +257,8 @@ div.csl-indent {
 <li>Measurement models can account for different sources of error.</li>
 </ol>
 </section>
-<section id="classical-true-score-model" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="classical-true-score-model"><span class="header-section-number">3.2</span> Classical True Score Model</h2>
+<section id="classical-true-score-model" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="classical-true-score-model"><span class="header-section-number">2.2</span> Classical True Score Model</h2>
 <p>The true score model is: <span class="math display">\[
 X = T + E
 \]</span> where <span class="math inline">\(X\)</span> is the <strong>observed score</strong>, <span class="math inline">\(T\)</span> is the <strong>true score</strong>, which is unknown, and <span class="math inline">\(E\)</span> is the <strong>error</strong></p>
@@ -346,8 +352,8 @@ X = T + E
 </div>
 </div>
 </section>
-<section id="reliability" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="reliability"><span class="header-section-number">3.3</span> Reliability</h2>
+<section id="reliability" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="reliability"><span class="header-section-number">2.3</span> Reliability</h2>
 <p><span class="math display">\[
 \text{reliability} = \frac{\sigma^2_T}{\sigma^2_X} = \frac{\sigma^2_T}{\sigma^2_T + \sigma^2_E} = \rho^2_{XT}
 \]</span></p>
@@ -386,12 +392,12 @@ X = T + E
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># points(x = CTTdata$X_t, pch = 2, factor(CTTdata$id))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="cronbachs-alpha" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="cronbachs-alpha"><span class="header-section-number">3.3.1</span> Cronbach’s <span class="math inline">\(\alpha\)</span></h3>
+<section id="cronbachs-alpha" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="cronbachs-alpha"><span class="header-section-number">2.3.1</span> Cronbach’s <span class="math inline">\(\alpha\)</span></h3>
 <p>In the notes for this chapter, I demonstrate aspects of classical test theory, reliability and generalizability theory using data from a study exploring the motivation of R package authors <span class="citation" data-cites="mair2015motivation">(<a href="#ref-mair2015motivation" role="doc-biblioref">Mair et al. 2015</a>)</span>. This tutorial is based on Chapter 1 of <span class="citation" data-cites="mair2018modern">Mair (<a href="#ref-mair2018modern" role="doc-biblioref">2018</a>)</span>, which can be consulted for a more in depth exposition of the underlying theory. Here I focus on demonstrating some of those concepts in R, as well as describing how to get certain results in R.</p>
 <p>First, I load the packages used in this tutorial:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r bluecode code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages used:</span></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages used:</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MPsychoR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -406,7 +412,7 @@ X = T + E
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>HybMot <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This leads to a data set with 777 authors and 19 items.</p>
-<div class="cell" style="background: blue;">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many authors(rows) and items(columns)?</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -892,12 +898,12 @@ X = T + E
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>sigma2_X <span class="ot">&lt;-</span> <span class="fu">sum</span>(vcmat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="other-reliability-coefficients" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="other-reliability-coefficients"><span class="header-section-number">3.3.2</span> Other Reliability Coefficients</h3>
+<section id="other-reliability-coefficients" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="other-reliability-coefficients"><span class="header-section-number">2.3.2</span> Other Reliability Coefficients</h3>
 </section>
 </section>
-<section id="generalizability-theory" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="generalizability-theory"><span class="header-section-number">3.4</span> Generalizability Theory</h2>
+<section id="generalizability-theory" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="generalizability-theory"><span class="header-section-number">2.4</span> Generalizability Theory</h2>
 <p>Generalizability theory, or G-theory for short, is an extension of CTT, which decomposes the one error term in CTT into multiple sources of error called <em>facets</em>. These could include sources such as items, raters, or measurement occasions. These were each given a subscript on page 2 of the text.</p>
 <p>Before looking at these different sources of error, let’s calculate Cronbach’s <span class="math inline">\(\alpha\)</span> in a different way, that will allow this decomposition going forward.</p>
 <p>We will first need to reshape the data from wide to long format. A great tutorial on reshaping data with the <code>reshape2</code> package can be found here:</p>
@@ -910,216 +916,49 @@ X = T + E
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>Hyblong <span class="ot">&lt;-</span> <span class="fu">melt</span>(Hyb1, <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">"person"</span>), <span class="at">variable.name =</span> <span class="st">"item"</span>)</span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>Hyblong<span class="sc">$</span>person <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(Hyblong<span class="sc">$</span>person)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="reliability-and-generalizability" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="reliability-and-generalizability"><span class="header-section-number">3.4.1</span> Reliability and Generalizability</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(value <span class="sc">~</span> person <span class="sc">+</span> item, <span class="at">data =</span> Hyblong))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>               Df Sum Sq Mean Sq F value Pr(&gt;F)    
-person        776  663.0    0.85   5.549 &lt;2e-16 ***
-item           18  573.8   31.88 207.048 &lt;2e-16 ***
-Residuals   13968 2150.5    0.15                   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-</div>
-<p>From this output we can calculate Cronbach’s <span class="math inline">\(\alpha\)</span> with the following values:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>MSp <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>MSe <span class="ot">&lt;-</span> <span class="fl">0.15</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> (MSp <span class="sc">-</span> MSe)<span class="sc">/</span>MSp</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(alpha, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.82</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ICC</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Call: ICC(x = HybMot)
-
-Intraclass correlation coefficients 
-                         type  ICC   F df1   df2        p lower bound
-Single_raters_absolute   ICC1 0.15 4.4 776 13986 7.2e-279        0.14
-Single_random_raters     ICC2 0.16 5.5 776 13968  0.0e+00        0.14
-Single_fixed_raters      ICC3 0.19 5.5 776 13968  0.0e+00        0.17
-Average_raters_absolute ICC1k 0.77 4.4 776 13986 7.2e-279        0.75
-Average_random_raters   ICC2k 0.78 5.5 776 13968  0.0e+00        0.75
-Average_fixed_raters    ICC3k 0.82 5.5 776 13968  0.0e+00        0.80
-                        upper bound
-Single_raters_absolute         0.17
-Single_random_raters           0.18
-Single_fixed_raters            0.21
-Average_raters_absolute        0.79
-Average_random_raters          0.81
-Average_fixed_raters           0.84
-
- Number of subjects = 777     Number of Judges =  19
-See the help file for a discussion of the other 4 McGraw and Wong estimates,</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>icchyb <span class="ot">&lt;-</span> <span class="fu">ICC</span>(HybMot)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>((<span class="fl">0.85-0.15</span>)<span class="sc">/</span><span class="dv">19</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.191943</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>((<span class="fl">31.88-0.15</span>)<span class="sc">/</span><span class="dv">777</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2020806</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lme4"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: Matrix</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(<span class="fu">lmer</span>(value <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>person) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item), <span class="at">data =</span> Hyblong))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> Groups   Name        Std.Dev.
- person   (Intercept) 0.19200 
- item     (Intercept) 0.20206 
- Residual             0.39238 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"gtheory"</span>)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>gfit <span class="ot">&lt;-</span> <span class="fu">gstudy</span>(<span class="at">data =</span> Hyblong, <span class="at">formula =</span> value <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>person) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item))</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>dfit <span class="ot">&lt;-</span> <span class="fu">dstudy</span>(gfit, <span class="at">colname.objects =</span> <span class="st">"person"</span>, <span class="at">colname.scores =</span> <span class="st">"value"</span>, </span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> Hyblong)</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(dfit<span class="sc">$</span>generalizability, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.82</code></pre>
-</div>
-</div>
 </section>
-<section id="multiple-sources-of-error" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="multiple-sources-of-error"><span class="header-section-number">3.4.2</span> Multiple Sources of Error</h3>
-<p>Generalizability theory acknowledges that multiple sources of error can impact scores simultaneously, and allow for estimating the effects of each <span class="citation" data-cites="raykov2011introduction">(<a href="#ref-raykov2011introduction" role="doc-biblioref">Raykov and Marcoulides 2011</a>)</span>. These various sources of error, or facets (e.g., items, raters, measurement occasions). All measurements of behavior are conceptualized as being sampled from a <em>universe</em> of admissible observations <span class="citation" data-cites="raykov2011introduction">(<a href="#ref-raykov2011introduction" role="doc-biblioref">Raykov and Marcoulides 2011</a>)</span>. If the observed score is expected to vary across a facet (e.g.&nbsp;vary across occasions, or vary depending on the items included, or the rater scoring), then that facet is a defining characteristic of the universe. The idea of reliability is replace with the idea of generalizability, which ,instead of asking how accurately observed scores can reflect the true score (CTT), generalizability theory asks how accurately observed scores allow us to generalize about behavior of an individual in a particular universe.</p>
-<p>Below is the code from the <span class="citation" data-cites="mair2018modern">Mair (<a href="#ref-mair2018modern" role="doc-biblioref">2018</a>)</span> text.</p>
+<section id="r-scripts" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="r-scripts"><span class="header-section-number">2.5</span> R Scripts</h2>
+<section id="simulating-ctt-data" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="simulating-ctt-data"><span class="header-section-number">2.5.1</span> Simulating CTT data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtheory)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Lakes"</span>)</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>phydat <span class="ot">&lt;-</span> <span class="fu">subset</span>(Lakes, subtest <span class="sc">==</span> <span class="st">"physical"</span>)</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>phydat<span class="sc">$</span>item <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(phydat<span class="sc">$</span>item)</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(phydat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      personID raterID item score  subtest
-12611        1       7 phy1     5 physical
-12612        1       1 phy1     5 physical
-12613        1       3 phy1     5 physical
-12614        1       8 phy1     4 physical
-12615        1       5 phy1     6 physical
-12616        2       3 phy1     5 physical</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>formula <span class="ot">&lt;-</span> score <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>personID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>raterID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item) <span class="sc">+</span> </span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">|</span>personID<span class="sc">:</span>raterID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>personID<span class="sc">:</span>item) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>raterID<span class="sc">:</span>item)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>gfit <span class="ot">&lt;-</span> <span class="fu">gstudy</span>(<span class="at">formula =</span> formula, <span class="at">data =</span> phydat)</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>gfit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$components
-            source         var percent n
-1 personID:raterID 0.127298630    10.7 1
-2    personID:item 0.151229568    12.7 1
-3         personID 0.458766113    38.5 1
-4     raterID:item 0.008802081     0.7 1
-5          raterID 0.139048763    11.7 1
-6             item 0.033388424     2.8 1
-7         Residual 0.272703419    22.9 1
-
-attr(,"class")
-[1] "gstudy" "list"  </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>dfit <span class="ot">&lt;-</span> <span class="fu">dstudy</span>(gfit, <span class="at">colname.objects =</span> <span class="st">"personID"</span>, <span class="at">colname.scores =</span> <span class="st">"score"</span>, </span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> phydat)</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>components</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            source          var percent  n
-1 personID:raterID 0.0254597259     4.3  5
-2    personID:item 0.0504098560     8.5  3
-3         personID 0.4587661131    77.4  1
-4     raterID:item 0.0005868054     0.1 15
-5          raterID 0.0278097526     4.7  5
-6             item 0.0111294746     1.9  3
-7         Residual 0.0181802279     3.1 15</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>var.error.abs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1335758</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>sem.abs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3654803</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>var.error.rel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.09404981</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>sem.rel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3066754</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>dependability</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7744954</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>generalizability</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8298714</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="additional-readings" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="additional-readings"><span class="header-section-number">3.5</span> Additional Readings</h2>
-<p>For more information of G theory, see <span class="citation" data-cites="raykov2011introduction">Raykov and Marcoulides (<a href="#ref-raykov2011introduction" role="doc-biblioref">2011</a>)</span>. For an example using the R package <code>lavaan</code> with G theory, see <span class="citation" data-cites="Jorgensen2021Howestimateabsolute">Jorgensen (<a href="#ref-Jorgensen2021Howestimateabsolute" role="doc-biblioref">2021</a>)</span>.</p>
-</section>
-<section id="r-scripts" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="r-scripts"><span class="header-section-number">3.6</span> R Scripts</h2>
-<section id="simulating-ctt-data" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1" class="anchored" data-anchor-id="simulating-ctt-data"><span class="header-section-number">3.6.1</span> Simulating CTT data</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Title: simulate_CTTdata</span></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: William Murrah</span></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Description: Simulate data to demonstrate CTT and reliability</span></span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: Monday, 09 August 2021</span></span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="co"># R version: R version 4.1.0 (2021-05-18)</span></span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Project(working) directory: /Users/wmm0017/Projects/Courses/AdvancedMeasurementTheoryNotebook</span></span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------</span></span>
-<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>simx <span class="ot">&lt;-</span> <span class="cf">function</span>(truescore, <span class="at">sigmax =</span> <span class="dv">1</span>) {</span>
-<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">18</span>, truescore, sigmax)</span>
-<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">round</span>(x))</span>
-<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>)</span>
-<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>Tau <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>),<span class="dv">2</span>)</span>
-<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20210805</span>)</span>
-<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a>CTTdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> id,</span>
-<span id="cb62-19"><a href="#cb62-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">6</span>),</span>
-<span id="cb62-20"><a href="#cb62-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb62-21"><a href="#cb62-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb62-22"><a href="#cb62-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">x3 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb62-23"><a href="#cb62-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">x4 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb62-24"><a href="#cb62-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">x5 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb62-25"><a href="#cb62-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">x6 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb62-26"><a href="#cb62-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">x7 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb62-27"><a href="#cb62-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">x8 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb62-28"><a href="#cb62-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">x9 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb62-29"><a href="#cb62-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">x10 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb62-30"><a href="#cb62-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tau =</span> Tau</span>
-<span id="cb62-31"><a href="#cb62-31" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb62-32"><a href="#cb62-32" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(id, Tau, simx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Title: simulate_CTTdata</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: William Murrah</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Description: Simulate data to demonstrate CTT and reliability</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: Monday, 09 August 2021</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># R version: R version 4.1.0 (2021-05-18)</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Project(working) directory: /Users/wmm0017/Projects/Courses/</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   AdvancedMeasurementTheoryNotebook</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>simx <span class="ot">&lt;-</span> <span class="cf">function</span>(truescore, <span class="at">sigmax =</span> <span class="dv">1</span>) {</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">18</span>, truescore, sigmax)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">round</span>(x))</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>Tau <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>),<span class="dv">2</span>)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20210805</span>)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>CTTdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> id,</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">6</span>),</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">x3 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">x4 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">x5 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">x6 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">x7 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">x8 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">x9 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">x10 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tau =</span> Tau</span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(id, Tau, simx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Jorgensen2021Howestimateabsolute" class="csl-entry" role="doc-biblioentry">
-Jorgensen, Terrence D. 2021. <span>“How to Estimate Absolute-Error Components in Structural Equation Models of Generalizability Theory.”</span> <em>Psych</em> 3 (2): 113–33. <a href="https://doi.org/10.3390/psych3020011">https://doi.org/10.3390/psych3020011</a>.
-</div>
 <div id="ref-mair2018modern" class="csl-entry" role="doc-biblioentry">
 Mair, Patrick. 2018. <em>Modern Psychometrics with <span>R</span></em>. Springer.
 </div>
@@ -1128,9 +967,6 @@ Mair, Patrick. 2018. <em>Modern Psychometrics with <span>R</span></em>. Springer
 </div>
 <div id="ref-mair2015motivation" class="csl-entry" role="doc-biblioentry">
 Mair, Patrick, Eva Hofmann, Kathrin Gruber, Reinhold Hatzinger, Achim Zeileis, and Kurt Hornik. 2015. <span>“Motivation, Values, and Work Design as Drivers of Participation in the r Open Source Project for Statistical Computing.”</span> <em>Proceedings of the National Academy of Sciences</em> 112 (48): 14788–92.
-</div>
-<div id="ref-raykov2011introduction" class="csl-entry" role="doc-biblioentry">
-Raykov, Tenko, and George A Marcoulides. 2011. <em>Introduction to Psychometric Theory</em>. Routledge.
 </div>
 </div>
 </section>
@@ -1273,10 +1109,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./intro_R_programming.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R Programming</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R Programming</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./generalizability.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Generalizability Theory</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

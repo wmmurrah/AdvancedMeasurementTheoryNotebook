@@ -1,8 +1,8 @@
-# Introduction to the Course {.unnumbered}
+# Introduction to the Course
 
 Welcome!
 This is a notebook for ERMA 8350 Advanced Measurement Theory.
-The class will be using the textbook *Handbook of Educational Measurement and Psychometrics Using R* [@Desjardins2018Handbookeducationalmeasurement], which will be the primary source for learning to use R for the methods covered in this course.
+The class will be using the textbook *Handbook of Educational Measurement and Psychometrics Using R* [@desjardins2018handbook], which will be the primary source for learning to use R for the methods covered in this course.
 I will use this notebook to make available additional readings to help you learn the theory behind these methods and to provide published examples of their use.
 It may include some examples from the textbook, with some elaborations, additional readings, and some more details about implementing the methods in R.
 These web-based notes will make it easy for you to use code, by allowing you to copy and paste code found within.
