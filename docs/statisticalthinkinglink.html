@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="William Murrah">
 
-<title>Advanced Measurement Theory Notebook</title>
+<title>Advanced Measurement Theory Notebook - return to statistical-thinking.com</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,25 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 
@@ -50,7 +30,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro_R_programming.html" rel="next">
+<link href="./factor_analysis.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -89,7 +69,7 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Advanced Measurement Theory Notebook</h1>
+      <h1 class="quarto-secondary-nav-title"><a href="https://www.statistical-thinking.com/">return to statistical-thinking.com</a></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -114,7 +94,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the Course</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the Course</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -139,7 +119,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./statisticalthinkinglink.html" class="sidebar-item-text sidebar-link"></a><a href="https://www.statistical-thinking.com/">return to statistical-thinking.com</a>
+  <a href="./statisticalthinkinglink.html" class="sidebar-item-text sidebar-link active"></a><a href="https://www.statistical-thinking.com/">return to statistical-thinking.com</a>
   </div>
 </li>
     </ul>
@@ -147,37 +127,20 @@ div.csl-indent {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#introduction-to-the-course" id="toc-introduction-to-the-course" class="nav-link active" data-scroll-target="#introduction-to-the-course"><span class="toc-section-number">1</span>  Introduction to the Course</a>
-  <ul class="collapse">
-  <li><a href="#resources-for-learning-r" id="toc-resources-for-learning-r" class="nav-link" data-scroll-target="#resources-for-learning-r">Resources for Learning R</a></li>
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a></li>
-  <li><a href="#how-to-use-these-notes" id="toc-how-to-use-these-notes" class="nav-link" data-scroll-target="#how-to-use-these-notes">How To Use These Notes</a></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Advanced Measurement Theory Notebook</h1>
+<h1 class="title d-none d-lg-block"><a href="https://www.statistical-thinking.com/">return to statistical-thinking.com</a></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>William Murrah </p>
-          </div>
-  </div>
     
   
     
@@ -186,38 +149,8 @@ div.csl-indent {
 
 </header>
 
-<section id="introduction-to-the-course" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction to the Course</h1>
-<p>Welcome! This is a notebook for ERMA 8350 Advanced Measurement Theory. The class will be using the textbook <em>Handbook of Educational Measurement and Psychometrics Using R</em> <span class="citation" data-cites="desjardins2018handbook">(<a href="#ref-desjardins2018handbook" role="doc-biblioref">Desjardins and Bulut 2018</a>)</span>, which will be the primary source for learning to use R for the methods covered in this course. I will use this notebook to make available additional readings to help you learn the theory behind these methods and to provide published examples of their use. It may include some examples from the textbook, with some elaborations, additional readings, and some more details about implementing the methods in R. These web-based notes will make it easy for you to use code, by allowing you to copy and paste code found within. Some of you will have experience with R and others not. So I will try to also point you to additional resources that may be helpful. For example, in this preface I will provide links to resources to help you setup R and RStudio. RStudio is a platform to make using R more productive. I will use it extensively in this course.</p>
-<p>There are at least two way you can access the software needed for this course. You can use the virtual labs on campus. I know at least the education virtual labs have R and RStudio installed. IF you go this route you can watch the following video. Note you will need Duo setup for this to work.</p>
-<p><a href="https://nv.instructuremedia.com/fetch/QkFoYkIxc0hhUVNIRGFrSE1Hd3JCeWhUREdFPS0tZjk4ODFlYWEyZWFiNWQwYWYyZDk0YTZjMjljZTJlMjBkNmIwMzE5Yw.mp4">Using Vlab to acces R/RStudio</a></p>
-<p>A better option if you have a laptop, you can install both programs on your computer. They are both absolutely free and available on all major operating systems, so you will not have to worry about transferring information across computers, limited connection speeds, or other hassles inherent with the VLab route.</p>
-<p>The following links take you to videos instructing you how to install them.</p>
-<p><a href="https://auburn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=5dacd1fe-b888-407b-a89f-ac150135ace8">Installing R and RStudio</a></p>
-<p><a href="https://auburn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=aed0e2a9-004f-453f-80c7-abbe010a063b">Organizing Projects in RStudio</a></p>
-<section id="resources-for-learning-r" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="resources-for-learning-r">Resources for Learning R</h2>
-<p>While such experience is certainly helpful, I do not assume you have prior knowledge of using R. I will demonstrate the use of R and provide (particularly in this notebook) the R code needed to use the methods we will learn. However, even if you have prior experience with R, you should plan to spend time learning to program in R. Some people find this intimidating initially, but most of you will grow to find R programming rewarding, and even fun by the end of the course. But, there will be frustration for sure.</p>
-<p>Here are some good places to start learning R:</p>
-<p><a href="https://cran.r-project.org/">CRAN</a></p>
-</section>
-<section id="r-packages" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="r-packages">R Packages</h2>
-<p>R is, among other paradigms, a functional programming language, which means is heavily utilizes functions. R’s functions are stored in packages. While base R has a long list of very useful functions, to fully realize the power of R you will have to use additional packages. So, learning how to <strong>install</strong> packages (downloading from the web to your computer) and <strong>loading</strong> packages (making the package’s functions accessible to your current R session) are important skills to master.</p>
-</section>
-<section id="how-to-use-these-notes" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="how-to-use-these-notes">How To Use These Notes</h2>
-<p>Before going further, it may be helpful to watch the following video about how to use the code in this notebook with Rstudio:</p>
-<p><a href="https://auburn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=13acb849-902a-45c7-bc4e-ad870153fcae">How to Use RStudio with this Notebook</a></p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-desjardins2018handbook" class="csl-entry" role="doc-biblioentry">
-Desjardins, Christopher D, and Okan Bulut. 2018. <em>Handbook of Educational Measurement and Psychometrics Using r</em>. CRC Press.
-</div>
-</div>
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -355,11 +288,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./factor_analysis.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Factor Analysis</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro_R_programming.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R Programming</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

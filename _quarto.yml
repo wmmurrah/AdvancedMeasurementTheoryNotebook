@@ -5,12 +5,20 @@ project:
 book:
   title: "Advanced Measurement Theory Notebook"
   author: "William Murrah"
+  
   chapters:
     - index.qmd
     - intro_R_programming.qmd
     - ctt.qmd
     - generalizability.qmd
     - factor_analysis.qmd
+    - statisticalthinkinglink.qmd
+  page-footer:
+    left: |
+      *Advanced Measurement Theory: a Computational Project-Based Approach* was written by William M. Murrah III.
+    right: |
+      Return to  <a href="https://www.statistical-thinking.com">statistical-thinking.com</a>.
+    
 bibliography: references.bib
 
 format:
