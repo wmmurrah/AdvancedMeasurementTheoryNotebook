@@ -2,28 +2,28 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Advanced Measurement Theory Notebook",
+    "title": "Advanced Measurement Theory: a Computational Project-Based Approach",
     "section": "",
     "text": "1 Introduction to the Course\nWelcome! This is a notebook for ERMA 8350 Advanced Measurement Theory. The class will be using the textbook Handbook of Educational Measurement and Psychometrics Using R (Desjardins and Bulut 2018), which will be the primary source for learning to use R for the methods covered in this course. I will use this notebook to make available additional readings to help you learn the theory behind these methods and to provide published examples of their use. It may include some examples from the textbook, with some elaborations, additional readings, and some more details about implementing the methods in R. These web-based notes will make it easy for you to use code, by allowing you to copy and paste code found within. Some of you will have experience with R and others not. So I will try to also point you to additional resources that may be helpful. For example, in this preface I will provide links to resources to help you setup R and RStudio. RStudio is a platform to make using R more productive. I will use it extensively in this course.\nThere are at least two way you can access the software needed for this course. You can use the virtual labs on campus. I know at least the education virtual labs have R and RStudio installed. IF you go this route you can watch the following video. Note you will need Duo setup for this to work.\nUsing Vlab to acces R/RStudio\nA better option if you have a laptop, you can install both programs on your computer. They are both absolutely free and available on all major operating systems, so you will not have to worry about transferring information across computers, limited connection speeds, or other hassles inherent with the VLab route.\nThe following links take you to videos instructing you how to install them.\nInstalling R and RStudio\nOrganizing Projects in RStudio"
   },
   {
     "objectID": "index.html#resources-for-learning-r",
     "href": "index.html#resources-for-learning-r",
-    "title": "Advanced Measurement Theory Notebook",
+    "title": "Advanced Measurement Theory: a Computational Project-Based Approach",
     "section": "Resources for Learning R",
     "text": "Resources for Learning R\nWhile such experience is certainly helpful, I do not assume you have prior knowledge of using R. I will demonstrate the use of R and provide (particularly in this notebook) the R code needed to use the methods we will learn. However, even if you have prior experience with R, you should plan to spend time learning to program in R. Some people find this intimidating initially, but most of you will grow to find R programming rewarding, and even fun by the end of the course. But, there will be frustration for sure.\nHere are some good places to start learning R:\nCRAN"
   },
   {
     "objectID": "index.html#r-packages",
     "href": "index.html#r-packages",
-    "title": "Advanced Measurement Theory Notebook",
+    "title": "Advanced Measurement Theory: a Computational Project-Based Approach",
     "section": "R Packages",
     "text": "R Packages\nR is, among other paradigms, a functional programming language, which means is heavily utilizes functions. R’s functions are stored in packages. While base R has a long list of very useful functions, to fully realize the power of R you will have to use additional packages. So, learning how to install packages (downloading from the web to your computer) and loading packages (making the package’s functions accessible to your current R session) are important skills to master."
   },
   {
     "objectID": "index.html#how-to-use-these-notes",
     "href": "index.html#how-to-use-these-notes",
-    "title": "Advanced Measurement Theory Notebook",
+    "title": "Advanced Measurement Theory: a Computational Project-Based Approach",
     "section": "How To Use These Notes",
     "text": "How To Use These Notes\nBefore going further, it may be helpful to watch the following video about how to use the code in this notebook with Rstudio:\nHow to Use RStudio with this Notebook\n\n\n\n\nDesjardins, Christopher D, and Okan Bulut. 2018. Handbook of Educational Measurement and Psychometrics Using r. CRC Press."
   },

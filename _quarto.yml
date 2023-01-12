@@ -3,7 +3,7 @@ project:
   output-dir: docs
   
 book:
-  title: "Advanced Measurement Theory Notebook"
+  title: "Advanced Measurement Theory: a Computational Project-Based Approach"
   author: "William Murrah"
   
   chapters:
