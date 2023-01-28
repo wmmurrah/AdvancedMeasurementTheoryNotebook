@@ -3,7 +3,7 @@ project:
   output-dir: docs
   
 book:
-  title: "Advanced Measurement Theory: a Computational Project-Based Approach"
+  title: "Advanced Measurement Theory: a Computational Model-Based Approach"
   author: "William Murrah"
   chapters:
     - index.qmd

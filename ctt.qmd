@@ -11,6 +11,7 @@ library(MPsychoR)
 
 ## Overview
 
+
 Three important concepts:
 
 1. We can build a model of instruments similar to the way we model conceptual relationships (measurement model vs. structural model).
