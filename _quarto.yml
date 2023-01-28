@@ -5,7 +5,6 @@ project:
 book:
   title: "Advanced Measurement Theory: a Computational Project-Based Approach"
   author: "William Murrah"
-  
   chapters:
     - index.qmd
     - intro_R_programming.qmd

@@ -1,1 +1,16 @@
 # Introduction to R Programming
+
+Before we can start learning about advanced measurement theory, we need a basic understanding of the software we will use.
+
+To understand why I use R, learn how to install it, and for an introduction to its use, go to <https://www.statistical-thinking.com> and follow the link in the left-hand column called "Introduction to R and RStudio" under the "Statistical Software" section.
+Read through the materials and watch the linked videos.
+
+:::{.callout-warning}
+## Under Contruction
+Many sections on the website referenced above are in draft form. 
+:::
+
+When you have worked through that section of the website read through chapter 1 of the textbook "Introduction to the R Programming Language". 
+Make sure you try many of the coding examples within these resources. 
+Don't worry if you are having trouble with some tasks. 
+The important thing is to come to the next class with good questions.
