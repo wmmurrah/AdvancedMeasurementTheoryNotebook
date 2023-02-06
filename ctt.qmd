@@ -1,4 +1,9 @@
-# Classic Test Theory {#CCT}
+---
+title: Classic Test Theory 
+format:  
+  html:
+    code-copy: true
+---
 
 ```{r setup, include=FALSE}
 library(knitr)
@@ -9,27 +14,228 @@ library(MPsychoR)
 ```
 
 
-## Overview
+## Measurement in Science
+
+**Measurement** is the quantification of theoretical constructs by means of assigning labels or numbers to observation, in a systematic way.
+This is one way in which we simplify reality as a means to better understand it.
+The vast majority, maybe all, of the constructs we want to learn about are not directly measurable.
+When we make measurement, we inevitably must leave out some information about what we are observing, hence simplifying it.
+
+A very important issue in measurement is validity. 
+**Validity** generally is the extent to which our measures reflect what we are attempting to measure, in a particular context.
+A similar concept is **reliability**, which deals with the consistency of our measures in a given context.
+If we were to take the same measurement of the same thing in the same context, we would expect to get the same measurement. 
+To the extent that this is true, the measure is reliable.
+Note that to be valid an instrument must be reliable, but just because an instrument is reliable does not mean it is valid.
+
+The concept of **invariance** relates to the extent to which scores on a measure are independent of examinee characteristics not relevant to the construct attempting to be measured. 
+These characteristics can include things like gender, ethnicity, cultural background etc.
+
+### Scales of Measurement
+
+They way we quantify or classify constructs to generate measures can be classified by the scheme in the following figure.
+
+```{mermaid}
+flowchart TB
+  A[Scales of Measurement] --> B[Qualitative/Categorical]
+  A --> C[Quantitative/Numeric]
+  B --> D[Nominal]
+  B --> E[Ordinal]
+  C --> F[Interval]
+  C --> G[Ratio]
+```
 
 
-Three important concepts:
+To understand the scales of measurement, let's use a data example.
+First, we will import a small data set of questions I ask students in some of my statistics classes.
 
-1. We can build a model of instruments similar to the way we model conceptual relationships (measurement model vs. structural model).
-2. The concept of reliability
-3. Measurement models can account for different sources of error.
+```{r}
+#| eval: false
+# File location on github:
+file_location <- "https://raw.githubusercontent.com/wmmurrah/AdvancedMeasurementTheoryNotebook/main/data/student_survey.csv"
 
+# Import data from csv file:
+student_survey <- read.csv(file = file_location,
+                           header = TRUE)
+# View raw data
+student_survey
+```
+
+```{r}
+#| echo: false
+file_location <- "https://raw.githubusercontent.com/wmmurrah/AdvancedMeasurementTheoryNotebook/main/data/student_survey.csv"
+# Import data from csv file:
+student_survey <- read.csv(file = file_location,
+                           header = TRUE)
+
+rmarkdown::paged_table(student_survey, options = list(cols.print = 5))
+```
+
+You can look at the codebook for this data below in section 3.5.1.
+We can see that all of the variables are coded as integers (see the `<int>` under the variable name in the data frame), with the exception of gender with is a character string (`<chr>`). 
+But if you look over the variables, and read the variable descriptions in the codebook,  you may realize that some of the variables are not best considered numeric.
+We will need to recode those variables.
+While we do that we will discuss scales of measurement.
+
+For example, we can see that the `sem` variable quantifies the current semester (Spring, Fall, or Summer) for the student taking the survey.
+Here we table this variable
+```{r}
+table(student_survey$sem)
+```
+
+Semester is clearly either a nominal or ordinal scale of measurement.
+It could be ordinal because, in a given calendar year spring comes before summer which comes before fall.
+But for our purposes of this survey the ordering is not important, so we will ignore it for now and create a nominal variable.
+In R we do this with the `factor()` function as follows:
+
+```{r}
+student_survey$sem <- factor(student_survey$sem,
+                             levels = c(1:3),
+                             labels = c("Spring", "Fall", "Summer"))
+```
+
+This code tells R to create an object in side of `student_survey` called `sem`.
+Because this object already exists here, this code will replace the existing object with the new one.
+Then the `factor()` function take an object as the first argument (`student_survey$sem`) which is the old object.
+So, essentially we are going take the old object turn it into a factor and replace the old object with the newly created factor.
+The next argument  `levels = c(1:3)` tells R that the values of the original object are the integers 1, 2, and 3. 
+Then, the `labels = c("Spring", "Fall", "Summer")` argument maps the three character strings ("Spring", "Fall", "Summer") onto the integers 1, 2, and 3. 
+The ordering of the two vectors (1, 2, and 3 on the one hand and "Spring", "Fall", "Summer" on the other are important.
+"Spring" is mapped onto 1, "Fall" onto 2, and "Summer" onto 3.
+After doing this we can table this variable again and see what happened.
+
+```{r}
+table(student_survey$sem)
+```
+
+We can do something similar with the `hand` variable, which the codebook states captures the student's handedness, and also is a nominal variable.
+But this time instead of saving the new variable over the old, I will create a new variable I will call `handedness`.
+
+```{r}
+student_survey$handedness <- factor(student_survey$hand, 
+                                    levels = c(1,2),
+                                    labels = c("left", "right"))
+```
+
+The major difference here is on the left side of the assignment operator (`<-`).
+Instead of using the same name of the original object `hand`, I gave it a new name `handedness`.
+Also note that in the `levels` argument, instead of the `1:2` shortcut I used `c(1,2)`, does the same thing.
+
+```{r}
+table(student_survey$handedness)
+```
+
+We have two more nominal variables gender and course.
+Next, let's recode `gender`.
+Because this variable contains character strings, which we can use as the labels, the code is simpler, we do not have to pass the `levels` or `labels` arguments.
+
+```{r}
+student_survey$gender <- factor(student_survey$gender)
+```
+
+```{r}
+table(student_survey$gender)
+```
+
+Our final nominal variable is  `course`, which measures which course the student taking the survey was enrolled.
+Because the labels are a bit more cumbersome, and to keep the code readable, we will first create a vector of the labels called `lbls`.
+Then we can use that vector in the `factor()` function.
+When we are done with the `lbls` object we will remove it with the `rm()` function.
+Finally, we will table the new variable.
+
+```{r}
+# Create temporary labels for course factor.
+lbls <- c("ERMA 7200 Basic Methods in Education Research",
+          "ERMA 7300 Design and Analysis I",
+          "ERMA 7310 Design and Analysis II",
+          "ERMA 8340 Advanced Psychometrics")
+student_survey$course <- factor(student_survey$course, 
+                                levels = c(1,2,3,4),
+                                labels = lbls)
+rm(lbls) # Remove labels object
+
+table(student_survey$course)
+```
+
+Ordinal Variables are those that have a natural order but the interval between those variables is not necessary the same across the different values.
+It the student survey data an example is `birth` which measured the birth order of students.
+
+```{r}
+student_survey$birth <- ordered(student_survey$birth)
+
+table(student_survey$birth)
+```
+
+The last 20 variables of the student survey are question that ask about research and statistics.
+These are also measured as integers but should be ordinal variables. 
+Creating a vector of labels as we did with the `course` variable, is also useful when you need to recode several variables with the same labels, such as in a set of variables that use the same Likert scale, as is the case for the Research and Statistics questions in the student survey.
+Below, we again create a object called `lbls` with the Likert labels.
+Then we create a vector of the column numbers that contain the Likert items, which are the 15th through the 31st columns, and name it `cols`.
+In R the square brackets are indexing functions and it allows us to use only a subset of the columns in the data frame.
+Then we use the `lapply` to repeat the `factor()` function for each of the Likert columns.
+
+```{r}
+# Likert labels
+lbls <- c("strongly disagree", "disagree", "neither agree/disagree", 
+          "agree", "strongly agree")
+
+# Column numbers containing Likert variables.
+cols <- 12:31
+
+# Use indexing to transform all Likert items to ordered factor.
+student_survey[ ,cols] <- lapply(student_survey[ ,cols], 
+                               function(x) factor(x, 
+                                                  levels = c(1,2,3,4,5),
+                                                  labels = lbls, 
+                                                  ordered = TRUE))
+
+```
+
+Note that to make a function ordered, which is the way to create ordinal variables in R, you pass the value `TRUE` to the `ordered` function. 
+It will use the order of `levels` to order the values.
+
+
+Here is the new dataframe
+
+```{r}
+#| eval: false
+student_survey
+```
+
+```{r}
+#| echo: false
+rmarkdown::paged_table(student_survey, options = list(cols.print = 5))
+```
 ## Classical True Score Model
 
 The true score model is:
 $$
-X = T + E
+X = T + E \tag{1}
 $$
 where $X$ is the **observed score**, $T$ is the **true score**, which is unknown, and $E$ is the **error**
 
-To demonstrate this let's assume we have the following data (R script is at end of this chapter),
+Four assumptions to the model above:
+
+1. $E(X) = T$, the expected value of the observed score $X$ is the true score $T$.
+
+2. $Cov(T,E) = 0$, the true score ane error are independent(not correlated)
+
+3. $Cov(E_1, E)2 = 0$, errors across test forms are independent.
+
+4. $Cov(E_1, T_2) = 0$, error on one form of test is independent of the true score on another form.
+
+Which leads to a re-expression of equation (1) above:
+
+$$
+\sigma^2_X = \sigma^2_T + \sigma^2_E
+$$
+
+To demonstrate this let's assume we have the following data [^1] , which was generated to meet these assumptions.
 
 ```{r}
-source("code/simulate_CTTdata.R")
+# Filepath to data on github. 
+filepath <- "https://raw.githubusercontent.com/wmmurrah/AdvancedMeasurementTheoryNotebook/main/code/generateToy_CTTdata.R"
+source(filepath)
 CTTdata
 ```
 
@@ -93,6 +299,16 @@ var(Tau)/(var(Tau) + var(E))
 cor(Tau, X)^2
 ```
 
+```{r}
+#| warning: false
+#| message: false
+library(hemp)
+split_half(CTTdata, type = "alternate")
+```
+```{r}
+coef_alpha(CTTdata)
+```
+
 
 ```{r}
 plot(x = CTTdata$Tau, y = CTTdata$id, xlim = c(1,10),
@@ -100,7 +316,8 @@ plot(x = CTTdata$Tau, y = CTTdata$id, xlim = c(1,10),
 points(x = CTTdata$X, y = jitter(CTTdata$id), pch = 3, col = "red")
 points(x = ave(x = CTTdata$X, factor(CTTdata$id), FUN = mean), y = CTTdata$id, 
        col = "blue", pch = 18)
-# points(x = CTTdata$X_t, pch = 2, factor(CTTdata$id))
+
+ points(x = CTTdata$X_t, pch = 2, factor(CTTdata$id))
 ```
 
 ### Cronbach's $\alpha$
@@ -155,31 +372,13 @@ sigma2_X <- sum(vcmat)
 ```
 ### Other Reliability Coefficients
 
-
-## Generalizability Theory
-
-Generalizability theory, or G-theory for short, is an extension of CTT, which decomposes the one error term in CTT into multiple sources of error called *facets*. 
-These could include sources such as items, raters, or measurement occasions.
-These were each given a subscript on page 2 of the text.
-
-Before looking at these different sources of error, let's calculate Cronbach's $\alpha$ in a different way, that will allow this decomposition going forward.
-
-We will first need to reshape the data from wide to long format. 
-A great tutorial on reshaping data with the `reshape2` package can be found here:
-
-https://seananderson.ca/2013/10/19/reshape/
-
-Basically, we need to transform the data so that instead of each item being in a separate column are reshaped so there is one column with the cell values, and one column that identifies which item the score is from.
+## R Scripts and Data
+### Student Survey Data Codebook
 
 ```{r}
-library("reshape2")
-# Add person variable
-Hyb1 <- data.frame(HybMot, person = 1:nrow(HybMot))
-Hyblong <- melt(Hyb1, id.vars = c("person"), variable.name = "item")
-Hyblong$person <- as.factor(Hyblong$person)
+#| echo: false
+writeLines(readLines("data/student_survey_codebook.txt"))
 ```
-
-## R Scripts
 
 ### Simulating CTT data
 
@@ -220,3 +419,4 @@ rm(id, Tau, simx)
 
 ```
 
+[^1]: You can use the code below or copy the R script is at end of this chapter and store it on your computer, though you will have to adapt the code to your location

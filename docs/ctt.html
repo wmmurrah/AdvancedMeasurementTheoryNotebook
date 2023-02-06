@@ -142,7 +142,12 @@ div.csl-indent {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
@@ -218,17 +223,20 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">3.1</span>  Overview</a></li>
+  <li><a href="#measurement-in-science" id="toc-measurement-in-science" class="nav-link active" data-scroll-target="#measurement-in-science"><span class="toc-section-number">3.1</span>  Measurement in Science</a>
+  <ul class="collapse">
+  <li><a href="#scales-of-measurement" id="toc-scales-of-measurement" class="nav-link" data-scroll-target="#scales-of-measurement"><span class="toc-section-number">3.1.1</span>  Scales of Measurement</a></li>
+  </ul></li>
   <li><a href="#classical-true-score-model" id="toc-classical-true-score-model" class="nav-link" data-scroll-target="#classical-true-score-model"><span class="toc-section-number">3.2</span>  Classical True Score Model</a></li>
   <li><a href="#reliability" id="toc-reliability" class="nav-link" data-scroll-target="#reliability"><span class="toc-section-number">3.3</span>  Reliability</a>
   <ul class="collapse">
   <li><a href="#cronbachs-alpha" id="toc-cronbachs-alpha" class="nav-link" data-scroll-target="#cronbachs-alpha"><span class="toc-section-number">3.3.1</span>  Cronbach’s <span class="math inline">\(\alpha\)</span></a></li>
   <li><a href="#other-reliability-coefficients" id="toc-other-reliability-coefficients" class="nav-link" data-scroll-target="#other-reliability-coefficients"><span class="toc-section-number">3.3.2</span>  Other Reliability Coefficients</a></li>
   </ul></li>
-  <li><a href="#generalizability-theory" id="toc-generalizability-theory" class="nav-link" data-scroll-target="#generalizability-theory"><span class="toc-section-number">3.4</span>  Generalizability Theory</a></li>
-  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts"><span class="toc-section-number">3.5</span>  R Scripts</a>
+  <li><a href="#r-scripts-and-data" id="toc-r-scripts-and-data" class="nav-link" data-scroll-target="#r-scripts-and-data"><span class="toc-section-number">3.4</span>  R Scripts and Data</a>
   <ul class="collapse">
-  <li><a href="#simulating-ctt-data" id="toc-simulating-ctt-data" class="nav-link" data-scroll-target="#simulating-ctt-data"><span class="toc-section-number">3.5.1</span>  Simulating CTT data</a></li>
+  <li><a href="#student-survey-data-codebook" id="toc-student-survey-data-codebook" class="nav-link" data-scroll-target="#student-survey-data-codebook"><span class="toc-section-number">3.4.1</span>  Student Survey Data Codebook</a></li>
+  <li><a href="#simulating-ctt-data" id="toc-simulating-ctt-data" class="nav-link" data-scroll-target="#simulating-ctt-data"><span class="toc-section-number">3.4.2</span>  Simulating CTT data</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -238,7 +246,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="CCT" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classic Test Theory</span></span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classic Test Theory</span></h1>
 </div>
 
 
@@ -253,24 +261,197 @@ div.csl-indent {
 
 </header>
 
-<section id="overview" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">3.1</span> Overview</h2>
-<p>Three important concepts:</p>
-<ol type="1">
-<li>We can build a model of instruments similar to the way we model conceptual relationships (measurement model vs.&nbsp;structural model).</li>
-<li>The concept of reliability</li>
-<li>Measurement models can account for different sources of error.</li>
-</ol>
+<section id="measurement-in-science" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="measurement-in-science"><span class="header-section-number">3.1</span> Measurement in Science</h2>
+<p><strong>Measurement</strong> is the quantification of theoretical constructs by means of assigning labels or numbers to observation, in a systematic way. This is one way in which we simplify reality as a means to better understand it. The vast majority, maybe all, of the constructs we want to learn about are not directly measurable. When we make measurement, we inevitably must leave out some information about what we are observing, hence simplifying it.</p>
+<p>A very important issue in measurement is validity. <strong>Validity</strong> generally is the extent to which our measures reflect what we are attempting to measure, in a particular context. A similar concept is <strong>reliability</strong>, which deals with the consistency of our measures in a given context. If we were to take the same measurement of the same thing in the same context, we would expect to get the same measurement. To the extent that this is true, the measure is reliable. Note that to be valid an instrument must be reliable, but just because an instrument is reliable does not mean it is valid.</p>
+<p>The concept of <strong>invariance</strong> relates to the extent to which scores on a measure are independent of examinee characteristics not relevant to the construct attempting to be measured. These characteristics can include things like gender, ethnicity, cultural background etc.</p>
+<section id="scales-of-measurement" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="scales-of-measurement"><span class="header-section-number">3.1.1</span> Scales of Measurement</h3>
+<p>They way we quantify or classify constructs to generate measures can be classified by the scheme in the following figure.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">flowchart TB
+  A[Scales of Measurement] --&gt; B[Qualitative/Categorical]
+  A --&gt; C[Quantitative/Numeric]
+  B --&gt; D[Nominal]
+  B --&gt; E[Ordinal]
+  C --&gt; F[Interval]
+  C --&gt; G[Ratio]
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+<p>To understand the scales of measurement, let’s use a data example. First, we will import a small data set of questions I ask students in some of my statistics classes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># File location on github:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>file_location <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/wmmurrah/AdvancedMeasurementTheoryNotebook/main/data/student_survey.csv"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data from csv file:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>student_survey <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> file_location,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># View raw data</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>student_survey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Duration.inseconds."],"name":[1],"type":["int"],"align":["right"]},{"label":["course"],"name":[2],"type":["int"],"align":["right"]},{"label":["sem"],"name":[3],"type":["int"],"align":["right"]},{"label":["exer"],"name":[4],"type":["int"],"align":["right"]},{"label":["soda"],"name":[5],"type":["int"],"align":["right"]},{"label":["tvmin"],"name":[6],"type":["int"],"align":["right"]},{"label":["siblings"],"name":[7],"type":["int"],"align":["right"]},{"label":["birth"],"name":[8],"type":["int"],"align":["right"]},{"label":["gender"],"name":[9],"type":["chr"],"align":["left"]},{"label":["hand"],"name":[10],"type":["int"],"align":["right"]},{"label":["numTVS"],"name":[11],"type":["int"],"align":["right"]},{"label":["stats_1"],"name":[12],"type":["int"],"align":["right"]},{"label":["stats_2"],"name":[13],"type":["int"],"align":["right"]},{"label":["stats_3"],"name":[14],"type":["int"],"align":["right"]},{"label":["stats_4"],"name":[15],"type":["int"],"align":["right"]},{"label":["stats_5"],"name":[16],"type":["int"],"align":["right"]},{"label":["stats_6"],"name":[17],"type":["int"],"align":["right"]},{"label":["stats_7"],"name":[18],"type":["int"],"align":["right"]},{"label":["stats_8"],"name":[19],"type":["int"],"align":["right"]},{"label":["stats_9"],"name":[20],"type":["int"],"align":["right"]},{"label":["stats_10"],"name":[21],"type":["int"],"align":["right"]},{"label":["stats_11"],"name":[22],"type":["int"],"align":["right"]},{"label":["stats_12"],"name":[23],"type":["int"],"align":["right"]},{"label":["stats_13"],"name":[24],"type":["int"],"align":["right"]},{"label":["stats_14"],"name":[25],"type":["int"],"align":["right"]},{"label":["stats_15"],"name":[26],"type":["int"],"align":["right"]},{"label":["stats_16"],"name":[27],"type":["int"],"align":["right"]},{"label":["stats_17"],"name":[28],"type":["int"],"align":["right"]},{"label":["stats_18"],"name":[29],"type":["int"],"align":["right"]},{"label":["stats_19"],"name":[30],"type":["int"],"align":["right"]},{"label":["stats_20"],"name":[31],"type":["int"],"align":["right"]}],"data":[{"1":"230","2":"2","3":"2","4":"300","5":"0","6":"60","7":"2","8":"3","9":"male","10":"2","11":"0","12":"5","13":"5","14":"5","15":"2","16":"4","17":"4","18":"4","19":"1","20":"4","21":"2","22":"4","23":"4","24":"4","25":"4","26":"4","27":"4","28":"4","29":"4","30":"4","31":"4"},{"1":"180","2":"2","3":"2","4":"120","5":"8","6":"60","7":"3","8":"1","9":"male","10":"2","11":"2","12":"5","13":"5","14":"5","15":"4","16":"4","17":"5","18":"5","19":"2","20":"2","21":"5","22":"5","23":"5","24":"5","25":"2","26":"4","27":"5","28":"5","29":"3","30":"2","31":"4"},{"1":"771","2":"2","3":"2","4":"60","5":"0","6":"120","7":"1","8":"2","9":"female","10":"2","11":"1","12":"5","13":"5","14":"5","15":"4","16":"4","17":"3","18":"4","19":"3","20":"4","21":"4","22":"5","23":"5","24":"5","25":"4","26":"4","27":"4","28":"4","29":"5","30":"5","31":"4"},{"1":"246","2":"2","3":"2","4":"120","5":"0","6":"120","7":"1","8":"1","9":"male","10":"2","11":"1","12":"5","13":"5","14":"4","15":"4","16":"4","17":"3","18":"3","19":"4","20":"4","21":"3","22":"5","23":"5","24":"5","25":"3","26":"3","27":"4","28":"5","29":"4","30":"3","31":"5"},{"1":"256","2":"2","3":"2","4":"30","5":"0","6":"120","7":"0","8":"1","9":"male","10":"2","11":"1","12":"5","13":"5","14":"5","15":"5","16":"5","17":"3","18":"5","19":"5","20":"4","21":"4","22":"5","23":"5","24":"5","25":"3","26":"3","27":"3","28":"4","29":"5","30":"3","31":"4"},{"1":"866","2":"2","3":"2","4":"120","5":"0","6":"0","7":"1","8":"2","9":"male","10":"2","11":"5","12":"5","13":"5","14":"5","15":"5","16":"5","17":"4","18":"5","19":"4","20":"3","21":"4","22":"5","23":"5","24":"5","25":"3","26":"3","27":"3","28":"4","29":"5","30":"4","31":"5"},{"1":"163","2":"2","3":"2","4":"0","5":"0","6":"40","7":"2","8":"1","9":"female","10":"2","11":"2","12":"3","13":"3","14":"3","15":"3","16":"3","17":"3","18":"4","19":"2","20":"2","21":"3","22":"3","23":"3","24":"NA","25":"5","26":"5","27":"3","28":"4","29":"NA","30":"NA","31":"NA"},{"1":"427","2":"2","3":"2","4":"240","5":"0","6":"500","7":"1","8":"1","9":"male","10":"2","11":"0","12":"5","13":"4","14":"5","15":"5","16":"5","17":"5","18":"5","19":"5","20":"5","21":"4","22":"5","23":"5","24":"5","25":"5","26":"5","27":"5","28":"5","29":"5","30":"5","31":"5"},{"1":"303","2":"2","3":"2","4":"60","5":"20","6":"60","7":"6","8":"3","9":"male","10":"2","11":"2","12":"4","13":"3","14":"4","15":"3","16":"3","17":"4","18":"3","19":"4","20":"3","21":"3","22":"5","23":"4","24":"4","25":"4","26":"4","27":"4","28":"4","29":"3","30":"4","31":"4"},{"1":"99","2":"2","3":"2","4":"120","5":"0","6":"90","7":"3","8":"1","9":"male","10":"2","11":"2","12":"5","13":"5","14":"5","15":"4","16":"4","17":"5","18":"4","19":"2","20":"2","21":"5","22":"5","23":"5","24":"4","25":"2","26":"4","27":"5","28":"4","29":"3","30":"2","31":"4"},{"1":"163","2":"2","3":"2","4":"120","5":"8","6":"90","7":"3","8":"1","9":"male","10":"2","11":"2","12":"5","13":"5","14":"4","15":"3","16":"3","17":"5","18":"5","19":"3","20":"2","21":"5","22":"5","23":"5","24":"4","25":"2","26":"4","27":"4","28":"4","29":"2","30":"1","31":"4"},{"1":"305","2":"2","3":"2","4":"0","5":"20","6":"120","7":"2","8":"1","9":"female","10":"2","11":"2","12":"4","13":"5","14":"4","15":"1","16":"3","17":"4","18":"4","19":"3","20":"4","21":"3","22":"4","23":"4","24":"5","25":"4","26":"4","27":"5","28":"5","29":"4","30":"4","31":"4"},{"1":"310","2":"2","3":"2","4":"240","5":"2","6":"30","7":"4","8":"1","9":"male","10":"2","11":"4","12":"4","13":"4","14":"4","15":"4","16":"4","17":"4","18":"4","19":"4","20":"3","21":"4","22":"4","23":"4","24":"4","25":"3","26":"3","27":"4","28":"4","29":"4","30":"3","31":"3"},{"1":"191","2":"2","3":"2","4":"120","5":"16","6":"30","7":"3","8":"4","9":"male","10":"2","11":"3","12":"5","13":"4","14":"5","15":"5","16":"5","17":"3","18":"4","19":"3","20":"4","21":"4","22":"4","23":"5","24":"4","25":"4","26":"4","27":"4","28":"4","29":"4","30":"4","31":"4"},{"1":"212","2":"2","3":"2","4":"240","5":"0","6":"0","7":"2","8":"3","9":"male","10":"2","11":"1","12":"5","13":"4","14":"4","15":"4","16":"4","17":"4","18":"3","19":"3","20":"4","21":"4","22":"5","23":"5","24":"5","25":"4","26":"5","27":"5","28":"5","29":"5","30":"4","31":"4"},{"1":"165","2":"2","3":"2","4":"240","5":"0","6":"90","7":"1","8":"1","9":"female","10":"2","11":"1","12":"5","13":"4","14":"5","15":"3","16":"4","17":"3","18":"3","19":"3","20":"4","21":"4","22":"5","23":"4","24":"5","25":"4","26":"4","27":"4","28":"5","29":"4","30":"4","31":"4"},{"1":"225","2":"2","3":"2","4":"5","5":"5","6":"30","7":"1","8":"1","9":"male","10":"2","11":"1","12":"5","13":"5","14":"5","15":"4","16":"5","17":"3","18":"3","19":"5","20":"4","21":"4","22":"5","23":"5","24":"5","25":"4","26":"4","27":"4","28":"4","29":"3","30":"4","31":"4"},{"1":"232","2":"2","3":"2","4":"0","5":"0","6":"0","7":"2","8":"3","9":"female","10":"2","11":"0","12":"5","13":"5","14":"5","15":"4","16":"4","17":"5","18":"3","19":"3","20":"3","21":"4","22":"5","23":"5","24":"5","25":"4","26":"4","27":"5","28":"5","29":"4","30":"4","31":"4"},{"1":"162","2":"2","3":"2","4":"120","5":"0","6":"120","7":"2","8":"2","9":"male","10":"2","11":"1","12":"4","13":"5","14":"5","15":"4","16":"3","17":"4","18":"3","19":"4","20":"4","21":"5","22":"4","23":"4","24":"4","25":"3","26":"4","27":"5","28":"4","29":"4","30":"5","31":"4"},{"1":"142","2":"2","3":"1","4":"90","5":"16","6":"30","7":"3","8":"4","9":"male","10":"2","11":"4","12":"5","13":"5","14":"4","15":"5","16":"5","17":"4","18":"4","19":"3","20":"4","21":"4","22":"4","23":"4","24":"4","25":"3","26":"5","27":"4","28":"4","29":"4","30":"4","31":"4"},{"1":"180","2":"2","3":"2","4":"30","5":"0","6":"10","7":"1","8":"1","9":"male","10":"2","11":"0","12":"5","13":"5","14":"4","15":"5","16":"4","17":"5","18":"5","19":"3","20":"3","21":"5","22":"5","23":"4","24":"4","25":"3","26":"4","27":"4","28":"5","29":"3","30":"4","31":"4"},{"1":"254","2":"2","3":"2","4":"180","5":"0","6":"60","7":"1","8":"2","9":"male","10":"2","11":"2","12":"5","13":"4","14":"4","15":"3","16":"4","17":"4","18":"3","19":"3","20":"3","21":"4","22":"4","23":"4","24":"4","25":"3","26":"3","27":"4","28":"4","29":"3","30":"4","31":"4"},{"1":"172","2":"2","3":"2","4":"0","5":"16","6":"30","7":"2","8":"3","9":"male","10":"2","11":"2","12":"4","13":"4","14":"5","15":"3","16":"4","17":"2","18":"2","19":"2","20":"3","21":"3","22":"5","23":"4","24":"4","25":"5","26":"5","27":"4","28":"4","29":"2","30":"2","31":"3"},{"1":"197","2":"2","3":"2","4":"6","5":"32","6":"60","7":"1","8":"2","9":"male","10":"2","11":"1","12":"4","13":"4","14":"4","15":"4","16":"4","17":"3","18":"4","19":"3","20":"4","21":"4","22":"4","23":"4","24":"3","25":"5","26":"5","27":"4","28":"4","29":"2","30":"4","31":"4"},{"1":"284","2":"2","3":"2","4":"180","5":"0","6":"300","7":"4","8":"2","9":"female","10":"2","11":"1","12":"5","13":"5","14":"5","15":"2","16":"5","17":"3","18":"3","19":"4","20":"4","21":"4","22":"5","23":"5","24":"5","25":"2","26":"4","27":"4","28":"5","29":"3","30":"4","31":"2"},{"1":"1209","2":"2","3":"2","4":"200","5":"0","6":"120","7":"1","8":"1","9":"male","10":"1","11":"1","12":"3","13":"4","14":"4","15":"2","16":"2","17":"2","18":"2","19":"2","20":"2","21":"4","22":"4","23":"2","24":"3","25":"2","26":"2","27":"4","28":"4","29":"4","30":"4","31":"4"},{"1":"136","2":"2","3":"2","4":"90","5":"12","6":"0","7":"1","8":"1","9":"male","10":"2","11":"3","12":"4","13":"4","14":"4","15":"4","16":"3","17":"3","18":"3","19":"3","20":"3","21":"4","22":"4","23":"4","24":"4","25":"3","26":"3","27":"4","28":"4","29":"4","30":"3","31":"4"},{"1":"448","2":"2","3":"2","4":"60","5":"12","6":"10","7":"0","8":"NA","9":"male","10":"2","11":"0","12":"3","13":"3","14":"3","15":"4","16":"4","17":"4","18":"4","19":"3","20":"3","21":"4","22":"4","23":"4","24":"4","25":"3","26":"3","27":"4","28":"NA","29":"4","30":"3","31":"4"},{"1":"755","2":"2","3":"2","4":"90","5":"0","6":"60","7":"0","8":"NA","9":"female","10":"2","11":"2","12":"5","13":"4","14":"5","15":"4","16":"5","17":"4","18":"4","19":"5","20":"5","21":"5","22":"4","23":"5","24":"5","25":"5","26":"5","27":"4","28":"5","29":"5","30":"5","31":"5"},{"1":"389","2":"2","3":"2","4":"250","5":"0","6":"45","7":"3","8":"1","9":"female","10":"2","11":"1","12":"5","13":"5","14":"5","15":"5","16":"5","17":"4","18":"3","19":"4","20":"4","21":"5","22":"5","23":"5","24":"5","25":"4","26":"3","27":"5","28":"5","29":"5","30":"4","31":"5"},{"1":"177","2":"2","3":"2","4":"0","5":"64","6":"60","7":"6","8":"4","9":"male","10":"2","11":"3","12":"5","13":"5","14":"5","15":"5","16":"5","17":"1","18":"3","19":"3","20":"3","21":"5","22":"5","23":"5","24":"5","25":"4","26":"4","27":"5","28":"5","29":"5","30":"5","31":"5"},{"1":"124","2":"2","3":"2","4":"240","5":"0","6":"60","7":"1","8":"1","9":"male","10":"2","11":"0","12":"4","13":"4","14":"4","15":"4","16":"4","17":"4","18":"4","19":"4","20":"4","21":"4","22":"4","23":"4","24":"4","25":"4","26":"4","27":"4","28":"4","29":"4","30":"4","31":"4"},{"1":"322","2":"2","3":"2","4":"300","5":"0","6":"30","7":"1","8":"NA","9":"male","10":"2","11":"1","12":"5","13":"5","14":"5","15":"4","16":"5","17":"4","18":"4","19":"5","20":"4","21":"4","22":"5","23":"5","24":"5","25":"3","26":"2","27":"4","28":"3","29":"5","30":"3","31":"5"},{"1":"327","2":"2","3":"2","4":"120","5":"12","6":"30","7":"1","8":"1","9":"male","10":"2","11":"1","12":"4","13":"5","14":"5","15":"3","16":"2","17":"2","18":"4","19":"2","20":"2","21":"4","22":"5","23":"4","24":"4","25":"3","26":"4","27":"4","28":"4","29":"4","30":"2","31":"4"},{"1":"3312","2":"2","3":"2","4":"420","5":"12","6":"60","7":"1","8":"2","9":"female","10":"2","11":"4","12":"4","13":"4","14":"3","15":"3","16":"3","17":"2","18":"2","19":"1","20":"5","21":"5","22":"4","23":"4","24":"3","25":"3","26":"3","27":"3","28":"5","29":"5","30":"4","31":"5"},{"1":"471","2":"2","3":"2","4":"4","5":"0","6":"180","7":"5","8":"3","9":"female","10":"2","11":"1","12":"4","13":"4","14":"3","15":"2","16":"2","17":"3","18":"3","19":"2","20":"2","21":"3","22":"3","23":"2","24":"2","25":"2","26":"3","27":"2","28":"3","29":"3","30":"2","31":"3"},{"1":"286","2":"2","3":"2","4":"150","5":"0","6":"30","7":"0","8":"1","9":"male","10":"2","11":"5","12":"5","13":"5","14":"5","15":"2","16":"4","17":"4","18":"3","19":"1","20":"4","21":"5","22":"5","23":"5","24":"5","25":"2","26":"2","27":"5","28":"5","29":"5","30":"4","31":"5"},{"1":"234","2":"2","3":"2","4":"180","5":"16","6":"60","7":"2","8":"3","9":"male","10":"2","11":"3","12":"5","13":"5","14":"5","15":"3","16":"4","17":"4","18":"3","19":"3","20":"3","21":"3","22":"4","23":"4","24":"4","25":"4","26":"4","27":"4","28":"5","29":"5","30":"4","31":"4"},{"1":"261025","2":"2","3":"2","4":"30","5":"7","6":"0","7":"2","8":"NA","9":"male","10":"1","11":"0","12":"4","13":"4","14":"5","15":"5","16":"4","17":"4","18":"5","19":"5","20":"5","21":"5","22":"5","23":"5","24":"4","25":"3","26":"4","27":"5","28":"5","29":"4","30":"4","31":"5"},{"1":"392","2":"2","3":"2","4":"300","5":"0","6":"60","7":"3","8":"1","9":"female","10":"2","11":"9","12":"5","13":"5","14":"5","15":"3","16":"4","17":"5","18":"5","19":"5","20":"4","21":"4","22":"5","23":"5","24":"5","25":"2","26":"3","27":"4","28":"4","29":"5","30":"5","31":"5"},{"1":"246","2":"2","3":"2","4":"30","5":"0","6":"120","7":"3","8":"4","9":"male","10":"2","11":"3","12":"4","13":"4","14":"4","15":"4","16":"4","17":"3","18":"3","19":"4","20":"4","21":"4","22":"4","23":"4","24":"4","25":"4","26":"4","27":"4","28":"4","29":"4","30":"4","31":"4"},{"1":"229","2":"2","3":"2","4":"240","5":"0","6":"30","7":"1","8":"2","9":"male","10":"1","11":"1","12":"5","13":"5","14":"5","15":"5","16":"5","17":"5","18":"3","19":"5","20":"4","21":"5","22":"5","23":"5","24":"5","25":"3","26":"4","27":"5","28":"5","29":"5","30":"4","31":"5"},{"1":"370","2":"2","3":"2","4":"60","5":"48","6":"240","7":"2","8":"1","9":"female","10":"1","11":"2","12":"4","13":"4","14":"4","15":"4","16":"4","17":"4","18":"4","19":"4","20":"4","21":"4","22":"4","23":"4","24":"4","25":"3","26":"4","27":"4","28":"4","29":"4","30":"3","31":"4"},{"1":"201","2":"2","3":"2","4":"180","5":"24","6":"180","7":"1","8":"NA","9":"male","10":"2","11":"2","12":"5","13":"5","14":"4","15":"4","16":"2","17":"3","18":"4","19":"3","20":"3","21":"4","22":"3","23":"4","24":"4","25":"4","26":"4","27":"4","28":"4","29":"4","30":"4","31":"4"},{"1":"185","2":"2","3":"2","4":"200","5":"0","6":"0","7":"1","8":"1","9":"female","10":"2","11":"2","12":"4","13":"5","14":"5","15":"3","16":"4","17":"5","18":"3","19":"3","20":"4","21":"4","22":"5","23":"5","24":"4","25":"2","26":"3","27":"4","28":"5","29":"2","30":"4","31":"4"},{"1":"588","2":"2","3":"2","4":"120","5":"12","6":"60","7":"3","8":"1","9":"male","10":"2","11":"1","12":"5","13":"5","14":"5","15":"5","16":"5","17":"5","18":"5","19":"5","20":"5","21":"5","22":"5","23":"5","24":"5","25":"5","26":"2","27":"5","28":"5","29":"5","30":"4","31":"5"},{"1":"199","2":"2","3":"2","4":"150","5":"0","6":"30","7":"4","8":"4","9":"male","10":"2","11":"1","12":"5","13":"5","14":"5","15":"4","16":"4","17":"4","18":"4","19":"4","20":"5","21":"5","22":"5","23":"5","24":"5","25":"3","26":"3","27":"4","28":"5","29":"4","30":"4","31":"5"},{"1":"361","2":"2","3":"2","4":"120","5":"40","6":"120","7":"2","8":"2","9":"male","10":"2","11":"2","12":"5","13":"5","14":"4","15":"4","16":"4","17":"3","18":"4","19":"4","20":"4","21":"3","22":"5","23":"5","24":"4","25":"4","26":"4","27":"5","28":"5","29":"3","30":"4","31":"5"},{"1":"283","2":"2","3":"2","4":"250","5":"16","6":"30","7":"3","8":"1","9":"male","10":"2","11":"9","12":"5","13":"5","14":"5","15":"4","16":"4","17":"4","18":"3","19":"3","20":"4","21":"4","22":"5","23":"5","24":"5","25":"3","26":"3","27":"5","28":"5","29":"4","30":"5","31":"5"},{"1":"490","2":"2","3":"2","4":"180","5":"16","6":"180","7":"1","8":"2","9":"male","10":"2","11":"4","12":"4","13":"4","14":"4","15":"4","16":"2","17":"2","18":"2","19":"3","20":"4","21":"4","22":"4","23":"4","24":"4","25":"2","26":"4","27":"4","28":"4","29":"4","30":"2","31":"4"},{"1":"241","2":"2","3":"2","4":"150","5":"0","6":"2","7":"7","8":"5","9":"male","10":"2","11":"1","12":"3","13":"5","14":"5","15":"5","16":"5","17":"4","18":"5","19":"5","20":"5","21":"5","22":"5","23":"5","24":"5","25":"3","26":"3","27":"4","28":"5","29":"5","30":"3","31":"5"},{"1":"157","2":"2","3":"2","4":"360","5":"0","6":"60","7":"6","8":"6","9":"female","10":"2","11":"1","12":"5","13":"5","14":"4","15":"4","16":"4","17":"3","18":"3","19":"2","20":"4","21":"4","22":"5","23":"5","24":"5","25":"2","26":"4","27":"4","28":"5","29":"4","30":"4","31":"5"},{"1":"215","2":"2","3":"2","4":"60","5":"0","6":"90","7":"2","8":"1","9":"female","10":"2","11":"1","12":"4","13":"5","14":"5","15":"4","16":"5","17":"5","18":"5","19":"5","20":"4","21":"4","22":"5","23":"5","24":"4","25":"4","26":"4","27":"5","28":"5","29":"4","30":"5","31":"5"},{"1":"183","2":"2","3":"2","4":"300","5":"24","6":"0","7":"0","8":"1","9":"female","10":"2","11":"0","12":"5","13":"5","14":"5","15":"5","16":"5","17":"5","18":"5","19":"5","20":"5","21":"5","22":"5","23":"5","24":"5","25":"5","26":"5","27":"5","28":"5","29":"5","30":"5","31":"5"},{"1":"289","2":"2","3":"2","4":"30","5":"12","6":"60","7":"3","8":"3","9":"male","10":"2","11":"1","12":"5","13":"5","14":"5","15":"4","16":"4","17":"4","18":"3","19":"3","20":"4","21":"4","22":"5","23":"5","24":"5","25":"4","26":"3","27":"4","28":"5","29":"5","30":"5","31":"5"}],"options":{"columns":{"min":{},"max":[5]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>You can look at the codebook for this data below in section 3.5.1. We can see that all of the variables are coded as integers (see the <code>&lt;int&gt;</code> under the variable name in the data frame), with the exception of gender with is a character string (<code>&lt;chr&gt;</code>). But if you look over the variables, and read the variable descriptions in the codebook, you may realize that some of the variables are not best considered numeric. We will need to recode those variables. While we do that we will discuss scales of measurement.</p>
+<p>For example, we can see that the <code>sem</code> variable quantifies the current semester (Spring, Fall, or Summer) for the student taking the survey. Here we table this variable</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(student_survey<span class="sc">$</span>sem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 1  2 
+ 1 54 </code></pre>
+</div>
+</div>
+<p>Semester is clearly either a nominal or ordinal scale of measurement. It could be ordinal because, in a given calendar year spring comes before summer which comes before fall. But for our purposes of this survey the ordering is not important, so we will ignore it for now and create a nominal variable. In R we do this with the <code>factor()</code> function as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>student_survey<span class="sc">$</span>sem <span class="ot">&lt;-</span> <span class="fu">factor</span>(student_survey<span class="sc">$</span>sem,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Spring"</span>, <span class="st">"Fall"</span>, <span class="st">"Summer"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This code tells R to create an object in side of <code>student_survey</code> called <code>sem</code>. Because this object already exists here, this code will replace the existing object with the new one. Then the <code>factor()</code> function take an object as the first argument (<code>student_survey$sem</code>) which is the old object. So, essentially we are going take the old object turn it into a factor and replace the old object with the newly created factor. The next argument <code>levels = c(1:3)</code> tells R that the values of the original object are the integers 1, 2, and 3. Then, the <code>labels = c("Spring", "Fall", "Summer")</code> argument maps the three character strings (“Spring”, “Fall”, “Summer”) onto the integers 1, 2, and 3. The ordering of the two vectors (1, 2, and 3 on the one hand and “Spring”, “Fall”, “Summer” on the other are important. “Spring” is mapped onto 1, “Fall” onto 2, and “Summer” onto 3. After doing this we can table this variable again and see what happened.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(student_survey<span class="sc">$</span>sem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Spring   Fall Summer 
+     1     54      0 </code></pre>
+</div>
+</div>
+<p>We can do something similar with the <code>hand</code> variable, which the codebook states captures the student’s handedness, and also is a nominal variable. But this time instead of saving the new variable over the old, I will create a new variable I will call <code>handedness</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>student_survey<span class="sc">$</span>handedness <span class="ot">&lt;-</span> <span class="fu">factor</span>(student_survey<span class="sc">$</span>hand, </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"right"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The major difference here is on the left side of the assignment operator (<code>&lt;-</code>). Instead of using the same name of the original object <code>hand</code>, I gave it a new name <code>handedness</code>. Also note that in the <code>levels</code> argument, instead of the <code>1:2</code> shortcut I used <code>c(1,2)</code>, does the same thing.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(student_survey<span class="sc">$</span>handedness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ left right 
+    4    51 </code></pre>
+</div>
+</div>
+<p>We have two more nominal variables gender and course. Next, let’s recode <code>gender</code>. Because this variable contains character strings, which we can use as the labels, the code is simpler, we do not have to pass the <code>levels</code> or <code>labels</code> arguments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>student_survey<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(student_survey<span class="sc">$</span>gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(student_survey<span class="sc">$</span>gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+female   male 
+    16     39 </code></pre>
+</div>
+</div>
+<p>Our final nominal variable is <code>course</code>, which measures which course the student taking the survey was enrolled. Because the labels are a bit more cumbersome, and to keep the code readable, we will first create a vector of the labels called <code>lbls</code>. Then we can use that vector in the <code>factor()</code> function. When we are done with the <code>lbls</code> object we will remove it with the <code>rm()</code> function. Finally, we will table the new variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create temporary labels for course factor.</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>lbls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ERMA 7200 Basic Methods in Education Research"</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">"ERMA 7300 Design and Analysis I"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">"ERMA 7310 Design and Analysis II"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">"ERMA 8340 Advanced Psychometrics"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>student_survey<span class="sc">$</span>course <span class="ot">&lt;-</span> <span class="fu">factor</span>(student_survey<span class="sc">$</span>course, </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                                <span class="at">labels =</span> lbls)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(lbls) <span class="co"># Remove labels object</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(student_survey<span class="sc">$</span>course)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ERMA 7200 Basic Methods in Education Research 
+                                            0 
+              ERMA 7300 Design and Analysis I 
+                                           55 
+             ERMA 7310 Design and Analysis II 
+                                            0 
+             ERMA 8340 Advanced Psychometrics 
+                                            0 </code></pre>
+</div>
+</div>
+<p>Ordinal Variables are those that have a natural order but the interval between those variables is not necessary the same across the different values. It the student survey data an example is <code>birth</code> which measured the birth order of students.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>student_survey<span class="sc">$</span>birth <span class="ot">&lt;-</span> <span class="fu">ordered</span>(student_survey<span class="sc">$</span>birth)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(student_survey<span class="sc">$</span>birth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 1  2  3  4  5  6 
+25 10  8  5  1  1 </code></pre>
+</div>
+</div>
+<p>The last 20 variables of the student survey are question that ask about research and statistics. These are also measured as integers but should be ordinal variables. Creating a vector of labels as we did with the <code>course</code> variable, is also useful when you need to recode several variables with the same labels, such as in a set of variables that use the same Likert scale, as is the case for the Research and Statistics questions in the student survey. Below, we again create a object called <code>lbls</code> with the Likert labels. Then we create a vector of the column numbers that contain the Likert items, which are the 15th through the 31st columns, and name it <code>cols</code>. In R the square brackets are indexing functions and it allows us to use only a subset of the columns in the data frame. Then we use the <code>lapply</code> to repeat the <code>factor()</code> function for each of the Likert columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Likert labels</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>lbls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"strongly disagree"</span>, <span class="st">"disagree"</span>, <span class="st">"neither agree/disagree"</span>, </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">"agree"</span>, <span class="st">"strongly agree"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Column numbers containing Likert variables.</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="dv">12</span><span class="sc">:</span><span class="dv">31</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Use indexing to transform all Likert items to ordered factor.</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>student_survey[ ,cols] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(student_survey[ ,cols], </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                               <span class="cf">function</span>(x) <span class="fu">factor</span>(x, </span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">labels =</span> lbls, </span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that to make a function ordered, which is the way to create ordinal variables in R, you pass the value <code>TRUE</code> to the <code>ordered</code> function. It will use the order of <code>levels</code> to order the values.</p>
+<p>Here is the new dataframe</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>student_survey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Duration.inseconds."],"name":[1],"type":["int"],"align":["right"]},{"label":["course"],"name":[2],"type":["fct"],"align":["left"]},{"label":["sem"],"name":[3],"type":["fct"],"align":["left"]},{"label":["exer"],"name":[4],"type":["int"],"align":["right"]},{"label":["soda"],"name":[5],"type":["int"],"align":["right"]},{"label":["tvmin"],"name":[6],"type":["int"],"align":["right"]},{"label":["siblings"],"name":[7],"type":["int"],"align":["right"]},{"label":["birth"],"name":[8],"type":["ord"],"align":["right"]},{"label":["gender"],"name":[9],"type":["fct"],"align":["left"]},{"label":["hand"],"name":[10],"type":["int"],"align":["right"]},{"label":["numTVS"],"name":[11],"type":["int"],"align":["right"]},{"label":["stats_1"],"name":[12],"type":["ord"],"align":["right"]},{"label":["stats_2"],"name":[13],"type":["ord"],"align":["right"]},{"label":["stats_3"],"name":[14],"type":["ord"],"align":["right"]},{"label":["stats_4"],"name":[15],"type":["ord"],"align":["right"]},{"label":["stats_5"],"name":[16],"type":["ord"],"align":["right"]},{"label":["stats_6"],"name":[17],"type":["ord"],"align":["right"]},{"label":["stats_7"],"name":[18],"type":["ord"],"align":["right"]},{"label":["stats_8"],"name":[19],"type":["ord"],"align":["right"]},{"label":["stats_9"],"name":[20],"type":["ord"],"align":["right"]},{"label":["stats_10"],"name":[21],"type":["ord"],"align":["right"]},{"label":["stats_11"],"name":[22],"type":["ord"],"align":["right"]},{"label":["stats_12"],"name":[23],"type":["ord"],"align":["right"]},{"label":["stats_13"],"name":[24],"type":["ord"],"align":["right"]},{"label":["stats_14"],"name":[25],"type":["ord"],"align":["right"]},{"label":["stats_15"],"name":[26],"type":["ord"],"align":["right"]},{"label":["stats_16"],"name":[27],"type":["ord"],"align":["right"]},{"label":["stats_17"],"name":[28],"type":["ord"],"align":["right"]},{"label":["stats_18"],"name":[29],"type":["ord"],"align":["right"]},{"label":["stats_19"],"name":[30],"type":["ord"],"align":["right"]},{"label":["stats_20"],"name":[31],"type":["ord"],"align":["right"]},{"label":["handedness"],"name":[32],"type":["fct"],"align":["left"]}],"data":[{"1":"230","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"300","5":"0","6":"60","7":"2","8":"3","9":"male","10":"2","11":"0","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"disagree","16":"agree","17":"agree","18":"agree","19":"strongly disagree","20":"agree","21":"disagree","22":"agree","23":"agree","24":"agree","25":"agree","26":"agree","27":"agree","28":"agree","29":"agree","30":"agree","31":"agree","32":"right"},{"1":"180","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"120","5":"8","6":"60","7":"3","8":"1","9":"male","10":"2","11":"2","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"agree","16":"agree","17":"strongly agree","18":"strongly agree","19":"disagree","20":"disagree","21":"strongly agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"disagree","26":"agree","27":"strongly agree","28":"strongly agree","29":"neither agree/disagree","30":"disagree","31":"agree","32":"right"},{"1":"771","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"60","5":"0","6":"120","7":"1","8":"2","9":"female","10":"2","11":"1","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"agree","16":"agree","17":"neither agree/disagree","18":"agree","19":"neither agree/disagree","20":"agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"agree","26":"agree","27":"agree","28":"agree","29":"strongly agree","30":"strongly agree","31":"agree","32":"right"},{"1":"246","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"120","5":"0","6":"120","7":"1","8":"1","9":"male","10":"2","11":"1","12":"strongly agree","13":"strongly agree","14":"agree","15":"agree","16":"agree","17":"neither agree/disagree","18":"neither agree/disagree","19":"agree","20":"agree","21":"neither agree/disagree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"neither agree/disagree","26":"neither agree/disagree","27":"agree","28":"strongly agree","29":"agree","30":"neither agree/disagree","31":"strongly agree","32":"right"},{"1":"256","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"30","5":"0","6":"120","7":"0","8":"1","9":"male","10":"2","11":"1","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"strongly agree","16":"strongly agree","17":"neither agree/disagree","18":"strongly agree","19":"strongly agree","20":"agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"neither agree/disagree","26":"neither agree/disagree","27":"neither agree/disagree","28":"agree","29":"strongly agree","30":"neither agree/disagree","31":"agree","32":"right"},{"1":"866","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"120","5":"0","6":"0","7":"1","8":"2","9":"male","10":"2","11":"5","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"strongly agree","16":"strongly agree","17":"agree","18":"strongly agree","19":"agree","20":"neither agree/disagree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"neither agree/disagree","26":"neither agree/disagree","27":"neither agree/disagree","28":"agree","29":"strongly agree","30":"agree","31":"strongly agree","32":"right"},{"1":"163","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"0","5":"0","6":"40","7":"2","8":"1","9":"female","10":"2","11":"2","12":"neither agree/disagree","13":"neither agree/disagree","14":"neither agree/disagree","15":"neither agree/disagree","16":"neither agree/disagree","17":"neither agree/disagree","18":"agree","19":"disagree","20":"disagree","21":"neither agree/disagree","22":"neither agree/disagree","23":"neither agree/disagree","24":"NA","25":"strongly agree","26":"strongly agree","27":"neither agree/disagree","28":"agree","29":"NA","30":"NA","31":"NA","32":"right"},{"1":"427","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"240","5":"0","6":"500","7":"1","8":"1","9":"male","10":"2","11":"0","12":"strongly agree","13":"agree","14":"strongly agree","15":"strongly agree","16":"strongly agree","17":"strongly agree","18":"strongly agree","19":"strongly agree","20":"strongly agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"strongly agree","26":"strongly agree","27":"strongly agree","28":"strongly agree","29":"strongly agree","30":"strongly agree","31":"strongly agree","32":"right"},{"1":"303","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"60","5":"20","6":"60","7":"6","8":"3","9":"male","10":"2","11":"2","12":"agree","13":"neither agree/disagree","14":"agree","15":"neither agree/disagree","16":"neither agree/disagree","17":"agree","18":"neither agree/disagree","19":"agree","20":"neither agree/disagree","21":"neither agree/disagree","22":"strongly agree","23":"agree","24":"agree","25":"agree","26":"agree","27":"agree","28":"agree","29":"neither agree/disagree","30":"agree","31":"agree","32":"right"},{"1":"99","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"120","5":"0","6":"90","7":"3","8":"1","9":"male","10":"2","11":"2","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"agree","16":"agree","17":"strongly agree","18":"agree","19":"disagree","20":"disagree","21":"strongly agree","22":"strongly agree","23":"strongly agree","24":"agree","25":"disagree","26":"agree","27":"strongly agree","28":"agree","29":"neither agree/disagree","30":"disagree","31":"agree","32":"right"},{"1":"163","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"120","5":"8","6":"90","7":"3","8":"1","9":"male","10":"2","11":"2","12":"strongly agree","13":"strongly agree","14":"agree","15":"neither agree/disagree","16":"neither agree/disagree","17":"strongly agree","18":"strongly agree","19":"neither agree/disagree","20":"disagree","21":"strongly agree","22":"strongly agree","23":"strongly agree","24":"agree","25":"disagree","26":"agree","27":"agree","28":"agree","29":"disagree","30":"strongly disagree","31":"agree","32":"right"},{"1":"305","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"0","5":"20","6":"120","7":"2","8":"1","9":"female","10":"2","11":"2","12":"agree","13":"strongly agree","14":"agree","15":"strongly disagree","16":"neither agree/disagree","17":"agree","18":"agree","19":"neither agree/disagree","20":"agree","21":"neither agree/disagree","22":"agree","23":"agree","24":"strongly agree","25":"agree","26":"agree","27":"strongly agree","28":"strongly agree","29":"agree","30":"agree","31":"agree","32":"right"},{"1":"310","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"240","5":"2","6":"30","7":"4","8":"1","9":"male","10":"2","11":"4","12":"agree","13":"agree","14":"agree","15":"agree","16":"agree","17":"agree","18":"agree","19":"agree","20":"neither agree/disagree","21":"agree","22":"agree","23":"agree","24":"agree","25":"neither agree/disagree","26":"neither agree/disagree","27":"agree","28":"agree","29":"agree","30":"neither agree/disagree","31":"neither agree/disagree","32":"right"},{"1":"191","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"120","5":"16","6":"30","7":"3","8":"4","9":"male","10":"2","11":"3","12":"strongly agree","13":"agree","14":"strongly agree","15":"strongly agree","16":"strongly agree","17":"neither agree/disagree","18":"agree","19":"neither agree/disagree","20":"agree","21":"agree","22":"agree","23":"strongly agree","24":"agree","25":"agree","26":"agree","27":"agree","28":"agree","29":"agree","30":"agree","31":"agree","32":"right"},{"1":"212","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"240","5":"0","6":"0","7":"2","8":"3","9":"male","10":"2","11":"1","12":"strongly agree","13":"agree","14":"agree","15":"agree","16":"agree","17":"agree","18":"neither agree/disagree","19":"neither agree/disagree","20":"agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"agree","26":"strongly agree","27":"strongly agree","28":"strongly agree","29":"strongly agree","30":"agree","31":"agree","32":"right"},{"1":"165","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"240","5":"0","6":"90","7":"1","8":"1","9":"female","10":"2","11":"1","12":"strongly agree","13":"agree","14":"strongly agree","15":"neither agree/disagree","16":"agree","17":"neither agree/disagree","18":"neither agree/disagree","19":"neither agree/disagree","20":"agree","21":"agree","22":"strongly agree","23":"agree","24":"strongly agree","25":"agree","26":"agree","27":"agree","28":"strongly agree","29":"agree","30":"agree","31":"agree","32":"right"},{"1":"225","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"5","5":"5","6":"30","7":"1","8":"1","9":"male","10":"2","11":"1","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"agree","16":"strongly agree","17":"neither agree/disagree","18":"neither agree/disagree","19":"strongly agree","20":"agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"agree","26":"agree","27":"agree","28":"agree","29":"neither agree/disagree","30":"agree","31":"agree","32":"right"},{"1":"232","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"0","5":"0","6":"0","7":"2","8":"3","9":"female","10":"2","11":"0","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"agree","16":"agree","17":"strongly agree","18":"neither agree/disagree","19":"neither agree/disagree","20":"neither agree/disagree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"agree","26":"agree","27":"strongly agree","28":"strongly agree","29":"agree","30":"agree","31":"agree","32":"right"},{"1":"162","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"120","5":"0","6":"120","7":"2","8":"2","9":"male","10":"2","11":"1","12":"agree","13":"strongly agree","14":"strongly agree","15":"agree","16":"neither agree/disagree","17":"agree","18":"neither agree/disagree","19":"agree","20":"agree","21":"strongly agree","22":"agree","23":"agree","24":"agree","25":"neither agree/disagree","26":"agree","27":"strongly agree","28":"agree","29":"agree","30":"strongly agree","31":"agree","32":"right"},{"1":"142","2":"ERMA 7300 Design and Analysis I","3":"Spring","4":"90","5":"16","6":"30","7":"3","8":"4","9":"male","10":"2","11":"4","12":"strongly agree","13":"strongly agree","14":"agree","15":"strongly agree","16":"strongly agree","17":"agree","18":"agree","19":"neither agree/disagree","20":"agree","21":"agree","22":"agree","23":"agree","24":"agree","25":"neither agree/disagree","26":"strongly agree","27":"agree","28":"agree","29":"agree","30":"agree","31":"agree","32":"right"},{"1":"180","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"30","5":"0","6":"10","7":"1","8":"1","9":"male","10":"2","11":"0","12":"strongly agree","13":"strongly agree","14":"agree","15":"strongly agree","16":"agree","17":"strongly agree","18":"strongly agree","19":"neither agree/disagree","20":"neither agree/disagree","21":"strongly agree","22":"strongly agree","23":"agree","24":"agree","25":"neither agree/disagree","26":"agree","27":"agree","28":"strongly agree","29":"neither agree/disagree","30":"agree","31":"agree","32":"right"},{"1":"254","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"180","5":"0","6":"60","7":"1","8":"2","9":"male","10":"2","11":"2","12":"strongly agree","13":"agree","14":"agree","15":"neither agree/disagree","16":"agree","17":"agree","18":"neither agree/disagree","19":"neither agree/disagree","20":"neither agree/disagree","21":"agree","22":"agree","23":"agree","24":"agree","25":"neither agree/disagree","26":"neither agree/disagree","27":"agree","28":"agree","29":"neither agree/disagree","30":"agree","31":"agree","32":"right"},{"1":"172","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"0","5":"16","6":"30","7":"2","8":"3","9":"male","10":"2","11":"2","12":"agree","13":"agree","14":"strongly agree","15":"neither agree/disagree","16":"agree","17":"disagree","18":"disagree","19":"disagree","20":"neither agree/disagree","21":"neither agree/disagree","22":"strongly agree","23":"agree","24":"agree","25":"strongly agree","26":"strongly agree","27":"agree","28":"agree","29":"disagree","30":"disagree","31":"neither agree/disagree","32":"right"},{"1":"197","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"6","5":"32","6":"60","7":"1","8":"2","9":"male","10":"2","11":"1","12":"agree","13":"agree","14":"agree","15":"agree","16":"agree","17":"neither agree/disagree","18":"agree","19":"neither agree/disagree","20":"agree","21":"agree","22":"agree","23":"agree","24":"neither agree/disagree","25":"strongly agree","26":"strongly agree","27":"agree","28":"agree","29":"disagree","30":"agree","31":"agree","32":"right"},{"1":"284","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"180","5":"0","6":"300","7":"4","8":"2","9":"female","10":"2","11":"1","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"disagree","16":"strongly agree","17":"neither agree/disagree","18":"neither agree/disagree","19":"agree","20":"agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"disagree","26":"agree","27":"agree","28":"strongly agree","29":"neither agree/disagree","30":"agree","31":"disagree","32":"right"},{"1":"1209","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"200","5":"0","6":"120","7":"1","8":"1","9":"male","10":"1","11":"1","12":"neither agree/disagree","13":"agree","14":"agree","15":"disagree","16":"disagree","17":"disagree","18":"disagree","19":"disagree","20":"disagree","21":"agree","22":"agree","23":"disagree","24":"neither agree/disagree","25":"disagree","26":"disagree","27":"agree","28":"agree","29":"agree","30":"agree","31":"agree","32":"left"},{"1":"136","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"90","5":"12","6":"0","7":"1","8":"1","9":"male","10":"2","11":"3","12":"agree","13":"agree","14":"agree","15":"agree","16":"neither agree/disagree","17":"neither agree/disagree","18":"neither agree/disagree","19":"neither agree/disagree","20":"neither agree/disagree","21":"agree","22":"agree","23":"agree","24":"agree","25":"neither agree/disagree","26":"neither agree/disagree","27":"agree","28":"agree","29":"agree","30":"neither agree/disagree","31":"agree","32":"right"},{"1":"448","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"60","5":"12","6":"10","7":"0","8":"NA","9":"male","10":"2","11":"0","12":"neither agree/disagree","13":"neither agree/disagree","14":"neither agree/disagree","15":"agree","16":"agree","17":"agree","18":"agree","19":"neither agree/disagree","20":"neither agree/disagree","21":"agree","22":"agree","23":"agree","24":"agree","25":"neither agree/disagree","26":"neither agree/disagree","27":"agree","28":"NA","29":"agree","30":"neither agree/disagree","31":"agree","32":"right"},{"1":"755","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"90","5":"0","6":"60","7":"0","8":"NA","9":"female","10":"2","11":"2","12":"strongly agree","13":"agree","14":"strongly agree","15":"agree","16":"strongly agree","17":"agree","18":"agree","19":"strongly agree","20":"strongly agree","21":"strongly agree","22":"agree","23":"strongly agree","24":"strongly agree","25":"strongly agree","26":"strongly agree","27":"agree","28":"strongly agree","29":"strongly agree","30":"strongly agree","31":"strongly agree","32":"right"},{"1":"389","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"250","5":"0","6":"45","7":"3","8":"1","9":"female","10":"2","11":"1","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"strongly agree","16":"strongly agree","17":"agree","18":"neither agree/disagree","19":"agree","20":"agree","21":"strongly agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"agree","26":"neither agree/disagree","27":"strongly agree","28":"strongly agree","29":"strongly agree","30":"agree","31":"strongly agree","32":"right"},{"1":"177","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"0","5":"64","6":"60","7":"6","8":"4","9":"male","10":"2","11":"3","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"strongly agree","16":"strongly agree","17":"strongly disagree","18":"neither agree/disagree","19":"neither agree/disagree","20":"neither agree/disagree","21":"strongly agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"agree","26":"agree","27":"strongly agree","28":"strongly agree","29":"strongly agree","30":"strongly agree","31":"strongly agree","32":"right"},{"1":"124","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"240","5":"0","6":"60","7":"1","8":"1","9":"male","10":"2","11":"0","12":"agree","13":"agree","14":"agree","15":"agree","16":"agree","17":"agree","18":"agree","19":"agree","20":"agree","21":"agree","22":"agree","23":"agree","24":"agree","25":"agree","26":"agree","27":"agree","28":"agree","29":"agree","30":"agree","31":"agree","32":"right"},{"1":"322","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"300","5":"0","6":"30","7":"1","8":"NA","9":"male","10":"2","11":"1","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"agree","16":"strongly agree","17":"agree","18":"agree","19":"strongly agree","20":"agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"neither agree/disagree","26":"disagree","27":"agree","28":"neither agree/disagree","29":"strongly agree","30":"neither agree/disagree","31":"strongly agree","32":"right"},{"1":"327","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"120","5":"12","6":"30","7":"1","8":"1","9":"male","10":"2","11":"1","12":"agree","13":"strongly agree","14":"strongly agree","15":"neither agree/disagree","16":"disagree","17":"disagree","18":"agree","19":"disagree","20":"disagree","21":"agree","22":"strongly agree","23":"agree","24":"agree","25":"neither agree/disagree","26":"agree","27":"agree","28":"agree","29":"agree","30":"disagree","31":"agree","32":"right"},{"1":"3312","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"420","5":"12","6":"60","7":"1","8":"2","9":"female","10":"2","11":"4","12":"agree","13":"agree","14":"neither agree/disagree","15":"neither agree/disagree","16":"neither agree/disagree","17":"disagree","18":"disagree","19":"strongly disagree","20":"strongly agree","21":"strongly agree","22":"agree","23":"agree","24":"neither agree/disagree","25":"neither agree/disagree","26":"neither agree/disagree","27":"neither agree/disagree","28":"strongly agree","29":"strongly agree","30":"agree","31":"strongly agree","32":"right"},{"1":"471","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"4","5":"0","6":"180","7":"5","8":"3","9":"female","10":"2","11":"1","12":"agree","13":"agree","14":"neither agree/disagree","15":"disagree","16":"disagree","17":"neither agree/disagree","18":"neither agree/disagree","19":"disagree","20":"disagree","21":"neither agree/disagree","22":"neither agree/disagree","23":"disagree","24":"disagree","25":"disagree","26":"neither agree/disagree","27":"disagree","28":"neither agree/disagree","29":"neither agree/disagree","30":"disagree","31":"neither agree/disagree","32":"right"},{"1":"286","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"150","5":"0","6":"30","7":"0","8":"1","9":"male","10":"2","11":"5","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"disagree","16":"agree","17":"agree","18":"neither agree/disagree","19":"strongly disagree","20":"agree","21":"strongly agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"disagree","26":"disagree","27":"strongly agree","28":"strongly agree","29":"strongly agree","30":"agree","31":"strongly agree","32":"right"},{"1":"234","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"180","5":"16","6":"60","7":"2","8":"3","9":"male","10":"2","11":"3","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"neither agree/disagree","16":"agree","17":"agree","18":"neither agree/disagree","19":"neither agree/disagree","20":"neither agree/disagree","21":"neither agree/disagree","22":"agree","23":"agree","24":"agree","25":"agree","26":"agree","27":"agree","28":"strongly agree","29":"strongly agree","30":"agree","31":"agree","32":"right"},{"1":"261025","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"30","5":"7","6":"0","7":"2","8":"NA","9":"male","10":"1","11":"0","12":"agree","13":"agree","14":"strongly agree","15":"strongly agree","16":"agree","17":"agree","18":"strongly agree","19":"strongly agree","20":"strongly agree","21":"strongly agree","22":"strongly agree","23":"strongly agree","24":"agree","25":"neither agree/disagree","26":"agree","27":"strongly agree","28":"strongly agree","29":"agree","30":"agree","31":"strongly agree","32":"left"},{"1":"392","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"300","5":"0","6":"60","7":"3","8":"1","9":"female","10":"2","11":"9","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"neither agree/disagree","16":"agree","17":"strongly agree","18":"strongly agree","19":"strongly agree","20":"agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"disagree","26":"neither agree/disagree","27":"agree","28":"agree","29":"strongly agree","30":"strongly agree","31":"strongly agree","32":"right"},{"1":"246","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"30","5":"0","6":"120","7":"3","8":"4","9":"male","10":"2","11":"3","12":"agree","13":"agree","14":"agree","15":"agree","16":"agree","17":"neither agree/disagree","18":"neither agree/disagree","19":"agree","20":"agree","21":"agree","22":"agree","23":"agree","24":"agree","25":"agree","26":"agree","27":"agree","28":"agree","29":"agree","30":"agree","31":"agree","32":"right"},{"1":"229","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"240","5":"0","6":"30","7":"1","8":"2","9":"male","10":"1","11":"1","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"strongly agree","16":"strongly agree","17":"strongly agree","18":"neither agree/disagree","19":"strongly agree","20":"agree","21":"strongly agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"neither agree/disagree","26":"agree","27":"strongly agree","28":"strongly agree","29":"strongly agree","30":"agree","31":"strongly agree","32":"left"},{"1":"370","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"60","5":"48","6":"240","7":"2","8":"1","9":"female","10":"1","11":"2","12":"agree","13":"agree","14":"agree","15":"agree","16":"agree","17":"agree","18":"agree","19":"agree","20":"agree","21":"agree","22":"agree","23":"agree","24":"agree","25":"neither agree/disagree","26":"agree","27":"agree","28":"agree","29":"agree","30":"neither agree/disagree","31":"agree","32":"left"},{"1":"201","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"180","5":"24","6":"180","7":"1","8":"NA","9":"male","10":"2","11":"2","12":"strongly agree","13":"strongly agree","14":"agree","15":"agree","16":"disagree","17":"neither agree/disagree","18":"agree","19":"neither agree/disagree","20":"neither agree/disagree","21":"agree","22":"neither agree/disagree","23":"agree","24":"agree","25":"agree","26":"agree","27":"agree","28":"agree","29":"agree","30":"agree","31":"agree","32":"right"},{"1":"185","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"200","5":"0","6":"0","7":"1","8":"1","9":"female","10":"2","11":"2","12":"agree","13":"strongly agree","14":"strongly agree","15":"neither agree/disagree","16":"agree","17":"strongly agree","18":"neither agree/disagree","19":"neither agree/disagree","20":"agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"agree","25":"disagree","26":"neither agree/disagree","27":"agree","28":"strongly agree","29":"disagree","30":"agree","31":"agree","32":"right"},{"1":"588","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"120","5":"12","6":"60","7":"3","8":"1","9":"male","10":"2","11":"1","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"strongly agree","16":"strongly agree","17":"strongly agree","18":"strongly agree","19":"strongly agree","20":"strongly agree","21":"strongly agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"strongly agree","26":"disagree","27":"strongly agree","28":"strongly agree","29":"strongly agree","30":"agree","31":"strongly agree","32":"right"},{"1":"199","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"150","5":"0","6":"30","7":"4","8":"4","9":"male","10":"2","11":"1","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"agree","16":"agree","17":"agree","18":"agree","19":"agree","20":"strongly agree","21":"strongly agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"neither agree/disagree","26":"neither agree/disagree","27":"agree","28":"strongly agree","29":"agree","30":"agree","31":"strongly agree","32":"right"},{"1":"361","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"120","5":"40","6":"120","7":"2","8":"2","9":"male","10":"2","11":"2","12":"strongly agree","13":"strongly agree","14":"agree","15":"agree","16":"agree","17":"neither agree/disagree","18":"agree","19":"agree","20":"agree","21":"neither agree/disagree","22":"strongly agree","23":"strongly agree","24":"agree","25":"agree","26":"agree","27":"strongly agree","28":"strongly agree","29":"neither agree/disagree","30":"agree","31":"strongly agree","32":"right"},{"1":"283","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"250","5":"16","6":"30","7":"3","8":"1","9":"male","10":"2","11":"9","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"agree","16":"agree","17":"agree","18":"neither agree/disagree","19":"neither agree/disagree","20":"agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"neither agree/disagree","26":"neither agree/disagree","27":"strongly agree","28":"strongly agree","29":"agree","30":"strongly agree","31":"strongly agree","32":"right"},{"1":"490","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"180","5":"16","6":"180","7":"1","8":"2","9":"male","10":"2","11":"4","12":"agree","13":"agree","14":"agree","15":"agree","16":"disagree","17":"disagree","18":"disagree","19":"neither agree/disagree","20":"agree","21":"agree","22":"agree","23":"agree","24":"agree","25":"disagree","26":"agree","27":"agree","28":"agree","29":"agree","30":"disagree","31":"agree","32":"right"},{"1":"241","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"150","5":"0","6":"2","7":"7","8":"5","9":"male","10":"2","11":"1","12":"neither agree/disagree","13":"strongly agree","14":"strongly agree","15":"strongly agree","16":"strongly agree","17":"agree","18":"strongly agree","19":"strongly agree","20":"strongly agree","21":"strongly agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"neither agree/disagree","26":"neither agree/disagree","27":"agree","28":"strongly agree","29":"strongly agree","30":"neither agree/disagree","31":"strongly agree","32":"right"},{"1":"157","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"360","5":"0","6":"60","7":"6","8":"6","9":"female","10":"2","11":"1","12":"strongly agree","13":"strongly agree","14":"agree","15":"agree","16":"agree","17":"neither agree/disagree","18":"neither agree/disagree","19":"disagree","20":"agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"disagree","26":"agree","27":"agree","28":"strongly agree","29":"agree","30":"agree","31":"strongly agree","32":"right"},{"1":"215","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"60","5":"0","6":"90","7":"2","8":"1","9":"female","10":"2","11":"1","12":"agree","13":"strongly agree","14":"strongly agree","15":"agree","16":"strongly agree","17":"strongly agree","18":"strongly agree","19":"strongly agree","20":"agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"agree","25":"agree","26":"agree","27":"strongly agree","28":"strongly agree","29":"agree","30":"strongly agree","31":"strongly agree","32":"right"},{"1":"183","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"300","5":"24","6":"0","7":"0","8":"1","9":"female","10":"2","11":"0","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"strongly agree","16":"strongly agree","17":"strongly agree","18":"strongly agree","19":"strongly agree","20":"strongly agree","21":"strongly agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"strongly agree","26":"strongly agree","27":"strongly agree","28":"strongly agree","29":"strongly agree","30":"strongly agree","31":"strongly agree","32":"right"},{"1":"289","2":"ERMA 7300 Design and Analysis I","3":"Fall","4":"30","5":"12","6":"60","7":"3","8":"3","9":"male","10":"2","11":"1","12":"strongly agree","13":"strongly agree","14":"strongly agree","15":"agree","16":"agree","17":"agree","18":"neither agree/disagree","19":"neither agree/disagree","20":"agree","21":"agree","22":"strongly agree","23":"strongly agree","24":"strongly agree","25":"agree","26":"neither agree/disagree","27":"agree","28":"strongly agree","29":"strongly agree","30":"strongly agree","31":"strongly agree","32":"right"}],"options":{"columns":{"min":{},"max":[5]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="classical-true-score-model" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="classical-true-score-model"><span class="header-section-number">3.2</span> Classical True Score Model</h2>
 <p>The true score model is: <span class="math display">\[
-X = T + E
+X = T + E \tag{1}
 \]</span> where <span class="math inline">\(X\)</span> is the <strong>observed score</strong>, <span class="math inline">\(T\)</span> is the <strong>true score</strong>, which is unknown, and <span class="math inline">\(E\)</span> is the <strong>error</strong></p>
-<p>To demonstrate this let’s assume we have the following data (R script is at end of this chapter),</p>
+<p>Four assumptions to the model above:</p>
+<ol type="1">
+<li><p><span class="math inline">\(E(X) = T\)</span>, the expected value of the observed score <span class="math inline">\(X\)</span> is the true score <span class="math inline">\(T\)</span>.</p></li>
+<li><p><span class="math inline">\(Cov(T,E) = 0\)</span>, the true score ane error are independent(not correlated)</p></li>
+<li><p><span class="math inline">\(Cov(E_1, E)2 = 0\)</span>, errors across test forms are independent.</p></li>
+<li><p><span class="math inline">\(Cov(E_1, T_2) = 0\)</span>, error on one form of test is independent of the true score on another form.</p></li>
+</ol>
+<p>Which leads to a re-expression of equation (1) above:</p>
+<p><span class="math display">\[
+\sigma^2_X = \sigma^2_T + \sigma^2_E
+\]</span></p>
+<p>To demonstrate this let’s assume we have the following data <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> , which was generated to meet these assumptions.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"code/simulate_CTTdata.R"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>CTTdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filepath to data on github. </span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/wmmurrah/AdvancedMeasurementTheoryNotebook/main/code/generateToy_CTTdata.R"</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(filepath)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>CTTdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   id time x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 Tau
 1   1    1  3  6  5  3  5  5  4  5  3   3   4
@@ -296,16 +477,16 @@ X = T + E
 <p>where <code>id</code> is a variable indicating individual test-takers, <code>time</code> indicated which of 3 times each individual was assessed, <code>x1</code> - <code>x10</code> are the scores on 10 items that comprise the test, and <code>Tau</code> is the true value of the individuals ability. I use <code>Tau</code> here instead of <code>T</code>, because <code>T</code> is a protected symbol in R which is short-hand for <code>TRUE</code>. Note that we would not know <code>Tau</code> in most situations, but because this is simulated data we will pretend we do.</p>
 <p>We can create a composite score for the ten items for each individual on each occasion by averaging columns 3 through 12.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>CTTdata<span class="sc">$</span>X <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(CTTdata[ ,<span class="dv">3</span><span class="sc">:</span><span class="dv">12</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>CTTdata<span class="sc">$</span>X <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(CTTdata[ ,<span class="dv">3</span><span class="sc">:</span><span class="dv">12</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And we can also create <code>E</code>, the error with:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>CTTdata<span class="sc">$</span>E <span class="ot">&lt;-</span> CTTdata<span class="sc">$</span>X <span class="sc">-</span> CTTdata<span class="sc">$</span>Tau</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>CTTdata<span class="sc">$</span>E <span class="ot">&lt;-</span> CTTdata<span class="sc">$</span>X <span class="sc">-</span> CTTdata<span class="sc">$</span>Tau</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Again, in practice we would not be able to directly compute <code>E</code> because we would not know <code>Tau</code>, but we will use it to build an understanding of what error is.</p>
 <p>Now we have:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>CTTdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>CTTdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   id time x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 Tau   X    E
 1   1    1  3  6  5  3  5  5  4  5  3   3   4 4.2  0.2
@@ -330,10 +511,10 @@ X = T + E
 </div>
 <p>Look over the last three columns and make sure you understand their relation. For example, in the first row, note that <code>X</code> is .2 points above <code>Tau</code>, which is exactly the value of <code>E</code> we computed (<span class="math inline">\(X_1 - T_1 = E_1 = 4.2 - 4 = .2\)</span>). The 1 subscript in the previous expression indicated row 1 (i.e.&nbsp;i = 1).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>CTTdata<span class="sc">$</span>X_t <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">ave</span>(CTTdata<span class="sc">$</span>X, CTTdata<span class="sc">$</span>id, <span class="at">FUN =</span> mean),<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>CTTdata<span class="sc">$</span>X_t <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">ave</span>(CTTdata<span class="sc">$</span>X, CTTdata<span class="sc">$</span>id, <span class="at">FUN =</span> mean),<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>CTTdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>CTTdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   id time x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 Tau   X    E X_t
 1   1    1  3  6  5  3  5  5  4  5  3   3   4 4.2  0.2 4.0
@@ -364,67 +545,81 @@ X = T + E
 \]</span></p>
 <p>The reliability is the proportion of variance of <span class="math inline">\(T\)</span> in <span class="math inline">\(X\)</span>, which is also the squared correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(T\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Tau <span class="ot">&lt;-</span> CTTdata<span class="sc">$</span>Tau</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> CTTdata<span class="sc">$</span>X</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> CTTdata<span class="sc">$</span>X <span class="sc">-</span> CTTdata<span class="sc">$</span>Tau</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Tau <span class="ot">&lt;-</span> CTTdata<span class="sc">$</span>Tau</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> CTTdata<span class="sc">$</span>X</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> CTTdata<span class="sc">$</span>X <span class="sc">-</span> CTTdata<span class="sc">$</span>Tau</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(Tau)<span class="sc">/</span><span class="fu">var</span>(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(Tau)<span class="sc">/</span><span class="fu">var</span>(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9170806</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(Tau)<span class="sc">/</span>(<span class="fu">var</span>(Tau) <span class="sc">+</span> <span class="fu">var</span>(E))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(Tau)<span class="sc">/</span>(<span class="fu">var</span>(Tau) <span class="sc">+</span> <span class="fu">var</span>(E))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8898776</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(Tau, X)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(Tau, X)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.886766</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> CTTdata<span class="sc">$</span>Tau, <span class="at">y =</span> CTTdata<span class="sc">$</span>id, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">10</span>),</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">7</span>))</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> CTTdata<span class="sc">$</span>X, <span class="at">y =</span> <span class="fu">jitter</span>(CTTdata<span class="sc">$</span>id), <span class="at">pch =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> <span class="fu">ave</span>(<span class="at">x =</span> CTTdata<span class="sc">$</span>X, <span class="fu">factor</span>(CTTdata<span class="sc">$</span>id), <span class="at">FUN =</span> mean), <span class="at">y =</span> CTTdata<span class="sc">$</span>id, </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">pch =</span> <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="ctt_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hemp)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">split_half</span>(CTTdata, <span class="at">type =</span> <span class="st">"alternate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.887</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># points(x = CTTdata$X_t, pch = 2, factor(CTTdata$id))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef_alpha</span>(CTTdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.894</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> CTTdata<span class="sc">$</span>Tau, <span class="at">y =</span> CTTdata<span class="sc">$</span>id, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">10</span>),</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">7</span>))</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> CTTdata<span class="sc">$</span>X, <span class="at">y =</span> <span class="fu">jitter</span>(CTTdata<span class="sc">$</span>id), <span class="at">pch =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> <span class="fu">ave</span>(<span class="at">x =</span> CTTdata<span class="sc">$</span>X, <span class="fu">factor</span>(CTTdata<span class="sc">$</span>id), <span class="at">FUN =</span> mean), <span class="at">y =</span> CTTdata<span class="sc">$</span>id, </span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">pch =</span> <span class="dv">18</span>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">points</span>(<span class="at">x =</span> CTTdata<span class="sc">$</span>X_t, <span class="at">pch =</span> <span class="dv">2</span>, <span class="fu">factor</span>(CTTdata<span class="sc">$</span>id))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ctt_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 <section id="cronbachs-alpha" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="cronbachs-alpha"><span class="header-section-number">3.3.1</span> Cronbach’s <span class="math inline">\(\alpha\)</span></h3>
 <p>In the notes for this chapter, I demonstrate aspects of classical test theory, reliability and generalizability theory using data from a study exploring the motivation of R package authors <span class="citation" data-cites="mair2015motivation">(<a href="#ref-mair2015motivation" role="doc-biblioref">Mair et al. 2015</a>)</span>. This tutorial is based on Chapter 1 of <span class="citation" data-cites="mair2018modern">Mair (<a href="#ref-mair2018modern" role="doc-biblioref">2018</a>)</span>, which can be consulted for a more in depth exposition of the underlying theory. Here I focus on demonstrating some of those concepts in R, as well as describing how to get certain results in R.</p>
 <p>First, I load the packages used in this tutorial:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages used:</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MPsychoR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages used:</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MPsychoR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, I load the full data set from the <code>MPsychoR</code> package <span class="citation" data-cites="Mair2020mpsychor">(<a href="#ref-Mair2020mpsychor" role="doc-biblioref">Mair 2020</a>)</span>, then as in the chapter, I subset the data to only include hybrid motivation items, followed by removing rows with missing values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Rmotivation"</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame with only Hybrid Motivation items.</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>HybMot <span class="ot">&lt;-</span> <span class="fu">subset</span>(Rmotivation, </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">select =</span> <span class="fu">grep</span>(<span class="st">"hyb"</span>, <span class="fu">names</span>(Rmotivation)))</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows  with any missing data.</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>HybMot <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Rmotivation"</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame with only Hybrid Motivation items.</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>HybMot <span class="ot">&lt;-</span> <span class="fu">subset</span>(Rmotivation, </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">select =</span> <span class="fu">grep</span>(<span class="st">"hyb"</span>, <span class="fu">names</span>(Rmotivation)))</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows  with any missing data.</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>HybMot <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This leads to a data set with 777 authors and 19 items.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many authors(rows) and items(columns)?</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many authors(rows) and items(columns)?</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 777  19</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note they are all dichotomous items.</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note they are all dichotomous items.</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  hyb1 hyb2 hyb3 hyb4 hyb5 hyb6 hyb7 hyb8 hyb9 hyb10 hyb11 hyb12 hyb13 hyb14
 1    1    0    1    0    1    1    0    0    0     1     1     1     1     0
@@ -443,9 +638,9 @@ X = T + E
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance/Covariance Matrix</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>vcmat <span class="ot">&lt;-</span> <span class="fu">cov</span>(HybMot)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scroll_box</span>(<span class="fu">kable</span>(vcmat, <span class="at">digits =</span> <span class="dv">2</span>), <span class="at">width =</span> <span class="st">"100%"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance/Covariance Matrix</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>vcmat <span class="ot">&lt;-</span> <span class="fu">cov</span>(HybMot)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scroll_box</span>(<span class="fu">kable</span>(vcmat, <span class="at">digits =</span> <span class="dv">2</span>), <span class="at">width =</span> <span class="st">"100%"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; "><table>
@@ -898,68 +1093,137 @@ X = T + E
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">ncol</span>(HybMot)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>sigma2_Xi <span class="ot">&lt;-</span> <span class="fu">tr</span>(vcmat) <span class="co"># trace of matrix or sum(diag(vmat))</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>sigma2_X <span class="ot">&lt;-</span> <span class="fu">sum</span>(vcmat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">ncol</span>(HybMot)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>sigma2_Xi <span class="ot">&lt;-</span> <span class="fu">tr</span>(vcmat) <span class="co"># trace of matrix or sum(diag(vmat))</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>sigma2_X <span class="ot">&lt;-</span> <span class="fu">sum</span>(vcmat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="other-reliability-coefficients" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="other-reliability-coefficients"><span class="header-section-number">3.3.2</span> Other Reliability Coefficients</h3>
 </section>
 </section>
-<section id="generalizability-theory" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="generalizability-theory"><span class="header-section-number">3.4</span> Generalizability Theory</h2>
-<p>Generalizability theory, or G-theory for short, is an extension of CTT, which decomposes the one error term in CTT into multiple sources of error called <em>facets</em>. These could include sources such as items, raters, or measurement occasions. These were each given a subscript on page 2 of the text.</p>
-<p>Before looking at these different sources of error, let’s calculate Cronbach’s <span class="math inline">\(\alpha\)</span> in a different way, that will allow this decomposition going forward.</p>
-<p>We will first need to reshape the data from wide to long format. A great tutorial on reshaping data with the <code>reshape2</code> package can be found here:</p>
-<p>https://seananderson.ca/2013/10/19/reshape/</p>
-<p>Basically, we need to transform the data so that instead of each item being in a separate column are reshaped so there is one column with the cell values, and one column that identifies which item the score is from.</p>
+<section id="r-scripts-and-data" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="r-scripts-and-data"><span class="header-section-number">3.4</span> R Scripts and Data</h2>
+<section id="student-survey-data-codebook" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="student-survey-data-codebook"><span class="header-section-number">3.4.1</span> Student Survey Data Codebook</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"reshape2"</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Add person variable</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>Hyb1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(HybMot, <span class="at">person =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(HybMot))</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>Hyblong <span class="ot">&lt;-</span> <span class="fu">melt</span>(Hyb1, <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">"person"</span>), <span class="at">variable.name =</span> <span class="st">"item"</span>)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>Hyblong<span class="sc">$</span>person <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(Hyblong<span class="sc">$</span>person)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Documentation for Student Survey data
+
+This is a real data set from a survey given to graduate students in a statistics class.
+
+Variables
+
+Duration.inseconds. - length in seconds to complete survey.
+
+course  - Which course are you completing this survey for?
+          1 = ERMA 7200 Basic Methods in Education Research
+          2 = ERMA 7300 Design and Analysis I
+          3 = ERMA 7300 Design and Analysis II
+          4 = ERMA 8340 Advanced Psychometrics
+
+sem - Which is the current semester? 1 = Spring, 2 = Fall, 3 = Summer
+
+year - What is the current year (enter 4 numerals. For example 2019)?
+
+exer - How many minutes do you exercise in a typical week?
+
+soda - How much soda (in ounces) have you consumed in the last 24 hours?
+
+tvmin - How many minutes of television do you watch in a typical day?
+
+siblings - How many siblings do you have?
+ 
+birth - What is your birth order among you and your siblings?
+
+gender - what is your gender? 1 = male, 2 = female
+
+hand - Which is your dominant hand? 1 = left, 2 = right, 3 neither/both
+
+numTVS - How many TVs do you own?
+
+Research and Statistics Questions
+          1 = Strongly agree, 2 = Disagree, 3 = Neither agree/disagree, 
+          4 = Agree, 5 = Strongly agree
+          
+stats_1 - Involvement in research will enhance my job/career opportunities.
+
+stats_2 - People I respect would approve of my involvement in research.       
+
+stats_3 - Research involvement will allow me to contribute to practitioners’ knowledge base.
+
+stats_4 - Doing research will increase my sense of self-worth.
+
+stats_5 - Becoming involved research will lead to the kind of career I most want.
+
+stats_6 - Research involvement is valued by significant people in my life.
+
+stats_7 - My peers think highly of me if I become involved in research.
+
+stats_8 - Research involvement will enable me to associate with the kind of people I value most.
+
+stats_9 - Involvement on a research team leads to close personal connections.
+
+stats_10 - Research involvement leads to a sense of satisfaction.
+
+stats_11 - Being involved in research contributes to my development as a professional.
+
+stats_12 - I believe research skills will be fruitful for my career.
+
+stats_13 - My involvement in research will lead to meaningful contributions to the field.
+
+stats _14 - Involvement in research will take time away from my significant relationships.
+
+stats_15 - Involvement in research takes time from leisure activities.
+
+stats_16 - Involvement in research helps me to understand the current issues in my profession.
+
+stats _17 - My analytical skills will become more developed because of my involvement in research activities.
+
+stats_18 - I believe that research involvement will lead to becoming well-known and respected in the field.
+
+stats_19 - Research involvement will lead to increased financial opportunities.
+
+stats_20 - Involvement in research will positively influence my applied skills.</code></pre>
+</div>
 </div>
 </section>
-<section id="r-scripts" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="r-scripts"><span class="header-section-number">3.5</span> R Scripts</h2>
-<section id="simulating-ctt-data" class="level3" data-number="3.5.1">
-<h3 data-number="3.5.1" class="anchored" data-anchor-id="simulating-ctt-data"><span class="header-section-number">3.5.1</span> Simulating CTT data</h3>
+<section id="simulating-ctt-data" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="simulating-ctt-data"><span class="header-section-number">3.4.2</span> Simulating CTT data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Title: simulate_CTTdata</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: William Murrah</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Description: Simulate data to demonstrate CTT and reliability</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: Monday, 09 August 2021</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># R version: R version 4.1.0 (2021-05-18)</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Project(working) directory: /Users/wmm0017/Projects/Courses/</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   AdvancedMeasurementTheoryNotebook</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>simx <span class="ot">&lt;-</span> <span class="cf">function</span>(truescore, <span class="at">sigmax =</span> <span class="dv">1</span>) {</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">18</span>, truescore, sigmax)</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">round</span>(x))</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>)</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>Tau <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>),<span class="dv">2</span>)</span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20210805</span>)</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>CTTdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> id,</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">6</span>),</span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">x3 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">x4 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">x5 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">x6 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">x7 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">x8 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">x9 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">x10 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tau =</span> Tau</span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(id, Tau, simx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Title: simulate_CTTdata</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: William Murrah</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Description: Simulate data to demonstrate CTT and reliability</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: Monday, 09 August 2021</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co"># R version: R version 4.1.0 (2021-05-18)</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Project(working) directory: /Users/wmm0017/Projects/Courses/</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   AdvancedMeasurementTheoryNotebook</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>simx <span class="ot">&lt;-</span> <span class="cf">function</span>(truescore, <span class="at">sigmax =</span> <span class="dv">1</span>) {</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">18</span>, truescore, sigmax)</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">round</span>(x))</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>Tau <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>),<span class="dv">2</span>)</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20210805</span>)</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>CTTdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> id,</span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">6</span>),</span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">x3 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">x4 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">x5 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">x6 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">x7 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">x8 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">x9 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">x10 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tau =</span> Tau</span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(id, Tau, simx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -975,6 +1239,12 @@ Mair, Patrick, Eva Hofmann, Kathrin Gruber, Reinhold Hatzinger, Achim Zeileis, a
 </div>
 </div>
 </section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>You can use the code below or copy the R script is at end of this chapter and store it on your computer, though you will have to adapt the code to your location<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -1126,7 +1396,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left"><em>Advanced Measurement Theory: a Computational Project-Based Approach</em> was written by William M. Murrah III.</div>   
+    <div class="nav-footer-left"><em>Advanced Measurement Theory: a Computational Model-Based Approach</em> was written by William M. Murrah III.</div>   
     <div class="nav-footer-right">Return to <a href="https://www.statistical-thinking.com">statistical-thinking.com</a>.</div>
   </div>
 </footer>

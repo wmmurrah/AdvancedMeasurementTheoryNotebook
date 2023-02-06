@@ -1,0 +1,77 @@
+Documentation for Student Survey data
+
+This is a real data set from a survey given to graduate students in a statistics class.
+
+Variables
+
+Duration.inseconds. - length in seconds to complete survey.
+
+course  - Which course are you completing this survey for?
+          1 = ERMA 7200 Basic Methods in Education Research
+          2 = ERMA 7300 Design and Analysis I
+          3 = ERMA 7300 Design and Analysis II
+          4 = ERMA 8340 Advanced Psychometrics
+
+sem - Which is the current semester? 1 = Spring, 2 = Fall, 3 = Summer
+
+year - What is the current year (enter 4 numerals. For example 2019)?
+
+exer - How many minutes do you exercise in a typical week?
+
+soda - How much soda (in ounces) have you consumed in the last 24 hours?
+
+tvmin - How many minutes of television do you watch in a typical day?
+
+siblings - How many siblings do you have?
+ 
+birth - What is your birth order among you and your siblings?
+
+gender - what is your gender? 1 = male, 2 = female
+
+hand - Which is your dominant hand? 1 = left, 2 = right, 3 neither/both
+
+numTVS - How many TVs do you own?
+
+Research and Statistics Questions
+          1 = Strongly agree, 2 = Disagree, 3 = Neither agree/disagree, 
+          4 = Agree, 5 = Strongly agree
+          
+stats_1 - Involvement in research will enhance my job/career opportunities.
+
+stats_2 - People I respect would approve of my involvement in research.       
+
+stats_3 - Research involvement will allow me to contribute to practitioners’ knowledge base.
+
+stats_4 - Doing research will increase my sense of self-worth.
+
+stats_5 - Becoming involved research will lead to the kind of career I most want.
+
+stats_6 - Research involvement is valued by significant people in my life.
+
+stats_7 - My peers think highly of me if I become involved in research.
+
+stats_8 - Research involvement will enable me to associate with the kind of people I value most.
+
+stats_9 - Involvement on a research team leads to close personal connections.
+
+stats_10 - Research involvement leads to a sense of satisfaction.
+
+stats_11 - Being involved in research contributes to my development as a professional.
+
+stats_12 - I believe research skills will be fruitful for my career.
+
+stats_13 - My involvement in research will lead to meaningful contributions to the field.
+
+stats _14 - Involvement in research will take time away from my significant relationships.
+
+stats_15 - Involvement in research takes time from leisure activities.
+
+stats_16 - Involvement in research helps me to understand the current issues in my profession.
+
+stats _17 - My analytical skills will become more developed because of my involvement in research activities.
+
+stats_18 - I believe that research involvement will lead to becoming well-known and respected in the field.
+
+stats_19 - Research involvement will lead to increased financial opportunities.
+
+stats_20 - Involvement in research will positively influence my applied skills.
