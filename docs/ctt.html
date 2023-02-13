@@ -83,25 +83,6 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 
@@ -148,8 +129,6 @@ div.csl-indent {
 
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -228,15 +207,17 @@ div.csl-indent {
   <li><a href="#scales-of-measurement" id="toc-scales-of-measurement" class="nav-link" data-scroll-target="#scales-of-measurement"><span class="toc-section-number">3.1.1</span>  Scales of Measurement</a></li>
   </ul></li>
   <li><a href="#classical-true-score-model" id="toc-classical-true-score-model" class="nav-link" data-scroll-target="#classical-true-score-model"><span class="toc-section-number">3.2</span>  Classical True Score Model</a></li>
-  <li><a href="#reliability" id="toc-reliability" class="nav-link" data-scroll-target="#reliability"><span class="toc-section-number">3.3</span>  Reliability</a>
+  <li><a href="#reliability" id="toc-reliability" class="nav-link" data-scroll-target="#reliability"><span class="toc-section-number">3.3</span>  Reliability</a></li>
+  <li><a href="#sapa-example" id="toc-sapa-example" class="nav-link" data-scroll-target="#sapa-example"><span class="toc-section-number">3.4</span>  SAPA Example</a>
   <ul class="collapse">
-  <li><a href="#cronbachs-alpha" id="toc-cronbachs-alpha" class="nav-link" data-scroll-target="#cronbachs-alpha"><span class="toc-section-number">3.3.1</span>  Cronbach’s <span class="math inline">\(\alpha\)</span></a></li>
-  <li><a href="#other-reliability-coefficients" id="toc-other-reliability-coefficients" class="nav-link" data-scroll-target="#other-reliability-coefficients"><span class="toc-section-number">3.3.2</span>  Other Reliability Coefficients</a></li>
+  <li><a href="#reliability-1" id="toc-reliability-1" class="nav-link" data-scroll-target="#reliability-1"><span class="toc-section-number">3.4.1</span>  Reliability</a></li>
+  <li><a href="#validity" id="toc-validity" class="nav-link" data-scroll-target="#validity"><span class="toc-section-number">3.4.2</span>  Validity</a></li>
+  <li><a href="#item-analysis" id="toc-item-analysis" class="nav-link" data-scroll-target="#item-analysis"><span class="toc-section-number">3.4.3</span>  Item Analysis</a></li>
   </ul></li>
-  <li><a href="#r-scripts-and-data" id="toc-r-scripts-and-data" class="nav-link" data-scroll-target="#r-scripts-and-data"><span class="toc-section-number">3.4</span>  R Scripts and Data</a>
+  <li><a href="#r-scripts-and-data" id="toc-r-scripts-and-data" class="nav-link" data-scroll-target="#r-scripts-and-data"><span class="toc-section-number">3.5</span>  R Scripts and Data</a>
   <ul class="collapse">
-  <li><a href="#student-survey-data-codebook" id="toc-student-survey-data-codebook" class="nav-link" data-scroll-target="#student-survey-data-codebook"><span class="toc-section-number">3.4.1</span>  Student Survey Data Codebook</a></li>
-  <li><a href="#simulating-ctt-data" id="toc-simulating-ctt-data" class="nav-link" data-scroll-target="#simulating-ctt-data"><span class="toc-section-number">3.4.2</span>  Simulating CTT data</a></li>
+  <li><a href="#student-survey-data-codebook" id="toc-student-survey-data-codebook" class="nav-link" data-scroll-target="#student-survey-data-codebook"><span class="toc-section-number">3.5.1</span>  Student Survey Data Codebook</a></li>
+  <li><a href="#simulating-ctt-data" id="toc-simulating-ctt-data" class="nav-link" data-scroll-target="#simulating-ctt-data"><span class="toc-section-number">3.5.2</span>  Simulating CTT data</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -592,520 +573,336 @@ X = T + E \tag{1}
 <p><img src="ctt_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<section id="cronbachs-alpha" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="cronbachs-alpha"><span class="header-section-number">3.3.1</span> Cronbach’s <span class="math inline">\(\alpha\)</span></h3>
-<p>In the notes for this chapter, I demonstrate aspects of classical test theory, reliability and generalizability theory using data from a study exploring the motivation of R package authors <span class="citation" data-cites="mair2015motivation">(<a href="#ref-mair2015motivation" role="doc-biblioref">Mair et al. 2015</a>)</span>. This tutorial is based on Chapter 1 of <span class="citation" data-cites="mair2018modern">Mair (<a href="#ref-mair2018modern" role="doc-biblioref">2018</a>)</span>, which can be consulted for a more in depth exposition of the underlying theory. Here I focus on demonstrating some of those concepts in R, as well as describing how to get certain results in R.</p>
-<p>First, I load the packages used in this tutorial:</p>
+</section>
+<section id="sapa-example" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sapa-example"><span class="header-section-number">3.4</span> SAPA Example</h2>
+<p>In this section I wil use data from the <code>hemp</code> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages used:</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MPsychoR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hemp)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"SAPA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Next, I load the full data set from the <code>MPsychoR</code> package <span class="citation" data-cites="Mair2020mpsychor">(<a href="#ref-Mair2020mpsychor" role="doc-biblioref">Mair 2020</a>)</span>, then as in the chapter, I subset the data to only include hybrid motivation items, followed by removing rows with missing values.</p>
+<p>Take a few minutes to look at the data description.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Rmotivation"</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame with only Hybrid Motivation items.</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>HybMot <span class="ot">&lt;-</span> <span class="fu">subset</span>(Rmotivation, </span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">select =</span> <span class="fu">grep</span>(<span class="st">"hyb"</span>, <span class="fu">names</span>(Rmotivation)))</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows  with any missing data.</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>HybMot <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>?SAPA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This leads to a data set with 777 authors and 19 items.</p>
+<p>You can explore individual items as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many authors(rows) and items(columns)?</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(SAPA<span class="sc">$</span>reason<span class="fl">.4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 777  19</code></pre>
+<pre><code>
+        0         1 
+0.3598162 0.6401838 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note they are all dichotomous items.</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  hyb1 hyb2 hyb3 hyb4 hyb5 hyb6 hyb7 hyb8 hyb9 hyb10 hyb11 hyb12 hyb13 hyb14
-1    1    0    1    0    1    1    0    0    0     1     1     1     1     0
-3    0    0    1    0    1    0    0    0    0     1     0     1     1     0
-4    1    1    1    1    1    0    1    0    0     1     0     1     1     0
-5    1    0    0    1    1    0    0    0    0     1     1     1     1     0
-8    1    1    1    1    1    1    1    1    1     1     0     1     1     1
-9    1    0    0    1    1    0    0    0    0     1     0     0     1     0
-  hyb15 hyb16 hyb17 hyb18 hyb19
-1     1     1     1     1     1
-3     1     0     0     1     0
-4     0     1     1     1     1
-5     1     0     1     1     1
-8     1     1     1     1     1
-9     0     1     1     1     1</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance/Covariance Matrix</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>vcmat <span class="ot">&lt;-</span> <span class="fu">cov</span>(HybMot)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scroll_box</span>(<span class="fu">kable</span>(vcmat, <span class="at">digits =</span> <span class="dv">2</span>), <span class="at">width =</span> <span class="st">"100%"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(SAPA<span class="sc">$</span>reason<span class="fl">.4</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; "><table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> hyb1 </th>
-   <th style="text-align:right;"> hyb2 </th>
-   <th style="text-align:right;"> hyb3 </th>
-   <th style="text-align:right;"> hyb4 </th>
-   <th style="text-align:right;"> hyb5 </th>
-   <th style="text-align:right;"> hyb6 </th>
-   <th style="text-align:right;"> hyb7 </th>
-   <th style="text-align:right;"> hyb8 </th>
-   <th style="text-align:right;"> hyb9 </th>
-   <th style="text-align:right;"> hyb10 </th>
-   <th style="text-align:right;"> hyb11 </th>
-   <th style="text-align:right;"> hyb12 </th>
-   <th style="text-align:right;"> hyb13 </th>
-   <th style="text-align:right;"> hyb14 </th>
-   <th style="text-align:right;"> hyb15 </th>
-   <th style="text-align:right;"> hyb16 </th>
-   <th style="text-align:right;"> hyb17 </th>
-   <th style="text-align:right;"> hyb18 </th>
-   <th style="text-align:right;"> hyb19 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> hyb1 </td>
-   <td style="text-align:right;"> 0.18 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb2 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.25 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> -0.01 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.03 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb3 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.23 </td>
-   <td style="text-align:right;"> 0.13 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb4 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.13 </td>
-   <td style="text-align:right;"> 0.21 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb5 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.11 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.03 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb6 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.24 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.11 </td>
-   <td style="text-align:right;"> 0.15 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.07 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.07 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb7 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> -0.01 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.22 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.02 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb8 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.11 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.25 </td>
-   <td style="text-align:right;"> 0.10 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.06 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb9 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.15 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.10 </td>
-   <td style="text-align:right;"> 0.20 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.05 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb10 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.15 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.05 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb11 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.23 </td>
-   <td style="text-align:right;"> 0.10 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.10 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.02 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb12 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.10 </td>
-   <td style="text-align:right;"> 0.23 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.11 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb13 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.10 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.02 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb14 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.07 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.20 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.04 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb15 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.10 </td>
-   <td style="text-align:right;"> 0.11 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.23 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb16 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.17 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.07 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb17 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.14 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.07 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb18 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.08 </td>
-   <td style="text-align:right;"> 0.05 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> hyb19 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.07 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.07 </td>
-   <td style="text-align:right;"> 0.07 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.21 </td>
-  </tr>
-</tbody>
-</table></div>
-
+<p><img src="ctt_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>You can look at the proportion correct for all items.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportion correct for each item:</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">proportion_correct =</span> <span class="fu">colMeans</span>(SAPA, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          proportion_correct
+reason.4           0.6401838
+reason.16          0.6981627
+reason.17          0.6973079
+reason.19          0.6152331
+letter.7           0.5997375
+letter.33          0.5712410
+letter.34          0.6132633
+letter.58          0.4439344
+matrix.45          0.5259357
+matrix.46          0.5498688
+matrix.47          0.6139199
+matrix.55          0.3740157
+rotate.3           0.1936967
+rotate.4           0.2127380
+rotate.6           0.2994091
+rotate.8           0.1850394</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">ncol</span>(HybMot)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>sigma2_Xi <span class="ot">&lt;-</span> <span class="fu">tr</span>(vcmat) <span class="co"># trace of matrix or sum(diag(vmat))</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>sigma2_X <span class="ot">&lt;-</span> <span class="fu">sum</span>(vcmat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">num_miss</span>(SAPA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          num_miss perc_miss
+reason.4         2      0.13
+reason.16        1      0.07
+reason.17        2      0.13
+reason.19        2      0.13
+letter.7         1      0.07
+letter.33        2      0.13
+letter.34        2      0.13
+letter.58        0      0.00
+matrix.45        2      0.13
+matrix.46        1      0.07
+matrix.47        2      0.13
+matrix.55        1      0.07
+rotate.3         2      0.13
+rotate.4         2      0.13
+rotate.6         2      0.13
+rotate.8         1      0.07</code></pre>
+</div>
+</div>
+<section id="reliability-1" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="reliability-1"><span class="header-section-number">3.4.1</span> Reliability</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">split_half</span>(SAPA, <span class="at">type =</span> <span class="st">"alternate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.758</code></pre>
+</div>
+</div>
+<p>The split-half reliability coefficient is known to be downwardly biased. The Spearman-Brown formula can adjust for this. To get the Spearman-Brown reliability estimate use the following.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">split_half</span>(SAPA, <span class="at">sb =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8623436</code></pre>
+</div>
+</div>
+<p>We might wish to estimate what length of test is needed to achieve a particular reliability.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test_length</span>(SAPA, <span class="at">r =</span> .<span class="dv">95</span>, <span class="at">r_type =</span> <span class="st">"split"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 49</code></pre>
+</div>
+</div>
+<section id="cronbachs-alpha" class="level4" data-number="3.4.1.1">
+<h4 data-number="3.4.1.1" class="anchored" data-anchor-id="cronbachs-alpha"><span class="header-section-number">3.4.1.1</span> Cronbach’s <span class="math inline">\(\alpha\)</span></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef_alpha</span>(SAPA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.841</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">alpha</span>(SAPA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Reliability analysis   
+Call: psych::alpha(x = SAPA)
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
+      0.84      0.84    0.85      0.25 5.3 0.006 0.49 0.25     0.23
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.83  0.84  0.85
+Duhachek  0.83  0.84  0.85
+
+ Reliability if an item is dropped:
+          raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
+reason.4       0.83      0.83    0.83      0.25 4.9   0.0064 0.0056  0.22
+reason.16      0.83      0.83    0.84      0.25 5.0   0.0063 0.0057  0.23
+reason.17      0.83      0.83    0.83      0.25 4.9   0.0064 0.0054  0.22
+reason.19      0.83      0.83    0.84      0.25 5.0   0.0063 0.0057  0.23
+letter.7       0.83      0.83    0.83      0.25 4.9   0.0064 0.0053  0.22
+letter.33      0.83      0.83    0.84      0.25 5.0   0.0063 0.0055  0.23
+letter.34      0.83      0.83    0.83      0.25 4.9   0.0064 0.0052  0.22
+letter.58      0.83      0.83    0.84      0.25 4.9   0.0064 0.0058  0.22
+matrix.45      0.83      0.84    0.84      0.25 5.1   0.0062 0.0057  0.24
+matrix.46      0.83      0.84    0.84      0.25 5.1   0.0062 0.0056  0.23
+matrix.47      0.83      0.83    0.84      0.25 5.0   0.0063 0.0059  0.22
+matrix.55      0.84      0.84    0.84      0.26 5.2   0.0061 0.0054  0.25
+rotate.3       0.83      0.83    0.83      0.25 5.0   0.0062 0.0042  0.24
+rotate.4       0.83      0.83    0.83      0.25 4.9   0.0063 0.0044  0.23
+rotate.6       0.83      0.83    0.83      0.25 4.9   0.0063 0.0049  0.23
+rotate.8       0.83      0.84    0.84      0.25 5.1   0.0062 0.0044  0.24
+
+ Item statistics 
+             n raw.r std.r r.cor r.drop mean   sd
+reason.4  1523  0.59  0.58  0.54   0.50 0.64 0.48
+reason.16 1524  0.53  0.53  0.48   0.45 0.70 0.46
+reason.17 1523  0.59  0.58  0.55   0.50 0.70 0.46
+reason.19 1523  0.56  0.55  0.51   0.47 0.62 0.49
+letter.7  1524  0.58  0.58  0.54   0.50 0.60 0.49
+letter.33 1523  0.56  0.55  0.50   0.46 0.57 0.50
+letter.34 1523  0.59  0.59  0.55   0.51 0.61 0.49
+letter.58 1525  0.58  0.57  0.53   0.49 0.44 0.50
+matrix.45 1523  0.51  0.50  0.44   0.41 0.53 0.50
+matrix.46 1524  0.52  0.50  0.45   0.42 0.55 0.50
+matrix.47 1523  0.55  0.54  0.49   0.46 0.61 0.49
+matrix.55 1524  0.45  0.44  0.37   0.34 0.37 0.48
+rotate.3  1523  0.51  0.53  0.50   0.43 0.19 0.40
+rotate.4  1523  0.56  0.58  0.55   0.48 0.21 0.41
+rotate.6  1523  0.55  0.57  0.53   0.47 0.30 0.46
+rotate.8  1524  0.48  0.51  0.46   0.40 0.19 0.39
+
+Non missing response frequency for each item
+             0    1 miss
+reason.4  0.36 0.64    0
+reason.16 0.30 0.70    0
+reason.17 0.30 0.70    0
+reason.19 0.38 0.62    0
+letter.7  0.40 0.60    0
+letter.33 0.43 0.57    0
+letter.34 0.39 0.61    0
+letter.58 0.56 0.44    0
+matrix.45 0.47 0.53    0
+matrix.46 0.45 0.55    0
+matrix.47 0.39 0.61    0
+matrix.55 0.63 0.37    0
+rotate.3  0.81 0.19    0
+rotate.4  0.79 0.21    0
+rotate.6  0.70 0.30    0
+rotate.8  0.81 0.19    0</code></pre>
+</div>
+</div>
+<p>To get bootstraped confidence intervals for the <code>hemp</code> coefficient alpha.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>alpha_fun <span class="ot">&lt;-</span> <span class="cf">function</span>(data, row){</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef_alpha</span>(data[row, ])</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>alpha_boot <span class="ot">&lt;-</span> <span class="fu">boot</span>(<span class="at">data =</span> SAPA, <span class="at">statistic =</span> alpha_fun, </span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">R =</span> <span class="fl">1e4</span>)</span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>alpha_boot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ORDINARY NONPARAMETRIC BOOTSTRAP
+
+
+Call:
+boot(data = SAPA, statistic = alpha_fun, R = 10000)
+
+
+Bootstrap Statistics :
+    original     bias    std. error
+t1*    0.841 -0.0004028 0.005489842</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(alpha_boot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ctt_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boot.ci</span>(alpha_boot, <span class="at">type =</span> <span class="st">"bca"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+Based on 10000 bootstrap replicates
+
+CALL : 
+boot.ci(boot.out = alpha_boot, type = "bca")
+
+Intervals : 
+Level       BCa          
+95%   ( 0.829,  0.851 )  
+Calculations and Intervals on Original Scale</code></pre>
+</div>
 </div>
 </section>
-<section id="other-reliability-coefficients" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="other-reliability-coefficients"><span class="header-section-number">3.3.2</span> Other Reliability Coefficients</h3>
+</section>
+<section id="validity" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="validity"><span class="header-section-number">3.4.2</span> Validity</h3>
+<p>Validity is more complicated to estimate than reliability. One useful from of validity is <em>criterion related validity</em> which is assessed by looking at how closely aligned scores on the scale you are evaluating are with some other established measure of this construct.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"interest"</span>)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cor</span>(interest[ ,<span class="fu">c</span>(<span class="st">"vocab"</span>, <span class="st">"reading"</span>, <span class="st">"sentcomp"</span>)]), <span class="at">digits=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         vocab reading sentcomp
+vocab     1.00    0.80     0.81
+reading   0.80    1.00     0.73
+sentcomp  0.81    0.73     1.00</code></pre>
+</div>
+</div>
+</section>
+<section id="item-analysis" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="item-analysis"><span class="header-section-number">3.4.3</span> Item Analysis</h3>
+<p>Item difficulty is an estimate of how hard a particular item is. A fairly straight-forward way to assess item difficulty is looking at the proportion of participants who answered each item correctly. If our items are score <code>0</code> or <code>1</code> for incorrect and correct answers respectively, we can calculate the column (item) means to get the proportion correct.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>item_difficulty <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(SAPA, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cbind</span>(item_difficulty), <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          item_difficulty
+reason.4             0.64
+reason.16            0.70
+reason.17            0.70
+reason.19            0.62
+letter.7             0.60
+letter.33            0.57
+letter.34            0.61
+letter.58            0.44
+matrix.45            0.53
+matrix.46            0.55
+matrix.47            0.61
+matrix.55            0.37
+rotate.3             0.19
+rotate.4             0.21
+rotate.6             0.30
+rotate.8             0.19</code></pre>
+</div>
+</div>
+<p>Note that a more intuitive name for this estimate would be item easiness, as the higher the number, the easier the item is. But we use item difficulty for historical reasons.</p>
+<p>We can aslo calculate the <em>item discrimination</em>, which is a measure of how well an item discriminates between participants with high ability vs.&nbsp;those with low ability. The most common way to do this is to calcualte the point-biserial correlation between a participants score on an item and their total score.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>total_score <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(SAPA, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>item_discrimination <span class="ot">&lt;-</span> <span class="fu">cor</span>(SAPA,</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>                           total_score,</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>item_discrimination</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               [,1]
+reason.4  0.5875787
+reason.16 0.5326660
+reason.17 0.5859068
+reason.19 0.5582773
+letter.7  0.5835910
+letter.33 0.5569431
+letter.34 0.5946924
+letter.58 0.5750172
+matrix.45 0.5095047
+matrix.46 0.5138256
+matrix.47 0.5478686
+matrix.55 0.4468619
+rotate.3  0.5100778
+rotate.4  0.5559848
+rotate.6  0.5542336
+rotate.8  0.4807175</code></pre>
+</div>
+</div>
+<p>higher values (closer to 1.00) mean the item has good discrimination, while values close to zero suggest little or not relation, and high negative numbers, suggest that people who do well on the rest of the instrument tend to do poorly in this item. This last situation often suggests something unintended is going on with the item or, said differently, the item is not “behaving” well.</p>
+<p>Another way to calculate discrimination of items is to calculate the <em>item discrimination index</em> which splits the test takers into a high and low group based on their total score and then correlate this grouping variable with each item response.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">idi</span>(SAPA, SAPA<span class="sc">$</span>reason<span class="fl">.4</span>, <span class="at">perc_cut =</span> .<span class="dv">27</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Upper 27% Lower 27% 
+ 0.805136  0.194864 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">iri</span>(SAPA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               [,1]
+reason.4  0.2820989
+reason.16 0.2451971
+reason.17 0.2692675
+reason.19 0.2717135
+letter.7  0.2865325
+letter.33 0.2757209
+letter.34 0.2897118
+letter.58 0.2863221
+matrix.45 0.2544930
+matrix.46 0.2562540
+matrix.47 0.2668171
+matrix.55 0.2161230
+rotate.3  0.2016459
+rotate.4  0.2276081
+rotate.6  0.2539219
+rotate.8  0.1867207</code></pre>
+</div>
+</div>
+<p>Finally, for multiple choice tests, you may also want look at the distractors, which are the incorrect answers to such a question. This is done by looking at barplots or the proportion of test takers that answer each choice. If there are wrong choices that many test takers select, you may want to reconsider the distractors. There may be something confusing about the choices. If you have a popular distractor and a low discrimination measure, changing the distractor may help.</p>
 </section>
 </section>
-<section id="r-scripts-and-data" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="r-scripts-and-data"><span class="header-section-number">3.4</span> R Scripts and Data</h2>
-<section id="student-survey-data-codebook" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="student-survey-data-codebook"><span class="header-section-number">3.4.1</span> Student Survey Data Codebook</h3>
+<section id="r-scripts-and-data" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="r-scripts-and-data"><span class="header-section-number">3.5</span> R Scripts and Data</h2>
+<section id="student-survey-data-codebook" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="student-survey-data-codebook"><span class="header-section-number">3.5.1</span> Student Survey Data Codebook</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Documentation for Student Survey data
@@ -1188,56 +985,45 @@ stats_20 - Involvement in research will positively influence my applied skills.<
 </div>
 </div>
 </section>
-<section id="simulating-ctt-data" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="simulating-ctt-data"><span class="header-section-number">3.4.2</span> Simulating CTT data</h3>
+<section id="simulating-ctt-data" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="simulating-ctt-data"><span class="header-section-number">3.5.2</span> Simulating CTT data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Title: simulate_CTTdata</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: William Murrah</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Description: Simulate data to demonstrate CTT and reliability</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: Monday, 09 August 2021</span></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co"># R version: R version 4.1.0 (2021-05-18)</span></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Project(working) directory: /Users/wmm0017/Projects/Courses/</span></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   AdvancedMeasurementTheoryNotebook</span></span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------</span></span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>simx <span class="ot">&lt;-</span> <span class="cf">function</span>(truescore, <span class="at">sigmax =</span> <span class="dv">1</span>) {</span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">18</span>, truescore, sigmax)</span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">round</span>(x))</span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>)</span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>Tau <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>),<span class="dv">2</span>)</span>
-<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20210805</span>)</span>
-<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>CTTdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> id,</span>
-<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">6</span>),</span>
-<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">x3 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">x4 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">x5 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">x6 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">x7 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">x8 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">x9 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">x10 =</span> <span class="fu">simx</span>(Tau),</span>
-<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tau =</span> Tau</span>
-<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(id, Tau, simx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Title: simulate_CTTdata</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: William Murrah</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Description: Simulate data to demonstrate CTT and reliability</span></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: Monday, 09 August 2021</span></span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="co"># R version: R version 4.1.0 (2021-05-18)</span></span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Project(working) directory: /Users/wmm0017/Projects/Courses/</span></span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   AdvancedMeasurementTheoryNotebook</span></span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------</span></span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a>simx <span class="ot">&lt;-</span> <span class="cf">function</span>(truescore, <span class="at">sigmax =</span> <span class="dv">1</span>) {</span>
+<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">18</span>, truescore, sigmax)</span>
+<span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">round</span>(x))</span>
+<span id="cb75-14"><a href="#cb75-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb75-15"><a href="#cb75-15" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb75-16"><a href="#cb75-16" aria-hidden="true" tabindex="-1"></a>Tau <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">each =</span> <span class="dv">3</span>),<span class="dv">2</span>)</span>
+<span id="cb75-17"><a href="#cb75-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20210805</span>)</span>
+<span id="cb75-18"><a href="#cb75-18" aria-hidden="true" tabindex="-1"></a>CTTdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb75-19"><a href="#cb75-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> id,</span>
+<span id="cb75-20"><a href="#cb75-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">6</span>),</span>
+<span id="cb75-21"><a href="#cb75-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb75-22"><a href="#cb75-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb75-23"><a href="#cb75-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">x3 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb75-24"><a href="#cb75-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">x4 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb75-25"><a href="#cb75-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">x5 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb75-26"><a href="#cb75-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">x6 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb75-27"><a href="#cb75-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">x7 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb75-28"><a href="#cb75-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">x8 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb75-29"><a href="#cb75-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">x9 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb75-30"><a href="#cb75-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">x10 =</span> <span class="fu">simx</span>(Tau),</span>
+<span id="cb75-31"><a href="#cb75-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tau =</span> Tau</span>
+<span id="cb75-32"><a href="#cb75-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb75-33"><a href="#cb75-33" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(id, Tau, simx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-mair2018modern" class="csl-entry" role="doc-biblioentry">
-Mair, Patrick. 2018. <em>Modern Psychometrics with <span>R</span></em>. Springer.
-</div>
-<div id="ref-Mair2020mpsychor" class="csl-entry" role="doc-biblioentry">
-———. 2020. <em>MPsychoR: Modern Psychometrics with <span>R</span></em>. <a href="https://CRAN.R-project.org/package=MPsychoR">https://CRAN.R-project.org/package=MPsychoR</a>.
-</div>
-<div id="ref-mair2015motivation" class="csl-entry" role="doc-biblioentry">
-Mair, Patrick, Eva Hofmann, Kathrin Gruber, Reinhold Hatzinger, Achim Zeileis, and Kurt Hornik. 2015. <span>“Motivation, Values, and Work Design as Drivers of Participation in the r Open Source Project for Statistical Computing.”</span> <em>Proceedings of the National Academy of Sciences</em> 112 (48): 14788–92.
-</div>
-</div>
 </section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">

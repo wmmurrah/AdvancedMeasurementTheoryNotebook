@@ -320,57 +320,143 @@ points(x = ave(x = CTTdata$X, factor(CTTdata$id), FUN = mean), y = CTTdata$id,
  points(x = CTTdata$X_t, pch = 2, factor(CTTdata$id))
 ```
 
-### Cronbach's $\alpha$
 
-In the notes for this chapter, I demonstrate aspects of classical test theory, reliability and generalizability theory using data from a study exploring the motivation of R package authors [@mair2015motivation]. 
-This tutorial is based on Chapter 1 of @mair2018modern, which can be consulted for a more in depth exposition of the underlying theory.
-Here I focus on demonstrating some of those concepts in R, as well as describing how to get certain results in R.
+## SAPA Example
 
-First, I load the packages used in this tutorial:
+In this section I wil use data from the `hemp` package.
 
 ```{r}
-# Packages used:
-library(psych)
-library(MPsychoR)
+library(hemp)
+data("SAPA")
 ```
 
-
-Next, I load the full data set from the `MPsychoR` package [@Mair2020mpsychor], then as in the chapter, I subset the data to only include hybrid motivation items, followed by removing rows with missing values.
-
-```{r, echo=TRUE}
-data("Rmotivation")
-
-# Create data frame with only Hybrid Motivation items.
-HybMot <- subset(Rmotivation, 
-                        select = grep("hyb", names(Rmotivation)))
-# Remove rows  with any missing data.
-HybMot <- na.omit(HybMot)
-
+Take a few minutes to look at the data description.
+```{r}
+?SAPA
 ```
 
-This leads to a data set with 777 authors and 19 items.
+You can explore individual items as follows:
+```{r}
+prop.table(table(SAPA$reason.4))
+barplot(prop.table(table(SAPA$reason.4)))
+```
+
+You can look at the proportion correct for all items.
 
 ```{r}
-# How many authors(rows) and items(columns)?
-dim(HybMot)
-# Note they are all dichotomous items.
-head(HybMot)
+# Proportion correct for each item:
+cbind(proportion_correct = colMeans(SAPA, na.rm = TRUE))
+```
+```{r}
+num_miss(SAPA)
 ```
 
+### Reliability
 
 ```{r}
-# Variance/Covariance Matrix
-vcmat <- cov(HybMot)
-scroll_box(kable(vcmat, digits = 2), width = "100%")
+split_half(SAPA, type = "alternate")
 ```
-
+The split-half reliability coefficient is known to be downwardly biased.
+The Spearman-Brown formula can adjust for this.
+To get the Spearman-Brown reliability estimate use the following.
 
 ```{r}
-k <- ncol(HybMot)
-sigma2_Xi <- tr(vcmat) # trace of matrix or sum(diag(vmat))
-sigma2_X <- sum(vcmat)
+split_half(SAPA, sb = TRUE)
 ```
-### Other Reliability Coefficients
+
+We might wish to estimate what length of test is needed to achieve a particular reliability.
+
+```{r}
+test_length(SAPA, r = .95, r_type = "split")
+```
+
+
+
+
+#### Cronbach's $\alpha$
+
+```{r}
+coef_alpha(SAPA)
+```
+
+```{r}
+psych::alpha(SAPA)
+```
+To get bootstraped confidence intervals for the `hemp` coefficient alpha.
+
+```{r}
+library(boot)
+
+alpha_fun <- function(data, row){
+  coef_alpha(data[row, ])
+}
+
+alpha_boot <- boot(data = SAPA, statistic = alpha_fun, 
+                   R = 1e4)
+alpha_boot
+```
+
+```{r}
+plot(alpha_boot)
+```
+
+```{r}
+boot.ci(alpha_boot, type = "bca")
+```
+
+### Validity
+
+Validity is more complicated to estimate than reliability.
+One useful from of validity is *criterion related validity* which is assessed by looking at how closely aligned scores on the scale you are evaluating are with some other established measure of this construct.
+
+```{r}
+data("interest")
+
+print(cor(interest[ ,c("vocab", "reading", "sentcomp")]), digits= 2)
+```
+
+### Item Analysis
+
+Item difficulty is an estimate of how hard a particular item is.
+A fairly straight-forward way to assess item difficulty is looking at the proportion of participants who answered each item correctly.
+If our items are score `0` or `1` for incorrect and correct answers respectively, we can calculate the column (item) means to get the proportion correct.
+
+```{r}
+item_difficulty <- colMeans(SAPA, na.rm = TRUE)
+round(cbind(item_difficulty), digits = 2)
+```
+Note that a more intuitive name for this estimate would be item easiness, as the higher the number, the easier the item is. 
+But we use item difficulty for historical reasons.
+
+We can aslo calculate the *item discrimination*, which is a measure of how well an item discriminates between participants with high ability vs. those with low ability.
+The most common way to do this is to calcualte the point-biserial correlation between a participants score on an item and their total score.
+
+```{r}
+total_score <- rowSums(SAPA, na.rm = TRUE)
+item_discrimination <- cor(SAPA,
+                           total_score,
+                           use = "pairwise.complete.obs")
+
+item_discrimination
+```
+higher values (closer to 1.00) mean the item has good discrimination, while values close to zero suggest little or not relation, and high negative numbers, suggest that people who do well on the rest of the instrument tend to do poorly in this item.
+This last situation often suggests something unintended is going on with the item or, said differently, the item is not "behaving" well.
+
+Another way to calculate discrimination of items is to calculate the *item discrimination index* which splits the test takers into a high and low group based on their total score and then correlate this grouping variable with each item response.
+
+```{r}
+idi(SAPA, SAPA$reason.4, perc_cut = .27)
+```
+
+```{r}
+iri(SAPA)
+```
+
+Finally, for multiple choice tests, you may also want look at the distractors, which are the incorrect answers to such a question. 
+This is done by looking at barplots or the proportion of test takers that answer each choice.
+If there are wrong choices that many test takers select, you may want to reconsider the distractors. There may be something confusing about the choices. 
+If you have a popular distractor and a low discrimination measure, changing the distractor may help.
+
 
 ## R Scripts and Data
 ### Student Survey Data Codebook
