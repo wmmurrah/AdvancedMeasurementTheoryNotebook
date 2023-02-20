@@ -216,7 +216,13 @@ div.csl-indent {
    
   <ul>
   <li><a href="#multiple-sources-of-error" id="toc-multiple-sources-of-error" class="nav-link active" data-scroll-target="#multiple-sources-of-error"><span class="toc-section-number">4.0.1</span>  Multiple Sources of Error</a></li>
-  <li><a href="#additional-readings" id="toc-additional-readings" class="nav-link" data-scroll-target="#additional-readings"><span class="toc-section-number">4.1</span>  Additional Readings</a></li>
+  <li><a href="#one-facet-design" id="toc-one-facet-design" class="nav-link" data-scroll-target="#one-facet-design"><span class="toc-section-number">4.1</span>  One-Facet Design</a>
+  <ul class="collapse">
+  <li><a href="#g-study" id="toc-g-study" class="nav-link" data-scroll-target="#g-study"><span class="toc-section-number">4.1.1</span>  G Study</a></li>
+  <li><a href="#d-study" id="toc-d-study" class="nav-link" data-scroll-target="#d-study"><span class="toc-section-number">4.1.2</span>  D Study</a></li>
+  </ul></li>
+  <li><a href="#two-facet-crossed-design" id="toc-two-facet-crossed-design" class="nav-link" data-scroll-target="#two-facet-crossed-design"><span class="toc-section-number">4.2</span>  Two-Facet Crossed Design</a></li>
+  <li><a href="#additional-readings" id="toc-additional-readings" class="nav-link" data-scroll-target="#additional-readings"><span class="toc-section-number">4.3</span>  Additional Readings</a></li>
   </ul>
 </nav>
     </div>
@@ -241,190 +247,230 @@ div.csl-indent {
 </header>
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages used:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MPsychoR)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Rmotivation"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame with only Hybrid Motivation items.</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>HybMot <span class="ot">&lt;-</span> <span class="fu">subset</span>(Rmotivation, </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">select =</span> <span class="fu">grep</span>(<span class="st">"hyb"</span>, <span class="fu">names</span>(Rmotivation)))</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows  with any missing data.</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>HybMot <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(HybMot)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"reshape2"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add person variable</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>Hyb1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(HybMot, <span class="at">person =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(HybMot))</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Hyblong <span class="ot">&lt;-</span> <span class="fu">melt</span>(Hyb1, <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">"person"</span>), </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">variable.name =</span> <span class="st">"item"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>Hyblong<span class="sc">$</span>person <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(Hyblong<span class="sc">$</span>person)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(value <span class="sc">~</span> person <span class="sc">+</span> item, <span class="at">data =</span> Hyblong))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>               Df Sum Sq Mean Sq F value Pr(&gt;F)    
-person        776  663.0    0.85   5.549 &lt;2e-16 ***
-item           18  573.8   31.88 207.048 &lt;2e-16 ***
-Residuals   13968 2150.5    0.15                   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-</div>
-<p>From this output we can calculate Cronbach’s <span class="math inline">\(\alpha\)</span> with the following values:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>MSp <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>MSe <span class="ot">&lt;-</span> <span class="fl">0.15</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> (MSp <span class="sc">-</span> MSe)<span class="sc">/</span>MSp</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(alpha, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.82</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ICC</span>(HybMot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Call: ICC(x = HybMot)
 
-Intraclass correlation coefficients 
-                         type  ICC   F df1   df2        p lower bound
-Single_raters_absolute   ICC1 0.15 4.4 776 13986 7.2e-279        0.14
-Single_random_raters     ICC2 0.16 5.5 776 13968  0.0e+00        0.14
-Single_fixed_raters      ICC3 0.19 5.5 776 13968  0.0e+00        0.17
-Average_raters_absolute ICC1k 0.77 4.4 776 13986 7.2e-279        0.75
-Average_random_raters   ICC2k 0.78 5.5 776 13968  0.0e+00        0.75
-Average_fixed_raters    ICC3k 0.82 5.5 776 13968  0.0e+00        0.80
-                        upper bound
-Single_raters_absolute         0.17
-Single_random_raters           0.18
-Single_fixed_raters            0.21
-Average_raters_absolute        0.79
-Average_random_raters          0.81
-Average_fixed_raters           0.84
-
- Number of subjects = 777     Number of Judges =  19
-See the help file for a discussion of the other 4 McGraw and Wong estimates,</code></pre>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>icchyb <span class="ot">&lt;-</span> <span class="fu">ICC</span>(HybMot)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>((<span class="fl">0.85-0.15</span>)<span class="sc">/</span><span class="dv">19</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.191943</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>((<span class="fl">31.88-0.15</span>)<span class="sc">/</span><span class="dv">777</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2020806</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lme4"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: Matrix</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(<span class="fu">lmer</span>(value <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>person) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item), <span class="at">data =</span> Hyblong))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> Groups   Name        Std.Dev.
- person   (Intercept) 0.19200 
- item     (Intercept) 0.20206 
- Residual             0.39238 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"gtheory"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>gfit <span class="ot">&lt;-</span> <span class="fu">gstudy</span>(<span class="at">data =</span> Hyblong, <span class="at">formula =</span> value <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>person) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item))</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>dfit <span class="ot">&lt;-</span> <span class="fu">dstudy</span>(gfit, <span class="at">colname.objects =</span> <span class="st">"person"</span>, <span class="at">colname.scores =</span> <span class="st">"value"</span>, </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> Hyblong)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(dfit<span class="sc">$</span>generalizability, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.82</code></pre>
-</div>
-</div>
+<p>Generalizability theory, or G theory, integrates classic test theory (CTT) and analysis of variance (ANOVA). In essence, ANOVA is used to decompose the single error component in CTT into multiple components in G theory. Recall the equations for the observed scores (<a href="#eq-cttmean">Equation&nbsp;<span>4.1</span></a>) and its variance (<a href="#eq-cttvar">Equation&nbsp;<span>4.2</span></a>) from CTT.</p>
+<p><span id="eq-cttmean"><span class="math display">\[
+X = T + E,
+\tag{4.1}\]</span></span> and,</p>
+<p><span id="eq-cttvar"><span class="math display">\[
+\sigma^2_x = \sigma^2_T + \sigma^2_E
+\tag{4.2}\]</span></span></p>
+<p>which state that the observed score <span class="math inline">\(X\)</span> is a function of the true score <span class="math inline">\(T\)</span> plus some random error <span class="math inline">\(E\)</span>, and that the variance of the observed score <span class="math inline">\(\sigma^2_X\)</span> is a function of the true score variance <span class="math inline">\(\sigma^2_T\)</span> plus the variance of the error <span class="math inline">\(\sigma^2_E\)</span>. In this model all the error is capture in a single term which has a population mean of <span class="math inline">\(E\)</span> and a population variance of <span class="math inline">\(\sigma^2_E\)</span>. There is no mechanism in CTT to differentiate the various potential types of error.</p>
+<p>A hypothetical example used by <span class="citation" data-cites="Brennan2010Generalizabilitytheoryclassical desjardins2018handbook">(<a href="#ref-Brennan2010Generalizabilitytheoryclassical" role="doc-biblioref">Brennan 2010</a>; and similar to one used by <a href="#ref-desjardins2018handbook" role="doc-biblioref">Desjardins and Bulut 2018</a>)</span>, concerns the desire of a testing company to develop a writing proficiency test, which consists of students completing several writing prompts that are scored by multiple raters. We might expect that variability in the observed scores on this test could be due not only to variability in the writing proficiency across students, may also reflect varying difficulty across writing prompts as well and variability in how different raters may score similar performance across students on a particular prompt. CTT would lump all these sources into one error term, while a properly designed study combined with G theory may be able to separately estimate these sources.</p>
 <section id="multiple-sources-of-error" class="level3" data-number="4.0.1">
 <h3 data-number="4.0.1" class="anchored" data-anchor-id="multiple-sources-of-error"><span class="header-section-number">4.0.1</span> Multiple Sources of Error</h3>
-<p>Generalizability theory acknowledges that multiple sources of error can impact scores simultaneously, and allow for estimating the effects of each <span class="citation" data-cites="raykov2011introduction">(<a href="#ref-raykov2011introduction" role="doc-biblioref">Raykov and Marcoulides 2011</a>)</span>. These various sources of error, or facets (e.g., items, raters, measurement occasions). All measurements of behavior are conceptualized as being sampled from a <em>universe</em> of admissible observations <span class="citation" data-cites="raykov2011introduction">(<a href="#ref-raykov2011introduction" role="doc-biblioref">Raykov and Marcoulides 2011</a>)</span>. If the observed score is expected to vary across a facet (e.g.&nbsp;vary across occasions, or vary depending on the items included, or the rater scoring), then that facet is a defining characteristic of the universe. The idea of reliability is replace with the idea of generalizability, which ,instead of asking how accurately observed scores can reflect the true score (CTT), generalizability theory asks how accurately observed scores allow us to generalize about behavior of an individual in a particular universe.</p>
-<p>Below is the code from the <span class="citation" data-cites="mair2018modern">Mair (<a href="#ref-mair2018modern" role="doc-biblioref">2018</a>)</span> text.</p>
+<p>Generalizability theory acknowledges that multiple sources of error can impact scores simultaneously, and allow for estimating the effects of each <span class="citation" data-cites="raykov2011introduction">(<a href="#ref-raykov2011introduction" role="doc-biblioref">Raykov and Marcoulides 2011</a>)</span>. These various sources of error are referred to as facets (e.g., items, raters, measurement occasions). All measurements of behavior are conceptualized as being sampled from a <em>universe</em> of admissible observations <span class="citation" data-cites="raykov2011introduction">(<a href="#ref-raykov2011introduction" role="doc-biblioref">Raykov and Marcoulides 2011</a>)</span>. If the observed score is expected to vary across a facet (e.g.&nbsp;vary across occasions, or vary depending on the items included, or the rater scoring), then that facet is a defining characteristic of the universe. The idea of reliability is replace with the idea of generalizability, which, instead of asking how accurately observed scores can reflect the true score (as in CTT), generalizability theory asks how accurately observed scores allow us to generalize about behavior of an individual in a particular universe.</p>
+<p><span id="eq-gtheorymean"><span class="math display">\[
+X_{swr} = \mu + \nu^s + \nu_w + \nu_r + \nu_{sw} + \nu_{sr} + \nu_{wr} + \nu_{swr,e}
+\tag{4.3}\]</span></span></p>
+<p><span id="eq-gtheoryvar"><span class="math display">\[
+\sigma^2(X_{swr})= \sigma^2_s + \sigma^2_w + \sigma^2_r + \sigma^2_{sw} + \sigma^2_{sr} + \sigma^2_{wr} + \sigma^2_{swr,e}
+\tag{4.4}\]</span></span></p>
+<p>In <a href="#eq-gtheorymean">Equation&nbsp;<span>4.3</span></a>, <span class="math inline">\(\mu\)</span> is the mean <em>population and universe score</em> which is the G theory equivalent of the true score in CTT <span class="citation" data-cites="Brennan2010Generalizabilitytheoryclassical">(<a href="#ref-Brennan2010Generalizabilitytheoryclassical" role="doc-biblioref">Brennan 2010</a>)</span>. The <span class="math inline">\(\nu\)</span> (pronounced “new”) components are the uncorrelated effect of the sub-scripted measurement unit (e.g.&nbsp;participants) or facet (e.g.&nbsp;item, raters, etc.).</p>
+<p><a href="#eq-gtheoryvar">Equation&nbsp;<span>4.4</span></a> describes how the total variance of observed scores, <span class="math inline">\(\sigma^2(X_{swr})\)</span>, can be decomposed into several independent variances. <a href="#fig-vennGtheory">Figure&nbsp;<span>4.1</span></a> is a graphical representation of the variance components, with the total variance in observed score represented by the three overlapping circles, and each component in <a href="#eq-gtheoryvar">Equation&nbsp;<span>4.4</span></a> labeled in the figure. These components represent the student, rater, and writing prompts, along with their interaction.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtheory)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Lakes"</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>phydat <span class="ot">&lt;-</span> <span class="fu">subset</span>(Lakes, subtest <span class="sc">==</span> <span class="st">"physical"</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>phydat<span class="sc">$</span>item <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(phydat<span class="sc">$</span>item)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(phydat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      personID raterID item score  subtest
-12611        1       7 phy1     5 physical
-12612        1       1 phy1     5 physical
-12613        1       3 phy1     5 physical
-12614        1       8 phy1     4 physical
-12615        1       5 phy1     6 physical
-12616        2       3 phy1     5 physical</code></pre>
+<div class="cell-output-display">
+<div id="fig-vennGtheory" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="generalizability_files/figure-html/fig-vennGtheory-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Venn diagram of crossed two-facet G theory model.</figcaption><p></p>
+</figure>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>formula <span class="ot">&lt;-</span> score <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>personID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>raterID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item) <span class="sc">+</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">|</span>personID<span class="sc">:</span>raterID) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>personID<span class="sc">:</span>item) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>raterID<span class="sc">:</span>item)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>gfit <span class="ot">&lt;-</span> <span class="fu">gstudy</span>(<span class="at">formula =</span> formula, <span class="at">data =</span> phydat)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>gfit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Important concepts in G theory include the <em>universe of admissible observation</em> and the related G study; and the <em>universes of generalization</em> and the related D (or decision) study <span class="citation" data-cites="Brennan2010Generalizabilitytheoryclassical">(<a href="#ref-Brennan2010Generalizabilitytheoryclassical" role="doc-biblioref">Brennan 2010</a>)</span>. It is helpful to note that the term</p>
+</section>
+<section id="one-facet-design" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="one-facet-design"><span class="header-section-number">4.1</span> One-Facet Design</h2>
+<p>To start with we will consider a simple design taken from chapter 3 of <span class="citation" data-cites="desjardins2018handbook">Desjardins and Bulut (<a href="#ref-desjardins2018handbook" role="doc-biblioref">2018</a>)</span>, in which 30 participants were administered an executive functioning (EF) instrument, consisting of 10 dichotomously scored items (scored 0, or 1). In addition to the variation across participants, this design has one facet, which is item. In all there are three sources of variance in EF scores, one source due to participant (<span class="math inline">\(\sigma^2_p\)</span>), one source due to items (<span class="math inline">\(\sigma^2_i\)</span>) and one source the interaction of the two, which is also confounded with the residual of the model (<span class="math inline">\(\sigma^2_{pi,e}\)</span>). These are represented in <span class="quarto-unresolved-ref">?eq-efvar</span>, and graphically displayed in <a href="#fig-vennOnefacet">Figure&nbsp;<span>4.2</span></a>.</p>
+<p><span id="eq-efvvar"><span class="math display">\[
+\sigma^2(X_{pi})= \sigma^2_p + \sigma^2_i + \sigma^2_{pi,e}
+\tag{4.5}\]</span></span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-vennOnefacet" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="generalizability_files/figure-html/fig-vennOnefacet-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.2: Venn diagram of one-facet G theory model.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>First, load the hypothetical data for this example from the <code>hemp</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hemp)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co"># for descriptives and the headTail function</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"efData"</span>) <span class="co"># from hemp package</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Thee we can look at the data as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(efData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>$components
-            source         var percent n
-1 personID:raterID 0.127298630    10.7 1
-2    personID:item 0.151229568    12.7 1
-3         personID 0.458766113    38.5 1
-4     raterID:item 0.008802081     0.7 1
-5          raterID 0.139048763    11.7 1
-6             item 0.033388424     2.8 1
-7         Residual 0.272703419    22.9 1
-
-attr(,"class")
-[1] "gstudy" "list"  </code></pre>
+<pre><code>'data.frame':   350 obs. of  3 variables:
+ $ Items       : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ Score       : int  0 1 1 1 1 1 1 1 1 1 ...
+ $ Participants: int  1 2 3 4 5 6 7 8 9 10 ...
+ - attr(*, "reshapeLong")=List of 4
+  ..$ varying:List of 1
+  .. ..$ score: chr [1:10] "item.1" "item.2" "item.3" "item.4" ...
+  .. ..- attr(*, "v.names")= chr "score"
+  .. ..- attr(*, "times")= int [1:10] 1 2 3 4 5 6 7 8 9 10
+  ..$ v.names: chr "score"
+  ..$ idvar  : chr "participant"
+  ..$ timevar: chr "item"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">headTail</span>(efData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Items Score Participants
+1.1       1     0            1
+2.1       1     1            2
+3.1       1     1            3
+4.1       1     1            4
+...     ...   ...          ...
+32.10    10     0           32
+33.10    10     1           33
+34.10    10     0           34
+35.10    10     0           35</code></pre>
+</div>
+</div>
+<p>We can see that this is a balanced design by tallying the number of items per participant.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(Items <span class="sc">~</span> Participants , <span class="at">data =</span> efData, length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Participants Items
+1             1    10
+2             2    10
+3             3    10
+4             4    10
+5             5    10
+6             6    10
+7             7    10
+8             8    10
+9             9    10
+10           10    10
+11           11    10
+12           12    10
+13           13    10
+14           14    10
+15           15    10
+16           16    10
+17           17    10
+18           18    10
+19           19    10
+20           20    10
+21           21    10
+22           22    10
+23           23    10
+24           24    10
+25           25    10
+26           26    10
+27           27    10
+28           28    10
+29           29    10
+30           30    10
+31           31    10
+32           32    10
+33           33    10
+34           34    10
+35           35    10</code></pre>
+</div>
+</div>
+<section id="g-study" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="g-study"><span class="header-section-number">4.1.1</span> G Study</h3>
+<p>A G study can be conducted to estimate the three variance components. This is done using the <code>lme4</code> package in R, which is automatically loaded when you load the <code>hemp</code> package (but could be loaded otherwise with <code>library(lme4)</code>). This package was developed to estimate linear mixed effects models. You can learn more about this package type <code>?lme4</code> in the R console and to learn more about the function used below type <code>?lmer</code>. Briefly, the <code>lmer</code> function allows inclusion of fixed effects, like those included in standard regression models and most ANOVA models, along with random effects as done here. The random effects are each contained in a set of parentheses in the formula argument (e.g.&nbsp;<code>(1 | Participant)</code> and <code>(1 | Items)</code> below). We estimate a model and name it <code>one_facet_model</code> which estimates the scores on the EF instrument with two random effects, one for participant and one for items. Then we perform a G study with the <code>gstudy()</code> function from the <code>hemp</code> package and loo at the estimates of the three variance components.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>one_facet_model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Score <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span> Participants) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Items), </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span> efData)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>one_facet_gstudy <span class="ot">&lt;-</span> <span class="fu">gstudy</span>(one_facet_model)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>one_facet_gstudy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Source Est.Variance Percent.Variance
+1 Participants       0.0258             9.9%
+2        Items       0.0959            36.8%
+3     Residual       0.1387            53.3%</code></pre>
+</div>
+</div>
+<p>A nice feature of the <code>gstudy()</code> function is the proportion of variances given in the output. We see that about 37% of the variance in EF scores are estimated to be due to the items, while only about 10% is due to differences across participants. These variances represent the magnitude of the error in generalizing from a participants score on a specific item of the EF instrument to that participants universe score. These components do not tell us the variance in generalizing based on an instrument with 10 items. To get that estimate we can do a D study and set the test length to 10 (see below). Note that the large residual error of 53% represents both the participant by item interaction and random error. We are unable to distinguish between these two sources of error.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>participant_means <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(Score <span class="sc">~</span> Participants, <span class="at">data =</span> efData, mean)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(participant_means) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Participant"</span>, <span class="st">"Mean"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(participant_means<span class="sc">$</span>Mean, <span class="at">xlab =</span> <span class="st">"Proportion of Items Correct"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">""</span>, <span class="at">breaks=</span> <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="generalizability_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lattice<span class="sc">::</span><span class="fu">histogram</span>(participant_means<span class="sc">$</span>Mean, <span class="at">type =</span> <span class="st">"count"</span>, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">xlab =</span> <span class="st">"Proportion of Items Correct"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="generalizability_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>dfit <span class="ot">&lt;-</span> <span class="fu">dstudy</span>(gfit, <span class="at">colname.objects =</span> <span class="st">"personID"</span>, <span class="at">colname.scores =</span> <span class="st">"score"</span>, </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> phydat)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>components</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>item_means <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(Score <span class="sc">~</span> Items, efData, mean)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(item_means) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Item"</span>, <span class="st">"Mean"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>item_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            source          var percent  n
-1 personID:raterID 0.0254597259     4.3  5
-2    personID:item 0.0504098560     8.5  3
-3         personID 0.4587661131    77.4  1
-4     raterID:item 0.0005868054     0.1 15
-5          raterID 0.0278097526     4.7  5
-6             item 0.0111294746     1.9  3
-7         Residual 0.0181802279     3.1 15</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>var.error.abs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1335758</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>sem.abs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3654803</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>var.error.rel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.09404981</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>sem.rel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3066754</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>dependability</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7744954</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>dfit<span class="sc">$</span>generalizability</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8298714</code></pre>
+<pre><code>   Item       Mean
+1     1 0.94285714
+2     2 0.68571429
+3     3 0.68571429
+4     4 0.08571429
+5     5 0.74285714
+6     6 0.77142857
+7     7 0.08571429
+8     8 0.60000000
+9     9 0.45714286
+10   10 0.11428571</code></pre>
 </div>
 </div>
 </section>
-<section id="additional-readings" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="additional-readings"><span class="header-section-number">4.1</span> Additional Readings</h2>
+<section id="d-study" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="d-study"><span class="header-section-number">4.1.2</span> D Study</h3>
+<p>One purpose of a D study is to explore how manipulating the facets might impact the reliability of the instrument as a whole in the relevant context. For example, we mentioned above that the G study does not give us information about our instrument as a whole. If we want to estimate the reliability of this instrument with 10 items, which is what was done in this hypothetical study we could do the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>one_facet_dstudy <span class="ot">&lt;-</span> <span class="fu">dstudy</span>(one_facet_gstudy, <span class="at">unit =</span> <span class="st">"Participants"</span>, <span class="at">n =</span> <span class="fu">c</span>(<span class="st">"Items"</span> <span class="ot">=</span> <span class="dv">10</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>one_facet_dstudy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Source Est.Variance   N Ratio of Var:N
+1 Participants       0.0258 350        0.02580
+2        Items       0.0959  10        0.00959
+3     Residual       0.1387  10        0.01387
+
+The generalizability coefficient is: 0.6503655.
+The dependability coefficient is: 0.5237515.</code></pre>
+</div>
+</div>
+<p>The output of the D study contains three types of information. First, the estimated variances of each source of variance (e.g.&nbsp;Participant, Item, and Residual) are given. Second, the generalizability coefficient, which is analogous to the reliability coefficient in CTT is given. Here is is estimated at .65, which is fairly low.</p>
+<p>We might also want to determine what impact the number of items has on the reliability of the instrument. That way we can estimate the impact of adding more items.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dstudy_plot</span>(one_facet_gstudy, <span class="at">unit =</span> <span class="st">"Participants"</span>, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">facets =</span> <span class="fu">list</span>(<span class="at">Items =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>)),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">g_coef =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="generalizability_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="two-facet-crossed-design" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="two-facet-crossed-design"><span class="header-section-number">4.2</span> Two-Facet Crossed Design</h2>
+</section>
+<section id="additional-readings" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="additional-readings"><span class="header-section-number">4.3</span> Additional Readings</h2>
 <p>For more information of G theory, see <span class="citation" data-cites="raykov2011introduction">Raykov and Marcoulides (<a href="#ref-raykov2011introduction" role="doc-biblioref">2011</a>)</span>. For an example using the R package <code>lavaan</code> with G theory, see <span class="citation" data-cites="Jorgensen2021Howestimateabsolute">Jorgensen (<a href="#ref-Jorgensen2021Howestimateabsolute" role="doc-biblioref">2021</a>)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Brennan2010Generalizabilitytheoryclassical" class="csl-entry" role="doc-biblioentry">
+Brennan, Robert L. 2010. <span>“Generalizability Theory and Classical Test Theory.”</span> <em>Applied Measurement in Education</em> 24 (1): 1–21. <a href="https://doi.org/10.1080/08957347.2011.532417">https://doi.org/10.1080/08957347.2011.532417</a>.
+</div>
+<div id="ref-desjardins2018handbook" class="csl-entry" role="doc-biblioentry">
+Desjardins, Christopher D, and Okan Bulut. 2018. <em>Handbook of Educational Measurement and Psychometrics Using r</em>. CRC Press.
+</div>
 <div id="ref-Jorgensen2021Howestimateabsolute" class="csl-entry" role="doc-biblioentry">
 Jorgensen, Terrence D. 2021. <span>“How to Estimate Absolute-Error Components in Structural Equation Models of Generalizability Theory.”</span> <em>Psych</em> 3 (2): 113–33. <a href="https://doi.org/10.3390/psych3020011">https://doi.org/10.3390/psych3020011</a>.
-</div>
-<div id="ref-mair2018modern" class="csl-entry" role="doc-biblioentry">
-Mair, Patrick. 2018. <em>Modern Psychometrics with <span>R</span></em>. Springer.
 </div>
 <div id="ref-raykov2011introduction" class="csl-entry" role="doc-biblioentry">
 Raykov, Tenko, and George A Marcoulides. 2011. <em>Introduction to Psychometric Theory</em>. Routledge.

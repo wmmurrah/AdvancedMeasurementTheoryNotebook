@@ -1,94 +1,158 @@
 # Generalizability Theory
 
 ```{r}
-# Packages used:
-library(psych)
-library(MPsychoR)
-data("Rmotivation")
-
-# Create data frame with only Hybrid Motivation items.
-HybMot <- subset(Rmotivation, 
-                        select = grep("hyb", names(Rmotivation)))
-# Remove rows  with any missing data.
-HybMot <- na.omit(HybMot)
-library("reshape2")
-# Add person variable
-Hyb1 <- data.frame(HybMot, person = 1:nrow(HybMot))
-Hyblong <- melt(Hyb1, id.vars = c("person"), 
-                variable.name = "item")
-Hyblong$person <- as.factor(Hyblong$person)
-summary(aov(value ~ person + item, data = Hyblong))
+#| echo: false
+#| warning: false
+#| message: false
+library(ggvenn)
+library(RColorBrewer)
 ```
 
-From this output we can calculate Cronbach's $\alpha$ with the following values:
+Generalizability theory, or G theory, integrates classic test theory (CTT) and analysis of variance (ANOVA). In essence, ANOVA is used to decompose the single error component in CTT into multiple components in G theory. Recall the equations for the observed scores (@eq-cttmean) and its variance (@eq-cttvar) from CTT.
 
-```{r}
-MSp <- 0.85
-MSe <- 0.15
+$$
+X = T + E,
+$$ {#eq-cttmean} and,
 
-alpha <- (MSp - MSe)/MSp
-print(alpha, digits = 2)
-```
+$$
+\sigma^2_x = \sigma^2_T + \sigma^2_E
+$$ {#eq-cttvar}
 
-```{r}
-ICC(HybMot)
-```
+which state that the observed score $X$ is a function of the true score $T$ plus some random error $E$, and that the variance of the observed score $\sigma^2_X$ is a function of the true score variance $\sigma^2_T$ plus the variance of the error $\sigma^2_E$. In this model all the error is capture in a single term which has a population mean of $E$ and a population variance of $\sigma^2_E$. There is no mechanism in CTT to differentiate the various potential types of error.
 
-
-```{r}
-icchyb <- ICC(HybMot)
-sqrt((0.85-0.15)/19)
-sqrt((31.88-0.15)/777)
-
-library("lme4")
-VarCorr(lmer(value ~ (1|person) + (1|item), data = Hyblong))
-
-library("gtheory")
-gfit <- gstudy(data = Hyblong, formula = value ~ (1|person) + (1|item))
-dfit <- dstudy(gfit, colname.objects = "person", colname.scores = "value", 
-               data = Hyblong)
-round(dfit$generalizability, 3)
-```
+A hypothetical example used by [@Brennan2010Generalizabilitytheoryclassical; and similar to one used by @desjardins2018handbook], concerns the desire of a testing company to develop a writing proficiency test, which consists of students completing several writing prompts that are scored by multiple raters. We might expect that variability in the observed scores on this test could be due not only to variability in the writing proficiency across students, may also reflect varying difficulty across writing prompts as well and variability in how different raters may score similar performance across students on a particular prompt. CTT would lump all these sources into one error term, while a properly designed study combined with G theory may be able to separately estimate these sources.
 
 ### Multiple Sources of Error
 
-Generalizability theory acknowledges that multiple sources of error can impact scores simultaneously, and allow for estimating the effects of each [@raykov2011introduction].
-These various sources of error, or facets (e.g., items, raters, measurement occasions).
-All measurements of behavior are conceptualized as being sampled from a *universe* of admissible observations [@raykov2011introduction].
-If the observed score is expected to vary across a facet (e.g. vary across occasions, or vary depending on the items included, or the rater scoring), then that facet is a defining characteristic of the universe.
-The idea of reliability is replace with the idea of generalizability, which ,instead of asking how accurately observed scores can reflect the true score (CTT), generalizability theory asks how accurately observed scores allow us to generalize about behavior of an individual in a particular universe.
+Generalizability theory acknowledges that multiple sources of error can impact scores simultaneously, and allow for estimating the effects of each [@raykov2011introduction]. These various sources of error are referred to as facets (e.g., items, raters, measurement occasions). All measurements of behavior are conceptualized as being sampled from a *universe* of admissible observations [@raykov2011introduction]. If the observed score is expected to vary across a facet (e.g. vary across occasions, or vary depending on the items included, or the rater scoring), then that facet is a defining characteristic of the universe. The idea of reliability is replace with the idea of generalizability, which, instead of asking how accurately observed scores can reflect the true score (as in CTT), generalizability theory asks how accurately observed scores allow us to generalize about behavior of an individual in a particular universe.
 
-Below is the code from the @mair2018modern text.
+$$
+X_{swr} = \mu + \nu^s + \nu_w + \nu_r + \nu_{sw} + \nu_{sr} + \nu_{wr} + \nu_{swr,e} 
+$$ {#eq-gtheorymean}
+
+$$
+\sigma^2(X_{swr})= \sigma^2_s + \sigma^2_w + \sigma^2_r + \sigma^2_{sw} + \sigma^2_{sr} + \sigma^2_{wr} + \sigma^2_{swr,e}
+$$ {#eq-gtheoryvar}
+
+In @eq-gtheorymean, $\mu$ is the mean *population and universe score* which is the G theory equivalent of the true score in CTT [@Brennan2010Generalizabilitytheoryclassical]. The $\nu$ (pronounced "new") components are the uncorrelated effect of the sub-scripted measurement unit (e.g. participants) or facet (e.g. item, raters, etc.).
+
+@eq-gtheoryvar describes how the total variance of observed scores, $\sigma^2(X_{swr})$, can be decomposed into several independent variances. @fig-vennGtheory is a graphical representation of the variance components, with the total variance in observed score represented by the three overlapping circles, and each component in @eq-gtheoryvar labeled in the figure. These components represent the student, rater, and writing prompts, along with their interaction.
+
 ```{r}
-library(gtheory)
+#| echo: false
+#| label: fig-vennGtheory
+#| fig-cap: "Venn diagram of crossed two-facet G theory model."
+x <- list(Student = c("s", "sr", "sw", "swr,e"),
+          Rater = c("r", "sr", "wr", "swr,e"),
+          `Writing Prompt` = c("w", "sw", "wr", "swr,e"))
 
-data("Lakes")
-phydat <- subset(Lakes, subtest == "physical")
-phydat$item <- droplevels(phydat$item)
-head(phydat)
+ggvenn(x,
+        show_elements = TRUE,
+       fill_color = brewer.pal(name="Set1",n=3)) 
 
-formula <- score ~ (1|personID) + (1|raterID) + (1|item) + 
-  (1|personID:raterID) + (1|personID:item) + (1|raterID:item)
-gfit <- gstudy(formula = formula, data = phydat)
-gfit
+```
+
+Important concepts in G theory include the *universe of admissible observation* and the related G study; and the *universes of generalization* and the related D (or decision) study [@Brennan2010Generalizabilitytheoryclassical]. It is helpful to note that the term
+
+## One-Facet Design
+
+To start with we will consider a simple design taken from chapter 3 of @desjardins2018handbook, in which 30 participants were administered an executive functioning (EF) instrument, consisting of 10 dichotomously scored items (scored 0, or 1).
+In addition to the variation across participants, this design has one facet, which is item. In all there are three sources of variance in EF scores, one source due to participant ($\sigma^2_p$), one source due to items ($\sigma^2_i$) and one source the interaction of the two, which is also confounded with the residual of the model ($\sigma^2_{pi,e}$). These are represented in @eq-efvar, and graphically displayed in @fig-vennOnefacet.
+
+$$
+\sigma^2(X_{pi})= \sigma^2_p + \sigma^2_i + \sigma^2_{pi,e}
+$$ {#eq-efvvar}
+
+
+```{r}
+#| echo: false
+#| label: fig-vennOnefacet
+#| fig-cap: "Venn diagram of one-facet G theory model."
+
+Participant <- c('p', 'pi,e')
+Item <- c('i', 'pi,e')
+
+ggvenn(list(Participant=Participant, Item=Item),
+        show_elements = TRUE,
+       fill_color = brewer.pal(name="Set1",n=3)) 
+
+```
+
+First, load the hypothetical data for this example from the `hemp` package.
+```{r}
+#| warning: false
+#| message: false
+library(hemp)
+library(psych) # for descriptives and the headTail function
+data("efData") # from hemp package
+```
+
+Thee we can look at the data as follows:
+```{r}
+str(efData)
+headTail(efData)
+```
+
+We can see that this is a balanced design by tallying the number of items per participant.
+```{r}
+aggregate(Items ~ Participants , data = efData, length)
+
+```
+
+### G Study
+
+A G study can be conducted to estimate the three variance components. This is done using the `lme4` package in R, which is automatically loaded when you load the `hemp` package (but could be loaded otherwise with `library(lme4)`). This package was developed to estimate linear mixed effects models. You can learn more about this package type `?lme4` in the R console and to learn more about the function used below type `?lmer`. Briefly, the `lmer` function allows inclusion of fixed effects, like those included in standard regression models and most ANOVA models, along with random effects as done here. The random effects are each contained in a set of parentheses in the formula argument (e.g. `(1 | Participant)` and `(1 | Items)` below).
+We estimate a model and name it `one_facet_model` which estimates the scores on the EF instrument with two random effects, one for participant and one for items. Then we perform a G study with the `gstudy()` function from the `hemp` package and loo at the estimates of the three variance components. 
+
+```{r}
+one_facet_model <- lmer(Score ~ (1 | Participants) + (1 | Items), 
+                        data = efData)
+
+one_facet_gstudy <- gstudy(one_facet_model)
+one_facet_gstudy
+```
+A nice feature of the `gstudy()` function is the proportion of variances given in the output. We see that about 37% of the variance in EF scores are estimated to be due to the items, while only about 10% is due to differences across participants. These variances represent the magnitude of the error in generalizing from a participants score on a specific item of the EF instrument to that participants universe score. These components do not tell us the variance in generalizing based on an instrument with 10 items. To get that estimate we can do a D study and set the test length to 10 (see below).
+Note that the large residual error of 53% represents both the participant by item interaction and random error. We are unable to distinguish between these two sources of error.
+
+```{r}
+participant_means <- aggregate(Score ~ Participants, data = efData, mean)
+colnames(participant_means) <- c("Participant", "Mean")
+hist(participant_means$Mean, xlab = "Proportion of Items Correct",
+     main = "", breaks= 7)
+
+lattice::histogram(participant_means$Mean, type = "count", 
+                   xlab = "Proportion of Items Correct")
 ```
 
 ```{r}
-dfit <- dstudy(gfit, colname.objects = "personID", colname.scores = "score", 
-               data = phydat)
-dfit$components
+item_means <- aggregate(Score ~ Items, efData, mean)
+colnames(item_means) <- c("Item", "Mean")
+item_means
 ```
 
+### D Study
+
+One purpose of a D study is to explore how manipulating the facets might impact the reliability of the instrument as a whole in the relevant context. For example, we mentioned above that the G study does not give us information about our instrument as a whole. If we want to estimate the reliability of this instrument with 10 items, which is what was done in this hypothetical study we could do the following:
+
 ```{r}
-dfit$var.error.abs
-dfit$sem.abs
-dfit$var.error.rel
-dfit$sem.rel
-dfit$dependability
-dfit$generalizability
+one_facet_dstudy <- dstudy(one_facet_gstudy, unit = "Participants", n = c("Items" = 10))
+one_facet_dstudy
 ```
+The output of the D study contains three types of information. First, the estimated variances of each source of variance (e.g. Participant, Item, and Residual) are given. Second, the generalizability coefficient, which is analogous to the reliability coefficient in CTT is given. Here is is estimated at .65, which is fairly low. 
+
+We might also want to determine what impact the number of items has on the reliability of the instrument. That way we can estimate the impact of adding more items.
+
+
+```{r}
+dstudy_plot(one_facet_gstudy, unit = "Participants", 
+            facets = list(Items = c(10, 20, 30, 40, 50, 60)),
+            g_coef = FALSE)
+```
+
+## Two-Facet Crossed Design
+
+
 
 ## Additional Readings
 
-For more information of G theory, see @raykov2011introduction. 
-For an example using the R package `lavaan` with G theory, see @Jorgensen2021Howestimateabsolute.
+For more information of G theory, see @raykov2011introduction. For an example using the R package `lavaan` with G theory, see @Jorgensen2021Howestimateabsolute.
