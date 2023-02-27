@@ -10,7 +10,7 @@ book:
     - intro_R_programming.qmd
     - ctt.qmd
     - generalizability.qmd
-    - factor_analysis.qmd
+    - efa.qmd
     - statisticalthinkinglink.qmd
   page-footer:
     left: |

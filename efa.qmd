@@ -1,0 +1,582 @@
+---
+title: Exploratory Factor Analysis
+---
+
+## The Common Factor Model
+
+In the common factor model, variances can be partitioned into common variances and unique variances.
+Common variances are those due to the common factor, while unique variances include all sources of variance not attributable to the common factor.
+Unique variance can be decomposed into specific and error variances. 
+Specific variance is due to systematic sources of variability that are unique to the observed indicator.
+Error variance is due to random measurement variance.
+
+$$
+x = \tau + \varepsilon
+$$ {#eq-ctt_sample}
+
+
+$$
+\sigma^2_x = \sigma^2_T + \sigma^2_{\varepsilon}
+$$ {#eq-ctt_variance}
+
+which we can directly compare to the common factor model we will learn about in this chapter:
+
+$$
+x = \mu + \Lambda f + \varepsilon
+$$ {#eq-common_factor}
+
+
+$$
+Var(x) = \Lambda \Phi \Lambda^T + \psi = \Sigma(\theta)
+$$ {#eq-factor_variance}
+
+### Think about these situations
+
+What do you do when you have a large number of variables you are considering as predictors of a dependent variable?
+
+-   Often, subsets of these variables are measuring the same, or very similar things.
+-   We might like to reduce the variables to a smaller number of predictors.
+
+What if you are developing a measurement scale and have a large number of items you think measure the same construct
+
+-   You might want to see how strongly the items are related to the construct.
+
+To make sense of these abstract goals, and to help explain the procedures of EFA in this chapter, I will use an example from chapter 4 of @desjardins2018handbook.
+
+This example uses as subset of the `interest` data which fictitious survey data on cognitive, personality and interest items. A subset of items related to cognition will be used here to follow the description in that text.
+
+First, load the *`hemp`* package and create a data frame called `cognition`.
+```{r}
+#| warning: false
+library(hemp)
+cognition <- subset(interest, select = vocab:analyrea)
+```
+Then look at a summary of the data.
+
+```{r}
+summary(cognition)
+```
+
+Looking at the output, we see that the means of these variables are close to zero, with the spread of the data being roughly symmetrical around the mean, suggesting that these variables may have been standardized, which entails transforming them into z-scores.
+If this is the case, we would expect the variances (and standard deviations) to be about 1.
+We can look at the variances of each of the variables with the combination of the `apply()` and `var()` functions.
+The `apply()` function allows us to repeat another function over either the rows or columns of a two dimensional data object, such as a data frame. 
+The MARGIN = 2, argument tells the function to appply `var()` over the columns (MARGIN = 1 would use rows).
+And the FUN = var argument identifies the function to apply over columns.
+Note the absence of parentheses after the function `var` in the call.
+
+```{r}
+apply(cognition, MARGIN = 2, FUN = var)
+```
+This supports our suspicion of standardized variables. 
+It is often good to have items on the same or similar scales for factor analysis. 
+
+The cognition data are organized so that each individual is represented by one row, and their score on each item is contained in a separate column. 
+This format is often called the wide format.
+To conduct factor analysis (and many other types of analysis) the long format is needed. 
+Instead of separate columns containing the scores for each item, the long format would have all scores in one column and a categorical variable that captures which item each score represents.
+Therefore, each individual would be represented by multiple rows, one for each item, hence the long in long format.
+
+Below, the `reshape()` function from base R is used to reshape the data from wide to long format, and store this new data frame in an object named `cognition_l` (note that the lowercase letter L is appended to the name, not the number 1).
+This function takes the cognition data (`data = cognition`), indicated that the first through the sixth columns are the ones to convert (`varying = 1:6`), names the variable that will contain the cell values from the original data as "score" (`v.names = "score"`), names the new character variable that describes which column the scores came from as "indicator" (`timevar = "indicator"`), uses the column names of those columns as the what will become the labels in the new categorical variable, which is a factor in R (`times = names(cognition)`), and finally tells the function to tranform the data into the "long" format (`direction = "long"`).
+The new 
+To learn more about this function you can type `?reshape` in to the R console.
+This transformation create the indicator variable as a charater variable, so we also convert it into a factor. 
+```{r}
+#| warning: false
+cognition_l <- reshape(data = cognition,
+                       varying = 1:6,
+                       v.names = "score",
+                       timevar = "indicator",
+                       times = names(cognition),
+                       direction = "long")
+
+# Convert "indicator" into factor using the values as labels
+cognition_l$indicator <- factor(cognition_l$indicator)
+```
+
+Looking at the first few rows, we can see that this data indeed has one column for the numeric values in the cells of the original data, and a factor variable containing the indicator type.
+
+```{r}
+head(cognition_l[order(cognition_l$id), ])
+```
+
+With this long data frame, we can look at the univariate distribution of the 6 indicators.
+Below I show how to do that with the *`lattice`* package and the *`ggplot2`* package.
+
+```{r}
+library(lattice)
+histogram(~ score | indicator, data = cognition_l)
+```
+
+```{r}
+#| warning: false
+library(ggplot2)
+ggplot(cognition_l, aes(x = score)) + geom_histogram() +
+  facet_wrap(~ indicator )
+```
+
+From these plots it seems reasonable to assume these variables are normally distributed, and we also see that these indicators have similar variances and are centered around zero, consistent with them being standardized.
+
+Next we can explore bivariate relations between the indicators.
+Before calculating correlation coefficients, it is helpful to plot the bivariate relations to evalute the assumptions of correlation coefficients as well as for the factor analysis.
+The `pairs()` function is useful for this.
+```{r}
+pairs(cognition)
+```
+
+
+### Correlation Coefficient
+
+*Pearson product-moment correlation*:
+
+$$
+r_{xy} = \frac{\Sigma_{n=1}^n (x_k - \bar{x})(y_i - \bar{y})}{\sqrt{\Sigma_{n=1}^n(x_i - \bar{x})^2} \sqrt{\Sigma_{n=1}^n(y_i - \bar{y})^2}} = \frac{s_{xy}}{s_x s_y}.
+$$
+
+The equation looks very daunting, until you see that it is just the covariance of $x$ and $y$ divided by the product of their standard deviations.
+
+
+
+```{r}
+correlations <- cor(cognition)
+round(correlations, 3)
+```
+```{r}
+cor_diff <- correlations - cor(cognition[-c(202, 53, 111), ])
+round(cor_diff, 3)
+```
+
+```{r}
+bollen_plot(cognition, crit.value = 0.06)
+```
+
+```{r}
+cognition[c(202, 53, 111), ]
+```
+
+```{r}
+apply(cognition, 2, min)
+apply(cognition, 2, max)
+```
+
+## Solutions
+
+1.  Principal Components Analysis
+
+    -   transforming the original variables into a new set of linear combinations (pricipal components).
+
+2.  Factor Analysis
+
+    -   setting up a mathematical model to estimate the number or factors
+
+### Principal Components Analysis
+
+-   Concerned with explaining variance-covariance structure of a set of variables.
+-   PCA attempts to explain as much of the total variance among the observed variables as possible with a smaller number of components.
+-   Because the variables are standardized prior to analysis, the total amount of variance available is the number of variables.
+-   The goal is **data reduction** for subsequent analysis.
+-   Variables *cause* components.
+-   Components are not representative of any underlying theory.
+
+### Factor Analysis
+
+-   The goal is understanding underlying constructs.
+-   Uses a modified correlation matrix (reduced matrix)
+-   factors *cause* the variables.
+-   Factors represent theoretical constructs.
+-   Focuses on the common variance of the variables, and purges the unique variance.
+
+### Steps in Factor Analysis
+
+1.  Choose extraction method
+    -   So far we've focused on PCA
+    -   EFA is often preferred if you are developing theory
+2.  Determine the number of components/factors
+    -   Kaiser method: eigenvalues \> 1
+    -   Scree plot: All components before leveling off
+    -   Horn's parallel analysis: components/factors greater than simulated values from random numbers
+3.  Rotate Factors
+    -   Orthogonal
+    -   Oblique
+4.  Interpret Components/Factors
+
+
+
+### "Little Jiffy" method of factor analysis
+
+1.  Extraction method : PCA
+2.  Number of factors: eigenvalues \> 1
+3.  Rotation: orthogonal(varimax)
+4.  Interpretation
+
+Following these steps without thought can lead to many problems [see @Preacher2003RepairingTomSwifts]
+
+### Eigenvalues
+
+Eigenvalues represent the variance in the variables explained by the success components.
+
+
+### Determining the Number of Factors
+
+1.  Kaiser criterion: Retain only factors with eigenvalues \> 1. (generally accurate)
+2.  Scree plot: plot eigenvalues and drop factors after leveling off.
+3.  Parallel analysis: compare observed eigenvalues to parallel set of data from randomly generated data. Retain factors in original if eigenvalue is greater than random eigenvalue.
+4.  Factor meaningfulness is also very important to consider.
+
+
+#### Kaiser
+
+Retain factors with eigenvalues greater than 1
+
+```{r}
+eigen_decomp <- eigen(correlations)
+round(eigen_decomp$values, 3)
+```
+
+#### Scree Plot
+
+```{r}
+scree(cognition, pc = FALSE)
+```
+
+#### Horn's Parallel Analysis
+
+```{r}
+fa.parallel(cognition, fm = "ml")
+```
+
+
+
+
+
+Using these conventions we can rewrite the classic test score model as:
+
+
+
+
+
+
+
+
+
+```{r}
+principal(correlations)
+```
+
+```{r}
+one_factor <- fa(r = cognition, nfactors = 1, rotate = "oblimin")
+one_factor
+```
+
+```{r}
+two_factor <- fa(r = cognition, nfactors = 2, rotate = "oblimin")
+two_factor
+```
+
+
+### EFA with Categorical Data
+
+```{r}
+SAPA_subset <- subset(SAPA, select = c(letter.7:letter.58,
+                                       rotate.3:rotate.8))
+
+fa.parallel(SAPA_subset, cor = "poly")
+```
+
+```{r}
+EFA_SAPA <- fa(r = SAPA_subset, nfactors = 2, rotate = "oblimin",
+               cor = "poly")
+EFA_SAPA
+```
+
+
+
+
+
+
+
+
+
+## Another Example
+```{r, include=FALSE, warning=FALSE, message=FALSE}
+# Some customization.  You can alter or delete as desired (if you know what you are doing).
+
+# knitr settings to control how R chunks work.
+library(knitr)
+# opts_knit$set(root.dir = "../../")
+opts_chunk$set(
+  echo = TRUE,
+  tidy=FALSE,     # display code as typed
+  size="small",    # slightly smaller font for code
+  comment = NULL,
+  warning = FALSE,
+  message = FALSE
+)
+
+library(mosaic)
+library(pander)
+suppressPackageStartupMessages(library(tidyverse))
+library(texreg)
+library(car)
+library(lavaan)
+library(semPlot)
+library(psych)
+library(tables)
+library(lavaan)
+options(ztable.type = "latex")
+options(xtable.comment = FALSE)
+# Set ggplot default font size
+theme_update(text = element_text(size = 18))
+# This changes the default colors in lattice plots.
+trellis.par.set(theme=theme.mosaic())  
+tsize = 30
+panderOptions("missing", "")
+```
+
+
+
+```{r}
+library("MPsychoR")
+data("YouthDep")
+item1 <- YouthDep[, 1]
+levels(item1) <- c("0", "1", "1")
+item2 <- YouthDep[, 14]
+levels(item2) <- c("0", "1", "1")
+table(item1, item2)
+```
+
+```{r}
+## ------ correlation coefficients
+library("psych")
+tetcor <- tetrachoric(cbind(item1, item2))
+tetcor
+item1 <- YouthDep[, 1]
+item2 <- YouthDep[, 14]
+polcor <- polychoric(cbind(item1, item2))
+polcor
+
+draw.tetra(r = .35, t1 = 1.16, t2 = .36)
+
+DepItems <- YouthDep[,1:26] 
+Depnum <- data.matrix(DepItems) - 1  ## convert to numeric   
+Rdep <- polychoric(Depnum)
+```
+
+
+
+### Example data
+
+```{r}
+lower <- "
+1.00
+0.70 1.00
+0.65 0.66 1.00
+0.62 0.63 0.60 1.00
+"
+cormat <- getCov(lower, names = c("d1", "d2", "d3", "d4"))
+
+cormat
+
+```
+
+### Kaiser
+
+Retain factors with eigenvalues greater than 1
+
+```{r}
+eigen(cormat)$values
+```
+
+### Scree Plot
+
+```{r}
+scree(cormat, factors = FALSE)
+```
+
+### Horn's Parallel Analysis
+
+```{r}
+fa.parallel(cormat, fa = "pc")
+```
+
+## Another example
+
+```{r}
+fa.parallel(Harman74.cor$cov, fa = "pc")
+```
+
+### Rotation
+
+-   Principal components are derived to maximize the variance accounted for (data reduction).
+-   Rotation is done to make the factors more interpretable (i.e. meaningful).
+-   Two major classes of rotation:
+    -   Orthogonal - new factors are still uncorrelated, as were the initial factors.
+    -   Oblique - new factors are allowed to be correlated.
+
+Essentially reallocates the loadings. The first factor may not be the one accounting for the most variance.
+
+### Orthogonal Rotation
+
+1.  **Quartimax** - idea is to clean up the *variables*. Rotation done so each variable loads mainly on one factor. Problematic if there is a general factor on which most or all variables load on (think IQ).
+
+2.  **Varimax** - to clean up *factors*. So each factor has high correlation with a smaller number of variables, low correlation with the other variables. Generally makes interpretation easier.
+
+### Oblique Rotation
+
+-   Often correlated factors are more reasonable.
+-   Therefore, oblique rotation is often preferred.
+-   But interpretation is more complicated.
+
+### Factor Matrices
+
+1.  Factor pattern matrix:
+    -   includes *pattern coefficients* analogous to standardized partial regression coefficients.
+    -   Indicated the unique importance of a factor to a variable, holding other factors constant.
+2.  Factor structure matrix:
+    -   includes *structure coefficients* which are simple correlations of the variables with the factors.
+
+### Which matrix should we interpret?
+
+-   When orthogonal rotation is used interpret *structural coefficients* (but they are the same as pattern coefficients).
+
+-   When oblique rotation is used pattern coefficients are preferred because they account for the correlation between the factors and they are parameters of the correlated factor model (which we will discuss next class).
+
+### Which variables should be used to interpret each factor?
+
+-   The idea is to use only those variables that have a strong association with the factor.
+-   Typical thresholds are \|.30\| or \|.40\|.
+-   Content knowledge is critical.
+
+## Tom Swift's Electric Factor Analysis Factory
+
+
+```{r, include=FALSE, warning=FALSE, message=FALSE}
+# Some customization.  You can alter or delete as desired (if you know what you are doing).
+
+# knitr settings to control how R chunks work.
+library(knitr)
+# opts_knit$set(root.dir = "../../")
+opts_chunk$set(
+  echo = FALSE,
+  tidy=FALSE,     # display code as typed
+  size="small",    # slightly smaller font for code
+  comment = NULL,
+  warning = FALSE,
+  message = FALSE
+)
+
+library(mosaic)
+library(pander)
+suppressPackageStartupMessages(library(tidyverse))
+library(texreg)
+library(car)
+library(lavaan)
+library(semPlot)
+library(psych)
+library(tables)
+library(lavaan)
+library(Hmisc)
+options(ztable.type = "latex")
+options(xtable.comment = FALSE)
+# Set ggplot default font size
+theme_update(text = element_text(size = 18))
+# This changes the default colors in lattice plots.
+trellis.par.set(theme=theme.mosaic())  
+tsize = 30
+#panderOptions("missing", "")
+```
+
+### Steps in Factor Analysis
+
+1.  Choose extraction method
+    -   So far we've focused on PCA
+2.  Determine the number of components/factors
+    -   Kaiser method: eigenvalues \> 1
+    -   Scree plot: All components before leveling off
+    -   Horn's parallel analysis: components/factors greater than simulated values from random numbers
+3.  Rotate Factors
+    -   Orthogonal
+    -   Oblique
+4.  Interpret Components/Factors
+
+
+
+### "Little Jiffy" method of factor analysis
+
+1.  Extraction method : PCA
+2.  Number of factors: eigenvalues \> 1
+3.  Rotation: orthogonal(varimax)
+4.  Interpretation
+
+### Metal Boxes
+
+```{r, eval=TRUE}
+tab <- data.frame(
+  Dimension  = c("Thickness", "Width", "Length", "Volume", "Density", "Weight",
+                 "Surface area", "Cross-section", "Edge length", 
+                 "Diagonal length", "Cost/lb"),
+  Derivation = c("x", "y", "z", "xyz", "d", "xyzd", "2(xy + xz + yz)",
+                 "yz", "4(x + y + z)", "(x^2)", "c"))
+kable(tab, caption = "Functional Definitions of Tom Swift's Original 11 Variables")
+```
+
+```{r}
+# Import data and look at them.
+swift <- read.csv("data/swift.csv", header = TRUE)
+str(swift)
+```
+
+```{=tex}
+\begin{table}[]
+\begin{tabular}{lllll}
+ Dimension &  Derivation  &  \\
+ \hline \\
+ Thickness &  $x$  \\
+ Width & $y$ \\
+ Length & $z$ \\
+ Volume & $xyz$ \\
+ Density & $d$ \\
+ Weight & $xyzd$ \\
+ Total surface area & $2(xy + xz +_ yz)$ \\
+ Cross-sectional area & $yz$ \\
+ Total edge length & $4(x +  y + z)$ \\
+ Internal diagonal length & $(x^2 + y^2 + z^2)^2$ \\
+ Cost per pound & $c$
+\end{tabular}
+\end{table}
+```
+### Correlations
+
+
+```{r}
+# load("data/Rdata/swift.Rdata")
+
+# round(cor(swift), 2)
+
+kable(cor(swift), caption = "Correlations between dimensions", digits = 2)
+```
+
+### Eigenvalues \> 1
+
+```{r}
+scree(cor(swift), factors = FALSE)
+```
+
+### Orthogonal Rotation
+
+```{r}
+jiffy <- pca(cov(swift), nfactors = 5)
+print(jiffy$loadings, cut = .70)
+```
+
+### Orthogonal Rotation with Loadings \> .70
+
+
+```{r}
+jiffy <- pca(cor(swift), nfactors = 3, rotate = "varimax", method = "ml")
+print(jiffy$loadings, cut = .70)
+```
+
+
+
