@@ -1,0 +1,76 @@
+digraph cfa2F {
+  rankdir = LR
+  graph [overlap = false, fontsize = 14, layout = neato,
+  splines = true]
+  node [shape = box]
+
+  # nodes
+ x1[pos="1,11!", label = "info"] 
+ x2[pos="1,10!", label = "comp"]
+ x3[pos="1,9!", label = "arith"]
+ x4[pos="1,8!", label = "simil"]
+ x5[pos="1,7!", label = "digit"]
+ x6[pos="1,6!", label = "vocab"]
+ 
+ x7[pos="1,5!", label = "pictcomp"] 
+ x8[pos="1,4!", label = "parang"]
+ x9[pos="1,3!", label = "block"]
+ x10[pos="1,2!", label = "object"]
+ x11[pos="1,1!", label = "coding"]
+ 
+  # phantoms
+ p1[pos="5,6.5!", label = "", color = "white"]
+# p2[pos="5,3.5!", label = "", color = "white"]
+
+ 
+ node[shape = circle]
+ f1[pos="5,8.5!", label = "Verbal"]
+ f2[pos="5,3!", label = "Perform"]
+ e1[pos="0,11!"]
+ e2[pos="0,10!"]
+ e3[pos="0,9!"]
+ e4[pos="0,8!"]
+ e5[pos="0,7!"]
+ e6[pos="0,6!"]
+ e7[pos="0,5!"]
+ e8[pos="0,4!"]
+ e9[pos="0,3!"]
+ e10[pos="0,2!"]
+ e11[pos="0,1!"] 
+
+ 
+ edge [color = "black"]
+ f1 -> x1[label=1] 
+ f1 -> {x2 x3 x4 x5 x6};
+ f2 -> x7[label=1] 
+ f2 -> {x8 x9 x10 x11};
+ 
+
+ 
+ f1 -> f2 [dir="both"]
+ f1 -> f1[dir="both"]
+ f2 -> f2[dir="both"]
+ e1 -> x1[label = 1]
+ e2 -> x2[label = 1]
+ e3 -> x3[label = 1]
+ e4 -> x4[label = 1]
+ e5 -> x5[label = 1]
+ e6 -> x6[label = 1]
+ e7 -> x7[label = 1]
+ e8 -> x8[label = 1]
+ e9 -> x9[label = 1]
+ e10 -> x10[label = 1]
+ e11 -> x11[label = 1]
+ e1:w -> e1:w[dir="both"]
+ e2:w -> e2:w[dir="both"]
+ e3:w -> e3:w[dir="both"]
+ e4:w -> e4:w[dir="both"]
+ e5:w -> e5:w[dir="both"]
+ e6:w -> e6:w[dir="both"]
+ e7:w -> e7:w[dir="both"]
+ e8:w -> e8:w[dir="both"]
+ e9:w -> e9:w[dir="both"]
+ e10:w -> e10:w[dir="both"]
+ e11:w -> e11:w[dir="both"] 
+
+}

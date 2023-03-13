@@ -1,0 +1,268 @@
+---
+title: "Confirmatory Factor Analysis"
+---
+
+```{r}
+#| echo: false
+library(DiagrammeR)
+```
+
+In the last chapter we discussed exploratory factor analysis (EFA). 
+In this chapter I will walk you through an example of a confirmatory factor analysis(CFA).
+Along the way we will discuss the some advantages and disadvantages to each.
+To help ground the concepts covered, I will start with an example research project.
+This one is also based on the example data in the HEMP book, and is similar to many examples using CFA.
+This example used data from an IQ battery, the WISC-R.
+To get the data load the `hemp` package, then load the *wiscsem* data frame. Then take a look at the data:
+```{r}
+#| message: false
+library(hemp)
+data(wiscsem)
+str(wiscsem)
+summary(wiscsem)
+```
+
+You should also look at the help information for this data set with `?wiscsem` in the R console.
+Be sure to look at what each of the variables represents.
+
+This example will use 11 items from the WISC-R that are thought to underlie two cognitive abilities, verbal and performance. 
+The verbal scale is thought to rely on abilities captured by sub-tests assessing information processing, comprehension, arithmetic, similarities, vocabulary, and digit span.
+These map onto the following variable names in the wiscsem data: `info`, `comp`, `arith`, `simil`, `vocab`, and `digit`.
+The performance scale is thought to rely on abilities captured by sub-tests assessing picture completion, picture arrangement, block design, object assembly, and coding, which map onto the following variable names:
+`pictcomp`, `parang`, `block`, `object`, and `coding`.
+
+Below, I create a vector of column names for the variables I wish to subset from the larger data set.
+Then I create a new data frame I call `wisc_iq` that consists of those variables.
+I will use this smaller data set to create plots and descriptive statistics for only these variables.
+```{r}
+# Create a vector of variable names for iq model variables.
+wisc_iq_vars <- c("info", "comp", "arith", "simil", "digit",
+                  "vocab", "pictcomp", "parang", "block",
+                  "object", "coding")
+
+# Create a data frame with only the iq variables from wiscsem.
+wisc_iq <- wiscsem[ , wisc_iq_vars]
+```
+
+First, look at a plot of these variables.
+
+```{r}
+pairs.panels(wisc_iq)
+```
+This plot suggests that the variables are consistent with coming from populations that are normally distributed, and there is not strong evidence of nonlinear relations between the variables.
+We can get some basic descriptive statistics of this data.
+```{r}
+describe(wisc_iq, fast = TRUE)
+```
+Notice that the sub-test scores have similar ranges, means, and standard deviations. 
+This is usually good for items used in a factor analysis. 
+If these values were not similar, rescaling items might be useful.
+
+If this were a real research project, I would spend much more time exploring the data to assess distributions, outliers, and look for data entry errors, among other things. 
+But here I will skip most of that to focus on the factor analysis.
+
+### Goals of Factor Analysis
+
+Recall that the goal of factor analysis is to determine the number of latent constructs that best explain the variance in a set of indicators.
+The indicators are the observed variables, while the latent variables are theoretical constructs we do not measure directly.
+Also recall that in factor analysis, we decompose the variance of our indicators into *unique* and *common* variances, and that the unique variance consist of both variance due to *error* as well as causes of variance that are *specific* to that indicator (e.g. causes that do not impact other indicators).
+
+
+```{r}
+library(psych)
+
+efa2 <- fa(wisc_iq, nfactors = 2, rotate = "oblimin")
+efa2
+```
+
+### EFA versus CFA
+
+* **Exploratory Factor Analysis**
+
+1. Researcher does not specify factor/item relations (unrestricted measurement model).
+2. Models with more than one factor are **under-identified**, so no unique solution.
+3. Generally assumed that *specific variance* of indicators not correlated.
+
+* Replication requires additional data. Don't do a CFA after an EFA on the same data. This capitalizes on change, and leads to **over-fitting**.
+
+#### Characteristics of Exploratory Factor Analysis
+
+1. Every indicator is regressed on all factors
+2. Direct effects are the **pattern coefficients** or **factor loadings**.
+3. Correlations between factors are fixed as zero for **orthogonal rotated** models and estimated for **oblique rotated** models.
+4. Rotation is for increasing interpretability of results
+5. **Simple structure** means each factor explains as much of the variance as possible in non-overlapping sets of indicators. 
+6. EFA models are **rotationally** and **factor score** indeterminate.
+
+### Confirmatory Factor Analysis
+
+1. Researcher specifies factors and items (restricted measurement model).
+2. Model must be identified (no rotation).
+3. Can specify correlations between indicators.
+
+#### Characteristics of a Standard Confirmatory Factor Model
+
+1. Each indicator is continuous with two causes: a single factor and a measure of unique sources of variance (error term).
+2. Error terms are independent.
+3. All associations are linear and the factors covary (are correlated).
+
+To demonstrate CFA, I will use the `lavaan` package in R. If you have used Mplus, you will likely find some similarities with `lavaan`, particularly with the output.
+If you do not have this package installed, first install it then load it.
+```{r}
+# uncomment the following line if you need to install lavaan.
+#install.packages("lavaan) 
+library(lavaan)
+```
+
+To get an understanding of the `lavaan` package, go the the following website:
+
+[https://lavaan.ugent.be/](https://lavaan.ugent.be/)
+
+The tutorial section is particularly helpful.
+
+CFA models are often depicted graphically.
+@fig-iqcfa is a graphic representation of the verbal and performance scales of the WISC-R.
+
+```{r}
+#| echo: false
+#| fig-cap: "Graphic Depiction of Verbal and Performance Scales of the WISC-R"
+#| label: fig-iqcfa
+
+grViz("code/wiscsem_iq.gv")
+```
+
+
+## Additional CFA Specification Issues
+
+* Select good indicators: Those that represent the breadth of the hypothetical construct (latent variable).
+* Ideally, at least 3 indicators of each factor (minimum of 2 for multiple factors)
+* Reverse code any negatively worded items
+* Factor analysis is appropriate for reflective (effect) measurement. The factors cause variance in the indicators.
+* formative measurement is when the indicators cause the latent factor (e.g. SES).
+
+
+### Scaling Latent Variables
+
+* In addition to the requirement that $df \ge 0$, identification requires latent variables to be scaled
+* This reduces the number of free parameters to be estimated (i.e., increases df)
+* This is similar to providing a solution to one unknown in an equation with more than one unknown.  ex.: $a \times b = 6$ to $a \times 1 = 6$
+* This is required to estimate the parameters
+* the value 1 is used so as not to artificially inflate or shrink other values
+
+### Identification of CFA Models
+
+* Because latent variables (factors) are not observed, there is no inherent scale, they must be constrained  for the model to be identified and estimated
+
+* Three basic ways to scale factors:
+
+    1. **Reference variable method** - Constrain the loading of one indicator per factor to be 1.00
+    2. **Factor variance method** - Constrain each factor variances to be 1.00
+    3. **Effect coding method** - Constrain the *average* of the factor loadings to be 1.00
+    
+## Fallacies about Factors and Indicators
+
+* *Reification* is the fallacy that because you created a factor the latent construct must exist in reality. **Just because you create a factor does not mean it exists in reality!**
+
+* The *Naming Fallacy* is the fallacy that because you give a factor a name, that is what it must be measuring. **Just becasue you give a factor a name does not mean that is what it is measuring.**
+
+* The *Jingle Fallacy* is the false belief that because two things (indicators) have the same name they are the same thing. **Giving two things the same name does not mean they are measuring the same thing**
+
+* The *Jangle Fallacy* is the false belief that because two things have different names they are different things. **Just because two things have different names does not mean they are measuring different things.**
+
+## Interpreting Estimates in CFA
+
+* Pattern coefficients (factor loadings) are interpreted as regression coefficeints
+* For simple indicators (load on one factor) standardized pattern coefficients are interpreted as Pearson correlations, and squared coefficients are the proportion of the indicator explained by the factor.
+* For complex indicators (load on more than one factor) standardized pattern coefficients are interpreted as beta weights (standardized regression coefficients)
+* The ratio of an unstandardized error variance over the observed variance of an indicator is the proportion of unexplained variance. One minus this value is the explained variance.
+* The Pearson correlation between an indicator and a factor is a structure coefficient
+* The standardized pattern coefficient for a simple indicator is a structure coefficient, but not for a complex indicator.
+
+## Standardization in CFA
+
+* STD in Mplus can be used to only standardize the factors. This can be useful if the scale of the indicators is meaningful and you want to retain the scale (e.g. you want to estimate how much a one unit change in the factor would impact reaction time in the indicators).
+
+* STDYX is Mplus will standardize all latent (factors) and observed variables (indicators). This might be useful if indicators are on different scales or the scale of the indicators is not of interest.
+
+## CFA when sample size is not large
+
+1. Use indicators with good psychometric properties (reliability, validity), standardized pattern coefficients > .70.
+
+2. Consider imposing equality constraints on indicators of the same factor if metric is on same scale.
+
+3. Consider using parcels instead of latent factors.
+
+## Respecification of CFA
+
+* Changes involving the indicators
+    + change factors
+    + simple to complex (load on multiple factors)
+    + correlate the residuals of indicators
+    
+* Change the factor structure
+    + change number of factors
+
+Start by inspecting the residuals and modification indices
+
+## Analyzing Likert-Scale Items
+
+* ML is not appropriate when the using categorical indicators with small number of categories (e.g. <= 5) or when response distributions are asymmetrical
+* Robust Weighted Least Squares (WLS) estimation can be used
+* WLS makes no distributional assumptions, and can be used with categorical and continuous variables
+
+## WLS Parameterization
+
+* Delta scaling:
+    + **total** variance of latent response fixed to 1.0
+    + pattern coefficients estimate amount of standard deviation change in lantent response given 1 standard deviation change in common factor
+    + thresholds are normal deviates that correspond to cummulative area of the curve to the left of particular category.
+    
+* Theta scaling:
+    + **residual** variance of latent response fixed to 1.0
+    + pattern coefficeints estimate amount of change in probit (normal deviate) give a 1 unit change in the factor
+    + thresholds are predicted normal deviates for next lowest response category where the latent response variable is not standardized
+
+## Reliability of Factor Measurement
+
+* There is a substantial methodological literature detailing the problems with using coefficient alpha as an estimate of scale reliability
+
+* There is a substantial applied literature which ignores the substantial methodological literature.
+
+* CFA provides a much better way to evaluate scale reliability (McDonald's Omega, AVE, etc.)
+
+
+
+```{r}
+iq_mod <- "
+verb =~ info + comp + arith + simil + digit + vocab
+perf =~ pictcomp + parang + block + object + coding
+"
+```
+
+```{r}
+iq_fit <- cfa(iq_mod, data = wiscsem)
+```
+
+```{r}
+inspect(iq_fit)
+```
+
+```{r}
+summary(iq_fit)
+```
+
+```{r}
+summary(iq_fit, standardized = TRUE, fit.measures = TRUE,
+        rsquare = TRUE)
+```
+
+
+```{r}
+iq_mod_nocode <- "
+verb =~ info + comp + arith + simil + digit + vocab
+perf =~ pictcomp + parang + block + object + 0*coding
+"
+iq_fit_nocode <- cfa(iq_mod_nocode, data = wiscsem)
+summary(iq_fit_nocode, standardized = TRUE, fit.measures = TRUE,
+        rsquare = TRUE)
+```
