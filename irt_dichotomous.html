@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>irt_dichotomous</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="irt_dichotomous_files/libs/clipboard/clipboard.min.js"></script>
+<script src="irt_dichotomous_files/libs/quarto-html/quarto.js"></script>
+<script src="irt_dichotomous_files/libs/quarto-html/popper.min.js"></script>
+<script src="irt_dichotomous_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="irt_dichotomous_files/libs/quarto-html/anchor.min.js"></script>
+<link href="irt_dichotomous_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="irt_dichotomous_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="irt_dichotomous_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="irt_dichotomous_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="irt_dichotomous_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="synthetic-aperture-personality-assessment-sapa" class="level2">
+<h2 class="anchored" data-anchor-id="synthetic-aperture-personality-assessment-sapa">Synthetic Aperture Personality Assessment (SAPA)</h2>
+<p>To learn more about this data you can use the R help function after loading the <code>hemp</code> package as follows,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hemp)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(SAPA)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>?SAPA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and you can also go the the SAPA website at <a href="https://www.sapa-project.org/">https://www.sapa-project.org/</a>.</p>
+<p>You should spend some time familiarizing yourself with the data, a process you should be able to do on your own.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(SAPA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   1525 obs. of  16 variables:
+ $ reason.4 : num  0 0 0 1 0 1 1 0 1 1 ...
+ $ reason.16: num  0 0 1 0 1 1 1 1 1 1 ...
+ $ reason.17: num  0 1 1 0 1 1 1 0 0 1 ...
+ $ reason.19: num  0 0 0 0 0 1 1 0 1 1 ...
+ $ letter.7 : num  0 1 1 0 0 1 1 0 0 0 ...
+ $ letter.33: num  1 0 0 0 1 1 1 0 1 0 ...
+ $ letter.34: num  0 1 0 1 0 1 1 0 1 1 ...
+ $ letter.58: num  0 0 0 0 0 1 1 0 1 0 ...
+ $ matrix.45: num  0 0 1 0 1 1 1 0 1 1 ...
+ $ matrix.46: num  0 0 1 0 1 1 1 1 0 1 ...
+ $ matrix.47: num  0 0 0 0 0 1 1 1 0 0 ...
+ $ matrix.55: num  1 0 0 0 0 0 0 0 0 0 ...
+ $ rotate.3 : num  0 0 0 0 0 1 1 0 0 0 ...
+ $ rotate.4 : num  0 0 0 0 0 1 1 1 0 0 ...
+ $ rotate.6 : num  0 1 0 0 0 1 1 0 0 0 ...
+ $ rotate.8 : num  0 0 0 0 0 0 1 0 0 0 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAPA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    reason.4        reason.16        reason.17        reason.19     
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :1.0000   Median :1.0000   Median :1.0000   Median :1.0000  
+ Mean   :0.6402   Mean   :0.6982   Mean   :0.6973   Mean   :0.6152  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+ NA's   :2        NA's   :1        NA's   :2        NA's   :2       
+    letter.7        letter.33        letter.34        letter.58     
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :1.0000   Median :1.0000   Median :1.0000   Median :0.0000  
+ Mean   :0.5997   Mean   :0.5712   Mean   :0.6133   Mean   :0.4439  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+ NA's   :1        NA's   :2        NA's   :2                        
+   matrix.45        matrix.46        matrix.47        matrix.55    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.000  
+ Median :1.0000   Median :1.0000   Median :1.0000   Median :0.000  
+ Mean   :0.5259   Mean   :0.5499   Mean   :0.6139   Mean   :0.374  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.000  
+ NA's   :2        NA's   :1        NA's   :2        NA's   :1      
+    rotate.3         rotate.4         rotate.6         rotate.8    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.000  
+ Median :0.0000   Median :0.0000   Median :0.0000   Median :0.000  
+ Mean   :0.1937   Mean   :0.2127   Mean   :0.2994   Mean   :0.185  
+ 3rd Qu.:0.0000   3rd Qu.:0.0000   3rd Qu.:1.0000   3rd Qu.:0.000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.000  
+ NA's   :2        NA's   :2        NA's   :2        NA's   :1      </code></pre>
+</div>
+</div>
+</section>
+<section id="item-response-theory" class="level2">
+<h2 class="anchored" data-anchor-id="item-response-theory">Item Response Theory</h2>
+<p>Example of a test item:</p>
+<p>Which of the following is an example of a chemical reaction?</p>
+<p>A. A rainbow<br>
+B. Lightning<br>
+C. Burning wood<br>
+D. Melting snow<br>
+What must one know to answer this question?</p>
+<ul>
+<li><p>be able to read and comprehend English</p></li>
+<li><p>understand the question format</p></li>
+<li><p>know the meaning of “chemical reaction”</p></li>
+<li><p>know they can make only one choice, and how to record it</p></li>
+<li><p>that a rainbow results from refracting light</p></li>
+<li><p>lightning is an electric discharge</p></li>
+<li><p>melting snow is a change of state</p></li>
+<li><p>that burning wood is combination of the molecular structure of wood with oxygen to yield a different compound</p></li>
+</ul>
+<p><strong>This fairly straight-forward question is complex!</strong></p>
+<section id="logit-scale" class="level3">
+<h3 class="anchored" data-anchor-id="logit-scale">Logit Scale</h3>
+<p>A Logit is just the log odds and it is a s-shaped functional form. For IRT higher logits means a higher probability of answering a question correctly. The use of a logit scale (there are other options, such as the probit scale) allows us to do mathematical operations to results gathered from items on the nominal or ordinal scales.</p>
+</section>
+<section id="item-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="item-parameters">Item Parameters</h3>
+<section id="item-difficulty" class="level4">
+<h4 class="anchored" data-anchor-id="item-difficulty">Item Difficulty</h4>
+<p>Each scale item has an <em>item difficulty</em> value represented as its location within the range of ability, which is often represented as theta (<span class="math inline">\(\theta\)</span>). For dichotomous items, the item difficulty is defined as the point on the ability range that represents the person having a 50% chance of endorsing the item (e.g.&nbsp;answering it correctly). People with a higher ability (i.e.&nbsp;higher <span class="math inline">\(\theta\)</span>, which is on the logit scale) will have a higher likelihood of answering the item correctly, and those with lower ability will be less likely to answer it correctly. Items with higher logit values are more difficult, requiring persons to have a higher <span class="math inline">\(\theta\)</span> to endorse the item with the same likelihood.</p>
+</section>
+<section id="item-discrimination" class="level4">
+<h4 class="anchored" data-anchor-id="item-discrimination">Item Discrimination</h4>
+<p>The item difficulty is the point on the s-curve where the slope is steepest (and also is in the middle of the curve as it is symmetrical). The logit for this location is zero. The steepness of the s-shaped curve in the middle represents the <em>item discrimination</em>, and the steeper the curve the better the item is at discriminating between persons higher in ability from those lower in ability. Generally, items with higher item discrimination are preferred.</p>
+</section>
+</section>
+</section>
+<section id="pl-irt-model-or-the-rasch-model" class="level2">
+<h2 class="anchored" data-anchor-id="pl-irt-model-or-the-rasch-model">1-PL IRT Model or the Rasch Model</h2>
+<p>To understand these parameters we will consider how they are related in IRT models. We will start with the simplest model known as the one parameter logistic IRT model and also as the Rasch model. The “one-parameter” is because this model only has one item parameter, namely, item difficulty. Item discrimination is assumed to be equal across items.</p>
+<p><span class="math display">\[
+P(Y_{ij} = 1 | \theta_j, a, b_j) = \frac{\text{exp}(Da(\theta_j - b_i))}{1 + \text{exp}(Da(\theta_j - b_i))}
+\]</span></p>
+<p>where <span class="math inline">\(\theta_j\)</span> is the level of the latent trait for person <span class="math inline">\(j\)</span>, <span class="math inline">\(a\)</span> is the item discrimination parameter. The parameter <span class="math inline">\(b_i\)</span>, represents the item difficulty for item <span class="math inline">\(i\)</span>, and <span class="math inline">\(D\)</span> is a constant, that scales the monotonic function for the logistic model onto a normal ogive model, where <span class="math inline">\(D = 1.7\)</span>.</p>
+<p>IRT is a probabilistic model of responses to a given item based on an underlying latent ability. “A latent trait is a characteristic or ability of an individual that is not directly observable but instead must be inferred based on some aspect of a person’s performance or presentation” <span class="citation" data-cites="baylor2011introduction">(<a href="#ref-baylor2011introduction" role="doc-biblioref">Baylor et al. 2011</a>)</span>.</p>
+<p>The probability of item endorsement is referred to as theta (<span class="math inline">\(\theta\)</span>), and us a is a monotonically increasing function of the latent ability.</p>
+<section id="general-assumptions-underlying-item-response-theory-models" class="level4">
+<h4 class="anchored" data-anchor-id="general-assumptions-underlying-item-response-theory-models">General Assumptions Underlying Item Response Theory Models</h4>
+<ol type="1">
+<li><strong>Unidimensionality</strong> of the latent construct</li>
+<li><strong>Parallel</strong> item characteristic curves</li>
+<li><strong>Local independence</strong> after considering person parameter</li>
+</ol>
+<p>Let’s see this model in action with our example data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("mirt")</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mirt"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"hemp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Look at the help file for <code>mirt</code>, and browse the vignettes.</p>
+<p>First, we will define the model as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>onepl_mod <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">F = 1 - 16</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">CONSTRAIN = (1 - 16, a1)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>F</code> represents the latent ability, and is manifested by columns 1-16 in the data. The <code>CONSTRAIN</code> command constrains the used items to have the same item discrimination (<span class="math inline">\(a\)</span>). Note <code>mirt</code> uses <span class="math inline">\(a1\)</span> to represent item discrimination instead of <span class="math inline">\(a\)</span>. This model object is then passed to the <code>mirt()</code> function as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>onepl_fit <span class="ot">&lt;-</span> <span class="fu">mirt</span>(<span class="at">data =</span> SAPA, <span class="at">model =</span> onepl_mod,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">SE =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration: 1, Log-Lik: -13494.679, Max-Change: 0.23406
+Iteration: 2, Log-Lik: -13335.854, Max-Change: 0.12756
+Iteration: 3, Log-Lik: -13292.524, Max-Change: 0.07878
+Iteration: 4, Log-Lik: -13277.030, Max-Change: 0.05217
+Iteration: 5, Log-Lik: -13270.789, Max-Change: 0.03431
+Iteration: 6, Log-Lik: -13268.209, Max-Change: 0.02244
+Iteration: 7, Log-Lik: -13266.529, Max-Change: 0.00847
+Iteration: 8, Log-Lik: -13266.376, Max-Change: 0.00575
+Iteration: 9, Log-Lik: -13266.308, Max-Change: 0.00382
+Iteration: 10, Log-Lik: -13266.259, Max-Change: 0.00131
+Iteration: 11, Log-Lik: -13266.255, Max-Change: 0.00084
+Iteration: 12, Log-Lik: -13266.253, Max-Change: 0.00062
+Iteration: 13, Log-Lik: -13266.251, Max-Change: 0.00017
+Iteration: 14, Log-Lik: -13266.251, Max-Change: 0.00013
+Iteration: 15, Log-Lik: -13266.251, Max-Change: 0.00009
+
+Calculating information matrix...</code></pre>
+</div>
+</div>
+<p>With the model estimated, we can save the parameters to another object, which can be useful, as there are many parameters estimated.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>onepl_params <span class="ot">&lt;-</span> <span class="fu">coef</span>(onepl_fit, <span class="at">IRTpars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>By setting <code>IRTpars = TRUE</code> we will get traditional IRT parameters, instead of an intercept and a slope with is the default in <code>mirt</code>.</p>
+<p><span class="math display">\[
+b_i = \frac{-d_i}{a1_i}
+\]</span> where <span class="math inline">\(d\)</span> is the intercept parameter, which represents item easiness (think CTT), <span class="math inline">\(a1_i\)</span> is the slope parameter, which represents item discrimination, and <span class="math inline">\(b_i\)</span> item difficulty and is the traditional IRT parameter we want.</p>
+<p>The <code>simplify = TRUE</code> puts the item parameters into a data frame for ease of use.</p>
+<p>To explore the parameters, we will look at the item parameters first. We start with looking at the first few.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>onepl_items <span class="ot">&lt;-</span> onepl_params<span class="sc">$</span>items</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(onepl_items)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 a          b g u
+reason.4  1.445587 -0.5557199 0 1
+reason.16 1.445587 -0.8020747 0 1
+reason.17 1.445587 -0.7980649 0 1
+reason.19 1.445587 -0.4546611 0 1
+letter.7  1.445587 -0.3923381 0 1
+letter.33 1.445587 -0.2810892 0 1</code></pre>
+</div>
+</div>
+<p>Notice that the <code>a</code> parameter is estimated to be 1.45 and are all the same, which makes sense in light of constraining them to be the same. The <code>b</code> parameter varies across items, and reflects the estimated difficulty of these items. The <code>g</code> parameter is the lower asymptote, or the lowest value of on the y-axis of the s-curve, which represents the guessing parameter (we will discuss later). Finally, <code>u</code> is the upper asymptote, or the maximum value on the y-axis of the s-curve. Again these last two parameters are not estimated here, and will be important for more complex models later.</p>
+<p>To see the standard errors of the estimates we do the following</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>onepl_se <span class="ot">&lt;-</span> <span class="fu">coef</span>(onepl_fit, <span class="at">printSE =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(onepl_se)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "reason.4"  "reason.16" "reason.17" "reason.19" "letter.7"  "letter.33"
+ [7] "letter.34" "letter.58" "matrix.45" "matrix.46" "matrix.47" "matrix.55"
+[13] "rotate.3"  "rotate.4"  "rotate.6"  "rotate.8"  "GroupPars"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(onepl_fit, <span class="at">type =</span> <span class="st">"trace"</span>, <span class="at">which.items =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">itemplot</span>(onepl_fit, <span class="at">type =</span> <span class="st">"infoSE"</span>, <span class="at">item =</span><span class="dv">1</span>, )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MPsychoR"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mirt"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"zareki"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>?zareki</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="zareki" class="level4">
+<h4 class="anchored" data-anchor-id="zareki"><code>?zareki</code></h4>
+<p><code>zareki {MPsychoR}</code></p>
+</section>
+<section id="neuropsychological-test-battery-for-number-processing-and-calculation-in-children" class="level4">
+<h4 class="anchored" data-anchor-id="neuropsychological-test-battery-for-number-processing-and-calculation-in-children">Neuropsychological Test Battery for Number Processing and Calculation in Children</h4>
+<section id="description" class="level5">
+<h5 class="anchored" data-anchor-id="description">Description</h5>
+<p>ZAREKI-R test battery (von Aster et al., 2006) for the assessment of dyscalculia in children. Includes subsets of 8 summation and 8 subtraction items, dichotomously scored, and 2 covariates.</p>
+</section>
+<section id="usage" class="level5">
+<h5 class="anchored" data-anchor-id="usage">Usage</h5>
+<p><code>data("zareki")</code></p>
+</section>
+<section id="format" class="level5">
+<h5 class="anchored" data-anchor-id="format">Format</h5>
+<p>A data frame with 341 and 18 variables. Variables starting with addit are summation items, variables starting with subtr are subtraction items. class denotes elementary school class, time the time in min require to complete the test.</p>
+</section>
+</section>
+<section id="example-data" class="level3">
+<h3 class="anchored" data-anchor-id="example-data">Example data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>zarsub <span class="ot">&lt;-</span> zareki[, <span class="fu">grep</span>(<span class="st">"subtr"</span>, <span class="fu">colnames</span>(zareki))]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(zarsub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  subtr1 subtr2 subtr3 subtr4 subtr5 subtr6 subtr7 subtr8
+1      1      1      1      1      1      1      0      1
+2      1      1      1      1      1      1      0      1
+3      1      1      0      1      1      0      0      1
+4      1      1      0      1      1      0      1      1
+5      1      1      0      1      1      0      0      1
+6      1      1      0      1      1      1      0      0</code></pre>
+</div>
+</div>
+</section>
+<section id="using-princals-for-dimensionality-assessment" class="level3">
+<h3 class="anchored" data-anchor-id="using-princals-for-dimensionality-assessment">Using <code>princals</code> for Dimensionality Assessment</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"Gifi"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>prinzar <span class="ot">&lt;-</span> <span class="fu">princals</span>(zarsub)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prinzar, <span class="at">main =</span> <span class="st">"Zareki Loadings"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"Gifi"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>prinzar <span class="ot">&lt;-</span> <span class="fu">princals</span>(zarsub)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prinzar, <span class="at">main =</span> <span class="st">"Zareki Loadings"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="horns-parallel-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="horns-parallel-analysis">Horn’s Parallel Analysis</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"psych"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fa.parallel</span>(zarsub, <span class="at">cor =</span> <span class="st">"poly"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parallel analysis suggests that the number of factors =  3  and the number of components =  1 </code></pre>
+</div>
+</div>
+</section>
+<section id="item-factor-analysis-mirt-package" class="level3">
+<h3 class="anchored" data-anchor-id="item-factor-analysis-mirt-package">Item Factor Analysis (<code>mirt</code> package)</h3>
+<div class="cell" data-hash="irt_dichotomous_cache/html/unnamed-chunk-16_db5df0ef15a88a912d49639d1c6115a6">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fitifa1 <span class="ot">&lt;-</span> <span class="fu">mirt</span>(zarsub, <span class="dv">1</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>fitifa2 <span class="ot">&lt;-</span> <span class="fu">mirt</span>(zarsub, <span class="dv">2</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>, <span class="at">TOL =</span> <span class="fl">0.001</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fitifa1, fitifa2, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             AIC    SABIC       HQ      BIC    logLik     X2 df     p
+fitifa1 2558.405 2568.959 2582.831 2619.715 -1263.202                
+fitifa2 2561.249 2576.422 2596.363 2649.383 -1257.625 11.155  7 0.132</code></pre>
+</div>
+</div>
+</section>
+<section id="rasch-model-using-easiness-parameter-beta-instead-of-difficulty-parameter" class="level3">
+<h3 class="anchored" data-anchor-id="rasch-model-using-easiness-parameter-beta-instead-of-difficulty-parameter">Rasch Model (using easiness parameter <span class="math inline">\(\beta\)</span> instead of difficulty parameter )</h3>
+<p><span class="math display">\[P(x_{\nu i} = 1) = \frac{\text{exp}(\theta_\nu + \beta_i)}{1 + \text{exp}(\theta_\nu + \beta_i)}\]</span></p>
+</section>
+<section id="rasch-model-using-erm-package" class="level3">
+<h3 class="anchored" data-anchor-id="rasch-model-using-erm-package">Rasch Model using <code>eRm</code> Package</h3>
+<div class="cell" data-warnings="false">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"eRm"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>fitrasch1 <span class="ot">&lt;-</span> <span class="fu">RM</span>(zarsub)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>fitrasch1 <span class="co"># this gives item parameter estimates only</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Results of RM estimation: 
+
+Call:  RM(X = zarsub) 
+
+Conditional log-likelihood: -646.9202 
+Number of iterations: 12 
+Number of parameters: 7 
+
+Item (Category) Difficulty Parameters (eta):
+             subtr2    subtr3     subtr4    subtr5    subtr6    subtr7
+Estimate -0.7552997 1.6808330 -0.4774069 -0.280543 0.4163264 1.5508677
+Std.Err   0.1619353 0.1310474  0.1515977  0.145557 0.1316531 0.1296646
+             subtr8
+Estimate -0.1884142
+Std.Err   0.1430740</code></pre>
+</div>
+</div>
+<section id="rasch-model-extracting-the-easiness-parameter-estimates" class="level4">
+<h4 class="anchored" data-anchor-id="rasch-model-extracting-the-easiness-parameter-estimates">Rasch Model: extracting the easiness parameter estimates ($)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(fitrasch1<span class="sc">$</span>betapar, <span class="dv">3</span>) <span class="co"># easiness</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>beta subtr1 beta subtr2 beta subtr3 beta subtr4 beta subtr5 beta subtr6 
+      1.946       0.755      -1.681       0.477       0.281      -0.416 
+beta subtr7 beta subtr8 
+     -1.551       0.188 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">sort</span>(<span class="sc">-</span>fitrasch1<span class="sc">$</span>betapar), <span class="dv">3</span>) <span class="co"># difficulty</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>beta subtr1 beta subtr2 beta subtr4 beta subtr5 beta subtr8 beta subtr6 
+     -1.946      -0.755      -0.477      -0.281      -0.188       0.416 
+beta subtr7 beta subtr3 
+      1.551       1.681 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="plotting" class="level3">
+<h3 class="anchored" data-anchor-id="plotting">Plotting</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotPImap</span>(fitrasch1, <span class="at">sorted =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="checking-goodness-of-fit-for-the-rasch-model" class="level3">
+<h3 class="anchored" data-anchor-id="checking-goodness-of-fit-for-the-rasch-model">Checking Goodness of Fit for the Rasch Model</h3>
+<p>We test fit by comparing subgroups</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>timecat <span class="ot">&lt;-</span> <span class="fu">factor</span>(zareki<span class="sc">$</span>time <span class="sc">&lt;=</span> <span class="fu">median</span>(zareki<span class="sc">$</span>time), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"fast"</span>, <span class="st">"slow"</span>))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>fitLR <span class="ot">&lt;-</span> <span class="fu">LRtest</span>(fitrasch1, timecat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>fitLR</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Andersen LR-test: 
+LR-value: 24.097 
+Chi-square df: 7 
+p-value:  0.001 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Waldtest</span>(fitrasch1, timecat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Wald test on item level (z-values):
+
+            z-statistic p-value
+beta subtr1      -0.360   0.719
+beta subtr2       0.237   0.813
+beta subtr3      -2.342   0.019
+beta subtr4       0.730   0.465
+beta subtr5       4.199   0.000
+beta subtr6      -0.548   0.584
+beta subtr7      -1.529   0.126
+beta subtr8      -0.469   0.639</code></pre>
+</div>
+</div>
+</section>
+<section id="ploting-to-explore-gof" class="level3">
+<h3 class="anchored" data-anchor-id="ploting-to-explore-gof">Ploting to Explore GOF</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotGOF</span>(fitLR, <span class="at">ctrline =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"gray"</span>), <span class="at">conf =</span> <span class="fu">list</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="refit-model-without-subtr5-item" class="level3">
+<h3 class="anchored" data-anchor-id="refit-model-without-subtr5-item">Refit Model without <code>subtr5</code> item</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fitrasch2 <span class="ot">&lt;-</span> <span class="fu">RM</span>(zarsub[, <span class="sc">-</span><span class="dv">5</span>])</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>fitLR2 <span class="ot">&lt;-</span> <span class="fu">LRtest</span>(fitrasch2, timecat)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>fitLR2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Andersen LR-test: 
+LR-value: 5.715 
+Chi-square df: 6 
+p-value:  0.456 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotGOF</span>(fitLR2, <span class="at">ctrline =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"gray"</span>), <span class="at">conf =</span> <span class="fu">list</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="new-difficulty-parameter-estimates" class="level3">
+<h3 class="anchored" data-anchor-id="new-difficulty-parameter-estimates">New difficulty parameter estimates</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">sort</span>(<span class="sc">-</span>fitrasch2<span class="sc">$</span>betapar), <span class="dv">2</span>) <span class="co"># Difficulty parameter estimates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>beta subtr1 beta subtr2 beta subtr4 beta subtr8 beta subtr6 beta subtr7 
+      -2.08       -0.83       -0.54       -0.24        0.39        1.58 
+beta subtr3 
+       1.72 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotjointICC</span>(fitrasch2, </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">xlab =</span> <span class="st">"Subtraction Trait"</span>, </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">main =</span> <span class="st">"ICCs Subtraction Items"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotPImap</span>(fitrasch2, <span class="at">sorted =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-baylor2011introduction" class="csl-entry" role="doc-biblioentry">
+Baylor, Carolyn, William Hula, Neila J Donovan, Patrick J Doyle, Diane Kendall, and Kathryn Yorkston. 2011. <span>“An Introduction to Item Response Theory and Rasch Models for Speech-Language Pathologists.”</span>
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,7 +1,303 @@
-# Item Response Theory
+---
+Title: Item Response Theory
+bibliography: references.bib
+---
 
-Some _significant_ applications are demonstrated in this chapter.
 
-## Example one
 
-## Example two
+## Synthetic Aperture Personality Assessment (SAPA)
+
+To learn more about this data you can use the R help function after loading the `hemp` package as follows,
+
+```{r}
+#| message: false
+library(hemp)
+data(SAPA)
+?SAPA
+```
+and you can also go the the SAPA website at [https://www.sapa-project.org/](https://www.sapa-project.org/).
+
+You should spend some time familiarizing yourself with the data, a process you should be able to do on your own.
+
+```{r}
+str(SAPA)
+
+summary(SAPA)
+```
+
+## Item Response Theory
+
+Example of a test item:
+
+Which of the following is an example of a chemical reaction?
+
+A. A rainbow\
+B. Lightning\
+C. Burning wood\
+D. Melting snow\
+What must one know to answer this question?
+
+-   be able to read and comprehend English
+
+-   understand the question format
+
+-   know the meaning of "chemical reaction"
+
+-   know they can make only one choice, and how to record it
+
+-   that a rainbow results from refracting light
+
+-   lightning is an electric discharge
+
+-   melting snow is a change of state
+
+-   that burning wood is combination of the molecular structure of wood with oxygen to yield a different compound
+
+**This fairly straight-forward question is complex!**
+
+### Logit Scale
+
+A Logit is just the log odds and it is a s-shaped functional form. For IRT higher logits means a higher probability of answering a question correctly. The use of a logit scale (there are other options, such as the probit scale) allows us to do mathematical operations to results gathered from items on the nominal or ordinal scales. 
+
+### Item Parameters
+
+#### Item Difficulty
+
+Each scale item has an *item difficulty* value represented as its location within the range of ability, which is often represented as theta ($\theta$). For dichotomous items, the item difficulty is defined as the point on the ability range that represents the person having a 50% chance of endorsing the item (e.g. answering it correctly). People with a higher ability (i.e. higher $\theta$, which is on the logit scale) will have a higher likelihood of answering the item correctly, and those with lower ability will be less likely to answer it correctly. Items with higher logit values are more difficult, requiring persons to have a higher $\theta$ to endorse the item with the same likelihood. 
+
+#### Item Discrimination
+
+The item difficulty is the point on the s-curve where the slope is steepest (and also is in the middle of the curve as it is symmetrical). The logit for this location is zero.
+The steepness of the s-shaped curve in the middle represents the *item discrimination*, and the steeper the curve the better the item is at discriminating between persons higher in ability from those lower in ability. Generally, items with higher item discrimination are preferred.
+
+## 1-PL IRT Model or the Rasch Model
+
+To understand these parameters we will consider how they are related in IRT models. We will start with the simplest model known as the one parameter logistic IRT model and also as the Rasch model. The "one-parameter" is because this model only has one item parameter, namely, item difficulty. Item discrimination is assumed to be equal across items.
+
+$$
+P(Y_{ij} = 1 | \theta_j, a, b_j) = \frac{\text{exp}(Da(\theta_j - b_i))}{1 + \text{exp}(Da(\theta_j - b_i))}
+$$
+
+where $\theta_j$ is the level of the latent trait for person $j$, $a$ is the item discrimination parameter. The parameter $b_i$, represents the item difficulty for item $i$, and $D$ is a constant, that scales the monotonic function for the logistic model onto a normal ogive model, where $D = 1.7$.
+
+
+IRT is a probabilistic model of responses to a given item based on an underlying latent ability. "A latent trait is a characteristic or ability of an individual that is not directly observable but instead must be inferred based on some aspect of a person's performance or presentation" [@baylor2011introduction].
+
+The probability of item endorsement is referred to as theta ($\theta$), and us a is a monotonically increasing function of the latent ability.
+
+#### General Assumptions Underlying Item Response Theory Models
+
+1.  **Unidimensionality** of the latent construct
+2.  **Parallel** item characteristic curves
+3.  **Local independence** after considering person parameter
+
+
+Let's see this model in action with our example data
+
+```{r}
+#| message: false
+# install.packages("mirt")
+library("mirt")
+library("hemp")
+```
+
+Look at the help file for `mirt`, and browse the vignettes.
+
+First, we will define the model as follows:
+```{r}
+onepl_mod <- "
+F = 1 - 16
+CONSTRAIN = (1 - 16, a1)
+"
+```
+
+The `F` represents the latent ability, and is manifested by columns 1-16 in the data. The `CONSTRAIN` command constrains the used items to have the same item discrimination ($a$). Note `mirt` uses $a1$ to represent item discrimination instead of $a$.
+This model object is then passed to the `mirt()` function as follows:
+```{r}
+onepl_fit <- mirt(data = SAPA, model = onepl_mod,
+                  SE = TRUE)
+```
+
+With the model estimated, we can save the parameters to another object, which can be useful, as there are many parameters estimated.
+```{r}
+onepl_params <- coef(onepl_fit, IRTpars = TRUE,
+                     simplify = TRUE)
+```
+By setting `IRTpars = TRUE` we will get traditional IRT parameters, instead of an intercept and a slope with is the default in `mirt`. 
+
+$$
+b_i = \frac{-d_i}{a1_i}
+$$
+where $d$ is the intercept parameter, which represents item easiness (think CTT), $a1_i$ is the slope parameter, which represents item discrimination, and $b_i$ item difficulty and is the traditional IRT parameter we want.
+
+The `simplify = TRUE` puts the item parameters into a data frame for ease of use.
+
+To explore the parameters, we will look at the item parameters first. We start with looking at the first few.
+```{r}
+onepl_items <- onepl_params$items
+head(onepl_items)
+```
+
+Notice that the `a` parameter is estimated to be 1.45 and are all the same, which makes sense in light of constraining them to be the same. 
+The `b` parameter varies across items, and reflects the estimated difficulty of these items. The `g` parameter is the lower asymptote, or the lowest value of on the y-axis of the s-curve, which represents the guessing parameter (we will discuss later). Finally, `u` is the upper asymptote, or the maximum value on the y-axis of the s-curve. Again these last two parameters are not estimated here, and will be important for more complex models later.
+
+To see the standard errors of the estimates we do the following
+```{r}
+onepl_se <- coef(onepl_fit, printSE = TRUE)
+names(onepl_se)
+```
+
+```{r}
+plot(onepl_fit, type = "trace", which.items = 1:2)
+```
+
+```{r}
+itemplot(onepl_fit, type = "infoSE", item =1, )
+
+```
+
+
+
+```{r, echo=TRUE}
+library("MPsychoR")
+library("mirt")
+data("zareki")
+
+?zareki
+```
+
+#### `?zareki`
+
+`zareki {MPsychoR}`
+
+#### Neuropsychological Test Battery for Number Processing and Calculation in Children
+
+##### Description
+
+ZAREKI-R test battery (von Aster et al., 2006) for the assessment of dyscalculia in children. Includes subsets of 8 summation and 8 subtraction items, dichotomously scored, and 2 covariates.
+
+##### Usage
+
+`data("zareki")`
+
+##### Format
+
+A data frame with 341 and 18 variables. Variables starting with addit are summation items, variables starting with subtr are subtraction items. class denotes elementary school class, time the time in min require to complete the test.
+
+### Example data
+
+```{r, echo=TRUE}
+zarsub <- zareki[, grep("subtr", colnames(zareki))]
+
+head(zarsub)
+```
+
+### Using `princals` for Dimensionality Assessment
+
+```{r, echo=TRUE, eval=FALSE}
+library("Gifi")
+prinzar <- princals(zarsub)
+plot(prinzar, main = "Zareki Loadings")
+```
+
+```{r}
+library("Gifi")
+prinzar <- princals(zarsub)
+plot(prinzar, main = "Zareki Loadings")
+```
+
+### Horn's Parallel Analysis
+
+```{r}
+library("psych")
+fa.parallel(zarsub, cor = "poly")
+```
+
+### Item Factor Analysis (`mirt` package)
+
+```{r, echo=TRUE,  cache=TRUE}
+fitifa1 <- mirt(zarsub, 1, verbose = FALSE)
+fitifa2 <- mirt(zarsub, 2, verbose = FALSE, TOL = 0.001)
+anova(fitifa1, fitifa2, verbose = FALSE)
+```
+
+### Rasch Model (using easiness parameter $\beta$ instead of difficulty parameter )
+
+$$P(x_{\nu i} = 1) = \frac{\text{exp}(\theta_\nu + \beta_i)}{1 + \text{exp}(\theta_\nu + \beta_i)}$$
+
+### Rasch Model using `eRm` Package
+
+```{r, echo=TRUE, warnings = FALSE, message=FALSE}
+library("eRm")
+fitrasch1 <- RM(zarsub)
+fitrasch1 # this gives item parameter estimates only
+```
+
+#### Rasch Model: extracting the easiness parameter estimates (\$)
+
+```{r, echo=TRUE}
+round(fitrasch1$betapar, 3) # easiness
+```
+
+```{r, echo=TRUE}
+round(sort(-fitrasch1$betapar), 3) # difficulty
+```
+
+### Plotting
+
+```{r}
+plotPImap(fitrasch1, sorted = TRUE)
+```
+
+### Checking Goodness of Fit for the Rasch Model
+
+We test fit by comparing subgroups
+
+```{r, echo=TRUE}
+timecat <- factor(zareki$time <= median(zareki$time), labels = c("fast", "slow"))
+fitLR <- LRtest(fitrasch1, timecat)
+```
+
+```{r, echo=TRUE}
+fitLR
+```
+
+```{r, echo=TRUE}
+Waldtest(fitrasch1, timecat)
+```
+
+### Ploting to Explore GOF
+
+```{r, echo=TRUE}
+
+plotGOF(fitLR, ctrline = list(col = "gray"), conf = list())
+```
+
+### Refit Model without `subtr5` item
+
+```{r, echo=TRUE}
+fitrasch2 <- RM(zarsub[, -5])
+fitLR2 <- LRtest(fitrasch2, timecat)
+fitLR2
+```
+
+```{r}
+plotGOF(fitLR2, ctrline = list(col = "gray"), conf = list())
+```
+
+### New difficulty parameter estimates
+
+```{r, echo=TRUE}
+round(sort(-fitrasch2$betapar), 2) # Difficulty parameter estimates
+```
+
+```{r, echo=TRUE}
+plotjointICC(fitrasch2, 
+             xlab = "Subtraction Trait", 
+             main = "ICCs Subtraction Items")
+```
+
+```{r, echo = TRUE}
+plotPImap(fitrasch2, sorted = TRUE)
+```
+
