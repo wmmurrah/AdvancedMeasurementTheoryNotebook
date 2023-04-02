@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Advanced Measurement Theory: a Computational Model-Based Approach - 7&nbsp; Item Response Theory: Dichotomous Items</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./statisticalthinkinglink.html" rel="next">
+<link href="./cfa.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Item Response Theory: Dichotomous Items</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Advanced Measurement Theory: a Computational Model-Based Approach</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the Course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_R_programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R Programming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ctt.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classic Test Theory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./generalizability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Generalizability Theory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./efa.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exploratory Factor Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cfa.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confirmatory Factor Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./irt_dichotomous.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Item Response Theory: Dichotomous Items</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./statisticalthinkinglink.html" class="sidebar-item-text sidebar-link"></a><a href="https://www.statistical-thinking.com/">return to statistical-thinking.com</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-item-response-theory" id="toc-introduction-to-item-response-theory" class="nav-link active" data-scroll-target="#introduction-to-item-response-theory"><span class="toc-section-number">7.1</span>  Introduction to Item Response Theory</a>
+  <ul class="collapse">
+  <li><a href="#synthetic-aperture-personality-assessment-sapa" id="toc-synthetic-aperture-personality-assessment-sapa" class="nav-link" data-scroll-target="#synthetic-aperture-personality-assessment-sapa"><span class="toc-section-number">7.1.1</span>  Synthetic Aperture Personality Assessment (SAPA)</a></li>
+  <li><a href="#logit-scale" id="toc-logit-scale" class="nav-link" data-scroll-target="#logit-scale"><span class="toc-section-number">7.1.2</span>  Logit Scale</a></li>
+  <li><a href="#item-parameters" id="toc-item-parameters" class="nav-link" data-scroll-target="#item-parameters"><span class="toc-section-number">7.1.3</span>  Item Parameters</a></li>
+  </ul></li>
+  <li><a href="#unidimensional-irt-models-for-dichotomous-items" id="toc-unidimensional-irt-models-for-dichotomous-items" class="nav-link" data-scroll-target="#unidimensional-irt-models-for-dichotomous-items"><span class="toc-section-number">7.2</span>  Unidimensional IRT Models for Dichotomous Items</a>
+  <ul class="collapse">
+  <li><a href="#pl-irt-model-or-the-rasch-model" id="toc-pl-irt-model-or-the-rasch-model" class="nav-link" data-scroll-target="#pl-irt-model-or-the-rasch-model"><span class="toc-section-number">7.2.1</span>  1-PL IRT Model or the Rasch Model</a></li>
+  <li><a href="#two-parameter-logistic-model" id="toc-two-parameter-logistic-model" class="nav-link" data-scroll-target="#two-parameter-logistic-model"><span class="toc-section-number">7.2.2</span>  Two-Parameter Logistic Model</a></li>
+  <li><a href="#three-parameter-logistic-model" id="toc-three-parameter-logistic-model" class="nav-link" data-scroll-target="#three-parameter-logistic-model"><span class="toc-section-number">7.2.3</span>  Three-Parameter Logistic Model</a></li>
+  <li><a href="#four-parameter-logistic-model" id="toc-four-parameter-logistic-model" class="nav-link" data-scroll-target="#four-parameter-logistic-model"><span class="toc-section-number">7.2.4</span>  Four-Parameter Logistic Model</a></li>
+  </ul></li>
+  <li><a href="#ability-estimation-in-irt-models" id="toc-ability-estimation-in-irt-models" class="nav-link" data-scroll-target="#ability-estimation-in-irt-models"><span class="toc-section-number">7.3</span>  Ability Estimation in IRT Models</a></li>
+  <li><a href="#model-diagnostics" id="toc-model-diagnostics" class="nav-link" data-scroll-target="#model-diagnostics"><span class="toc-section-number">7.4</span>  Model Diagnostics</a>
+  <ul class="collapse">
+  <li><a href="#item-fit" id="toc-item-fit" class="nav-link" data-scroll-target="#item-fit"><span class="toc-section-number">7.4.1</span>  Item Fit</a></li>
+  <li><a href="#person-fit" id="toc-person-fit" class="nav-link" data-scroll-target="#person-fit"><span class="toc-section-number">7.4.2</span>  Person Fit</a></li>
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection"><span class="toc-section-number">7.4.3</span>  Model Selection</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="toc-section-number">7.5</span>  References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Item Response Theory: Dichotomous Items</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction-to-item-response-theory" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="introduction-to-item-response-theory"><span class="header-section-number">7.1</span> Introduction to Item Response Theory</h2>
+<section id="synthetic-aperture-personality-assessment-sapa" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="synthetic-aperture-personality-assessment-sapa"><span class="header-section-number">7.1.1</span> Synthetic Aperture Personality Assessment (SAPA)</h3>
+<p>To learn more about this data you can use the R help function after loading the <code>hemp</code> package as follows,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hemp)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(SAPA)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>?SAPA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and you can also go the the SAPA website at <a href="https://www.sapa-project.org/">https://www.sapa-project.org/</a>.</p>
+<p>You should spend some time familiarizing yourself with the data, a process you should be able to do on your own.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(SAPA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   1525 obs. of  16 variables:
+ $ reason.4 : num  0 0 0 1 0 1 1 0 1 1 ...
+ $ reason.16: num  0 0 1 0 1 1 1 1 1 1 ...
+ $ reason.17: num  0 1 1 0 1 1 1 0 0 1 ...
+ $ reason.19: num  0 0 0 0 0 1 1 0 1 1 ...
+ $ letter.7 : num  0 1 1 0 0 1 1 0 0 0 ...
+ $ letter.33: num  1 0 0 0 1 1 1 0 1 0 ...
+ $ letter.34: num  0 1 0 1 0 1 1 0 1 1 ...
+ $ letter.58: num  0 0 0 0 0 1 1 0 1 0 ...
+ $ matrix.45: num  0 0 1 0 1 1 1 0 1 1 ...
+ $ matrix.46: num  0 0 1 0 1 1 1 1 0 1 ...
+ $ matrix.47: num  0 0 0 0 0 1 1 1 0 0 ...
+ $ matrix.55: num  1 0 0 0 0 0 0 0 0 0 ...
+ $ rotate.3 : num  0 0 0 0 0 1 1 0 0 0 ...
+ $ rotate.4 : num  0 0 0 0 0 1 1 1 0 0 ...
+ $ rotate.6 : num  0 1 0 0 0 1 1 0 0 0 ...
+ $ rotate.8 : num  0 0 0 0 0 0 1 0 0 0 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAPA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    reason.4        reason.16        reason.17        reason.19     
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :1.0000   Median :1.0000   Median :1.0000   Median :1.0000  
+ Mean   :0.6402   Mean   :0.6982   Mean   :0.6973   Mean   :0.6152  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+ NA's   :2        NA's   :1        NA's   :2        NA's   :2       
+    letter.7        letter.33        letter.34        letter.58     
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :1.0000   Median :1.0000   Median :1.0000   Median :0.0000  
+ Mean   :0.5997   Mean   :0.5712   Mean   :0.6133   Mean   :0.4439  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+ NA's   :1        NA's   :2        NA's   :2                        
+   matrix.45        matrix.46        matrix.47        matrix.55    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.000  
+ Median :1.0000   Median :1.0000   Median :1.0000   Median :0.000  
+ Mean   :0.5259   Mean   :0.5499   Mean   :0.6139   Mean   :0.374  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.000  
+ NA's   :2        NA's   :1        NA's   :2        NA's   :1      
+    rotate.3         rotate.4         rotate.6         rotate.8    
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.000  
+ Median :0.0000   Median :0.0000   Median :0.0000   Median :0.000  
+ Mean   :0.1937   Mean   :0.2127   Mean   :0.2994   Mean   :0.185  
+ 3rd Qu.:0.0000   3rd Qu.:0.0000   3rd Qu.:1.0000   3rd Qu.:0.000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.000  
+ NA's   :2        NA's   :2        NA's   :2        NA's   :1      </code></pre>
+</div>
+</div>
+<p>Example of a test item:</p>
+<p>Which of the following is an example of a chemical reaction?</p>
+<p>A. A rainbow<br>
+B. Lightning<br>
+C. Burning wood<br>
+D. Melting snow<br>
+What must one know to answer this question?</p>
+<ul>
+<li><p>be able to read and comprehend English</p></li>
+<li><p>understand the question format</p></li>
+<li><p>know the meaning of “chemical reaction”</p></li>
+<li><p>know they can make only one choice, and how to record it</p></li>
+<li><p>that a rainbow results from refracting light</p></li>
+<li><p>lightning is an electric discharge</p></li>
+<li><p>melting snow is a change of state</p></li>
+<li><p>that burning wood is combination of the molecular structure of wood with oxygen to yield a different compound</p></li>
+</ul>
+<p><strong>This fairly straight-forward question is complex!</strong></p>
+</section>
+<section id="logit-scale" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="logit-scale"><span class="header-section-number">7.1.2</span> Logit Scale</h3>
+<p>A Logit is just the log odds and it is a s-shaped functional form. For IRT higher logits means a higher probability of answering a question correctly. The use of a logit scale (there are other options, such as the probit scale) allows us to do mathematical operations to results gathered from items on the nominal or ordinal scales.</p>
+</section>
+<section id="item-parameters" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="item-parameters"><span class="header-section-number">7.1.3</span> Item Parameters</h3>
+<section id="item-difficulty" class="level4" data-number="7.1.3.1">
+<h4 data-number="7.1.3.1" class="anchored" data-anchor-id="item-difficulty"><span class="header-section-number">7.1.3.1</span> Item Difficulty</h4>
+<p>Each scale item has an <em>item difficulty</em> value represented as its location within the range of ability, which is often represented as theta (<span class="math inline">\(\theta\)</span>). For dichotomous items, the item difficulty is defined as the point on the ability range that represents the person having a 50% chance of endorsing the item (e.g.&nbsp;answering it correctly). People with a higher ability (i.e.&nbsp;higher <span class="math inline">\(\theta\)</span>, which is on the logit scale) will have a higher likelihood of answering the item correctly, and those with lower ability will be less likely to answer it correctly. Items with higher logit values are more difficult, requiring persons to have a higher <span class="math inline">\(\theta\)</span> to endorse the item with the same likelihood.</p>
+</section>
+<section id="item-discrimination" class="level4" data-number="7.1.3.2">
+<h4 data-number="7.1.3.2" class="anchored" data-anchor-id="item-discrimination"><span class="header-section-number">7.1.3.2</span> Item Discrimination</h4>
+<p>The item difficulty is the point on the s-curve where the slope is steepest (and also is in the middle of the curve as it is symmetrical). The logit for this location is zero. The steepness of the s-shaped curve in the middle represents the <em>item discrimination</em>, and the steeper the curve the better the item is at discriminating between persons higher in ability from those lower in ability. Generally, items with higher item discrimination are preferred.</p>
+</section>
+<section id="general-assumptions-underlying-item-response-theory-models" class="level4" data-number="7.1.3.3">
+<h4 data-number="7.1.3.3" class="anchored" data-anchor-id="general-assumptions-underlying-item-response-theory-models"><span class="header-section-number">7.1.3.3</span> General Assumptions Underlying Item Response Theory Models</h4>
+<ol type="1">
+<li><strong>Unidimensionality</strong> of the latent construct</li>
+<li><strong>Parallel</strong> item characteristic curves</li>
+<li><strong>Local independence</strong> after considering person parameter</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="unidimensional-irt-models-for-dichotomous-items" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="unidimensional-irt-models-for-dichotomous-items"><span class="header-section-number">7.2</span> Unidimensional IRT Models for Dichotomous Items</h2>
+<p>In this section we will explore four unidimensional IRT models for dichotomous items. These include the one-parameter, two-parameter, three-parameter, and four-parameter models.</p>
+<section id="pl-irt-model-or-the-rasch-model" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="pl-irt-model-or-the-rasch-model"><span class="header-section-number">7.2.1</span> 1-PL IRT Model or the Rasch Model</h3>
+<p>To understand these parameters we will consider how they are related in IRT models. We will start with the simplest model known as the one parameter logistic IRT model and also as the Rasch model. The “one-parameter” is because this model only has one item parameter, namely, item difficulty. Item discrimination is assumed to be equal across items.</p>
+<p><span class="math display">\[
+P(Y_{ij} = 1 | \theta_j, a, b_j) = \frac{\text{exp}(Da(\theta_j - b_i))}{1 + \text{exp}(Da(\theta_j - b_i))}
+\]</span></p>
+<p>where <span class="math inline">\(\theta_j\)</span> is the level of the latent trait for person <span class="math inline">\(j\)</span>, <span class="math inline">\(a\)</span> is the item discrimination parameter. The parameter <span class="math inline">\(b_i\)</span>, represents the item difficulty for item <span class="math inline">\(i\)</span>, and <span class="math inline">\(D\)</span> is a constant, that scales the monotonic function for the logistic model onto a normal ogive model, where <span class="math inline">\(D = 1.7\)</span>.</p>
+<p>IRT is a probabilistic model of responses to a given item based on an underlying latent ability. “A latent trait is a characteristic or ability of an individual that is not directly observable but instead must be inferred based on some aspect of a person’s performance or presentation” <span class="citation" data-cites="baylor2011introduction">(<a href="#ref-baylor2011introduction" role="doc-biblioref">Baylor et al. 2011</a>)</span>.</p>
+<p>The probability of item endorsement is referred to as theta (<span class="math inline">\(\theta\)</span>), and us a is a monotonically increasing function of the latent ability.</p>
+<p>Let’s see this model in action with our example data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("mirt")</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"mirt"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"hemp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Look at the help file for <code>mirt</code>, and browse the vignettes.</p>
+<p>First, we will define the model as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>onepl_mod <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">F = 1 - 16</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">CONSTRAIN = (1 - 16, a1)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>F</code> represents the latent ability, and is manifested by columns 1-16 in the data. The <code>CONSTRAIN</code> command constrains the used items to have the same item discrimination (<span class="math inline">\(a\)</span>). Note <code>mirt</code> uses <span class="math inline">\(a1\)</span> to represent item discrimination instead of <span class="math inline">\(a\)</span>. This model object is then passed to the <code>mirt()</code> function as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>onepl_fit <span class="ot">&lt;-</span> <span class="fu">mirt</span>(<span class="at">data =</span> SAPA, <span class="at">model =</span> onepl_mod,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">SE =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration: 1, Log-Lik: -13494.679, Max-Change: 0.23406
+Iteration: 2, Log-Lik: -13335.854, Max-Change: 0.12756
+Iteration: 3, Log-Lik: -13292.524, Max-Change: 0.07878
+Iteration: 4, Log-Lik: -13277.030, Max-Change: 0.05217
+Iteration: 5, Log-Lik: -13270.789, Max-Change: 0.03431
+Iteration: 6, Log-Lik: -13268.209, Max-Change: 0.02244
+Iteration: 7, Log-Lik: -13266.529, Max-Change: 0.00847
+Iteration: 8, Log-Lik: -13266.376, Max-Change: 0.00575
+Iteration: 9, Log-Lik: -13266.308, Max-Change: 0.00382
+Iteration: 10, Log-Lik: -13266.259, Max-Change: 0.00131
+Iteration: 11, Log-Lik: -13266.255, Max-Change: 0.00084
+Iteration: 12, Log-Lik: -13266.253, Max-Change: 0.00062
+Iteration: 13, Log-Lik: -13266.251, Max-Change: 0.00017
+Iteration: 14, Log-Lik: -13266.251, Max-Change: 0.00013
+Iteration: 15, Log-Lik: -13266.251, Max-Change: 0.00009
+
+Calculating information matrix...</code></pre>
+</div>
+</div>
+<p>With the model estimated, we can save the parameters to another object, which can be useful, as there are many parameters estimated.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>onepl_params <span class="ot">&lt;-</span> <span class="fu">coef</span>(onepl_fit, <span class="at">IRTpars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>By setting <code>IRTpars = TRUE</code> we will get traditional IRT parameters, instead of an intercept and a slope with is the default in <code>mirt</code>.</p>
+<p><span class="math display">\[
+b_i = \frac{-d_i}{a1_i}
+\]</span> where <span class="math inline">\(d\)</span> is the intercept parameter, which represents item easiness (think CTT), <span class="math inline">\(a1_i\)</span> is the slope parameter, which represents item discrimination, and <span class="math inline">\(b_i\)</span> item difficulty and is the traditional IRT parameter we want.</p>
+<p>The <code>simplify = TRUE</code> puts the item parameters into a data frame for ease of use.</p>
+<p>To explore the parameters, we will look at the item parameters first. We start with looking at the first few.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>onepl_items <span class="ot">&lt;-</span> onepl_params<span class="sc">$</span>items</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(onepl_items)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 a          b g u
+reason.4  1.445587 -0.5557199 0 1
+reason.16 1.445587 -0.8020747 0 1
+reason.17 1.445587 -0.7980649 0 1
+reason.19 1.445587 -0.4546611 0 1
+letter.7  1.445587 -0.3923381 0 1
+letter.33 1.445587 -0.2810892 0 1</code></pre>
+</div>
+</div>
+<p>Notice that the <code>a</code> parameter is estimated to be 1.45 and are all the same, which makes sense in light of constraining them to be the same. The <code>b</code> parameter varies across items, and reflects the estimated difficulty of these items. The <code>g</code> parameter is the lower asymptote, or the lowest value of on the y-axis of the s-curve, which represents the guessing parameter (we will discuss later). Finally, <code>u</code> is the upper asymptote, or the maximum value on the y-axis of the s-curve. Again these last two parameters are not estimated here, and will be important for more complex models later.</p>
+<p>To see the standard errors of the estimates we do the following</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>onepl_se <span class="ot">&lt;-</span> <span class="fu">coef</span>(onepl_fit, <span class="at">printSE =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(onepl_se)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "reason.4"  "reason.16" "reason.17" "reason.19" "letter.7"  "letter.33"
+ [7] "letter.34" "letter.58" "matrix.45" "matrix.46" "matrix.47" "matrix.55"
+[13] "rotate.3"  "rotate.4"  "rotate.6"  "rotate.8"  "GroupPars"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(onepl_fit, <span class="at">type =</span> <span class="st">"trace"</span>, <span class="at">which.items =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">itemplot</span>(onepl_fit, <span class="at">type =</span> <span class="st">"infoSE"</span>, <span class="at">item =</span><span class="dv">1</span>, )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="two-parameter-logistic-model" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="two-parameter-logistic-model"><span class="header-section-number">7.2.2</span> Two-Parameter Logistic Model</h3>
+<p>Recall the equation for the one parameter logistics model: <span id="eq-rasch"><span class="math display">\[
+P(Y_{ij} = 1 | \theta_j, a, b_j) = \frac{\text{exp}(Da(\theta_j - b_i))}{1 + \text{exp}(Da(\theta_j - b_i))}
+\tag{7.1}\]</span></span></p>
+<p>The equation <span id="eq-2pl"><span class="math display">\[
+P(Y_{ij} = 1 | \theta_j, a, b_j) = \frac{\text{exp}(Da_i(\theta_j - b_i))}{1 + \text{exp}(Da_i(\theta_j - b_i))}
+\tag{7.2}\]</span></span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>twopl_mod <span class="ot">&lt;-</span> <span class="st">"F = 1 - 16"</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>twopl_fit <span class="ot">&lt;-</span> <span class="fu">mirt</span>(<span class="at">data =</span> SAPA, <span class="at">model =</span> twopl_mod,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">itemtype =</span> <span class="st">"2PL"</span>, <span class="at">SE =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>twopl_params <span class="ot">&lt;-</span> <span class="fu">coef</span>(twopl_fit, <span class="at">IRTpars =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>twopl_items <span class="ot">&lt;-</span> twopl_params<span class="sc">$</span>items</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>twopl_items</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  a          b g u
+reason.4  1.6924256 -0.5127258 0 1
+reason.16 1.4616058 -0.7967194 0 1
+reason.17 1.8568189 -0.7052519 0 1
+reason.19 1.4429276 -0.4544282 0 1
+letter.7  1.5739581 -0.3749607 0 1
+letter.33 1.3512472 -0.2906578 0 1
+letter.34 1.6568903 -0.4165187 0 1
+letter.58 1.4637541  0.2090402 0 1
+matrix.45 1.0649705 -0.1241352 0 1
+matrix.46 1.1060157 -0.2292152 0 1
+matrix.47 1.3463316 -0.4666121 0 1
+matrix.55 0.8786048  0.6793708 0 1
+rotate.3  1.7878172  1.1986461 0 1
+rotate.4  2.0841977  1.0317428 0 1
+rotate.6  1.6388551  0.7524753 0 1
+rotate.8  1.5855260  1.3201267 0 1</code></pre>
+</div>
+</div>
+<p>Note that unlike with the 1-PL model in which the a (discrimination) parameter was constant but the b (difficulty) parameter varied across items, for the 2-PL model both parameters are estimated for each item. We can see this by plotting the item characteristics curves (ICC).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(twopl_fit, <span class="at">type =</span> <span class="st">"trace"</span>, <span class="at">which.items =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-2pl" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="irt_dichotomous_files/figure-html/fig-2pl-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;7.1: Two-Parameter Logistic Model ICC for Items 12 (matrix.55) and 14 (rotate.4)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The steepness of the curve reflects the dicrimination of the item, so <code>rotate.4</code> better discriminates participants low and high on the latent trait compared to <code>matrix.55</code>.</p>
+<p>Below, we plot two items with very similar discriminations, but different difficulties. Here</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(twopl_fit, <span class="at">type =</span> <span class="st">"trace"</span>, <span class="at">which.items =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">16</span>),</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">facet_items =</span> <span class="cn">FALSE</span>, <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">points =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">lines =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">columns =</span> <span class="dv">2</span>),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">par.settings =</span> <span class="fu">simpleTheme</span>(<span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-2pl_5_16" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="irt_dichotomous_files/figure-html/fig-2pl_5_16-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;7.2: Two Items from the 2-PL model with similar discriminations but where one (<code>rotate.8</code>) has a higher difficulty than the other (<code>letter.7</code>).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="three-parameter-logistic-model" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="three-parameter-logistic-model"><span class="header-section-number">7.2.3</span> Three-Parameter Logistic Model</h3>
+<p>The three-parameter logistic (3-PL) IRT model extents the 2-PL model by allowing the lower asymptote to be a value other than zero and to vary across items. This new parameter is known as the pseudo-guessing parameter and represents the likelihood of endorsing the item based solely on chance. This equation looks a bit different from the 1-PL and 2-PL. Of note here, the pseudo-guessing parameter is represented as <span class="math inline">\(c_i\)</span> in <a href="#eq-3pl">Equation&nbsp;<span>7.3</span></a>.</p>
+<p><span id="eq-3pl"><span class="math display">\[
+P(Y_{ij} = 1 |\theta_j,a_i,b_i,c_i) = c_i + \frac{1 - c_i}{1 + \text{exp}(-Da_i(\theta_j - b_i))}
+\tag{7.3}\]</span></span></p>
+<p>Using R code similar to the 2-PL model we can obtain similar output for the 3-PL model, simply by passing “3PL” instead of “2PL” to the <code>itemtype</code> argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>threepl_mod <span class="ot">&lt;-</span> <span class="st">"F = 1 - 16"</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>threepl_fit <span class="ot">&lt;-</span> <span class="fu">mirt</span>(<span class="at">data =</span> SAPA, <span class="at">model =</span> threepl_mod,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">itemtype =</span> <span class="st">"3PL"</span>, <span class="at">SE =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>EM cycles terminated after 500 iterations.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>three_params <span class="ot">&lt;-</span> <span class="fu">coef</span>(threepl_fit, <span class="at">IRtpars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>threepl_items <span class="ot">&lt;-</span> three_params<span class="sc">$</span>items</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>threepl_items</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                a1          d            g u
+reason.4  1.965832  0.5641179 0.1220243277 1
+reason.16 1.419231  1.1347790 0.0022155571 1
+reason.17 1.780427  1.2599642 0.0020240288 1
+reason.19 1.379131  0.6226675 0.0005308146 1
+letter.7  1.535846  0.5564295 0.0007297169 1
+letter.33 1.336533  0.3677506 0.0010139285 1
+letter.34 1.599364  0.6512575 0.0004802221 1
+letter.58 1.440834 -0.3409123 0.0020967366 1
+matrix.45 1.046398  0.1154139 0.0009894579 1
+matrix.46 1.080147  0.2242550 0.0059583434 1
+matrix.47 1.317104  0.5978160 0.0034682297 1
+matrix.55 1.070360 -0.9567629 0.0847850503 1
+rotate.3  5.094621 -5.6138172 0.0519131011 1
+rotate.4  5.084681 -5.1611727 0.0499032687 1
+rotate.6  2.972703 -2.5725099 0.0867770483 1
+rotate.8  3.613054 -4.3917883 0.0559861724 1</code></pre>
+</div>
+</div>
+<p>Now the <code>g</code> parameter, which represents <span class="math inline">\(c_i\)</span> in <a href="#eq-3pl">Equation&nbsp;<span>7.3</span></a>, not only is clealy no longer a column of zeros, but also varies across items. Higher values represent a higher likelihood of guessing correctly. We can see this in the <a href="#fig-3pl_1_4">Figure&nbsp;<span>7.3</span></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(threepl_fit, <span class="at">type =</span> <span class="st">"trace"</span>, <span class="at">which.items =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>),</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">facet_items =</span> <span class="cn">FALSE</span>, <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">points =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">lines =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">columns =</span> <span class="dv">2</span>),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">par.settings =</span> <span class="fu">simpleTheme</span>(<span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-3pl_1_4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="irt_dichotomous_files/figure-html/fig-3pl_1_4-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;7.3: Two items with similar difficulties and discriminations, but where one (<code>reason.4</code>) has a higher guessing parameter than the other (<code>reason.19</code>).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="four-parameter-logistic-model" class="level3" data-number="7.2.4">
+<h3 data-number="7.2.4" class="anchored" data-anchor-id="four-parameter-logistic-model"><span class="header-section-number">7.2.4</span> Four-Parameter Logistic Model</h3>
+<p>The four-parameter logistic (4-PL) IRT model add to the 3-PL model by allowing the upper asymptote to be a value other than 1, and to vary across items. This parameter, which is represented by a <span class="math inline">\(u_i\)</span> in <a href="#eq-4pl">Equation&nbsp;<span>7.4</span></a>, looks very similar to <a href="#eq-3pl">Equation&nbsp;<span>7.3</span></a>. Notice the <span class="math inline">\(u_i\)</span> replaces a 1 in <a href="#eq-3pl">Equation&nbsp;<span>7.3</span></a>. <span id="eq-4pl"><span class="math display">\[
+P(Y_{ij} = 1 |\theta_j,a_i,b_i,c_i, u_i) = c_i + \frac{u_i - c_i}{1 + \text{exp}(-Da_i(\theta_j - b_i))}
+\tag{7.4}\]</span></span></p>
+<p>This parameter can be thought of as a ceiling parameter that prevents the probability of correctly answering the question from approaching one, no matter how high the examanee is on the latent trait. Examples of model that might use the 4-PL include personality traits for which the highest probability of endorsement may be thought not to realized.</p>
+<p>To estimate this model simply pass “4PL” to the <code>itemtype</code> argument in the <code>mirt()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fourpl_mod <span class="ot">&lt;-</span> <span class="st">"F = 1 - 16"</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>fourpl_fit <span class="ot">&lt;-</span> <span class="fu">mirt</span>(<span class="at">data =</span>SAPA, <span class="at">model =</span> fourpl_mod,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">itemtype =</span> <span class="st">"4PL"</span>, <span class="at">SE =</span> <span class="cn">TRUE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>fourpl_params <span class="ot">&lt;-</span> <span class="fu">coef</span>(fourpl_fit, <span class="at">IRTpars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>fourpl_items <span class="ot">&lt;-</span> fourpl_params<span class="sc">$</span>items</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>fourpl_items</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   a           b            g         u
+reason.4   1.9766590 -0.33880191 0.1106491560 0.9912226
+reason.16  1.6049333 -0.85635560 0.0003777105 0.9670460
+reason.17  2.0646331 -0.74692890 0.0006907810 0.9718755
+reason.19  1.9129082 -0.62321056 0.0004655221 0.9056812
+letter.7   3.5986603 -0.35051970 0.1257669007 0.8856442
+letter.33  3.4005447 -0.30938988 0.1338977317 0.8529766
+letter.34  4.4887329 -0.39805679 0.1218857142 0.8843403
+letter.58  2.3238599  0.03893132 0.0621158007 0.8449203
+matrix.45  1.8124989 -0.41699175 0.0522580364 0.8166662
+matrix.46  4.1276339 -0.10604923 0.2430138966 0.8131703
+matrix.47  1.4774957 -0.52830296 0.0012448589 0.9639032
+matrix.55  0.9454504  0.78368331 0.0469519665 0.9838315
+rotate.3  19.8215065  0.88294556 0.0543281486 0.7832056
+rotate.4  11.6723112  0.85784348 0.0551411351 0.8415898
+rotate.6   3.8382098  0.86748083 0.1092746342 0.9857768
+rotate.8  11.5020149  0.99039594 0.0658973790 0.7838166</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fourpl_fit, <span class="at">type =</span> <span class="st">"trace"</span>, <span class="at">which.items =</span> <span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-4pl" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="irt_dichotomous_files/figure-html/fig-4pl-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;7.4: Ploting items 13 and 15, with different ceiling parameters</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="ability-estimation-in-irt-models" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="ability-estimation-in-irt-models"><span class="header-section-number">7.3</span> Ability Estimation in IRT Models</h2>
+<p>Up to this point, we have been considering the parameter estimates that describe the psychometric properties of the items. But IRT can also estimate characteristics of the persons completing the items. Specifically, when an examinee completes the items that comprise the instrument, IRT can obtain estimates of the latent trait underlying the instrument, and – given the items difficulty, discrimination, guessing, and ceiling parameters – can be used to predict each examinee’s probability of getting the item correct (<span class="math inline">\(P(\theta_j,a_i,b_i,c_i)\)</span>) or incorrect (<span class="math inline">\(Q(\theta_j,a_i,b_i,c_i)\)</span>). Note that <span class="math inline">\(Q(\theta_j,a_i,b_i,c_i)\)</span> is simply 1 - <span class="math inline">\(P(\theta_j,a_i,b_i,c_i)\)</span>.</p>
+<p>With these we can calculate the probabilities of the items in the response pattern to obtain the joint likelihood function for the items with:</p>
+<p><span id="eq-joint_lik"><span class="math display">\[
+L(\theta_j) = \prod^{N}_{i=1}P(\theta_j,a_i,b_i,c_i)^{x_i}Q(\theta_j,a_i,b_i,c_i)^{1-x_i}
+\tag{7.5}\]</span></span> where <span class="math inline">\(x_i\)</span> is person <span class="math inline">\(j\)</span>’s dichotomous (0,1) score on item <span class="math inline">\(i\)</span>. There are three methods to estimate the latent trait using the above joint likelihood:</p>
+<p><strong>Maximum Likelihood Estimation (MLE)</strong>: This method is used to find the latent trait that is most likely given the examinee’s observed response pattern and the estimated item parameters.</p>
+<p><strong>Maximum a Posteriori (MAP)</strong>: This method is a Bayesian version of the MLE method, in which the MLE is multiplied by a prior population distribution. The MAP computes the mode value of the final estimated distribution.</p>
+<p><strong>Expected a Posteriori (EAP)</strong>: This method is very similar to MAP but uses the mean of the posterior distribution instead of the mode.</p>
+<p>The last two have the advantage that they can be esimated for examinee’s who get all items correct or incorrect, which cannot be done with MLE. All these estimates can be calculated with the mirt package using the <code>fscores()</code> function as follows for the 2-PL model estimated above:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>latent_mle <span class="ot">&lt;-</span> <span class="fu">fscores</span>(twopl_fit, <span class="at">method =</span> <span class="st">"ML"</span>,</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">full.scores =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">full.scores.SE =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>latent_map <span class="ot">&lt;-</span> <span class="fu">fscores</span>(twopl_fit, <span class="at">method =</span> <span class="st">"MAP"</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">full.scores =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">full.scores.SE =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>latent_eap <span class="ot">&lt;-</span> <span class="fu">fscores</span>(twopl_fit, <span class="at">method =</span> <span class="st">"EAP"</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">full.scores =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">full.scores.SE =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here the three sets of results are collected in a data frame and the first few and last few estimates with each method are displayed for comparison.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>latent <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">MLE =</span> latent_mle[ ,<span class="dv">1</span>],</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">MAP =</span> latent_map[ ,<span class="dv">1</span>],</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">EAP =</span> latent_eap[ ,<span class="dv">1</span>])</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(<span class="fu">head</span>(latent), <span class="st">"..."</span>, <span class="fu">tail</span>(latent))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     MLE                 MAP                 EAP
+1      -1.72332501674418   -1.33653276190771   -1.40673697449049
+2      -0.73118860933391  -0.630788539587229   -0.65052152456826
+3      -0.67713195527688  -0.585477156176144  -0.602873121952331
+4       -1.3901748948739   -1.13381014095268   -1.18705645246632
+5     -0.712748737308236   -0.61537679672198  -0.634301931580828
+6       1.81752499584468    1.43562869182637    1.49358568876196
+7                    ...                 ...                 ...
+1520  -0.400302535759441   -0.34859411298161  -0.355642391059989
+1521    1.64557318056452    1.33051689148733    1.37970201174774
+1522    2.59018651486936    1.76241570987896    1.85138058713949
+1523   -1.15433557155277  -0.966829958769407   -1.00746116203187
+1524   0.240973815382656   0.209308642501458   0.215710675610587
+1525 -0.0202728370669997 -0.0176636995119004 -0.0152250463736297</code></pre>
+</div>
+</div>
+<p>You can see that all three methods give similar results. Below we can see that for examinees with all correct or incorrect the MLE estimates show as <code>Inf</code> and <code>-Inf</code> respectively, which reflects this methods inability to estimate theta for those individuals:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>latent[<span class="fu">c</span>(<span class="dv">73</span>, <span class="dv">89</span>, <span class="dv">103</span>, <span class="dv">105</span>), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     MLE       MAP       EAP
+73   Inf  1.985339  2.096258
+89   Inf  1.985339  2.096258
+103  Inf  1.985339  2.096258
+105 -Inf -1.864351 -1.980879</code></pre>
+</div>
+</div>
+<p>To understand the distribution of the estimated latent trait of the examinees we can calculate descriptive statistics and correlations. We will store these in an object we call <code>latent_est</code> and we will remove the examinees with either an <code>Inf</code> or <code>-Inf</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>latent_est <span class="ot">&lt;-</span> latent[<span class="fu">is.finite</span>(latent<span class="sc">$</span>MLE), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can take this objecdt and get a summary of the three types of estimates with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(latent_est, <span class="dv">2</span>, summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 MLE         MAP          EAP
+Min.    -2.439114424 -1.62922178 -1.725578546
+1st Qu. -0.689406667 -0.59580053 -0.613718783
+Median  -0.025201555 -0.02195921 -0.019611185
+Mean     0.002659149  0.00357282  0.001146392
+3rd Qu.  0.664415606  0.57240513  0.584675590
+Max.     2.590186515  1.76241571  1.851380587</code></pre>
+</div>
+</div>
+<p>This function applies the <code>summary()</code> function to each column in the <code>latent_est</code> object (which is a data frame). We can also get a sense of the dispersion of these latent trait estimates with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(latent_est, <span class="dv">2</span>, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      MLE       MAP       EAP 
+1.0112851 0.8021994 0.8345610 </code></pre>
+</div>
+</div>
+<p>To calculate the correlation between these estimate use:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(latent_est)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          MLE       MAP       EAP
+MLE 1.0000000 0.9973045 0.9978970
+MAP 0.9973045 1.0000000 0.9999447
+EAP 0.9978970 0.9999447 1.0000000</code></pre>
+</div>
+</div>
+<p>All three estimates are extremely highly correlated with each other. We can visualize these correlations with a scatterplot matrix.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(latent_est)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Finally, we can calculate the root mean squared deviation (RMSD) of the estimates as follows&gt;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rmsd</span>(latent_est<span class="sc">$</span>MLE, latent_est<span class="sc">$</span>MAP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03492328</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rmsd</span>(latent_est<span class="sc">$</span>MLE, latent_est<span class="sc">$</span>EAP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05782216</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rmsd</span>(latent_est<span class="sc">$</span>MAP, latent_est<span class="sc">$</span>EAP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.09274544</code></pre>
+</div>
+</div>
+</section>
+<section id="model-diagnostics" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="model-diagnostics"><span class="header-section-number">7.4</span> Model Diagnostics</h2>
+<p>Model diagnostics are important for evaluating how well the model fits the data, and can be examined at the level of items, persons, and the model.</p>
+<section id="item-fit" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="item-fit"><span class="header-section-number">7.4.1</span> Item Fit</h3>
+<p>There are two ways commonly used to assess item fit in IRT, graphical analysis and item fit statistics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>rasch_mod <span class="ot">&lt;-</span> <span class="st">"F = 1 - 16"</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>rasch_fit <span class="ot">&lt;-</span> <span class="fu">mirt</span>(<span class="at">data =</span> SAPA, <span class="at">model =</span> rasch_mod,</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">itemtype =</span> <span class="st">"Rasch"</span>, <span class="at">SE =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration: 1, Log-Lik: -13381.676, Max-Change: 0.37124
+Iteration: 2, Log-Lik: -13304.781, Max-Change: 0.28794
+Iteration: 3, Log-Lik: -13277.916, Max-Change: 0.18825
+Iteration: 4, Log-Lik: -13269.603, Max-Change: 0.11076
+Iteration: 5, Log-Lik: -13267.193, Max-Change: 0.06138
+Iteration: 6, Log-Lik: -13266.517, Max-Change: 0.03287
+Iteration: 7, Log-Lik: -13266.327, Max-Change: 0.01775
+Iteration: 8, Log-Lik: -13266.276, Max-Change: 0.00885
+Iteration: 9, Log-Lik: -13266.262, Max-Change: 0.00460
+Iteration: 10, Log-Lik: -13266.257, Max-Change: 0.00244
+Iteration: 11, Log-Lik: -13266.256, Max-Change: 0.00120
+Iteration: 12, Log-Lik: -13266.255, Max-Change: 0.00063
+Iteration: 13, Log-Lik: -13266.255, Max-Change: 0.00034
+Iteration: 14, Log-Lik: -13266.255, Max-Change: 0.00016
+Iteration: 15, Log-Lik: -13266.255, Max-Change: 0.00009
+
+Calculating information matrix...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">itemfit</span>(rasch_fit, <span class="at">empirical.plot =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_dichotomous_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">itemfit</span>(rasch_fit, <span class="at">fit_stats =</span> <span class="fu">c</span>(<span class="st">"Zh"</span>, <span class="st">"infit"</span>), <span class="at">impute =</span> <span class="dv">10</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Sample size after row-wise response data removal: 1523</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        item     Zh outfit z.outfit infit z.infit
+1   reason.4  4.936  0.777   -4.604 0.865  -5.118
+2  reason.16  2.928  0.836   -2.723 0.911  -2.983
+3  reason.17  5.250  0.749   -4.348 0.836  -5.689
+4  reason.19  3.404  0.869   -2.795 0.904  -3.681
+5   letter.7  4.642  0.819   -4.085 0.874  -4.998
+6  letter.33  2.969  0.903   -2.267 0.918  -3.275
+7  letter.34  5.179  0.836   -3.563 0.850  -5.910
+8  letter.58  3.872  0.841   -3.963 0.901  -3.993
+9  matrix.45  0.304  0.969   -0.738 0.995  -0.183
+10 matrix.46  0.622  0.963   -0.853 0.985  -0.604
+11 matrix.47  2.869  0.866   -2.855 0.926  -2.818
+12 matrix.55 -2.507  1.101    2.021 1.068   2.406
+13  rotate.3  3.067  0.975   -0.231 0.834  -4.185
+14  rotate.4  4.517  0.782   -2.685 0.803  -5.364
+15  rotate.6  3.541  0.858   -2.392 0.878  -4.042
+16  rotate.8  2.103  0.894   -1.086 0.888  -2.666</code></pre>
+</div>
+</div>
+</section>
+<section id="person-fit" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="person-fit"><span class="header-section-number">7.4.2</span> Person Fit</h3>
+</section>
+<section id="model-selection" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="model-selection"><span class="header-section-number">7.4.3</span> Model Selection</h3>
+<p>Model comparison with models estimated with <strong>mirt</strong> can be done with the <code>anova()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(onepl_fit, twopl_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               AIC    SABIC       HQ      BIC    logLik     X2 df p
+onepl_fit 26566.50 26603.10 26600.23 26657.11 -13266.25            
+twopl_fit 26464.79 26533.69 26528.28 26635.34 -13200.40 131.71 15 0</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(twopl_fit, threepl_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 AIC    SABIC       HQ      BIC    logLik      X2 df p
+twopl_fit   26464.79 26533.69 26528.28 26635.34 -13200.40             
+threepl_fit 26336.74 26440.08 26431.96 26592.56 -13120.37 160.058 16 0</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(threepl_fit, fourpl_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 AIC    SABIC       HQ      BIC    logLik      X2 df p
+threepl_fit 26336.74 26440.08 26431.96 26592.56 -13120.37             
+fourpl_fit  26259.96 26397.75 26386.92 26601.06 -13065.98 108.778 16 0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="references"><span class="header-section-number">7.5</span> References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-baylor2011introduction" class="csl-entry" role="doc-biblioentry">
+Baylor, Carolyn, William Hula, Neila J Donovan, Patrick J Doyle, Diane Kendall, and Kathryn Yorkston. 2011. <span>“An Introduction to Item Response Theory and Rasch Models for Speech-Language Pathologists.”</span>
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./cfa.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confirmatory Factor Analysis</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./statisticalthinkinglink.html" class="pagination-link">
+        <span class="nav-page-text"></span></a><a href="https://www.statistical-thinking.com/">return to statistical-thinking.com</a> <i class="bi bi-arrow-right-short"></i>
+      
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><em>Advanced Measurement Theory: a Computational Model-Based Approach</em> was written by William M. Murrah III.</div>   
+    <div class="nav-footer-right">Return to <a href="https://www.statistical-thinking.com">statistical-thinking.com</a>.</div>
+  </div>
+</footer>
+
+
+
+</body></html>

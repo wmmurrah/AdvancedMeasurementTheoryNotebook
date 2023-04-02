@@ -12,6 +12,7 @@ book:
     - generalizability.qmd
     - efa.qmd
     - cfa.qmd
+    - irt_dichotomous.qmd
     - statisticalthinkinglink.qmd
   page-footer:
     left: |
