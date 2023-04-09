@@ -1,0 +1,185 @@
+---
+title: "Item Response Theory for Polytomous Items"
+bibliography: references.bib
+---
+
+## Chapter Overview
+
+### Dichotomous vs Polytomous Items
+
+So far we have required that responses be dichotomous (or scored dichotomously). This could be correct (1) and incorrect(0) or endorse (1) and not endorse (0).
+Which of the following items are dichotomous and which are polytomous?
+
+```
+1. Which of the following is an example of a chemical reaction?    
+  A. A rainbow    (0)  
+  B. Lightning    (0)  
+  C. Burning wood (1)  
+  D. Melting snow (0)  
+
+2. I have dropped many of my interests and activities.   
+  A. Agree    (1)   
+  B. Disagree (0)   
+
+3. On the whole, I am satisfied with myself.    
+  A. Strongly Agree    (3)  
+  B. Agree             (2)
+  C. Disagree          (1)
+  D. Strongly Disagree (0)
+```
+
+The third item is polytomous, because this item cannot be scored as either endorsed or not endorsed. Instead the Likert scaling are aimed at determining level of endorsement.
+
+In this chapter we will consider a number of models for instruments with polytomous items. These will consist of polytomous Rasch models for ordinal items, polytomous non-Rasch models for ordinal items, and polytomous models for nominal models.
+
+### Data Example: The Rosenberg Self-Esteem Scale
+
+For most of the examples in this chapter we will use the data from the Roseberg Self-Esteem Scale. This data entitled `rse` is part of the `hemp` package and can be loaded, along with the needed packages, as follows.
+
+```{r}
+#| message: false
+library(hemp)
+library(mirt)
+data(rse)
+```
+Below is information that can be obtained in the help file for this data (e.g. typing `?rse` in the console after the `hemp` package is loaded).
+
+#### Description
+
+The RSE data set was obtained via online with an interactive version of the Rosenberg Self-Esteem Scale (Rosenberg, 1965). Individuals were informed at the start of the test that their data would be saved. When they completed the scale, they were asked to confirm that the responses they had given were accurate and could be used for research, only those who confirmed are included in this dataset. A random sample of 1000 participants who completed all of the items in the scale were included in the RSE data set. All of the 10 rating scale items were rated on a 4-point scale (i.e., 1=strongly disagree, 2=disagree, 3=agree, and 4=strongly agree). Items 3, 5, 8, 9 and 10 were reversed-coded in order to place all the items in the same direction. That is, higher scores indicate higher self-esteem.
+
+#### Format
+
+A data frame with 1000 participants who responded to 10 rating scale items in an interactive version of the Rosenberg Self-Esteem Scale (Rosenberg, 1965). There are also additional demographic items about the participants:
+
+#### Questions
+
+Question | Description
+----|------|
+Q1 | I feel that I am a person of worth, at least on an equal plane with others.
+Q2 | I feel that I have a number of good qualities.
+Q3* | All in all, I am inclined to feel that I am a failure.
+Q4 | I am able to do things as well as most other people.
+Q5* | I feel I do not have much to be proud of.
+Q6 | I take a positive attitude toward myself.
+Q7 | On the whole, I am satisfied with myself.
+Q8* | I wish I could have more respect for myself.
+Q9* | I certainly feel useless at times.
+Q10* | At times, I think I am no good at all.
+gender | Chosen from a drop down list (1=male, 2=female, 3=other; 0=none was chosen)
+age | Entered as a free response. (0=response that could not be converted to integer)
+source | How the user came to the web page of the RSE scale (1=Front page of personality website, 2=Google search, 3=other)
+country | Inferred from technical information using MaxMind GeoLite
+person | Participant identifier
+
+: Rosenberg Self-Esteem Scale Questions {#tbl-qs}
+
+Note: * = indicates a reverse coded item.
+
+#### Source
+
+The The Rosenberg Self-Esteem Scale is available at http://personality-testing.info/tests/RSE.php.
+
+#### Exploring `rse` Date
+
+```{r}
+round(cor(rse[ ,1:10]),2)
+```
+
+```{r}
+heatmap(cor(rse[ ,1:10]), )
+```
+
+## Polytomous Rasch Models for Ordinal Items
+
+### Partial Credit Model
+
+
+$$
+P(X_i | \theta, \delta_{ih}) = \frac{exp[\Sigma_{h=0}^{x_i}(\theta - \delta_{ih})]}{\Sigma_{k=0}^{m_i} exp[\Sigma_{h=0}^{k}(\theta - \delta_{ih})]}
+$$ {#eq-pcm}
+
+* $\theta$ is the latent trait
+* $\delta_{ih}$ is the step parameter (and difficulty) that represents obtaining $h$ points over $h - 1$ points.
+* $m_i$ is the maximum response category
+* 
+The probability of obtaining $X_i$ points, where $X_i = 0, 1,..., m_i$
+
+
+```{r}
+pcm_mod <- "selfesteem = 1 - 10"
+pcm_fit <- mirt(data = rse[ ,1:10], 
+                model = pcm_mod,
+                itemtype = "Rasch", SE = TRUE,
+                verbose = FALSE) # suppress messages
+pcm_params <- coef(pcm_fit, IRTpars = TRUE,
+                   simplify = TRUE)
+```
+
+```{r}
+pcm_items <- pcm_params$items
+pcm_items
+```
+
+```{r}
+plot(pcm_fit, type = "trace", which.items = c(2,5),
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, columns = 4))
+```
+
+
+```{r}
+plot(pcm_fit, type = "infotrace", which.items = c(2,5), 
+     par.settings = simpleTheme(lwd = 2))
+```
+
+```{r}
+plot(pcm_fit, type = "infotrace", 
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, columns = 4))
+```
+```{r}
+plot(pcm_fit, type = "infotrace", facet_items = FALSE,
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, columns = 4))
+```
+
+
+```{r}
+plot(pcm_fit, type = "info", 
+     par.settings = simpleTheme(lwd = 2))
+```
+
+### Rating Scale Model
+
+The rating scale model (RSM) is a restricted version of the PCM, where all items are constrained to have the same form. This is common for Likert scale instruments.
+
+
+$$
+P(X_i | \theta,\lambda_i,  \delta_1,...\delta_m) = \frac{exp[\Sigma_{j=0}^{c}(\theta - (\lambda_i +  \delta_{j})]}{\Sigma_{h=0}^{m} exp[\Sigma_{j=0}^{h}(\theta - (\lambda_i + \delta_{j}))]}
+$$
+
+```{r}
+rsm_mod <- "selfesteem = 1 - 10"
+rsm_fit <- mirt(data = rse[ ,1:10], model = rsm_mod,
+                itemtype = "rsm")
+rsm_params <- coef(rsm_fit, simplify = TRUE)
+rsm_items <- as.data.frame(rsm_params$items)
+rsm_items
+```
+
+```{r}
+plot(rsm_fit, type = "trace", which.items = c(2, 9), 
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, columns = 4))
+```
+
+
+```{r}
+plot(rsm_fit, type = "trace", facet = FALSE, 
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, columns = 2))
+```
+
+![](images/rsm_threshhold.png)
+

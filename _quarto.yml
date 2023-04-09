@@ -13,6 +13,7 @@ book:
     - efa.qmd
     - cfa.qmd
     - irt_dichotomous.qmd
+    - irt_polytomous.qmd
     - statisticalthinkinglink.qmd
   page-footer:
     left: |
