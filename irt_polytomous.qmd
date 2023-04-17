@@ -183,3 +183,161 @@ plot(rsm_fit, type = "trace", facet = FALSE,
 
 ![](images/rsm_threshhold.png)
 
+## Polytomous Non-Rasch Models for Ordinal Items
+
+There are two models that can be viewed as polytomous versions of the 2PL IRT model, the **generalized partial credit model** (GPCM) and the **graded response model** (GRM)
+
+
+### Generalized Partial Credit Model
+
+$$
+P(X_{ik} | \theta, a_i, \delta_{ik}) = \frac{exp[\sum^{K_{ik}}_{h=1}a_i(\theta - \delta_{ih})]}{\sum^{m_i}_{c=1} exp[\sum^c_{h=1} a_i (\theta - \delta_{ih})]}
+$$
+
+$a_i$ is the discrimination parameter. The thresholds ($\delta_{ik}$) are not restricted to be in the same order.
+
+
+```{r}
+gpcm_mod <- "selfesteem = 1 - 10"
+gpcm_fit <- mirt(data = rse[ ,1:10], model = gpcm_mod,
+                 itemtype = "gpcm", SE = TRUE)
+gpcm_params <- coef(gpcm_fit, IRTpars = TRUE, simplify = TRUE)
+gpcm_items <- gpcm_params$items
+gpcm_items
+```
+
+```{r}
+plot(gpcm_fit, type = "trace", which.items = c(6, 8),
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, comlumns = 4))
+```
+```{r}
+plot(gpcm_fit, type = "trace",
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, comlumns = 4))
+```
+
+```{r}
+plot(gpcm_fit, type = "info", theta_lim = c(-6, 6))
+plot(gpcm_fit, type = "SE", theta_lim = c(-6, 6))
+```
+
+### Graded Response Model
+
+This model retains the ordering of the response options.
+
+$$
+P^*(X_i | \theta, a_i, \delta_{X_i}) = \frac{e^{a_i(\theta - \delta_{x_i})}}{1 +e^{a_i(\theta - \delta_{x_i})} }
+$$
+
+
+
+```{r}
+grm_mod <- "selfesteem = 1 - 10"
+grm_fit <- mirt(data = rse[ ,1:10], model = grm_mod,
+                itemtype = "graded", SE = TRUE, verbose = FALSE)
+grm_params <- coef(grm_fit, IRTpars = TRUE, simplify = TRUE)
+grm_items <- grm_params$items
+grm_items
+```
+
+```{r}
+plot(grm_fit, type = "trace", which.items = c(5, 9),
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, comlumns = 4))
+```
+
+
+```{r}
+plot(grm_fit, type = "trace",
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, comlumns = 4))
+```
+
+```{r}
+plot(grm_fit, type = "info", theta_lim = c(-6, 6))
+plot(grm_fit, type = "SE", theta_lim = c(-6, 6))
+```
+
+## Polytomous IRT Models for Nominal Items
+
+If items do not have ordered response categories, but instead are not ordinal, we do not assume an ordinal transition. This is the case with nominal response categories.
+
+### Nominal Response Model
+
+$$
+P(X_{ik}|\theta,\mathbf{a},\gamma) = \frac{e^{\gamma_{ik}+a_{ik}\theta}}{\sum^m_{h=1}e^{\gamma_{ih}+a_{ih}\theta} }
+$$
+
+where $\mathbf{a}$ is a vector of item discrimination parameters, and $\gamma$ is a vector of difficulty parameters.
+
+```{r}
+nrm_mod <- "agression = 1 - 24"
+nrm_fit <- mirt(data = VerbAggWide[ ,4:27], model = nrm_mod,
+                itemtype = "nominal", SE = TRUE, verbose = FALSE)
+nrm_params <- coef(nrm_fit, IRTpars = TRUE, simlify = TRUE)
+nrm_items <- as.data.frame(nrm_params$items)
+nrm_items
+```
+
+### Nested Logit Model
+
+
+```{r}
+key <- c(4, 3, 2, 3, 4, 3, 2, 3, 1,
+           4, 3, 2, 3, 3, 4, 2, 4, 3,
+           3, 2, 2, 1, 2, 1, 1, 2, 1)
+```
+
+#### 2PL NLM
+```{r}
+twoplnlm_mod <- "ability = 1 - 27"
+twoplnlm_fit <- mirt(data = multiplechoice,
+                     model = twoplnlm_mod, itemtype = "2PLNRM",
+                     SE = TRUE, key = key, verbose = FALSE)
+twoplnlm_params <- coef(twoplnlm_fit, IRTpars = TRUE, simplify = TRUE)
+twoplnlm_items <- as.data.frame(twoplnlm_params$items)
+head(twoplnlm_items)
+```
+
+```{r}
+plot(twoplnlm_fit, type = "trace", which.items = c(8, 21),
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, columns = 4))
+```
+
+```{r}
+plot(twoplnlm_fit, type = "trace",
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, columns = 4))
+```
+
+#### 3PL NLM
+
+
+```{r}
+threeplnlm_mod <- "ability = 1 - 27"
+threeplnlm_fit <- mirt(data = multiplechoice,
+                       model = threeplnlm_mod, itemtype = "3PLNRM",
+                       SE = TRUE, key = key, verbose = FALSE)
+threeplnlm_params <- coef(threeplnlm_fit, IRTpars = TRUE, simplify = TRUE)
+threeplnlm_items <- as.data.frame(threeplnlm_params$items)
+round(head(threeplnlm_items), 4)
+```
+
+```{r}
+plot(threeplnlm_fit, type = "trace", which.items = c(1, 17),
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, columns = 4))
+```
+
+```{r}
+plot(threeplnlm_fit, type = "trace",
+     par.settings = simpleTheme(lty = 1:4, lwd = 2),
+     auto.key = list(points = FALSE, lines = TRUE, columns = 4))
+```
+
+```{r}
+anova(twoplnlm_fit, threeplnlm_fit)
+```
+

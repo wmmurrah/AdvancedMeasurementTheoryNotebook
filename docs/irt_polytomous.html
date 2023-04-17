@@ -221,6 +221,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#partial-credit-model" id="toc-partial-credit-model" class="nav-link" data-scroll-target="#partial-credit-model"><span class="toc-section-number">8.2.1</span>  Partial Credit Model</a></li>
   <li><a href="#rating-scale-model" id="toc-rating-scale-model" class="nav-link" data-scroll-target="#rating-scale-model"><span class="toc-section-number">8.2.2</span>  Rating Scale Model</a></li>
   </ul></li>
+  <li><a href="#polytomous-non-rasch-models-for-ordinal-items" id="toc-polytomous-non-rasch-models-for-ordinal-items" class="nav-link" data-scroll-target="#polytomous-non-rasch-models-for-ordinal-items"><span class="toc-section-number">8.3</span>  Polytomous Non-Rasch Models for Ordinal Items</a>
+  <ul class="collapse">
+  <li><a href="#generalized-partial-credit-model" id="toc-generalized-partial-credit-model" class="nav-link" data-scroll-target="#generalized-partial-credit-model"><span class="toc-section-number">8.3.1</span>  Generalized Partial Credit Model</a></li>
+  <li><a href="#graded-response-model" id="toc-graded-response-model" class="nav-link" data-scroll-target="#graded-response-model"><span class="toc-section-number">8.3.2</span>  Graded Response Model</a></li>
+  </ul></li>
+  <li><a href="#polytomous-irt-models-for-nominal-items" id="toc-polytomous-irt-models-for-nominal-items" class="nav-link" data-scroll-target="#polytomous-irt-models-for-nominal-items"><span class="toc-section-number">8.4</span>  Polytomous IRT Models for Nominal Items</a>
+  <ul class="collapse">
+  <li><a href="#nominal-response-model" id="toc-nominal-response-model" class="nav-link" data-scroll-target="#nominal-response-model"><span class="toc-section-number">8.4.1</span>  Nominal Response Model</a></li>
+  <li><a href="#nested-logit-model" id="toc-nested-logit-model" class="nav-link" data-scroll-target="#nested-logit-model"><span class="toc-section-number">8.4.2</span>  Nested Logit Model</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -547,8 +557,283 @@ Q10  1 -3.10133 -1.339071 0.7753553 -1.4522770</code></pre>
 </div>
 </div>
 <p><img src="images/rsm_threshhold.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="polytomous-non-rasch-models-for-ordinal-items" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="polytomous-non-rasch-models-for-ordinal-items"><span class="header-section-number">8.3</span> Polytomous Non-Rasch Models for Ordinal Items</h2>
+<p>There are two models that can be viewed as polytomous versions of the 2PL IRT model, the <strong>generalized partial credit model</strong> (GPCM) and the <strong>graded response model</strong> (GRM)</p>
+<section id="generalized-partial-credit-model" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="generalized-partial-credit-model"><span class="header-section-number">8.3.1</span> Generalized Partial Credit Model</h3>
+<p><span class="math display">\[
+P(X_{ik} | \theta, a_i, \delta_{ik}) = \frac{exp[\sum^{K_{ik}}_{h=1}a_i(\theta - \delta_{ih})]}{\sum^{m_i}_{c=1} exp[\sum^c_{h=1} a_i (\theta - \delta_{ih})]}
+\]</span></p>
+<p><span class="math inline">\(a_i\)</span> is the discrimination parameter. The thresholds (<span class="math inline">\(\delta_{ik}\)</span>) are not restricted to be in the same order.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>gpcm_mod <span class="ot">&lt;-</span> <span class="st">"selfesteem = 1 - 10"</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>gpcm_fit <span class="ot">&lt;-</span> <span class="fu">mirt</span>(<span class="at">data =</span> rse[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">model =</span> gpcm_mod,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">itemtype =</span> <span class="st">"gpcm"</span>, <span class="at">SE =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration: 1, Log-Lik: -10776.362, Max-Change: 2.86983
+Iteration: 2, Log-Lik: -10351.776, Max-Change: 0.80786
+Iteration: 3, Log-Lik: -10283.772, Max-Change: 0.23823
+Iteration: 4, Log-Lik: -10261.491, Max-Change: 0.15392
+Iteration: 5, Log-Lik: -10249.603, Max-Change: 0.13059
+Iteration: 6, Log-Lik: -10242.348, Max-Change: 0.10220
+Iteration: 7, Log-Lik: -10237.530, Max-Change: 0.09347
+Iteration: 8, Log-Lik: -10234.445, Max-Change: 0.06972
+Iteration: 9, Log-Lik: -10232.291, Max-Change: 0.06364
+Iteration: 10, Log-Lik: -10231.438, Max-Change: 0.03688
+Iteration: 11, Log-Lik: -10230.008, Max-Change: 0.03037
+Iteration: 12, Log-Lik: -10229.195, Max-Change: 0.02323
+Iteration: 13, Log-Lik: -10228.554, Max-Change: 0.01831
+Iteration: 14, Log-Lik: -10228.158, Max-Change: 0.01575
+Iteration: 15, Log-Lik: -10227.896, Max-Change: 0.01344
+Iteration: 16, Log-Lik: -10227.479, Max-Change: 0.00796
+Iteration: 17, Log-Lik: -10227.440, Max-Change: 0.00461
+Iteration: 18, Log-Lik: -10227.415, Max-Change: 0.00412
+Iteration: 19, Log-Lik: -10227.383, Max-Change: 0.00213
+Iteration: 20, Log-Lik: -10227.377, Max-Change: 0.00186
+Iteration: 21, Log-Lik: -10227.372, Max-Change: 0.00115
+Iteration: 22, Log-Lik: -10227.370, Max-Change: 0.00143
+Iteration: 23, Log-Lik: -10227.369, Max-Change: 0.00081
+Iteration: 24, Log-Lik: -10227.368, Max-Change: 0.00094
+Iteration: 25, Log-Lik: -10227.365, Max-Change: 0.00071
+Iteration: 26, Log-Lik: -10227.365, Max-Change: 0.00018
+Iteration: 27, Log-Lik: -10227.365, Max-Change: 0.00048
+Iteration: 28, Log-Lik: -10227.365, Max-Change: 0.00050
+Iteration: 29, Log-Lik: -10227.365, Max-Change: 0.00034
+Iteration: 30, Log-Lik: -10227.365, Max-Change: 0.00037
+Iteration: 31, Log-Lik: -10227.365, Max-Change: 0.00029
+Iteration: 32, Log-Lik: -10227.364, Max-Change: 0.00042
+Iteration: 33, Log-Lik: -10227.364, Max-Change: 0.00017
+Iteration: 34, Log-Lik: -10227.364, Max-Change: 0.00013
+Iteration: 35, Log-Lik: -10227.364, Max-Change: 0.00033
+Iteration: 36, Log-Lik: -10227.364, Max-Change: 0.00010
+
+Calculating information matrix...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>gpcm_params <span class="ot">&lt;-</span> <span class="fu">coef</span>(gpcm_fit, <span class="at">IRTpars =</span> <span class="cn">TRUE</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>gpcm_items <span class="ot">&lt;-</span> gpcm_params<span class="sc">$</span>items</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>gpcm_items</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            a         b1          b2        b3
+Q1  1.8238891 -1.7202941 -0.95938961 0.5885070
+Q2  1.7307657 -1.8564721 -1.28862013 0.6510270
+Q3  1.8710897 -1.3231835 -0.31308686 1.0425363
+Q4  1.2811061 -2.2085974 -1.00156932 1.2138474
+Q5  1.4939839 -1.1502285 -0.04606415 0.9041157
+Q6  2.7132868 -1.2057255 -0.09730049 1.1220286
+Q7  2.3609630 -1.0210663  0.07245970 1.3106380
+Q8  0.8945663 -1.1800257  0.81206980 1.2679593
+Q9  1.4911761 -0.7707405  0.78235286 1.2329194
+Q10 1.9005838 -0.8381950  0.33153091 0.7308140</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gpcm_fit, <span class="at">type =</span> <span class="st">"trace"</span>, <span class="at">which.items =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">8</span>),</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">par.settings =</span> <span class="fu">simpleTheme</span>(<span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">2</span>),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">points =</span> <span class="cn">FALSE</span>, <span class="at">lines =</span> <span class="cn">TRUE</span>, <span class="at">comlumns =</span> <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_polytomous_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gpcm_fit, <span class="at">type =</span> <span class="st">"trace"</span>,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">par.settings =</span> <span class="fu">simpleTheme</span>(<span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">2</span>),</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">points =</span> <span class="cn">FALSE</span>, <span class="at">lines =</span> <span class="cn">TRUE</span>, <span class="at">comlumns =</span> <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_polytomous_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gpcm_fit, <span class="at">type =</span> <span class="st">"info"</span>, <span class="at">theta_lim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_polytomous_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gpcm_fit, <span class="at">type =</span> <span class="st">"SE"</span>, <span class="at">theta_lim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_polytomous_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="graded-response-model" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="graded-response-model"><span class="header-section-number">8.3.2</span> Graded Response Model</h3>
+<p>This model retains the ordering of the response options.</p>
+<p><span class="math display">\[
+P^*(X_i | \theta, a_i, \delta_{X_i}) = \frac{e^{a_i(\theta - \delta_{x_i})}}{1 +e^{a_i(\theta - \delta_{x_i})} }
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>grm_mod <span class="ot">&lt;-</span> <span class="st">"selfesteem = 1 - 10"</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>grm_fit <span class="ot">&lt;-</span> <span class="fu">mirt</span>(<span class="at">data =</span> rse[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">model =</span> grm_mod,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">itemtype =</span> <span class="st">"graded"</span>, <span class="at">SE =</span> <span class="cn">TRUE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>grm_params <span class="ot">&lt;-</span> <span class="fu">coef</span>(grm_fit, <span class="at">IRTpars =</span> <span class="cn">TRUE</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>grm_items <span class="ot">&lt;-</span> grm_params<span class="sc">$</span>items</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>grm_items</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           a         b1          b2        b3
+Q1  2.324817 -1.9096256 -0.86459285 0.6212696
+Q2  2.136179 -2.1468087 -1.15272898 0.6594750
+Q3  2.435460 -1.3941348 -0.25807123 1.0778067
+Q4  1.650816 -2.4179124 -0.86144982 1.2003060
+Q5  2.172579 -1.2073811 -0.05750731 1.0257647
+Q6  3.202812 -1.2249932 -0.08533037 1.1446882
+Q7  2.810958 -1.0605179  0.09078729 1.3417869
+Q8  1.420458 -1.2018548  0.51592382 1.7199115
+Q9  2.163341 -0.7728069  0.63992017 1.4899442
+Q10 2.645276 -0.8719370  0.23061101 0.9486129</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grm_fit, <span class="at">type =</span> <span class="st">"trace"</span>, <span class="at">which.items =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">9</span>),</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">par.settings =</span> <span class="fu">simpleTheme</span>(<span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">2</span>),</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">points =</span> <span class="cn">FALSE</span>, <span class="at">lines =</span> <span class="cn">TRUE</span>, <span class="at">comlumns =</span> <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_polytomous_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grm_fit, <span class="at">type =</span> <span class="st">"trace"</span>,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">par.settings =</span> <span class="fu">simpleTheme</span>(<span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">2</span>),</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">points =</span> <span class="cn">FALSE</span>, <span class="at">lines =</span> <span class="cn">TRUE</span>, <span class="at">comlumns =</span> <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_polytomous_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grm_fit, <span class="at">type =</span> <span class="st">"info"</span>, <span class="at">theta_lim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_polytomous_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grm_fit, <span class="at">type =</span> <span class="st">"SE"</span>, <span class="at">theta_lim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_polytomous_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="polytomous-irt-models-for-nominal-items" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="polytomous-irt-models-for-nominal-items"><span class="header-section-number">8.4</span> Polytomous IRT Models for Nominal Items</h2>
+<p>If items do not have ordered response categories, but instead are not ordinal, we do not assume an ordinal transition. This is the case with nominal response categories.</p>
+<section id="nominal-response-model" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="nominal-response-model"><span class="header-section-number">8.4.1</span> Nominal Response Model</h3>
+<p><span class="math display">\[
+P(X_{ik}|\theta,\mathbf{a},\gamma) = \frac{e^{\gamma_{ik}+a_{ik}\theta}}{\sum^m_{h=1}e^{\gamma_{ih}+a_{ih}\theta} }
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{a}\)</span> is a vector of item discrimination parameters, and <span class="math inline">\(\gamma\)</span> is a vector of difficulty parameters.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>nrm_mod <span class="ot">&lt;-</span> <span class="st">"agression = 1 - 24"</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>nrm_fit <span class="ot">&lt;-</span> <span class="fu">mirt</span>(<span class="at">data =</span> VerbAggWide[ ,<span class="dv">4</span><span class="sc">:</span><span class="dv">27</span>], <span class="at">model =</span> nrm_mod,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">itemtype =</span> <span class="st">"nominal"</span>, <span class="at">SE =</span> <span class="cn">TRUE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>nrm_params <span class="ot">&lt;-</span> <span class="fu">coef</span>(nrm_fit, <span class="at">IRTpars =</span> <span class="cn">TRUE</span>, <span class="at">simlify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>nrm_items <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(nrm_params<span class="sc">$</span>items)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>nrm_items</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>data frame with 0 columns and 0 rows</code></pre>
+</div>
+</div>
+</section>
+<section id="nested-logit-model" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="nested-logit-model"><span class="header-section-number">8.4.2</span> Nested Logit Model</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>key <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>           <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>           <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="pl-nlm" class="level4" data-number="8.4.2.1">
+<h4 data-number="8.4.2.1" class="anchored" data-anchor-id="pl-nlm"><span class="header-section-number">8.4.2.1</span> 2PL NLM</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>twoplnlm_mod <span class="ot">&lt;-</span> <span class="st">"ability = 1 - 27"</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>twoplnlm_fit <span class="ot">&lt;-</span> <span class="fu">mirt</span>(<span class="at">data =</span> multiplechoice,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">model =</span> twoplnlm_mod, <span class="at">itemtype =</span> <span class="st">"2PLNRM"</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">SE =</span> <span class="cn">TRUE</span>, <span class="at">key =</span> key, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>twoplnlm_params <span class="ot">&lt;-</span> <span class="fu">coef</span>(twoplnlm_fit, <span class="at">IRTpars =</span> <span class="cn">TRUE</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>twoplnlm_items <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(twoplnlm_params<span class="sc">$</span>items)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(twoplnlm_items)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              a          b g u         a1          a2          a3         c1
+item1 0.5235573 -3.4086260 0 1 -0.4839230 -0.59603034  1.07995330 -0.2490648
+item2 0.4940809 -2.8496901 0 1  0.2270783 -0.35252767  0.12544933  0.6741845
+item3 0.5226378 -0.5159370 0 1  0.1343142 -0.05036814 -0.08394604  0.4162664
+item4 0.6871739 -1.6939763 0 1  0.2516607  0.29305060 -0.54471132 -0.6398626
+item5 0.2097941  2.9218435 0 1  0.2643272 -0.03633783 -0.22798933  0.8475738
+item6 0.5709976 -0.4476874 0 1  0.1282541 -0.41405909  0.28580500 -0.4715466
+               c2         c3
+item1 -0.05884263  0.3079074
+item2 -0.04293720 -0.6312473
+item3 -0.79558238  0.3793160
+item4  0.66367996 -0.0238174
+item5  0.50175068 -1.3493244
+item6  0.22261253  0.2489341</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(twoplnlm_fit, <span class="at">type =</span> <span class="st">"trace"</span>, <span class="at">which.items =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">21</span>),</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">par.settings =</span> <span class="fu">simpleTheme</span>(<span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">2</span>),</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">points =</span> <span class="cn">FALSE</span>, <span class="at">lines =</span> <span class="cn">TRUE</span>, <span class="at">columns =</span> <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_polytomous_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(twoplnlm_fit, <span class="at">type =</span> <span class="st">"trace"</span>,</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">par.settings =</span> <span class="fu">simpleTheme</span>(<span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">2</span>),</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">points =</span> <span class="cn">FALSE</span>, <span class="at">lines =</span> <span class="cn">TRUE</span>, <span class="at">columns =</span> <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_polytomous_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="pl-nlm-1" class="level4" data-number="8.4.2.2">
+<h4 data-number="8.4.2.2" class="anchored" data-anchor-id="pl-nlm-1"><span class="header-section-number">8.4.2.2</span> 3PL NLM</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>threeplnlm_mod <span class="ot">&lt;-</span> <span class="st">"ability = 1 - 27"</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>threeplnlm_fit <span class="ot">&lt;-</span> <span class="fu">mirt</span>(<span class="at">data =</span> multiplechoice,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">model =</span> threeplnlm_mod, <span class="at">itemtype =</span> <span class="st">"3PLNRM"</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">SE =</span> <span class="cn">TRUE</span>, <span class="at">key =</span> key, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>EM cycles terminated after 500 iterations.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>threeplnlm_params <span class="ot">&lt;-</span> <span class="fu">coef</span>(threeplnlm_fit, <span class="at">IRTpars =</span> <span class="cn">TRUE</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>threeplnlm_items <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(threeplnlm_params<span class="sc">$</span>items)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">head</span>(threeplnlm_items), <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           a       b      g u      a1      a2      a3      c1      c2      c3
+item1 0.6874 -1.0233 0.5512 1 -0.2967 -0.6796  0.9763 -0.1298 -0.1373  0.2671
+item2 0.5021 -2.7623 0.0176 1  0.2133 -0.3827  0.1693  0.6785 -0.0668 -0.6118
+item3 0.5759 -0.3280 0.0408 1  0.1494 -0.0432 -0.1062  0.4218 -0.7924  0.3707
+item4 0.6464 -1.7032 0.0334 1  0.1639  0.3439 -0.5078 -0.6654  0.6694 -0.0040
+item5 0.2192  2.8837 0.0064 1  0.2337 -0.0138 -0.2199  0.8453  0.5042 -1.3495
+item6 0.8618  0.6145 0.2781 1  0.1429 -0.3940  0.2511 -0.4749  0.2358  0.2391</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(threeplnlm_fit, <span class="at">type =</span> <span class="st">"trace"</span>, <span class="at">which.items =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">17</span>),</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">par.settings =</span> <span class="fu">simpleTheme</span>(<span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">2</span>),</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">points =</span> <span class="cn">FALSE</span>, <span class="at">lines =</span> <span class="cn">TRUE</span>, <span class="at">columns =</span> <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_polytomous_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(threeplnlm_fit, <span class="at">type =</span> <span class="st">"trace"</span>,</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">par.settings =</span> <span class="fu">simpleTheme</span>(<span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">2</span>),</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">auto.key =</span> <span class="fu">list</span>(<span class="at">points =</span> <span class="cn">FALSE</span>, <span class="at">lines =</span> <span class="cn">TRUE</span>, <span class="at">columns =</span> <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="irt_polytomous_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(twoplnlm_fit, threeplnlm_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    AIC    SABIC       HQ      BIC    logLik     X2 df     p
+twoplnlm_fit   24845.07 25012.34 25112.56 25526.53 -12260.53                
+threeplnlm_fit 24841.70 25036.85 25153.78 25636.74 -12231.85 57.365 27 0.001</code></pre>
+</div>
+</div>
 
 
+</section>
 </section>
 </section>
 
